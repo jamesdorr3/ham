@@ -20,7 +20,7 @@ class SearchContainer extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     if (this.state.text){
-      console.log('submit')
+      // console.log('submit')
       fetch(`http://localhost:3001/auto?q=${this.state.text}`)
       .then(r => r.json())
       .then(r => {

@@ -13,7 +13,7 @@ class App extends React.Component {
     fetch('http://localhost:3001/choices')
     .then(r => r.json())
     .then(choices => this.setState({choices: choices}))
-    .then(r => console.log(this.state.choices))
+    // .then(r => console.log(this.state.choices))
   }
 
   addChoice = (choice) => {
