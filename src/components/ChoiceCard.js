@@ -1,16 +1,36 @@
 import React from 'react'
 
-const ChoiceCard = props => {
-  return(
-    <tr>
-      <td>{props.choice.food.name}</td>
-      <td>{props.choice.amount}</td>
-      <td>{props.choice.measure}</td>
-      <td>{props.choice.food.fat}</td>
-      <td>{props.choice.food.carbs}</td>
-      <td>{props.choice.food.protein}</td>
-    </tr>
-  )
+class ChoiceCard extends React.Component {
+  
+  state = {
+    amount: this.props.choice.amount
+  }
+
+  autoUpdateMacro = macro => {
+    return(
+      (this.props.choice.food[macro] / (this.props.choice.food.serving_unit_amount || 1 ) * this.state.amount).toFixed(1)
+    )
+  }
+
+  render(){
+    console.log(this.props.choice)
+    return(
+      <tr>
+        <td>{this.props.choice.food.name}</td>
+        <td>
+          <input value={this.state.amount} 
+          onChange={(e) => this.setState({amount: e.target.value})} 
+          onBlur={() => console.log('blur!')}
+          >
+          </input>
+          </td>
+        <td>{this.props.choice.measure}</td>
+        <td>{this.autoUpdateMacro('fat')}</td>
+        <td>{this.autoUpdateMacro('carbs')}</td>
+        <td>{this.autoUpdateMacro('protein')}</td>
+      </tr>
+    )
+  }
 }
 
 export default ChoiceCard
