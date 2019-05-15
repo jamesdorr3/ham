@@ -12,6 +12,24 @@ class ChoiceCard extends React.Component {
     )
   }
 
+  componentDidMount(){
+    window.addEventListener('beforeunload', e => {
+      this.updateInDB()
+    })
+  }
+
+  updateInDB = () => {
+    const id = this.props.choice.id
+    fetch(`http://localhost:3001/choices/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type':'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({choice: {amount: this.state.amount}})
+    })
+  }
+
   render(){
     console.log(this.props.choice)
     return(
@@ -20,7 +38,7 @@ class ChoiceCard extends React.Component {
         <td>
           <input value={this.state.amount} 
           onChange={(e) => this.setState({amount: e.target.value})} 
-          onBlur={() => console.log('blur!')}
+          onBlur={this.updateInDB}
           >
           </input>
           </td>
