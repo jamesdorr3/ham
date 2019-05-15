@@ -49,9 +49,18 @@ class SearchContainer extends React.Component {
             < SearchResultCard 
             key={food.food_name} 
             food={food} 
-            addChoice={this.props.addChoice}/>)
+            addChoice={this.props.addChoice}
+            clearForm={() => this.setState({text: '', branded: [], common: []})}
+            />)
           )}
-          {this.state.branded.map(food =>< SearchResultCard key={food.nix_item_id} food={food}/>)}
+          {this.state.branded.map(food =>(
+            < SearchResultCard 
+            key={food.nix_item_id} 
+            food={food} 
+            addChoice={this.props.addChoice}
+            clearForm={() => this.setState({text: '', branded: [], common: []})}
+            />
+          ))}
           {/* {this.state.error ? <li>No Results</li> : null} */}
         </ul>
       </div>

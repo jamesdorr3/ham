@@ -3,14 +3,18 @@ import React from 'react'
 class SearchResultCard extends React.Component {
 
   handleAddCommon = () => {
-    fetch(`http://localhost:3001/search?q=${this.props.food.food_name}`)
+    this.props.clearForm()
+    fetch(`http://localhost:3001/search?name=${this.props.food.food_name}`)
     .then(r => r.json())
     .then(choice => this.props.addChoice(choice))
-    .then(r => console.log('search results card'))
+    // .then(r => console.log('search results card'))
   }
 
   handleAddBranded = () => {
-    console.log('branded')
+    this.props.clearForm()
+    fetch(`http://localhost:3001/search?id=${this.props.food.nix_item_id}`)
+    .then(r => r.json())
+    .then(choice => this.props.addChoice(choice))
   }
 
   render(){

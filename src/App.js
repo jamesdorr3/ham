@@ -17,7 +17,7 @@ class App extends React.Component {
   }
 
   addChoice = (choice) => {
-    console.log('app add choice')
+    // console.log('app add choice')
     const newChoices = [...this.state.choices]
     newChoices.push(choice)
     this.setState({choices: newChoices})
