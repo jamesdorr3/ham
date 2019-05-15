@@ -1,19 +1,8 @@
 import React from 'react'
 import ChoiceCard from '../components/ChoiceCard'
-import '../constants'
+// import '../constants'
 
 class ChoiceContainer extends React.Component {
-
-  state = {
-    choices: []
-  }
-
-  componentDidMount(){
-    const foodsUrl = `${URL}foods`
-    fetch('http://localhost:3001/choices')
-    .then(r => r.json())
-    .then(choices => this.setState({choices: choices}))
-  }
 
   render(){
     return(
@@ -29,7 +18,7 @@ class ChoiceContainer extends React.Component {
             <td>carbs</td>
             <td>protein</td>
           </tr>
-          {this.state.choices.map(choice => < ChoiceCard 
+          {this.props.choices.map(choice => < ChoiceCard 
           choice={choice} 
           key={choice.id}/> )}
         </tbody>
