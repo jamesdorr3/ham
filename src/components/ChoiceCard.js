@@ -3,13 +3,17 @@ import React from 'react'
 class ChoiceCard extends React.Component {
   
   state = {
-    amount: this.props.choice.amount
+    amount: this.props.choice.amount,
+    measure: this.props.choice.measure
   }
 
   autoUpdateMacro = macro => {
-    return(
-      (this.props.choice.food[macro] / (this.props.choice.food.serving_unit_amount || 1 ) * this.state.amount).toFixed(1)
-    )
+    if (this.state.measure === 'grams'){
+      return (this.props.choice.food[macro] / this.props.choice.food.serving_grams * this.state.amount).toFixed(1)
+    }
+    else{
+      return (this.props.choice.food[macro] / (this.props.choice.food.serving_unit_amount || 1 ) * this.state.amount).toFixed(1)
+    }
   }
 
   componentDidMount(){
@@ -26,7 +30,28 @@ class ChoiceCard extends React.Component {
         'Content-Type':'application/json',
         Accept: 'application/json'
       },
-      body: JSON.stringify({choice: {amount: this.state.amount}})
+      body: JSON.stringify({choice: this.state})
+    })
+  }
+
+  deleteChoice = () => {
+    console.log('DELETE!')
+  }
+
+  handleChange = (e) => {
+    this.setState({measure: e.target.value})
+  }
+
+  generateMeasures = () => {
+    const measures = [this.props.choice.measure]
+    if (!measures.includes('grams')){measures.push('grams')}
+    if (this.props.choice.food.serving_unit_name && !measures.includes(this.props.choice.food.serving_unit_name)){
+      measures.push(this.props.choice.food.serving_unit_name)
+    }
+    return measures.sort().map(measure => {
+      return (
+        <option value={measure}>{measure}</option>
+      )
     })
   }
 
@@ -42,10 +67,15 @@ class ChoiceCard extends React.Component {
           >
           </input>
           </td>
-        <td>{this.props.choice.measure}</td>
+        <td>
+          <select value={this.state.measure} onChange={this.handleChange}>
+            {this.generateMeasures()}
+          </select>
+        </td>
         <td>{this.autoUpdateMacro('fat')}</td>
         <td>{this.autoUpdateMacro('carbs')}</td>
         <td>{this.autoUpdateMacro('protein')}</td>
+        <td><button onClick={this.deleteChoice}>X</button></td>
       </tr>
     )
   }
