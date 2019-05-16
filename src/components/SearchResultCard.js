@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import '../constants.js'
+import {URL, HEADERS} from '../constants.js'
 
 class SearchResultCard extends React.Component {
 

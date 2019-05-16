@@ -1,5 +1,6 @@
 import React from 'react'
 import SearchResultCard from '../components/SearchResultCard'
+import {URL, HEADERS} from '../constants.js'
 
 class SearchContainer extends React.Component {
 
@@ -17,7 +18,7 @@ class SearchContainer extends React.Component {
     e.preventDefault()
     if (this.state.text){
       // console.log('submit')
-      fetch(`http://localhost:3001/auto?q=${this.state.text}`)
+      fetch(`${URL}auto?q=${this.state.text}`)
       .then(r => r.json())
       .then(r => {
         console.log(r)
