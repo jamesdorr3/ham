@@ -1,5 +1,6 @@
 import React from 'react'
 import '../constants.js'
+import {connect} from 'react-redux'
 
 class ChoiceCard extends React.Component {
   
@@ -87,4 +88,10 @@ class ChoiceCard extends React.Component {
   }
 }
 
-export default ChoiceCard
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteChoice: id => dispatch({ type: 'DELETE_CHOICE', payload: id})
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ChoiceCard)
