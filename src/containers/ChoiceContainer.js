@@ -12,17 +12,18 @@ class ChoiceContainer extends React.Component {
   }
 
   autoSum = (macro) => {
-    const elements = document.querySelectorAll(`.${macro}`)
     let sum = 0
-    elements.forEach(element => {
-      // debugger
-      sum += parseInt(element.innerText)
+    this.props.choices.forEach(choice => {
+      const measurement = choice.measure === 'grams' ? choice.food.serving_grams : (choice.food.serving_unit_amount || 1)
+      sum += parseInt((choice.food[macro] / measurement * choice.amount).toFixed(0))
     })
     return sum
   }
 
+
+
   render(){
-    console.log(this.props)
+    console.log('this.props.choices', this.props.choices)
     return(
       <table>
         <tbody>
@@ -35,10 +36,10 @@ class ChoiceContainer extends React.Component {
           </tr>
           <tr>
             <td colSpan='3'>Totals: </td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td>{this.autoSum('calories')}</td>
+            <td>{this.autoSum('fat')}</td>
+            <td>{this.autoSum('carbs')}</td>
+            <td>{this.autoSum('protein')}</td>
           </tr>
           <tr>
             <td>name</td>
@@ -61,7 +62,7 @@ class ChoiceContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => { // LIMIT TO WHAT THIS COMPONENT IS USING!
-  console.log('Choice Container state to props', state)
+  // console.log('Choice Container state to props', state)
   return state
 }
 
