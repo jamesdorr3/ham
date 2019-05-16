@@ -24,15 +24,17 @@ class ChoiceCard extends React.Component {
   }
 
   updateInDB = () => {
-    const id = this.props.choice.id
-    fetch(`${URL}choices/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type':'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify({choice: this.state})
-    })
+    if (this.props.choice.amount !== this.state.amount || this.props.choice.measure !== this.state.measure) {
+      const id = this.props.choice.id
+      fetch(`${URL}choices/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type':'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({choice: this.state})
+      })
+    }
   }
 
   handleChange = (e) => {
@@ -52,26 +54,21 @@ class ChoiceCard extends React.Component {
     })
   }
 
-  handleBlur = () => {
-    if (this.props.choice.amount !== this.state.amount || this.props.choice.measure !== this.state.measure) {
-      this.updateInDB()
-    }
-  }
-
   render(){
     console.log(this.props.choice)
     return(
-      <tr draggable='true'
-      onDrag={(e) => console.log('drag!', this.props.choice)}
-      onDrop={(e) => console.log('drop!', this.props.choice)}
-      onDragOver={(e) => console.log('over!', this.props.choice)}
+      <tr 
+      // draggable='true'
+      // onDrag={(e) => console.log('drag!', this.props.choice)}
+      // onDrop={(e) => console.log('drop!', this.props.choice)}
+      // onDragOver={(e) => console.log('over!', this.props.choice)}
       >
         <td>{this.props.choice.food.name}</td>
         <td>
           <input type='number'
           value={this.state.amount} 
           onChange={(e) => this.setState({amount: e.target.value})} 
-          onBlur={this.handleBlur}
+          onBlur={this.updateInDB}
           >
           </input>
           </td>
