@@ -5,12 +5,8 @@ class SearchContainer extends React.Component {
 
   state = {
     text: '',
-    branded: [{brand_name: "Paleo", 
-    food_name: "Pancakes and Waffle Mix",
-    nix_item_id: "5820276d70af3d0409d86648"
-    }],
-    common: [{food_name: "pecan pancakes"
-    }],
+    branded: [],
+    common: [],
     internal: [],
     error: false
   }
