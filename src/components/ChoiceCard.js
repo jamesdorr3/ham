@@ -4,10 +4,10 @@ import {connect} from 'react-redux'
 
 class ChoiceCard extends React.Component {
   
-  state = {
-    amount: this.props.choice.amount,
-    measure: this.props.choice.measure
-  }
+  // state = {
+  //   amount: this.props.choice.amount,
+  //   measure: this.props.choice.measure
+  // }
   
   componentDidMount(){
     window.addEventListener('beforeunload', e => {
@@ -33,9 +33,28 @@ class ChoiceCard extends React.Component {
     })
   }
 
-  handleChange = (e) => {
-    this.props.updateChoice({id: e.target.parentElement.parentElement.id, measure: e.target.name, value: e.target.value})
-    // console.log(e.target.parentElement.parentElement.id, e.target.name, e.target.value)
+  handleAmountChange = (e) => {
+    this.props.updateChoice({id: e.target.parentElement.parentElement.id, name: e.target.name, value: e.target.value})
+  }
+
+  handleMeasureChange = (e) => {
+    this.handleAmountChange(e)
+    const id = e.target.parentElement.parentElement.id
+    const name = e.target.name
+    const value = e.target.value
+    const numberPart = e.target.parentElement.parentElement.querySelectorAll('td')[1].querySelector('input')
+    const amount = numberPart.value
+    const serving_unit_amount = this.props.choice.food.serving_unit_amount
+    const serving_grams = this.props.choice.food.serving_grams
+    console.log(id, name, value, amount, serving_unit_amount, serving_grams)
+    let newAmount;
+    if (value === 'grams') {
+      newAmount = (amount / serving_unit_amount * serving_grams)
+    }else{
+      newAmount = (amount / serving_grams * serving_unit_amount)
+    }
+    this.props.updateChoice({id: id, name: 'amount', value: newAmount})
+    // this.props.updateChoice({id: e.target.parentElement.parentElement.id, measure: e.target.name, value: e.target.value})
   }
 
   generateMeasures = () => {
@@ -66,7 +85,7 @@ class ChoiceCard extends React.Component {
           <input type='number'
           name='amount'
           value={this.props.choice.amount} 
-          onChange={this.handleChange} 
+          onChange={this.handleAmountChange} 
           onBlur={this.updateInDB}
           >
           </input>
@@ -74,7 +93,7 @@ class ChoiceCard extends React.Component {
         <td>
           <select 
           value={this.props.choice.measure} 
-          onChange={this.handleChange}
+          onChange={this.handleMeasureChange}
           name='measure'
           >
             {this.generateMeasures()}
