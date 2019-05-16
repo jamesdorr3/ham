@@ -1,4 +1,5 @@
 import React from 'react'
+import '../constants.js'
 
 class ChoiceCard extends React.Component {
   
@@ -6,7 +7,13 @@ class ChoiceCard extends React.Component {
     amount: this.props.choice.amount,
     measure: this.props.choice.measure
   }
-
+  
+  componentDidMount(){
+    window.addEventListener('beforeunload', e => {
+      this.updateInDB()
+    })
+  }
+  
   autoUpdateMacro = macro => {
     if (this.state.measure === 'grams'){
       return (this.props.choice.food[macro] / this.props.choice.food.serving_grams * this.state.amount).toFixed(1)
@@ -16,15 +23,9 @@ class ChoiceCard extends React.Component {
     }
   }
 
-  componentDidMount(){
-    window.addEventListener('beforeunload', e => {
-      this.updateInDB()
-    })
-  }
-
   updateInDB = () => {
     const id = this.props.choice.id
-    fetch(`http://localhost:3001/choices/${id}`, {
+    fetch(`${URL}choices/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type':'application/json',
@@ -34,36 +35,43 @@ class ChoiceCard extends React.Component {
     })
   }
 
-  deleteChoice = () => {
-    console.log('DELETE!')
-  }
-
   handleChange = (e) => {
     this.setState({measure: e.target.value})
   }
 
   generateMeasures = () => {
     const measures = [this.props.choice.measure]
-    if (!measures.includes('grams')){measures.push('grams')}
+    if (this.props.choice.food.serving_grams && !measures.includes('grams')){measures.push('grams')}
     if (this.props.choice.food.serving_unit_name && !measures.includes(this.props.choice.food.serving_unit_name)){
       measures.push(this.props.choice.food.serving_unit_name)
     }
     return measures.sort().map(measure => {
       return (
-        <option value={measure}>{measure}</option>
+        <option value={measure} key={measure}>{measure}</option>
       )
     })
+  }
+
+  handleBlur = () => {
+    if (this.props.choice.amount !== this.state.amount || this.props.choice.measure !== this.state.measure) {
+      this.updateInDB()
+    }
   }
 
   render(){
     console.log(this.props.choice)
     return(
-      <tr>
+      <tr draggable='true'
+      onDrag={(e) => console.log('drag!', this.props.choice)}
+      onDrop={(e) => console.log('drop!', this.props.choice)}
+      onDragOver={(e) => console.log('over!', this.props.choice)}
+      >
         <td>{this.props.choice.food.name}</td>
         <td>
-          <input value={this.state.amount} 
+          <input type='number'
+          value={this.state.amount} 
           onChange={(e) => this.setState({amount: e.target.value})} 
-          onBlur={this.updateInDB}
+          onBlur={this.handleBlur}
           >
           </input>
           </td>
@@ -72,10 +80,11 @@ class ChoiceCard extends React.Component {
             {this.generateMeasures()}
           </select>
         </td>
-        <td>{this.autoUpdateMacro('fat')}</td>
-        <td>{this.autoUpdateMacro('carbs')}</td>
-        <td>{this.autoUpdateMacro('protein')}</td>
-        <td><button onClick={this.deleteChoice}>X</button></td>
+        <td className='calories'>{this.autoUpdateMacro('calories')}</td>
+        <td className='fat'>{this.autoUpdateMacro('fat')}</td>
+        <td className='carbs'>{this.autoUpdateMacro('carbs')}</td>
+        <td className='protein'>{this.autoUpdateMacro('protein')}</td>
+        <td><button onClick={() => {this.props.deleteChoice(this.props.choice.id)}}>X</button></td>
       </tr>
     )
   }
