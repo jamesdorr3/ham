@@ -5,10 +5,18 @@ import {connect} from 'react-redux'
 
 class ChoiceContainer extends React.Component {
 
+  state = {
+    userNeedsSaved: false
+  }
+
   componentDidMount(){
     fetch(`${URL}/choices`)
     .then(r => r.json())
     .then(choices => this.props.addChoices(choices))
+
+    fetch(`${URL}/users`)
+    .then(r => r.json())
+    .then(r => this.props.selectUser(r[r.length - 1]))
   }
 
   autoSum = (macro) => {
@@ -20,19 +28,36 @@ class ChoiceContainer extends React.Component {
     return sum
   }
 
+  handleUpdateGoals = (e) => {
+    this.setState({userNeedsSaved: true})
+    this.props.updateUser(e.target)
+  }
 
+  saveGoals = () => {
+    fetch(`${URL}users/${this.props.user.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type':'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(this.props.user)
+    })
+    .then(r => r.json())
+    .then(r => this.setState({userNeedsSaved: false}))
+  }
 
   render(){
-    console.log('this.props.choices', this.props.choices)
+    // console.log('this.props.choices', this.props)
     return(
       <table>
         <tbody>
           <tr>
             <td colSpan='3'>Goals: </td>
-            <td><input type='number'/></td>
-            <td><input type='number'/></td>
-            <td><input type='number'/></td>
-            <td><input type='number'/></td>
+            <td><input onChange={this.handleUpdateGoals} type='number' name='calories' defaultValue={this.props.user.calories} /></td>
+            <td><input onChange={this.handleUpdateGoals} type='number' name='fat' defaultValue={this.props.user.fat} /></td>
+            <td><input onChange={this.handleUpdateGoals} type='number' name='carbs' defaultValue={this.props.user.carbs} /></td>
+            <td><input onChange={this.handleUpdateGoals} type='number' name='protein' defaultValue={this.props.user.protein} /></td>
+            {this.state.userNeedsSaved ? <td><button onClick={this.saveGoals} >Save Goals</button></td> : null }
           </tr>
           <tr>
             <td colSpan='3'>Totals: </td>
@@ -50,7 +75,7 @@ class ChoiceContainer extends React.Component {
             <td>carbs</td>
             <td>protein</td>
           </tr>
-          {this.props.choices.map(choice => < ChoiceCard 
+          {this.props.choices.sort((x, y) => x.id - y.id).map(choice => < ChoiceCard 
           choice={choice} 
           key={choice.id} 
           deleteChoice={this.props.deleteChoice} 
@@ -68,7 +93,9 @@ const mapStateToProps = (state) => { // LIMIT TO WHAT THIS COMPONENT IS USING!
 
 const mapDispatchToProps = dispatch => {
   return {
-    addChoices: (choices) => dispatch({ type: 'ADD_CHOICES', payload: choices})
+    addChoices: (choices) => dispatch({ type: 'ADD_CHOICES', payload: choices}),
+    selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
+    updateUser: (elem) => dispatch({ type: 'UPDATE_USER', payload: elem})
   }
 }
 

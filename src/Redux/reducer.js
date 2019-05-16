@@ -1,12 +1,13 @@
 import '../constants.js'
 
 const initialState = {
-  choices: []
+  choices: [],
+  user: {}
 }
 
 
 const reducer = (state = initialState, action) => {
-  console.log(state)
+  // console.log(state)
   switch (action.type) {
     case 'ADD_CHOICES': {
       return {...state, choices: [...state.choices, ...action.payload]}
@@ -26,6 +27,20 @@ const reducer = (state = initialState, action) => {
           ...state.choices.filter(x => x.id !== parseInt(action.payload.id)),
           {...choice, [action.payload.measure]: action.payload.value}
         ]
+      }
+    }
+    case 'SELECT_USER': {
+      // console.log(action)
+      return {...state, user: action.payload}
+    }
+    case 'UPDATE_USER': {
+      // console.log(action.payload)
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [action.payload.name]: action.payload.value
+        }
       }
     }
     default: {
