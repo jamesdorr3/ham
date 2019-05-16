@@ -16,30 +16,26 @@ class ChoiceCard extends React.Component {
   }
   
   autoUpdateMacro = macro => {
-    if (this.state.measure === 'grams'){
-      return (this.props.choice.food[macro] / this.props.choice.food.serving_grams * this.state.amount).toFixed(1)
-    }
-    else{
-      return (this.props.choice.food[macro] / (this.props.choice.food.serving_unit_amount || 1 ) * this.state.amount).toFixed(1)
-    }
+    const choice = this.props.choice
+    const measurement = choice.measure === 'grams' ? choice.food.serving_grams : (choice.food.serving_unit_amount || 1)
+    return (this.props.choice.food[macro] / measurement * this.props.choice.amount).toFixed()
   }
 
   updateInDB = () => {
-    if (this.props.choice.amount !== this.state.amount || this.props.choice.measure !== this.state.measure) {
-      const id = this.props.choice.id
-      fetch(`${URL}choices/${id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type':'application/json',
-          Accept: 'application/json'
-        },
-        body: JSON.stringify({choice: this.state})
-      })
-    }
+    const id = this.props.choice.id
+    fetch(`${URL}choices/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type':'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({choice: this.props.choice})
+    })
   }
 
   handleChange = (e) => {
-    this.setState({measure: e.target.value})
+    this.props.updateChoice({id: e.target.parentElement.parentElement.id, measure: e.target.name, value: e.target.value})
+    // console.log(e.target.parentElement.parentElement.id, e.target.name, e.target.value)
   }
 
   generateMeasures = () => {
@@ -56,9 +52,10 @@ class ChoiceCard extends React.Component {
   }
 
   render(){
-    console.log(this.props.choice)
+    console.log('choice', this.props.choice)
     return(
       <tr 
+      id={this.props.choice.id}
       // draggable='true'
       // onDrag={(e) => console.log('drag!', this.props.choice)}
       // onDrop={(e) => console.log('drop!', this.props.choice)}
@@ -67,14 +64,19 @@ class ChoiceCard extends React.Component {
         <td>{this.props.choice.food.name}</td>
         <td>
           <input type='number'
-          value={this.state.amount} 
-          onChange={(e) => this.setState({amount: e.target.value})} 
+          name='amount'
+          value={this.props.choice.amount} 
+          onChange={this.handleChange} 
           onBlur={this.updateInDB}
           >
           </input>
           </td>
         <td>
-          <select value={this.state.measure} onChange={this.handleChange}>
+          <select 
+          value={this.props.choice.measure} 
+          onChange={this.handleChange}
+          name='measure'
+          >
             {this.generateMeasures()}
           </select>
         </td>
@@ -90,7 +92,8 @@ class ChoiceCard extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteChoice: id => dispatch({ type: 'DELETE_CHOICE', payload: id})
+    deleteChoice: id => dispatch({ type: 'DELETE_CHOICE', payload: id}),
+    updateChoice: idAndAttr => dispatch({ type: 'UPDATE_CHOICE', payload: idAndAttr})
   }
 }
 
