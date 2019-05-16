@@ -1,6 +1,6 @@
 import React from 'react'
 import ChoiceCard from '../components/ChoiceCard'
-import '../constants'
+import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
 
 class ChoiceContainer extends React.Component {
@@ -13,10 +13,6 @@ class ChoiceContainer extends React.Component {
     fetch(`${URL}/choices`)
     .then(r => r.json())
     .then(choices => this.props.addChoices(choices))
-
-    fetch(`${URL}/users`)
-    .then(r => r.json())
-    .then(r => this.props.selectUser(r[r.length - 1]))
   }
 
   autoSum = (macro) => {
@@ -38,7 +34,8 @@ class ChoiceContainer extends React.Component {
       method: 'PATCH',
       headers: {
         'Content-Type':'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
+        Authorization: `Bearer <token>`
       },
       body: JSON.stringify(this.props.user)
     })
@@ -53,10 +50,10 @@ class ChoiceContainer extends React.Component {
         <tbody>
           <tr>
             <td colSpan='3'>Goals: </td>
-            <td><input onChange={this.handleUpdateGoals} type='number' name='calories' defaultValue={this.props.user.calories} /></td>
-            <td><input onChange={this.handleUpdateGoals} type='number' name='fat' defaultValue={this.props.user.fat} /></td>
-            <td><input onChange={this.handleUpdateGoals} type='number' name='carbs' defaultValue={this.props.user.carbs} /></td>
-            <td><input onChange={this.handleUpdateGoals} type='number' name='protein' defaultValue={this.props.user.protein} /></td>
+            <td><input onChange={this.handleUpdateGoals} type='number' name='calories' value={this.props.user.calories} /></td>
+            <td><input onChange={this.handleUpdateGoals} type='number' name='fat' value={this.props.user.fat} /></td>
+            <td><input onChange={this.handleUpdateGoals} type='number' name='carbs' value={this.props.user.carbs} /></td>
+            <td><input onChange={this.handleUpdateGoals} type='number' name='protein' value={this.props.user.protein} /></td>
             {this.state.userNeedsSaved ? <td><button onClick={this.saveGoals} >Save Goals</button></td> : null }
           </tr>
           <tr>

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../constants.js'
+import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
 
 class ChoiceCard extends React.Component {
