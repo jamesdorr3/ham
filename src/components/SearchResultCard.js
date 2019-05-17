@@ -11,7 +11,7 @@ class SearchResultCard extends React.Component {
       `id=${this.props.food.nix_item_id}`: 
       `name=${this.props.food.food_name}`
     console.log(props)
-    fetch(`${URL}search?${props}`)
+    fetch(`${URL}search?${props}`, {headers: HEADERS()})
     .then(r => r.json())
     .then(choice => this.props.addChoice(choice))
   }

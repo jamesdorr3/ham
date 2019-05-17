@@ -1,7 +1,8 @@
 export const URL = 'http://localhost:3001/'
 
-export const HEADERS = {
+export const HEADERS = () => ({
   'Content-Type':'application/json',
   Accept: 'application/json',
-  Authorization: `Bearer <token>`
-}
+  Authorization: localStorage.getItem('token') ? `BEARER ${localStorage.getItem('token')}` : null
+  // Authorization: // upcase or title?
+})

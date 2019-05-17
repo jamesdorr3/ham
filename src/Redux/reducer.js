@@ -17,6 +17,7 @@ const reducer = (state = initialState, action) => {
       return {...state, choices: state.choices.filter(x => x.id !== action.payload)}
     }
     case 'UPDATE_CHOICE': {
+      // debugger
       const choice = state.choices.find(x => x.id === parseInt(action.payload.id))
       // const index = state.choices.indexOf(choice)
       choice[action.payload.name] = action.payload.value // ?
@@ -31,7 +32,8 @@ const reducer = (state = initialState, action) => {
     }
     case 'SELECT_USER': {
       // console.log(action)
-      return {...state, user: action.payload.user, jwt: action.payload.jwt}
+      // console.log( {...state, user: action.payload.user, jwt: action.payload.jwt})
+      return {...state, user: action.payload.user, jwt: action.payload.jwt, choices: []}
     }
     case 'UPDATE_USER': {
       // console.log(action.payload)
@@ -41,6 +43,14 @@ const reducer = (state = initialState, action) => {
           ...state.user,
           [action.payload.name]: action.payload.value
         }
+      }
+    }
+    case 'SIGN_OUT': {
+      console.log('sign out')
+      return {
+        ...state,
+        user: {},
+        choices: []
       }
     }
     default: {

@@ -4,11 +4,6 @@ import {connect} from 'react-redux'
 
 class ChoiceCard extends React.Component {
   
-  // state = {
-  //   amount: this.props.choice.amount,
-  //   measure: this.props.choice.measure
-  // }
-  
   componentDidMount(){
     window.addEventListener('beforeunload', e => {
       this.updateInDB()
@@ -25,10 +20,7 @@ class ChoiceCard extends React.Component {
     const id = this.props.choice.id
     fetch(`${URL}choices/${id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type':'application/json',
-        Accept: 'application/json'
-      },
+      headers: HEADERS(),
       body: JSON.stringify({choice: this.props.choice})
     })
   }

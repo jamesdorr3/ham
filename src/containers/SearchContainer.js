@@ -18,7 +18,7 @@ class SearchContainer extends React.Component {
     e.preventDefault()
     if (this.state.text){
       // console.log('submit')
-      fetch(`${URL}auto?q=${this.state.text}`)
+      fetch(`${URL}auto?q=${this.state.text}`, {headers: HEADERS()})
       .then(r => r.json())
       .then(r => {
         console.log(r)

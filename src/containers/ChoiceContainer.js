@@ -10,9 +10,11 @@ class ChoiceContainer extends React.Component {
   }
 
   componentDidMount(){
-    fetch(`${URL}/choices`)
-    .then(r => r.json())
-    .then(choices => this.props.addChoices(choices))
+    if (localStorage.getItem('token')){
+      fetch(`${URL}/choices`, {headers: HEADERS()})
+      .then(r => r.json())
+      .then(choicesArray => this.props.addChoices(choicesArray))
+    }
   }
 
   autoSum = (macro) => {
@@ -32,11 +34,7 @@ class ChoiceContainer extends React.Component {
   saveGoals = () => {
     fetch(`${URL}users/${this.props.user.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type':'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer <token>`
-      },
+      headers: HEADERS(),
       body: JSON.stringify(this.props.user)
     })
     .then(r => r.json())
@@ -44,33 +42,27 @@ class ChoiceContainer extends React.Component {
   }
 
   render(){
-    // console.log('this.props.choices', this.props)
+    // console.log('this.props.user', this.props.user)
     return(
       <table>
         <tbody>
           <tr>
-            <td colSpan='3'>Goals: </td>
-            <td><input onChange={this.handleUpdateGoals} type='number' name='calories' value={this.props.user.calories} /></td>
-            <td><input onChange={this.handleUpdateGoals} type='number' name='fat' value={this.props.user.fat} /></td>
-            <td><input onChange={this.handleUpdateGoals} type='number' name='carbs' value={this.props.user.carbs} /></td>
-            <td><input onChange={this.handleUpdateGoals} type='number' name='protein' value={this.props.user.protein} /></td>
-            {this.state.userNeedsSaved ? <td><button onClick={this.saveGoals} >Save Goals</button></td> : null }
+            <th>name</th><th>amount</th><th>measure</th><th>calories</th><th>fat</th><th>carbs</th><th>protein</th>
           </tr>
           <tr>
-            <td colSpan='3'>Totals: </td>
-            <td>{this.autoSum('calories')}</td>
-            <td>{this.autoSum('fat')}</td>
-            <td>{this.autoSum('carbs')}</td>
-            <td>{this.autoSum('protein')}</td>
+            <th colSpan='3'>Goals: </th>
+            <th><input onChange={this.handleUpdateGoals} type='number' name='calories' value={this.props.user.calories} /></th>
+            <th><input onChange={this.handleUpdateGoals} type='number' name='fat' value={this.props.user.fat} /></th>
+            <th><input onChange={this.handleUpdateGoals} type='number' name='carbs' value={this.props.user.carbs} /></th>
+            <th><input onChange={this.handleUpdateGoals} type='number' name='protein' value={this.props.user.protein} /></th>
+            {this.state.userNeedsSaved ? <th><button onClick={this.saveGoals} >Save Goals</button></th> : null }
           </tr>
           <tr>
-            <td>name</td>
-            <td>amount</td>
-            <td>measure</td>
-            <td>calories</td>
-            <td>fat</td>
-            <td>carbs</td>
-            <td>protein</td>
+            <th colSpan='3'>Totals: </th>
+            <th>{this.autoSum('calories')}</th>
+            <th>{this.autoSum('fat')}</th>
+            <th>{this.autoSum('carbs')}</th>
+            <th>{this.autoSum('protein')}</th>
           </tr>
           {this.props.choices.sort((x, y) => x.id - y.id).map(choice => < ChoiceCard 
           choice={choice} 
