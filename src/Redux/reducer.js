@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
   // console.log(state)
   switch (action.type) {
     case 'ADD_CHOICES': {
-      return {...state, choices: [...state.choices, ...action.payload]}
+      return {...state, choices: action.payload}
     }
     case 'DELETE_CHOICE': {
       fetch(`${URL}/choices/${action.payload}`, {method: 'DELETE'})

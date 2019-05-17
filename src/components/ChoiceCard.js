@@ -4,11 +4,6 @@ import {connect} from 'react-redux'
 
 class ChoiceCard extends React.Component {
   
-  // state = {
-  //   amount: this.props.choice.amount,
-  //   measure: this.props.choice.measure
-  // }
-  
   componentDidMount(){
     window.addEventListener('beforeunload', e => {
       this.updateInDB()

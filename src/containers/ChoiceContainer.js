@@ -9,11 +9,13 @@ class ChoiceContainer extends React.Component {
     userNeedsSaved: false
   }
 
-  // componentDidMount(){
-  //   fetch(`${URL}/choices`)
-  //   .then(r => r.json())
-  //   .then(choices => this.props.addChoices(choices))
-  // }
+  componentDidMount(){
+    if (localStorage.getItem('token')){
+      fetch(`${URL}/choices`, {headers: HEADERS()})
+      .then(r => r.json())
+      .then(choicesArray => this.props.addChoices(choicesArray))
+    }
+  }
 
   autoSum = (macro) => {
     let sum = 0
@@ -40,7 +42,7 @@ class ChoiceContainer extends React.Component {
   }
 
   render(){
-    console.log('this.props.user', this.props.user)
+    // console.log('this.props.user', this.props.user)
     return(
       <table>
         <tbody>

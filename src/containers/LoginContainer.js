@@ -35,10 +35,16 @@ class LoginContainer extends React.Component {
         if (jwtAndUser.user && jwtAndUser.jwt) {
           this.props.selectUser(jwtAndUser)
           localStorage.setItem('token', jwtAndUser.jwt)
-          // this.setState({signup: 'logout'})
+          this.fetchChoices()
         }
       })
     }
+  }
+
+  fetchChoices = () => {
+    fetch(`${URL}/choices`, {headers: HEADERS()})
+    .then(r => r.json())
+    .then(choicesArray => this.props.addChoices(choicesArray))
   }
 
   signup = () => {
@@ -55,7 +61,7 @@ class LoginContainer extends React.Component {
         if (jwtAndUser.user && jwtAndUser.jwt) {
           this.props.selectUser(jwtAndUser)
           localStorage.setItem('token', jwtAndUser.jwt)
-          // this.setState({signup: 'logout'})
+          this.fetchChoices()
         }
       })
     }
@@ -136,7 +142,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return{
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
-    signOut: (user) => dispatch({ type: 'SIGN_OUT', payload: user})
+    signOut: (user) => dispatch({ type: 'SIGN_OUT', payload: user}),
+    addChoices: (choices) => dispatch({ type: 'ADD_CHOICES', payload: choices})
   }
 }
 
