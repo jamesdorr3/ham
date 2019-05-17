@@ -98,7 +98,7 @@ class LoginContainer extends React.Component {
       signup: false
     })
     localStorage.removeItem('token');
-    this.props.signOut(this.props.user)
+    this.props.signOut()
   }
 
   handleSubmit = () => {
@@ -142,7 +142,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return{
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
-    signOut: (user) => dispatch({ type: 'SIGN_OUT', payload: user}),
+    signOut: () => dispatch({ type: 'SIGN_OUT'}),
     addChoices: (choices) => dispatch({ type: 'ADD_CHOICES', payload: choices})
   }
 }

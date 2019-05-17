@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
   // console.log(state)
   switch (action.type) {
     case 'ADD_CHOICES': {
-      return {...state, choices: action.payload}
+      return {...state, choices: [...state.choices, ...action.payload]}
     }
     case 'DELETE_CHOICE': {
       fetch(`${URL}/choices/${action.payload}`, {method: 'DELETE'})
@@ -32,8 +32,8 @@ const reducer = (state = initialState, action) => {
     }
     case 'SELECT_USER': {
       // console.log(action)
-      console.log( {...state, user: action.payload.user, jwt: action.payload.jwt})
-      return {...state, user: action.payload.user, jwt: action.payload.jwt}
+      // console.log( {...state, user: action.payload.user, jwt: action.payload.jwt})
+      return {...state, user: action.payload.user, jwt: action.payload.jwt, choices: []}
     }
     case 'UPDATE_USER': {
       // console.log(action.payload)
