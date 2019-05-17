@@ -9,11 +9,11 @@ class ChoiceContainer extends React.Component {
     userNeedsSaved: false
   }
 
-  componentDidMount(){
-    fetch(`${URL}/choices`)
-    .then(r => r.json())
-    .then(choices => this.props.addChoices(choices))
-  }
+  // componentDidMount(){
+  //   fetch(`${URL}/choices`)
+  //   .then(r => r.json())
+  //   .then(choices => this.props.addChoices(choices))
+  // }
 
   autoSum = (macro) => {
     let sum = 0
