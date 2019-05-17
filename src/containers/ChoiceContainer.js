@@ -32,11 +32,7 @@ class ChoiceContainer extends React.Component {
   saveGoals = () => {
     fetch(`${URL}users/${this.props.user.id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type':'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer <token>`
-      },
+      headers: HEADERS(),
       body: JSON.stringify(this.props.user)
     })
     .then(r => r.json())

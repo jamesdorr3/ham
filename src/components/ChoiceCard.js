@@ -25,10 +25,7 @@ class ChoiceCard extends React.Component {
     const id = this.props.choice.id
     fetch(`${URL}choices/${id}`, {
       method: 'PATCH',
-      headers: {
-        'Content-Type':'application/json',
-        Accept: 'application/json'
-      },
+      headers: HEADERS(),
       body: JSON.stringify({choice: this.props.choice})
     })
   }

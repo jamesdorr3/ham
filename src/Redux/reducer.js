@@ -17,6 +17,7 @@ const reducer = (state = initialState, action) => {
       return {...state, choices: state.choices.filter(x => x.id !== action.payload)}
     }
     case 'UPDATE_CHOICE': {
+      // debugger
       const choice = state.choices.find(x => x.id === parseInt(action.payload.id))
       // const index = state.choices.indexOf(choice)
       choice[action.payload.name] = action.payload.value // ?

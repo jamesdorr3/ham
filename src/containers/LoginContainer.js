@@ -22,7 +22,7 @@ class LoginContainer extends React.Component {
     if (this.state.password) {
       fetch(`${URL}/auth`, {
         method: 'POST',
-        headers: HEADERS,
+        headers: HEADERS(),
         body: JSON.stringify({
           user: {
             username_or_email: this.state.usernameOrEmail,
@@ -42,7 +42,23 @@ class LoginContainer extends React.Component {
   }
 
   signup = () => {
-    console.log('sign up!')
+    if (this.state.password && this.state.username && this.state.email){
+      fetch(`${URL}/users`, {
+        method: 'POST',
+        headers: HEADERS(),
+        body: JSON.stringify({
+          user: this.state
+        })
+      })
+      .then(r => r.json())
+      .then(jwtAndUser => {
+        if (jwtAndUser.user && jwtAndUser.jwt) {
+          this.props.selectUser(jwtAndUser)
+          localStorage.setItem('token', jwtAndUser.jwt)
+          // this.setState({signup: 'logout'})
+        }
+      })
+    }
   }
 
   handleLoginClick = () => {
@@ -79,6 +95,10 @@ class LoginContainer extends React.Component {
     this.props.signOut(this.props.user)
   }
 
+  handleSubmit = () => {
+    console.log('SUBMIT!')
+  }
+
   render(){
     return(
       <table>
@@ -96,7 +116,7 @@ class LoginContainer extends React.Component {
                 Log In
               </button>
               or
-              <button onClick={() => this.setState({signup: 'sign up'})} >
+              <button onClick={this.handleSignupClick} >
                 Sign Up
               </button>
             </>
