@@ -3,7 +3,7 @@ import './App.css';
 import SearchContainer from './containers/SearchContainer'
 import ChoiceContainer from './containers/ChoiceContainer'
 import LoginContainer from './containers/LoginContainer'
-// import './constants.js'
+import {DragDropContext} from 'react-beautiful-dnd';
 
 class App extends React.Component {
 
@@ -12,7 +12,9 @@ class App extends React.Component {
       <div className="App">
         < LoginContainer />
         < SearchContainer />
-        < ChoiceContainer />
+        <DragDropContext>
+          < ChoiceContainer />
+        </DragDropContext>
       </div>
     );
   }
