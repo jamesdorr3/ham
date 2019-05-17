@@ -67,6 +67,18 @@ class LoginContainer extends React.Component {
     }
   }
 
+  handleSignOut = () => {
+    this.setState({
+      username: '',
+      email: '',
+      usernameOrEmail: '',
+      password: '',
+      signup: false
+    })
+    localStorage.removeItem('token');
+    this.props.signOut(this.props.user)
+  }
+
   render(){
     return(
       <table>
@@ -77,7 +89,7 @@ class LoginContainer extends React.Component {
             </td>
             <td>
             {this.props.user.email ?
-            <button>Sign Out</button> :
+            <button onClick={this.handleSignOut}>Sign Out</button> :
             <>
               {this.state.signup ? < SignUpCard state={this.state} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/> : < LoginCard state={this.state} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>}
               <button onClick={this.handleLoginClick} >
@@ -103,7 +115,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return{
-    selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user})
+    selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
+    signOut: (user) => dispatch({ type: 'SIGN_OUT', payload: user})
   }
 }
 
