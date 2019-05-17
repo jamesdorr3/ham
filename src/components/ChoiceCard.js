@@ -62,17 +62,26 @@ class ChoiceCard extends React.Component {
     })
   }
 
+  handleDrag = () => {
+    console.log('hi')
+  }
+
   render(){
     console.log('choice', this.props.choice)
     return(
       <tr 
       id={this.props.choice.id}
-      // draggable='true'
-      // onDrag={(e) => console.log('drag!', this.props.choice)}
-      // onDrop={(e) => console.log('drop!', this.props.choice)}
-      // onDragOver={(e) => console.log('over!', this.props.choice)}
+      draggable='true'
+      className='row'
+      onDrag={this.handleDrag}
+      onDrop={this.handleDrag}
+      onDragOver={this.handleDrag}
       >
-        <td>{this.props.choice.food.name}</td>
+        <td className='name'>
+          <button className="up arrow">▲</button>
+          <button className="down arrow">▼</button>
+          <span>{this.props.choice.food.name}</span>
+        </td>
         <td>
           <input type='number'
           name='amount'

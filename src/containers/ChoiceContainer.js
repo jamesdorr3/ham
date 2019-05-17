@@ -64,7 +64,7 @@ class ChoiceContainer extends React.Component {
             <th>{this.autoSum('carbs')}</th>
             <th>{this.autoSum('protein')}</th>
           </tr>
-          {this.props.choices.sort((x, y) => x.id - y.id).map(choice => < ChoiceCard 
+          {this.props.choices.map(choice => < ChoiceCard //.sort((x, y) => x.id - y.id)
           choice={choice} 
           key={choice.id} 
           deleteChoice={this.props.deleteChoice} 

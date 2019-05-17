@@ -31,3 +31,27 @@
     transform: rotate(360deg);
   }
 }
+
+td.name{
+  text-align: left;
+  position: relative;
+}
+
+td.name span {
+  margin-left: 11px
+}
+
+button.up {
+  top: 0;
+}
+
+button.down {
+  bottom: 0;
+}
+
+button.arrow {
+  height: 50%;
+  position: absolute;
+  padding: 0px;
+  font-size: 9px;
+}
