@@ -32,12 +32,13 @@ class Login extends React.Component {
   }
 
   render(){
+    console.log(this.props)
     return(
       <table>
         <tbody>
           <tr>
             <td>
-              Feel free to use HAM without signing in. To save your foods, days, and goals, login or sign up!
+              {this.props.user.email ? this.props.user.email : 'Feel free to use HAM without signing in. To save your foods, days, and goals, login or sign up!'}
             </td>
             <td>
               <form onSubmit={this.handleSubmit}>
@@ -53,10 +54,14 @@ class Login extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return state
+}
+
 const mapDispatchToProps = dispatch => {
   return{
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user})
   }
 }
 
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
