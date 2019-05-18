@@ -1,6 +1,7 @@
 import React from 'react'
 import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
+import {Draggable} from 'react-beautiful-dnd'
 
 class ChoiceCard extends React.Component {
   
@@ -69,43 +70,47 @@ class ChoiceCard extends React.Component {
   render(){
     console.log('choice', this.props.choice)
     return(
-      <tr 
-      id={this.props.choice.id}
-      draggable='true'
-      className='row'
-      onDrag={this.handleDrag}
-      onDrop={this.handleDrag}
-      onDragOver={this.handleDrag}
+      <Draggable 
+        draggableId={this.props.choice.id} 
+        index={this.props.index}
       >
-        <td className='name'>
-          <button className="up arrow">▲</button>
-          <button className="down arrow">▼</button>
-          <span>{this.props.choice.food.name}</span>
-        </td>
-        <td>
-          <input type='number'
-          name='amount'
-          value={this.props.choice.amount} 
-          onChange={this.handleAmountChange} 
-          onBlur={this.updateInDB}
-          >
-          </input>
+        {provided => (
+        <tr 
+        className='Container'
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+        ref={provided.innerRef}
+        id={this.props.choice.id}
+        >
+          <td className='name'>
+            {this.props.choice.food.name}
           </td>
-        <td>
-          <select 
-          value={this.props.choice.measure} 
-          onChange={this.handleMeasureChange}
-          name='measure'
-          >
-            {this.generateMeasures()}
-          </select>
-        </td>
-        <td className='calories'>{this.autoUpdateMacro('calories')}</td>
-        <td className='fat'>{this.autoUpdateMacro('fat')}</td>
-        <td className='carbs'>{this.autoUpdateMacro('carbs')}</td>
-        <td className='protein'>{this.autoUpdateMacro('protein')}</td>
-        <td><button onClick={() => {this.props.deleteChoice(this.props.choice.id)}}>X</button></td>
-      </tr>
+          <td>
+            <input type='number'
+            name='amount'
+            value={this.props.choice.amount} 
+            onChange={this.handleAmountChange} 
+            onBlur={this.updateInDB}
+            >
+            </input>
+            </td>
+          <td>
+            <select 
+            value={this.props.choice.measure} 
+            onChange={this.handleMeasureChange}
+            name='measure'
+            >
+              {this.generateMeasures()}
+            </select>
+          </td>
+          <td className='calories'>{this.autoUpdateMacro('calories')}</td>
+          <td className='fat'>{this.autoUpdateMacro('fat')}</td>
+          <td className='carbs'>{this.autoUpdateMacro('carbs')}</td>
+          <td className='protein'>{this.autoUpdateMacro('protein')}</td>
+          <td><button onClick={() => {this.props.deleteChoice(this.props.choice.id)}}>X</button></td>
+        </tr>
+        )}
+      </Draggable>
     )
   }
 }

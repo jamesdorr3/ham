@@ -66,28 +66,25 @@ class ChoiceContainer extends React.Component {
             <th>{this.autoSum('carbs')}</th>
             <th>{this.autoSum('protein')}</th>
           </tr>
-          {/* <Droppable droppableId={this.props.column.id}>
+        </tbody>
+          <Droppable droppableId='1'>
             {(provided) => (
-              <div 
-                className="Hero-List" 
-                innerRef={provided.innerRef} 
+              <tbody
+                className="Hero-List"
+                ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {this.props.heroes.map((hero, index) => (
-                  <Hero key={hero.id} hero={hero} index={index} />
-                ))}
+                <tr>blah</tr>
+                {this.props.choices.map((choice, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
+                choice={choice} 
+                key={choice.id} 
+                index={index}
+                deleteChoice={this.props.deleteChoice} 
+                /> )}
                 {provided.placeholder}
-              </div>
+              </tbody>
             )}
-          </Droppable> */}
-        </tbody>
-        <tbody>
-          {this.props.choices.map(choice => < ChoiceCard //.sort((x, y) => x.id - y.id)
-          choice={choice} 
-          key={choice.id} 
-          deleteChoice={this.props.deleteChoice} 
-          /> )}
-        </tbody>
+          </Droppable>
       </table>
       </>
     )
