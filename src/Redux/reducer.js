@@ -53,6 +53,18 @@ const reducer = (state = initialState, action) => {
         choices: []
       }
     }
+    case 'UPDATE_INDEX': {
+      console.log(action.payload);
+      const choice = state.choices.find(x => x.id === action.payload.id)
+      console.log(choice)
+      return {
+        ...state,
+        choices: [
+          ...state.choices.filter(x => x !== choice),
+          {...choice, index: action.payload.index}
+        ]
+      }
+    }
     default: {
       return state
     }

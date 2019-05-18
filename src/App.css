@@ -31,3 +31,10 @@
     transform: rotate(360deg);
   }
 }
+
+td.name{
+  text-align: left;
+}
+table {
+  background-color: lime
+}

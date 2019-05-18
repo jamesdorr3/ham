@@ -2,6 +2,7 @@ import React from 'react'
 import ChoiceCard from '../components/ChoiceCard'
 import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
+import {Droppable} from 'react-beautiful-dnd'
 
 class ChoiceContainer extends React.Component {
 
@@ -44,6 +45,7 @@ class ChoiceContainer extends React.Component {
   render(){
     // console.log('this.props.user', this.props.user)
     return(
+      <>
       <table>
         <tbody>
           <tr>
@@ -64,13 +66,26 @@ class ChoiceContainer extends React.Component {
             <th>{this.autoSum('carbs')}</th>
             <th>{this.autoSum('protein')}</th>
           </tr>
-          {this.props.choices.sort((x, y) => x.id - y.id).map(choice => < ChoiceCard 
-          choice={choice} 
-          key={choice.id} 
-          deleteChoice={this.props.deleteChoice} 
-          /> )}
         </tbody>
+          <Droppable droppableId='1'>
+            {(provided) => (
+              <tbody
+                className="Hero-List"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {this.props.choices.sort((x, y) => x.index - y.index).map((choice, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
+                choice={choice} 
+                key={choice.id} 
+                index={index}
+                deleteChoice={this.props.deleteChoice} 
+                /> )}
+                {provided.placeholder}
+              </tbody>
+            )}
+          </Droppable>
       </table>
+      </>
     )
   }
 }
