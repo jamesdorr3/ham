@@ -74,8 +74,7 @@ class ChoiceContainer extends React.Component {
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                <tr>blah</tr>
-                {this.props.choices.map((choice, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
+                {this.props.choices.sort((x, y) => x.index - y.index).map((choice, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
                 choice={choice} 
                 key={choice.id} 
                 index={index}
