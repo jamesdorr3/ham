@@ -10,17 +10,14 @@ class App extends React.Component {
 
   onDragEnd = result => {
     const {destination, source, draggableId} = result;
-    // console.log(' from ', source.index, ' to ', destination.index, ' with id ', draggableId)
     if (!destination) {
       return;
     }
-    // if (
-    //   destination.droppableId === source.droppableId &&
-    //   destination.index === source.index
-    //   ) {
-    //   return;
-    // }
-    this.props.updateIndex({id: draggableId, index: destination.index})
+    const choicesIds = []
+    document.querySelectorAll('tr.choice').forEach(x => choicesIds.push(x.id))
+    const movedId = choicesIds.splice(source.index, 1)
+    choicesIds.splice(destination.index, 0, movedId)
+    this.props.updateIndex({choicesIds: choicesIds})
   };
 
   render(){
@@ -38,7 +35,7 @@ class App extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return{
-    updateIndex: choiceIdAndIndex => dispatch({ type: 'UPDATE_INDEX', payload: choiceIdAndIndex})
+    updateIndex: choicesIds => dispatch({ type: 'UPDATE_INDEX', payload: choicesIds})
   }
 }
 
