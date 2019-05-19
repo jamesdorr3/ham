@@ -68,7 +68,6 @@ class ChoiceCard extends React.Component {
   }
 
   render(){
-    console.log('choice', this.props.choice.index)
     return(
       <Draggable 
         draggableId={this.props.choice.id} 
@@ -76,7 +75,8 @@ class ChoiceCard extends React.Component {
       >
         {provided => (
         <tr 
-        className='Container'
+        // className='Container'
+        className='choice'
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}

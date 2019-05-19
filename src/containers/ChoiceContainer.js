@@ -14,7 +14,9 @@ class ChoiceContainer extends React.Component {
     if (localStorage.getItem('token')){
       fetch(`${URL}/choices`, {headers: HEADERS()})
       .then(r => r.json())
-      .then(choicesArray => this.props.addChoices(choicesArray))
+      .then(choicesArray => {
+        if (choicesArray[0]) {this.props.addChoices(choicesArray)}
+      })
     }
   }
 
@@ -43,7 +45,6 @@ class ChoiceContainer extends React.Component {
   }
 
   render(){
-    // console.log('this.props.user', this.props.user)
     return(
       <>
       <table>
