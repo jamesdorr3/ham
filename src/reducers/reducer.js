@@ -1,5 +1,4 @@
 import {URL, HEADERS} from '../constants.js'
-
 const initialState = {
   choices: [],
   user: {},
@@ -58,9 +57,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         choices: newChoices
       }
-    }
-    case 'REAUTH': {
-      return state
     }
     default: {
       return state

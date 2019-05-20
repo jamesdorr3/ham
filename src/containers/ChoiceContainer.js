@@ -17,12 +17,6 @@ class ChoiceContainer extends React.Component {
       .then(choicesArray => {
         if (choicesArray[0]) {this.props.addChoices(choicesArray)}
       })
-      fetch(`${URL}/reauth`, {
-        method: 'POST',
-        headers: HEADERS()
-      })
-      .then(r => r.json())
-      .then(jwtAndUser => this.props.selectUser(jwtAndUser))
     }
   }
 

@@ -3,6 +3,9 @@ import { URL, HEADERS } from '../constants.js'
 import { connect } from 'react-redux'
 import LoginCard from '../components/LoginCard'
 import SignUpCard from '../components/SignUpCard'
+import reauth from '../actions/authActions'
+import auth from '../actions/authActions2'
+import fetchChoices from '../actions/choicesActions'
 
 class LoginContainer extends React.Component {
 
@@ -14,37 +17,41 @@ class LoginContainer extends React.Component {
     signup: false
   }
 
+  componentDidMount(){
+    if (localStorage.getItem('token')){this.props.reauth()} // thunk
+  }
+
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value})
   }
 
   login = () => {
-    if (this.state.password) {
-      fetch(`${URL}/auth`, {
-        method: 'POST',
-        headers: HEADERS(),
-        body: JSON.stringify({
-          user: {
-            username_or_email: this.state.usernameOrEmail,
-            password: this.state.password
-          }
-        })
-      })
-      .then(r => r.json())
-      .then(jwtAndUser => {
-        if (jwtAndUser.user && jwtAndUser.jwt) {
-          this.props.selectUser(jwtAndUser)
-          localStorage.setItem('token', jwtAndUser.jwt)
-          this.fetchChoices()
-        }
-      })
-    }
+    this.props.auth(this.state)
+    // if (this.state.password) {
+    //   // this.props.auth(this.state)
+    //   fetch(`${URL}/auth`, {
+    //     method: 'POST',
+    //     headers: HEADERS(),
+    //     body: JSON.stringify({
+    //       user: {
+    //         username_or_email: this.state.usernameOrEmail,
+    //         password: this.state.password
+    //       }
+    //     })
+    //   })
+    //   .then(r => r.json())
+    //   .then(jwtAndUser => {
+    //     if (jwtAndUser.user && jwtAndUser.jwt) {
+    //       this.props.selectUser(jwtAndUser)
+    //       localStorage.setItem('token', jwtAndUser.jwt)
+    //       this.fetchChoices()
+    //     }
+    //   })
+    // }
   }
 
   fetchChoices = () => {
-    fetch(`${URL}/choices`, {headers: HEADERS()})
-    .then(r => r.json())
-    .then(choicesArray => this.props.addChoices(choicesArray))
+    this.props.fetchChoices()
   }
 
   signup = () => {
@@ -143,7 +150,10 @@ const mapDispatchToProps = dispatch => {
   return{
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
     signOut: () => dispatch({ type: 'SIGN_OUT'}),
-    addChoices: (choices) => dispatch({ type: 'ADD_CHOICES', payload: choices})
+    addChoices: (choices) => dispatch({ type: 'ADD_CHOICES', payload: choices}),
+    reauth: () => {dispatch(reauth())},
+    auth: (info) => {dispatch(auth(info))},
+    fetchChoices: () => dispatch(fetchChoices())
   }
 }
 
