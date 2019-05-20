@@ -3,8 +3,8 @@ import { URL, HEADERS } from '../constants.js'
 import { connect } from 'react-redux'
 import LoginCard from '../components/LoginCard'
 import SignUpCard from '../components/SignUpCard'
-import reauth from '../actions/authActions'
-import auth from '../actions/authActions2'
+import {auth, reauth} from '../actions/authActions'
+// import {auth} from '../actions/authActions2'
 import fetchChoices from '../actions/choicesActions'
 
 class LoginContainer extends React.Component {
@@ -26,32 +26,11 @@ class LoginContainer extends React.Component {
   }
 
   login = () => {
-    this.props.auth(this.state)
-    // if (this.state.password) {
-    //   // this.props.auth(this.state)
-    //   fetch(`${URL}/auth`, {
-    //     method: 'POST',
-    //     headers: HEADERS(),
-    //     body: JSON.stringify({
-    //       user: {
-    //         username_or_email: this.state.usernameOrEmail,
-    //         password: this.state.password
-    //       }
-    //     })
-    //   })
-    //   .then(r => r.json())
-    //   .then(jwtAndUser => {
-    //     if (jwtAndUser.user && jwtAndUser.jwt) {
-    //       this.props.selectUser(jwtAndUser)
-    //       localStorage.setItem('token', jwtAndUser.jwt)
-    //       this.fetchChoices()
-    //     }
-    //   })
-    // }
-  }
-
-  fetchChoices = () => {
-    this.props.fetchChoices()
+    if (this.state.password) {
+      this.props.auth(this.state)
+      .then(this.props.fetchChoices)
+    }
+    // this.props.fetchChoices()
   }
 
   signup = () => {
@@ -68,7 +47,6 @@ class LoginContainer extends React.Component {
         if (jwtAndUser.user && jwtAndUser.jwt) {
           this.props.selectUser(jwtAndUser)
           localStorage.setItem('token', jwtAndUser.jwt)
-          this.fetchChoices()
         }
       })
     }
@@ -126,11 +104,11 @@ class LoginContainer extends React.Component {
             <>
               {this.state.signup ? < SignUpCard state={this.state} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/> : < LoginCard state={this.state} handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>}
               <button onClick={this.handleLoginClick} >
-                Log In
+                {this.state.signup ? 'Click to Log In' : 'Log In'}
               </button>
               or
               <button onClick={this.handleSignupClick} >
-                Sign Up
+              {this.state.signup ? 'Sign Up' : 'Click to Sign Up'}
               </button>
             </>
             }
@@ -151,8 +129,8 @@ const mapDispatchToProps = dispatch => {
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
     signOut: () => dispatch({ type: 'SIGN_OUT'}),
     addChoices: (choices) => dispatch({ type: 'ADD_CHOICES', payload: choices}),
-    reauth: () => {dispatch(reauth())},
-    auth: (info) => {dispatch(auth(info))},
+    reauth: () => dispatch(reauth()),
+    auth: (info) => dispatch(auth(info)),
     fetchChoices: () => dispatch(fetchChoices())
   }
 }
