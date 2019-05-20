@@ -17,14 +17,14 @@ class ChoiceContainer extends React.Component {
     }
   }
 
-  autoSum = (macro) => {
-    let sum = 0
-    this.props.choices.forEach(choice => {
-      const measurement = ((choice.measure === 'grams') ? choice.food.serving_grams : (choice.food.serving_unit_amount || 1))
-      sum += parseInt((choice.food[macro] / measurement * choice.amount).toFixed(0))
-    })
-    return sum
-  }
+  // autoSum = (macro) => {
+  //   let sum = 0
+  //   this.props.choices.forEach(choice => {
+  //     const measurement = ((choice.measure === 'grams') ? choice.food.serving_grams : (choice.food.serving_unit_amount || 1))
+  //     sum += parseInt((choice.food[macro] / measurement * choice.amount).toFixed(0))
+  //   })
+  //   return sum
+  // }
 
   handleUpdateGoals = (e) => {
     this.setState({userNeedsSaved: true})
@@ -63,13 +63,13 @@ class ChoiceContainer extends React.Component {
             <th><input onChange={this.handleUpdateGoals} type='number' name='protein' value={this.props.user.protein} /></th>
             {this.state.userNeedsSaved ? <th><button onClick={this.saveGoals} >Save Goals</button></th> : null }
           </tr>
-          <tr>
+          {/* <tr>
             <th colSpan='3'>Totals: </th>
             <th>{this.autoSum('calories')}</th>
             <th>{this.autoSum('fat')}</th>
             <th>{this.autoSum('carbs')}</th>
             <th>{this.autoSum('protein')}</th>
-          </tr>
+          </tr> */}
         </tbody>
           <Droppable droppableId='1'>
             {(provided) => (
