@@ -1,8 +1,7 @@
 import {URL, HEADERS} from '../constants.js'
 const initialState = {
   choices: [],
-  user: {},
-  jwt: null
+  user: {}
 }
 
 
@@ -27,7 +26,7 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'SELECT_USER': {
-      return {...state, user: action.payload.user, jwt: action.payload.jwt, choices: []}
+      return {...state, user: action.payload.user, choices: []}
     }
     case 'UPDATE_USER': {
       return {

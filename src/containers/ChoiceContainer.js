@@ -3,6 +3,7 @@ import ChoiceCard from '../components/ChoiceCard'
 import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
 import {Droppable} from 'react-beautiful-dnd'
+import fetchChoices from '../actions/choicesActions'
 
 class ChoiceContainer extends React.Component {
 
@@ -12,11 +13,7 @@ class ChoiceContainer extends React.Component {
 
   componentDidMount(){
     if (localStorage.getItem('token')){
-      fetch(`${URL}/choices`, {headers: HEADERS()})
-      .then(r => r.json())
-      .then(choicesArray => {
-        if (choicesArray[0]) {this.props.addChoices(choicesArray)}
-      })
+      this.props.fetchChoices()
     }
   }
 
@@ -106,7 +103,8 @@ const mapDispatchToProps = dispatch => {
   return {
     addChoices: (choices) => dispatch({ type: 'ADD_CHOICES', payload: choices}),
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
-    updateUser: (elem) => dispatch({ type: 'UPDATE_USER', payload: elem})
+    updateUser: (elem) => dispatch({ type: 'UPDATE_USER', payload: elem}),
+    fetchChoices: () => dispatch(fetchChoices())
   }
 }
 

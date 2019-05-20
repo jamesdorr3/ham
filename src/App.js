@@ -24,10 +24,10 @@ class App extends React.Component {
     return (
       <div className="App">
         < LoginContainer />
-        < SearchContainer />
         <DragDropContext onDragEnd={this.onDragEnd}>
           < ChoiceContainer />
         </DragDropContext>
+        < SearchContainer />
       </div>
     );
   }
