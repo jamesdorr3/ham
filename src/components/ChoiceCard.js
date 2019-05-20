@@ -87,6 +87,7 @@ class ChoiceCard extends React.Component {
           </td>
           <td>
             <input type='number'
+            className='amount'
             name='amount'
             value={this.props.choice.amount} 
             onChange={this.handleAmountChange} 
