@@ -17,13 +17,19 @@ class ChoiceContainer extends React.Component {
       .then(choicesArray => {
         if (choicesArray[0]) {this.props.addChoices(choicesArray)}
       })
+      fetch(`${URL}/reauth`, {
+        method: 'POST',
+        headers: HEADERS()
+      })
+      .then(r => r.json())
+      .then(jwtAndUser => this.props.selectUser(jwtAndUser))
     }
   }
 
   autoSum = (macro) => {
     let sum = 0
     this.props.choices.forEach(choice => {
-      const measurement = choice.measure === 'grams' ? choice.food.serving_grams : (choice.food.serving_unit_amount || 1)
+      const measurement = ((choice.measure === 'grams') ? choice.food.serving_grams : (choice.food.serving_unit_amount || 1))
       sum += parseInt((choice.food[macro] / measurement * choice.amount).toFixed(0))
     })
     return sum
@@ -50,7 +56,13 @@ class ChoiceContainer extends React.Component {
       <table>
         <tbody>
           <tr>
-            <th>name</th><th>amount</th><th>measure</th><th>calories</th><th>fat</th><th>carbs</th><th>protein</th>
+            <th className='name'>name</th>
+            <th className='amount'>amount</th>
+            <th className='measure' >measure</th>
+            <th className='calories' >calories</th>
+            <th className='fat' >fat</th>
+            <th className='carbs' >carbs</th>
+            <th className='protein' >protein</th>
           </tr>
           <tr>
             <th colSpan='3'>Goals: </th>
