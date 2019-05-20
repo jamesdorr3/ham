@@ -37,7 +37,9 @@ class SearchContainer extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input type='text' 
             value={this.state.text} 
-            onChange={this.handleChange} >
+            onChange={this.handleChange}
+            placeholder='Search for any food!'
+            >
           </input>
           <input type='submit' value='search' />
         </form>
