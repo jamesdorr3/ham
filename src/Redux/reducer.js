@@ -1,7 +1,11 @@
 import {URL, HEADERS} from '../constants.js'
 
 const initialState = {
+  days: [],
+  categories: [],
   choices: [],
+  goal: {},
+  goals: [],
   user: {}
 }
 
@@ -20,18 +24,31 @@ const reducer = (state = initialState, action) => {
       return {...state, choices: state.choices.filter(x => x.id !== action.payload)}
     }
     case 'UPDATE_CHOICE': {
-      const choice = state.choices.find(x => x.id === parseInt(action.payload.id))
-      choice[action.payload.name] = action.payload.value // ?
+      // debugger
+      const choice = state.choices.find(x => x.choice.id === parseInt(action.payload.id))
+      choice.choice[action.payload.name] = action.payload.value // ?
+      // debugger
       return {
         ...state,
         choices: [
-          ...state.choices.filter(x => x.id !== parseInt(action.payload.id)),
+          ...state.choices.filter(x => x.choice.id !== parseInt(action.payload.id)),
           {...choice, [action.payload.name]: action.payload.value}
         ]
       }
     }
     case 'SELECT_USER': {
-      return {...state, user: action.payload.user, choices: []}
+      return {
+        days: action.payload.user.days,
+        categories: action.payload.user.last_day_categories,
+        choices: action.payload.user.last_day_choices_and_foods,
+        goal: action.payload.user.goals[0],
+        goals: action.payload.user.goals,
+        user: {
+          email: action.payload.user.email,
+          id: action.payload.user.id,
+          username: action.payload.user.username
+        }
+      }
     }
     case 'UPDATE_USER': {
       return {
@@ -51,11 +68,12 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'UPDATE_INDEX': {
+      debugger
       const newChoices = []
       const choicesIds = action.payload.choicesIds
       for (let i = 0; i < choicesIds.length; i ++) {
-        const choice = state.choices.find(x => x.id === parseInt(choicesIds[i]))
-        newChoices.push({...choice, index: i})
+        const choice = state.choices.find(x => x.choice.id === parseInt(choicesIds[i]))
+        newChoices.push({...choice.choice, ...choice.food})
       }
       return {
         ...state,

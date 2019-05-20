@@ -15,7 +15,8 @@ class App extends React.Component {
     }
     const choicesIds = []
     document.querySelectorAll('tr.choice').forEach(x => choicesIds.push(x.id))
-    const movedId = choicesIds.splice(source.index, 1)
+    const movedId = choicesIds.splice(source.index, 1)[0]
+    // debugger
     choicesIds.splice(destination.index, 0, movedId)
     this.props.updateIndex({choicesIds: choicesIds})
   };

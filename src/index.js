@@ -8,7 +8,7 @@ import { createStore, applyMiddleware } from 'redux'
 import reducer from './Redux/reducer'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
-import rootReducer from './reducers'
+// import rootReducer from './reducers'
 
 const store = createStore(
   reducer, applyMiddleware(thunk) //, /* preloadedState, */

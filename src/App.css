@@ -3,5 +3,6 @@ td {
 }
 
 td.name {
-  text-align: left
+  text-align: left;
+  overflow: scroll
 }

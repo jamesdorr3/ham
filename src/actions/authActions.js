@@ -33,7 +33,9 @@ export const reauth = () => {
       return response.json()
     })
     .then(jwtAndUser => {
+      // debugger
       if (jwtAndUser.user && jwtAndUser.jwt) {
+        console.log(jwtAndUser)
         dispatch({ type: 'SELECT_USER', payload: jwtAndUser})
       }
     })
