@@ -14,10 +14,17 @@ class App extends React.Component {
       return;
     }
     const choicesIds = []
-    document.querySelectorAll('tr.choice').forEach(x => choicesIds.push(x.id))
-    const movedId = choicesIds.splice(source.index, 1)[0]
-    choicesIds.splice(destination.index, 0, movedId)
-    this.props.updateIndex({choicesIds: choicesIds})
+    document.querySelectorAll('tr.choice').forEach(x => choicesIds.push(parseInt(x.id)))
+    // const movedId = choicesIds.splice(source.index, 1)[0]
+    // choicesIds.splice(destination.index, 0, movedId)
+    const fromIndex = choicesIds.indexOf(draggableId)
+    const toIndex = destination.index
+    const toCategory = destination.droppableId
+    const id = choicesIds.splice(fromIndex, 1)[0]
+    choicesIds.splice(toIndex, 0, id)
+    // debugger
+    // this.props.updateIndex({choicesIds: choicesIds})
+    this.props.handleDrop(choicesIds, draggableId, destination.droppableId)
   };
 
   render(){
@@ -35,7 +42,9 @@ class App extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return{
-    updateIndex: choicesIds => dispatch({ type: 'UPDATE_INDEX', payload: choicesIds})
+    handleDrop: (choicesIds, choiceId, categoryId) => dispatch({ type: 'HANDLE_DROP', payload: {choicesIds: choicesIds, choiceId: choiceId, categoryId: categoryId}}),
+    updateIndex: choicesIds => dispatch({ type: 'UPDATE_INDEX', payload: choicesIds}),
+    updateCategory: (choiceId, categoryId) => dispatch({ type: 'UPDATE_CATEGORY', payload: {choiceId: choiceId, categoryId: categoryId}})
   }
 }
 

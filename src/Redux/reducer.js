@@ -14,7 +14,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_CHOICE': {
-      debugger
+      // debugger
       return {...state, choiceFoods: [...state.choiceFoods, action.payload]}
     }
     case 'ADD_CHOICES': {
@@ -38,6 +38,7 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'SELECT_USER': {
+      // debugger
       return {
         categories: action.payload.user.categories,
         choiceFoods: action.payload.user.choice_foods,
@@ -69,21 +70,21 @@ const reducer = (state = initialState, action) => {
         choiceFoods: []
       }
     }
-    case 'UPDATE_INDEX': {
+    case 'HANDLE_DROP': {
       const newChoices = []
       const choicesIds = action.payload.choicesIds
       for (let i = 0; i < choicesIds.length; i ++) {
-        const choice = state.choiceFoods.find(x => x.choice.id === parseInt(choicesIds[i]))
+        const choiceFood = state.choiceFoods.find(x => x.choice.id === parseInt(choicesIds[i]))
         // debugger
-        newChoices.push({choice: {...choice.choice, index: i}, food: choice.food})
+        newChoices.push({choice: {...choiceFood.choice, index: i}, food: choiceFood.food})
       }
+      const choiceFood = newChoices.find(x => x.choice.id === action.payload.choiceId)
+      choiceFood.choice.category_id = action.payload.categoryId
+      // debugger
       return {
         ...state,
         choiceFoods: newChoices
       }
-    }
-    case 'REAUTH': {
-      return state
     }
     default: {
       return state
