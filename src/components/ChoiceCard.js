@@ -38,8 +38,8 @@ class ChoiceCard extends React.Component {
     const value = e.target.value
     const numberPart = e.target.parentElement.parentElement.querySelectorAll('td')[1].querySelector('input')
     const amount = numberPart.value
-    const serving_unit_amount = this.props.choice.food.serving_unit_amount
-    const serving_grams = this.props.choice.food.serving_grams
+    const serving_unit_amount = this.props.choiceFood.food.serving_unit_amount
+    const serving_grams = this.props.choiceFood.food.serving_grams
     console.log(id, name, value, amount, serving_unit_amount, serving_grams)
     let newAmount;
     if (value === 'grams') {
@@ -71,7 +71,6 @@ class ChoiceCard extends React.Component {
   }
 
   render(){
-    console.log(this.props.choiceFood)
     return(
       <Draggable 
         draggableId={this.props.choiceFood.choice.id} 
@@ -79,7 +78,7 @@ class ChoiceCard extends React.Component {
       >
         {provided => (
         <tr 
-        // className='Container'
+        className='Container'
         className='choice'
         {...provided.draggableProps}
         {...provided.dragHandleProps}
@@ -112,10 +111,6 @@ class ChoiceCard extends React.Component {
           <td className='fat'>{this.autoUpdateMacro('fat')}</td>
           <td className='carbs'>{this.autoUpdateMacro('carbs')}</td>
           <td className='protein'>{this.autoUpdateMacro('protein')}</td>
-          {/* <td className='calories'>'calories'</td>
-          <td className='fat'>'fat'</td>
-          <td className='carbs'>'carbs'</td>
-          <td className='protein'>'protein'</td> */}
           <td><button onClick={this.deleteChoice}>X</button></td>
         </tr>
         )}

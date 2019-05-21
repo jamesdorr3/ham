@@ -5,11 +5,12 @@ import {connect} from 'react-redux'
 import {Droppable} from 'react-beautiful-dnd'
 import fetchChoices from '../actions/choicesActions'
 import CategoryCard from '../components/CategoryCard'
+import {updateGoal} from '../actions/goalsActions'
 
 class ChoiceContainer extends React.Component {
 
   state = {
-    userNeedsSaved: false
+    goalChanged: false
   }
 
   componentDidMount(){
@@ -21,26 +22,21 @@ class ChoiceContainer extends React.Component {
   autoSum = (macro) => {
     let sum = 0
     this.props.choiceFoods.forEach(choiceFood => {
-      console.log(choiceFood)
+      // console.log(choiceFood)
       const measurement = ((choiceFood.choice.measure === 'grams') ? choiceFood.food.serving_grams : (choiceFood.food.serving_unit_amount || 1))
       sum += parseInt((choiceFood.food[macro] / measurement * choiceFood.choice.amount).toFixed(0))
     })
     return sum
   }
 
-  handleUpdateGoals = (e) => {
-    this.setState({userNeedsSaved: true})
-    this.props.updateUser(e.target)
+  handleChange = (e) => {
+    this.props.changeGoal({[e.target.name]: e.target.value})
+    this.setState({goalChanged: true})
   }
 
   saveGoals = () => {
-    fetch(`${URL}users/${this.props.user.id}`, {
-      method: 'PATCH',
-      headers: HEADERS(),
-      body: JSON.stringify(this.props.user)
-    })
-    .then(r => r.json())
-    .then(r => this.setState({userNeedsSaved: false}))
+    this.setState({goalChanged: false})
+    this.props.updateGoal(this.props.goal)
   }
 
   goalsSelector = (goals) => {
@@ -67,11 +63,11 @@ class ChoiceContainer extends React.Component {
           <tr>
             <th colSpan='1'>Goals: </th>
             <th colSpan='2'>{this.goalsSelector(this.props.goals)}</th>
-            <th><input onChange={this.handleUpdateGoals} type='number' name='calories' value={this.props.goal.calories} /></th>
-            <th><input onChange={this.handleUpdateGoals} type='number' name='fat' value={this.props.goal.fat} /></th>
-            <th><input onChange={this.handleUpdateGoals} type='number' name='carbs' value={this.props.goal.carbs} /></th>
-            <th><input onChange={this.handleUpdateGoals} type='number' name='protein' value={this.props.goal.protein} /></th>
-            {this.state.userNeedsSaved ? <th><button onClick={this.saveGoals} >Save Goals</button></th> : null }
+            <th><input onChange={this.handleChange} type='number' name='calories' value={this.props.goal.calories} /></th>
+            <th><input onChange={this.handleChange} type='number' name='fat' value={this.props.goal.fat} /></th>
+            <th><input onChange={this.handleChange} type='number' name='carbs' value={this.props.goal.carbs} /></th>
+            <th><input onChange={this.handleChange} type='number' name='protein' value={this.props.goal.protein} /></th>
+            {this.state.goalChanged ? <th><button onClick={this.saveGoals} >Save Goals</button></th> : null }
           </tr>
           <tr>
             <th colSpan='2'></th>
@@ -85,23 +81,6 @@ class ChoiceContainer extends React.Component {
         {this.props.categories.sort((x, y) => x.index - y.index).map(category => {
           return <CategoryCard category={category} />
         })}
-          {/* <Droppable droppableId='1'>
-            {(provided) => (
-              <tbody
-                className=""
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                {this.props.choices.sort((x, y) => x.choice.index - y.choice.index).map((choice, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
-                choice={choice} 
-                key={choice.choice.id} 
-                index={index}
-                deleteChoice={this.props.deleteChoice} 
-                /> )}
-                {provided.placeholder}
-              </tbody>
-            )}
-          </Droppable> */}
       </table>
       </>
     )
@@ -117,7 +96,8 @@ const mapDispatchToProps = dispatch => {
   return {
     addChoices: (choices) => dispatch({ type: 'ADD_CHOICES', payload: choices}),
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
-    updateUser: (elem) => dispatch({ type: 'UPDATE_USER', payload: elem}),
+    changeGoal: (info) => dispatch({ type: 'CHANGE_GOAL', payload: info}),
+    updateGoal: (goal) => dispatch(updateGoal(goal)),
     fetchChoices: () => dispatch(fetchChoices())
   }
 }

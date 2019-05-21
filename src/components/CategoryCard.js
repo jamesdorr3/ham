@@ -10,23 +10,33 @@ class CategoryCard extends React.Component {
     return myChoices.sort((x, y) => x.choice.index - y.choice.index)
   }
 
+  autoSum = (macro) => {
+    let sum = 0
+    this.props.choiceFoods.filter(choiceFood => choiceFood.choice.category_id === this.props.category.id).forEach(choiceFood => {
+      // console.log(choiceFood)
+      const measurement = ((choiceFood.choice.measure === 'grams') ? choiceFood.food.serving_grams : (choiceFood.food.serving_unit_amount || 1))
+      sum += parseInt((choiceFood.food[macro] / measurement * choiceFood.choice.amount).toFixed(0))
+    })
+    return sum
+  }
+
   render(){
-    console.log(this.props.choices)
+    // console.log(this.props)
     return(
       <Droppable droppableId={this.props.category.id}>
       {(provided) => (
         <tbody
-          className=""
+          className="category"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
-          <tr>
-            <th colSpan='2'>{this.props.category.name}</th>
-            <th colSpan='1'>Totals: </th>
-            <th>00</th>
-            <th>00</th>
-            <th>00</th>
-            <th>00</th>
+          <tr className='categoryHeader'>
+            <td colSpan='2'>{this.props.category.name}</td>
+            <td colSpan='1'>Totals: </td>
+            <td>{this.autoSum('calories')}</td>
+            <td>{this.autoSum('fat')}</td>
+            <td>{this.autoSum('carbs')}</td>
+            <td>{this.autoSum('protein')}</td>
           </tr>
           {this.mySortedChoices().map((choiceFood, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
           choiceFood={choiceFood} 

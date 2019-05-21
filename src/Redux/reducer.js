@@ -2,6 +2,7 @@ import {URL, HEADERS} from '../constants.js'
 
 const initialState = {
   categories: [],
+  day: {},
   days: [],
   choiceFoods: [],
   goal: {},
@@ -53,12 +54,13 @@ const reducer = (state = initialState, action) => {
         }
       }
     }
-    case 'UPDATE_USER': {
+    case 'CHANGE_GOAL': {
+      // debugger
       return {
         ...state,
-        user: {
-          ...state.user,
-          [action.payload.name]: action.payload.value
+        goal: {
+          ...state.goal,
+          ...action.payload
         }
       }
     }
