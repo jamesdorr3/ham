@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import LoginCard from '../components/LoginCard'
 import SignUpCard from '../components/SignUpCard'
 import {auth, reauth} from '../actions/authActions'
-import {createDay} from '../actions/daysActions'
+import {createDay, selectDay} from '../actions/daysActions'
 
 class Header extends React.Component {
 
@@ -63,7 +63,7 @@ class Header extends React.Component {
           {this.signedIn() ? <td>{this.props.user.email}</td> : <td className='doublewide'>Use HAM, no strings attached. Log In or Sign Up to save your goals and foods.</td>}
           {this.signedIn() ? 
             <td>
-            <select onChange={this.dayChange} value={this.props.day.id}>
+            <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id}>
               {/* <option selected>{this.prettyDayDisplay(this.props.day)}</option> */}
               {this.dayOptions()}
             </select> 
@@ -94,7 +94,8 @@ const mapDispatchToProps = dispatch => {
   return{
     signOut: () => dispatch({ type: 'SIGN_OUT'}),
     reauth: () => dispatch(reauth()),
-    createDay: () => dispatch(createDay())
+    createDay: () => dispatch(createDay()),
+    selectDay: (info) => dispatch(selectDay(info))
   }
 }
 

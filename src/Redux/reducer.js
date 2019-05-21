@@ -88,11 +88,26 @@ const reducer = (state = initialState, action) => {
         choiceFoods: newChoices
       }
     }
-    case 'SELECT_DAY': {
+    case 'ADD_DAY': {
       return {
         ...state,
         day: action.payload,
+        days: [...state.days, {...action.payload, goal_id: action.payload.goal.id}],
         goal: action.payload.goal
+      }
+    }
+    case 'SELECT_DAY': {
+      // debugger
+      return {
+        ...state,
+        categories: action.payload.unique_categories,
+        choiceFoods: action.payload.choice_foods,
+        day: {
+          created_at: action.payload.created_at,
+          id: action.payload.id,
+          name: action.payload.name
+        },
+        goal: action.payload.goal,
       }
     }
     default: {
