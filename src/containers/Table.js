@@ -4,6 +4,7 @@ import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
 import {Droppable} from 'react-beautiful-dnd'
 import fetchChoices from '../actions/choicesActions'
+import CategoryCard from '../components/CategoryCard'
 
 class ChoiceContainer extends React.Component {
 
@@ -49,7 +50,7 @@ class ChoiceContainer extends React.Component {
   }
 
   render(){
-    console.log(this.props)
+    console.log(this.props.categories)
     return(
       <>
       <table>
@@ -81,7 +82,10 @@ class ChoiceContainer extends React.Component {
             <th>{this.autoSum('protein')}</th>
           </tr>
         </tbody>
-          <Droppable droppableId='1'>
+        {this.props.categories.sort((x, y) => x.index - y.index).map(category => {
+          return <CategoryCard category={category} />
+        })}
+          {/* <Droppable droppableId='1'>
             {(provided) => (
               <tbody
                 className=""
@@ -97,7 +101,7 @@ class ChoiceContainer extends React.Component {
                 {provided.placeholder}
               </tbody>
             )}
-          </Droppable>
+          </Droppable> */}
       </table>
       </>
     )

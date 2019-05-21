@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import SearchContainer from './containers/SearchContainer'
-import ChoiceContainer from './containers/ChoiceContainer'
+import Table from './containers/Table'
 import Header from './containers/Header'
 import {DragDropContext} from 'react-beautiful-dnd';
 import {connect} from 'react-redux'
@@ -25,7 +25,7 @@ class App extends React.Component {
       <div className="App">
         < Header />
         <DragDropContext onDragEnd={this.onDragEnd}>
-          < ChoiceContainer />
+          < Table />
         </DragDropContext>
         < SearchContainer />
       </div>
