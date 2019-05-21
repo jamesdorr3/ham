@@ -3,8 +3,7 @@ td {
 }
 
 td.name {
-  text-align: left;
-  overflow: scroll
+  text-align: left
 }
 
 .header {
@@ -70,5 +69,22 @@ td.name {
   float: right;
   border: none;
   background-color: rgba(255, 255, 255, 0)
-  /* border-radius: 10px */
+}
+
+.categoryHeader {
+  font-style: italic;
+  text-decoration: underline;
+  font-size: 12px
+}
+
+table {
+  width: 100%
+}
+
+tbody.category:nth-child(odd) {
+  background: lightgrey;
+}
+
+tbody.category:nth-child(even) {
+  background: rgb(253, 216, 146);
 }

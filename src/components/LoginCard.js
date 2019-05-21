@@ -27,7 +27,7 @@ class LoginCard extends React.Component {
       })
       .then(r => r.json())
       .then(resp => {
-        debugger
+        // debugger
         if (resp.user && resp.jwt) {
           localStorage.setItem('token', resp.jwt)
           this.props.selectUser(resp)

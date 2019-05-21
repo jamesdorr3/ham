@@ -2,6 +2,7 @@ import {URL, HEADERS} from '../constants.js'
 
 const initialState = {
   categories: [],
+  day: {},
   days: [],
   choiceFoods: [],
   goal: {},
@@ -14,7 +15,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_CHOICE': {
-      debugger
+      // debugger
       return {...state, choiceFoods: [...state.choiceFoods, action.payload]}
     }
     case 'ADD_CHOICES': {
@@ -38,6 +39,7 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'SELECT_USER': {
+      // debugger
       return {
         categories: action.payload.user.categories,
         choiceFoods: action.payload.user.choice_foods,
@@ -52,12 +54,13 @@ const reducer = (state = initialState, action) => {
         }
       }
     }
-    case 'UPDATE_USER': {
+    case 'CHANGE_GOAL': {
+      // debugger
       return {
         ...state,
-        user: {
-          ...state.user,
-          [action.payload.name]: action.payload.value
+        goal: {
+          ...state.goal,
+          ...action.payload
         }
       }
     }
@@ -69,21 +72,43 @@ const reducer = (state = initialState, action) => {
         choiceFoods: []
       }
     }
-    case 'UPDATE_INDEX': {
+    case 'HANDLE_DROP': {
       const newChoices = []
       const choicesIds = action.payload.choicesIds
       for (let i = 0; i < choicesIds.length; i ++) {
-        const choice = state.choiceFoods.find(x => x.choice.id === parseInt(choicesIds[i]))
+        const choiceFood = state.choiceFoods.find(x => x.choice.id === parseInt(choicesIds[i]))
         // debugger
-        newChoices.push({choice: {...choice.choice, index: i}, food: choice.food})
+        newChoices.push({choice: {...choiceFood.choice, index: i}, food: choiceFood.food})
       }
+      const choiceFood = newChoices.find(x => x.choice.id === action.payload.choiceId)
+      choiceFood.choice.category_id = action.payload.categoryId
+      // debugger
       return {
         ...state,
         choiceFoods: newChoices
       }
     }
-    case 'REAUTH': {
-      return state
+    case 'ADD_DAY': {
+      return {
+        ...state,
+        day: action.payload,
+        days: [...state.days, {...action.payload, goal_id: action.payload.goal.id}],
+        goal: action.payload.goal
+      }
+    }
+    case 'SELECT_DAY': {
+      // debugger
+      return {
+        ...state,
+        categories: action.payload.unique_categories,
+        choiceFoods: action.payload.choice_foods,
+        day: {
+          created_at: action.payload.created_at,
+          id: action.payload.id,
+          name: action.payload.name
+        },
+        goal: action.payload.goal,
+      }
     }
     default: {
       return state
