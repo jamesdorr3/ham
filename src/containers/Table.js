@@ -20,10 +20,10 @@ class ChoiceContainer extends React.Component {
 
   autoSum = (macro) => {
     let sum = 0
-    this.props.choices.forEach(choice => {
-      console.log(choice)
-      const measurement = ((choice.choice.measure === 'grams') ? choice.food.serving_grams : (choice.food.serving_unit_amount || 1))
-      sum += parseInt((choice.food[macro] / measurement * choice.choice.amount).toFixed(0))
+    this.props.choiceFoods.forEach(choiceFood => {
+      console.log(choiceFood)
+      const measurement = ((choiceFood.choice.measure === 'grams') ? choiceFood.food.serving_grams : (choiceFood.food.serving_unit_amount || 1))
+      sum += parseInt((choiceFood.food[macro] / measurement * choiceFood.choice.amount).toFixed(0))
     })
     return sum
   }

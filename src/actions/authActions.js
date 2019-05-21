@@ -15,6 +15,7 @@ export const auth = (info) => {
     })
     .then(r => r.json())
     .then(jwtAndUser => {
+      debugger
       if (jwtAndUser.user && jwtAndUser.jwt) {
         localStorage.setItem('token', jwtAndUser.jwt)
         dispatch({ type: 'SELECT_USER', payload: jwtAndUser})

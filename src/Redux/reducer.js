@@ -1,9 +1,9 @@
 import {URL, HEADERS} from '../constants.js'
 
 const initialState = {
-  days: [],
   categories: [],
-  choices: [],
+  days: [],
+  choiceFoods: [],
   goal: {},
   goals: [],
   user: {},
@@ -14,35 +14,36 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_CHOICE': {
-      return {...state, choices: [...state.choices, {...action.payload.choice, food: action.payload.food}]}
+      debugger
+      return {...state, choiceFoods: [...state.choiceFoods, action.payload]}
     }
     case 'ADD_CHOICES': {
       debugger
-      return {...state, choices: [...state.choices, ...action.payload]}
+      return {...state, choiceFoods: [...state.choiceFoods, ...action.payload]}
     }
     case 'DELETE_CHOICE': {
-      return {...state, choices: state.choices.filter(x => x.choice.id !== action.payload)}
+      return {...state, choiceFoods: state.choiceFoods.filter(x => x.choice.id !== action.payload)}
     }
     case 'UPDATE_CHOICE': {
       // debugger
-      const choice = state.choices.find(x => x.choice.id === parseInt(action.payload.id))
+      const choice = state.choiceFoods.find(x => x.choice.id === parseInt(action.payload.id))
       choice.choice[action.payload.name] = action.payload.value // ?
       // debugger
       return {
         ...state,
-        choices: [
-          ...state.choices.filter(x => x.choice.id !== parseInt(action.payload.id)),
+        choiceFoods: [
+          ...state.choiceFoods.filter(x => x.choice.id !== parseInt(action.payload.id)),
           {...choice, [action.payload.name]: action.payload.value}
         ]
       }
     }
     case 'SELECT_USER': {
-      // debugger
       return {
+        categories: action.payload.user.categories,
+        choiceFoods: action.payload.user.choice_foods,
+        day: action.payload.user.day,
         days: action.payload.user.days,
-        categories: action.payload.user.last_day_categories,
-        choices: action.payload.user.last_day_choices_and_foods,
-        goal: action.payload.user.goals[0],
+        goal: action.payload.user.goal,
         goals: action.payload.user.goals,
         user: {
           email: action.payload.user.email,
@@ -65,20 +66,20 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         user: {},
-        choices: []
+        choiceFoods: []
       }
     }
     case 'UPDATE_INDEX': {
       const newChoices = []
       const choicesIds = action.payload.choicesIds
       for (let i = 0; i < choicesIds.length; i ++) {
-        const choice = state.choices.find(x => x.choice.id === parseInt(choicesIds[i]))
+        const choice = state.choiceFoods.find(x => x.choice.id === parseInt(choicesIds[i]))
         // debugger
         newChoices.push({choice: {...choice.choice, index: i}, food: choice.food})
       }
       return {
         ...state,
-        choices: newChoices
+        choiceFoods: newChoices
       }
     }
     case 'REAUTH': {

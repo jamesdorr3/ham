@@ -6,7 +6,7 @@ import ChoiceCard from '../components/ChoiceCard'
 class CategoryCard extends React.Component {
 
   mySortedChoices = () => {
-    const myChoices = this.props.choices.filter(choice => choice.choice.category_id === this.props.category.id)
+    const myChoices = this.props.choiceFoods.filter(choice => choice.choice.category_id === this.props.category.id)
     return myChoices.sort((x, y) => x.choice.index - y.choice.index)
   }
 
@@ -28,9 +28,9 @@ class CategoryCard extends React.Component {
             <th>00</th>
             <th>00</th>
           </tr>
-          {this.mySortedChoices().map((choice, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
-          choice={choice} 
-          key={choice.choice.id} 
+          {this.mySortedChoices().map((choiceFood, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
+          choiceFood={choiceFood} 
+          key={choiceFood.choice.id} 
           index={index}
           deleteChoice={this.props.deleteChoice} 
           /> )}
@@ -43,7 +43,7 @@ class CategoryCard extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {choices: state.choices}
+  return {choiceFoods: state.choiceFoods}
 }
 
 const mapDispatchToProps = dispatch => {
