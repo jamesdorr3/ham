@@ -88,6 +88,13 @@ const reducer = (state = initialState, action) => {
         choiceFoods: newChoices
       }
     }
+    case 'SELECT_DAY': {
+      return {
+        ...state,
+        day: action.payload,
+        goal: action.payload.goal
+      }
+    }
     default: {
       return state
     }

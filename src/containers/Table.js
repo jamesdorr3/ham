@@ -46,7 +46,7 @@ class ChoiceContainer extends React.Component {
   }
 
   render(){
-    console.log(this.props.categories)
+    // console.log(this.props.categories)
     return(
       <>
       <table>

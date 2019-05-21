@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import LoginCard from '../components/LoginCard'
 import SignUpCard from '../components/SignUpCard'
 import {auth, reauth} from '../actions/authActions'
-import fetchChoices from '../actions/choicesActions'
+import {createDay} from '../actions/daysActions'
 
 class Header extends React.Component {
 
   state = {
-    signup: false
+    showSignup: false
   }
 
   componentDidMount(){
@@ -29,15 +29,32 @@ class Header extends React.Component {
 
   toggleSignup = (e) => {
     e.preventDefault()
-    this.setState({signup: !this.state.signup})
+    this.setState({showSignup: !this.state.showSignup})
   }
 
   signedIn = () => {
     return !!this.props.user.email
   }
 
+  prettyDayDisplay = (dayObj) => {
+    const day = new Date(dayObj.created_at)
+    return `${day.getMonth() + 1}-${day.getDate()}-${day.getFullYear()}` + (dayObj.name ? ` ${dayObj.name}` : '' )
+  }
+
+  dayOptions = () => {
+    // const days = this.props.days.filter(day => day.id !== this.props.day.id)
+    const days = this.props.days.sort((x, y) => y.created_at - x.created_at)
+    return days.map(day => {
+      return <option value={day.id} >{this.prettyDayDisplay(day)}</option>
+    })
+  }
+
+  dayChange = () => {
+    console.log('DAY CHANGE@')
+  }
+
   render(){
-    console.log(this.props)
+    console.log(this.props.day)
     return(
       <>
       <table className='header'>
@@ -46,9 +63,11 @@ class Header extends React.Component {
           {this.signedIn() ? <td>{this.props.user.email}</td> : <td className='doublewide'>Use HAM, no strings attached. Log In or Sign Up to save your goals and foods.</td>}
           {this.signedIn() ? 
             <td>
-            <select>
-              <option>Today</option>
+            <select onChange={this.dayChange} value={this.props.day.id}>
+              {/* <option selected>{this.prettyDayDisplay(this.props.day)}</option> */}
+              {this.dayOptions()}
             </select> 
+            <button onClick={this.props.createDay}>New Day</button>
             </td>
             : null
           }
@@ -61,9 +80,7 @@ class Header extends React.Component {
           </tr>
         </tbody>
       </table>
-          {this.state.signup ? 
-          < SignUpCard toggleSignup={this.toggleSignup}/>
-          : null}
+        < SignUpCard toggleSignup={this.toggleSignup} showSignup={this.state.showSignup}/>
       </>
     )
   }
@@ -76,7 +93,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return{
     signOut: () => dispatch({ type: 'SIGN_OUT'}),
-    reauth: () => dispatch(reauth())
+    reauth: () => dispatch(reauth()),
+    createDay: () => dispatch(createDay())
   }
 }
 

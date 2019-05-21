@@ -14,8 +14,7 @@ class SignUpCard extends React.Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
-    // console.log(this.state)
+    e.preventDefault();
     if (this.state.password && this.state.username && this.state.email && this.state.password === this.state.password2){
       fetch(`${URL}/users`, {
         method: 'POST',
@@ -53,14 +52,14 @@ class SignUpCard extends React.Component {
 
   render(){
     return(
-      <div className='modal'>
+      <div className='modal' style={{display: `${this.props.showSignup ? 'block' : 'none'}`}}>
       <form onSubmit={this.handleSubmit}>
       <button onClick={this.props.toggleSignup} className='x'>X</button>
         <input value={this.state.username} name='username' onChange={this.handleChange} type='text' placeholder='username' />
         <input value={this.state.email} name='email' onChange={this.handleChange} type='text' placeholder='email' />
         <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='password'/>
         <input value={this.state.password2} name='password2' onChange={this.handleChange} type='password' placeholder='password'/>
-        <input value='Sign Up' type='submit' />
+        <input value='Sign Up' type='submit'/>
       </form>
       <p>{this.state.error}</p>
       </div>
