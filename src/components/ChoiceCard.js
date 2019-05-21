@@ -64,6 +64,12 @@ class ChoiceCard extends React.Component {
     })
   }
 
+  deleteChoice = () => {
+    const id = this.props.choice.choice.id
+    fetch(`${URL}/choices/${id}`, {method: 'DELETE'})
+    this.props.deleteChoice(id)
+  }
+
   render(){
     console.log(this.props.choice)
     return(
@@ -110,7 +116,7 @@ class ChoiceCard extends React.Component {
           <td className='fat'>'fat'</td>
           <td className='carbs'>'carbs'</td>
           <td className='protein'>'protein'</td> */}
-          <td><button onClick={() => {this.props.deleteChoice(this.props.choice.id)}}>X</button></td>
+          <td><button onClick={this.deleteChoice}>X</button></td>
         </tr>
         )}
       </Draggable>

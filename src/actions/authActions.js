@@ -19,6 +19,9 @@ export const auth = (info) => {
         localStorage.setItem('token', jwtAndUser.jwt)
         dispatch({ type: 'SELECT_USER', payload: jwtAndUser})
       }
+      else {
+        debugger
+      }
     })
   }
 }

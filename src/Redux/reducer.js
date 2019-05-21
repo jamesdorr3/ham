@@ -6,7 +6,8 @@ const initialState = {
   choices: [],
   goal: {},
   goals: [],
-  user: {}
+  user: {},
+  error: {}
 }
 
 
@@ -20,8 +21,7 @@ const reducer = (state = initialState, action) => {
       return {...state, choices: [...state.choices, ...action.payload]}
     }
     case 'DELETE_CHOICE': {
-      fetch(`${URL}/choices/${action.payload}`, {method: 'DELETE'})
-      return {...state, choices: state.choices.filter(x => x.id !== action.payload)}
+      return {...state, choices: state.choices.filter(x => x.choice.id !== action.payload)}
     }
     case 'UPDATE_CHOICE': {
       // debugger
@@ -37,6 +37,7 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'SELECT_USER': {
+      // debugger
       return {
         days: action.payload.user.days,
         categories: action.payload.user.last_day_categories,
@@ -68,12 +69,12 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'UPDATE_INDEX': {
-      debugger
       const newChoices = []
       const choicesIds = action.payload.choicesIds
       for (let i = 0; i < choicesIds.length; i ++) {
         const choice = state.choices.find(x => x.choice.id === parseInt(choicesIds[i]))
-        newChoices.push({...choice.choice, ...choice.food})
+        // debugger
+        newChoices.push({choice: {...choice.choice, index: i}, food: choice.food})
       }
       return {
         ...state,
