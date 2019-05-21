@@ -4,6 +4,7 @@ import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
 import {Droppable} from 'react-beautiful-dnd'
 import fetchChoices from '../actions/choicesActions'
+import CategoryCard from '../components/CategoryCard'
 
 class ChoiceContainer extends React.Component {
 
@@ -13,15 +14,16 @@ class ChoiceContainer extends React.Component {
 
   componentDidMount(){
     if (localStorage.getItem('token')){
-      this.props.fetchChoices()
+      // this.props.fetchChoices()
     }
   }
 
   autoSum = (macro) => {
     let sum = 0
     this.props.choices.forEach(choice => {
-      const measurement = ((choice.measure === 'grams') ? choice.food.serving_grams : (choice.food.serving_unit_amount || 1))
-      sum += parseInt((choice.food[macro] / measurement * choice.amount).toFixed(0))
+      console.log(choice)
+      const measurement = ((choice.choice.measure === 'grams') ? choice.food.serving_grams : (choice.food.serving_unit_amount || 1))
+      sum += parseInt((choice.food[macro] / measurement * choice.choice.amount).toFixed(0))
     })
     return sum
   }
@@ -41,7 +43,14 @@ class ChoiceContainer extends React.Component {
     .then(r => this.setState({userNeedsSaved: false}))
   }
 
+  goalsSelector = (goals) => {
+    return <select>
+      {goals.map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
+    </select>
+  }
+
   render(){
+    console.log(this.props.categories)
     return(
       <>
       <table>
@@ -56,38 +65,43 @@ class ChoiceContainer extends React.Component {
             <th className='protein' >protein</th>
           </tr>
           <tr>
-            <th colSpan='3'>Goals: </th>
-            <th><input onChange={this.handleUpdateGoals} type='number' name='calories' value={this.props.user.calories} /></th>
-            <th><input onChange={this.handleUpdateGoals} type='number' name='fat' value={this.props.user.fat} /></th>
-            <th><input onChange={this.handleUpdateGoals} type='number' name='carbs' value={this.props.user.carbs} /></th>
-            <th><input onChange={this.handleUpdateGoals} type='number' name='protein' value={this.props.user.protein} /></th>
+            <th colSpan='1'>Goals: </th>
+            <th colSpan='2'>{this.goalsSelector(this.props.goals)}</th>
+            <th><input onChange={this.handleUpdateGoals} type='number' name='calories' value={this.props.goal.calories} /></th>
+            <th><input onChange={this.handleUpdateGoals} type='number' name='fat' value={this.props.goal.fat} /></th>
+            <th><input onChange={this.handleUpdateGoals} type='number' name='carbs' value={this.props.goal.carbs} /></th>
+            <th><input onChange={this.handleUpdateGoals} type='number' name='protein' value={this.props.goal.protein} /></th>
             {this.state.userNeedsSaved ? <th><button onClick={this.saveGoals} >Save Goals</button></th> : null }
           </tr>
           <tr>
-            <th colSpan='3'>Totals: </th>
+            <th colSpan='2'></th>
+            <th colSpan='1'>Totals: </th>
             <th>{this.autoSum('calories')}</th>
             <th>{this.autoSum('fat')}</th>
             <th>{this.autoSum('carbs')}</th>
             <th>{this.autoSum('protein')}</th>
           </tr>
         </tbody>
-          <Droppable droppableId='1'>
+        {this.props.categories.sort((x, y) => x.index - y.index).map(category => {
+          return <CategoryCard category={category} />
+        })}
+          {/* <Droppable droppableId='1'>
             {(provided) => (
               <tbody
-                className="Hero-List"
+                className=""
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
-                {this.props.choices.sort((x, y) => x.index - y.index).map((choice, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
+                {this.props.choices.sort((x, y) => x.choice.index - y.choice.index).map((choice, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
                 choice={choice} 
-                key={choice.id} 
+                key={choice.choice.id} 
                 index={index}
                 deleteChoice={this.props.deleteChoice} 
                 /> )}
                 {provided.placeholder}
               </tbody>
             )}
-          </Droppable>
+          </Droppable> */}
       </table>
       </>
     )

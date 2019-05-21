@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import '../constants.js'
-import {URL, HEADERS} from '../constants.js'
+import {selectSearchResult} from '../actions/searchActions'
 
 class SearchResultCard extends React.Component {
 
@@ -10,10 +9,10 @@ class SearchResultCard extends React.Component {
     const props = (this.props.food.nix_item_id) ? 
       `id=${this.props.food.nix_item_id}`: 
       `name=${this.props.food.food_name}`
-    console.log(props)
-    fetch(`${URL}search?${props}`, {headers: HEADERS()})
-    .then(r => r.json())
-    .then(choice => this.props.addChoice(choice))
+    this.props.selectSearchResult(props)
+    // fetch(`${URL}search?${props}`, {headers: HEADERS()})
+    // .then(r => r.json())
+    // .then(choice => this.props.addChoice(choice))
   }
 
   render(){
@@ -28,7 +27,8 @@ class SearchResultCard extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addChoice: (choice) => dispatch({ type: 'ADD_CHOICES', payload: [choice]})
+    addChoice: (choice) => dispatch({ type: 'ADD_CHOICES', payload: [choice]}),
+    selectSearchResult: prop => dispatch(selectSearchResult(prop))
   }
 }
 

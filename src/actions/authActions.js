@@ -19,6 +19,9 @@ export const auth = (info) => {
         localStorage.setItem('token', jwtAndUser.jwt)
         dispatch({ type: 'SELECT_USER', payload: jwtAndUser})
       }
+      else {
+        debugger
+      }
     })
   }
 }
@@ -33,7 +36,9 @@ export const reauth = () => {
       return response.json()
     })
     .then(jwtAndUser => {
+      // debugger
       if (jwtAndUser.user && jwtAndUser.jwt) {
+        console.log(jwtAndUser)
         dispatch({ type: 'SELECT_USER', payload: jwtAndUser})
       }
     })

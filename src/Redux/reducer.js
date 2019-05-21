@@ -1,33 +1,55 @@
 import {URL, HEADERS} from '../constants.js'
 
 const initialState = {
+  days: [],
+  categories: [],
   choices: [],
-  user: {}
+  goal: {},
+  goals: [],
+  user: {},
+  error: {}
 }
 
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'ADD_CHOICE': {
+      return {...state, choices: [...state.choices, {...action.payload.choice, food: action.payload.food}]}
+    }
     case 'ADD_CHOICES': {
+      debugger
       return {...state, choices: [...state.choices, ...action.payload]}
     }
     case 'DELETE_CHOICE': {
-      fetch(`${URL}/choices/${action.payload}`, {method: 'DELETE'})
-      return {...state, choices: state.choices.filter(x => x.id !== action.payload)}
+      return {...state, choices: state.choices.filter(x => x.choice.id !== action.payload)}
     }
     case 'UPDATE_CHOICE': {
-      const choice = state.choices.find(x => x.id === parseInt(action.payload.id))
-      choice[action.payload.name] = action.payload.value // ?
+      // debugger
+      const choice = state.choices.find(x => x.choice.id === parseInt(action.payload.id))
+      choice.choice[action.payload.name] = action.payload.value // ?
+      // debugger
       return {
         ...state,
         choices: [
-          ...state.choices.filter(x => x.id !== parseInt(action.payload.id)),
+          ...state.choices.filter(x => x.choice.id !== parseInt(action.payload.id)),
           {...choice, [action.payload.name]: action.payload.value}
         ]
       }
     }
     case 'SELECT_USER': {
-      return {...state, user: action.payload.user, choices: []}
+      // debugger
+      return {
+        days: action.payload.user.days,
+        categories: action.payload.user.last_day_categories,
+        choices: action.payload.user.last_day_choices_and_foods,
+        goal: action.payload.user.goals[0],
+        goals: action.payload.user.goals,
+        user: {
+          email: action.payload.user.email,
+          id: action.payload.user.id,
+          username: action.payload.user.username
+        }
+      }
     }
     case 'UPDATE_USER': {
       return {
@@ -50,8 +72,9 @@ const reducer = (state = initialState, action) => {
       const newChoices = []
       const choicesIds = action.payload.choicesIds
       for (let i = 0; i < choicesIds.length; i ++) {
-        const choice = state.choices.find(x => x.id === parseInt(choicesIds[i]))
-        newChoices.push({...choice, index: i})
+        const choice = state.choices.find(x => x.choice.id === parseInt(choicesIds[i]))
+        // debugger
+        newChoices.push({choice: {...choice.choice, index: i}, food: choice.food})
       }
       return {
         ...state,

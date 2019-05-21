@@ -13,20 +13,21 @@ class ChoiceCard extends React.Component {
   
   autoUpdateMacro = macro => {
     const choice = this.props.choice
-    const measurement = choice.measure === 'grams' ? choice.food.serving_grams : (choice.food.serving_unit_amount || 1)
-    return (this.props.choice.food[macro] / measurement * this.props.choice.amount).toFixed()
+    const measurement = choice.choice.measure === 'grams' ? choice.food.serving_grams : (choice.food.serving_unit_amount || 1)
+    return (this.props.choice.food[macro] / measurement * this.props.choice.choice.amount).toFixed()
   }
 
   updateInDB = () => {
-    const id = this.props.choice.id
+    const id = this.props.choice.choice.id
     fetch(`${URL}choices/${id}`, {
       method: 'PATCH',
       headers: HEADERS(),
-      body: JSON.stringify({choice: this.props.choice})
+      body: JSON.stringify({choice: this.props.choice.choice})
     })
   }
 
   handleAmountChange = (e) => {
+    // debugger
     this.props.updateChoice({id: e.target.parentElement.parentElement.id, name: e.target.name, value: e.target.value})
   }
 
@@ -51,7 +52,7 @@ class ChoiceCard extends React.Component {
   }
 
   generateMeasures = () => {
-    const measures = [this.props.choice.measure]
+    const measures = [this.props.choice.choice.measure]
     if (this.props.choice.food.serving_grams && !measures.includes('grams')){measures.push('grams')}
     if (this.props.choice.food.serving_unit_name && !measures.includes(this.props.choice.food.serving_unit_name)){
       measures.push(this.props.choice.food.serving_unit_name)
@@ -63,14 +64,17 @@ class ChoiceCard extends React.Component {
     })
   }
 
-  handleDrag = () => {
-    console.log('hi')
+  deleteChoice = () => {
+    const id = this.props.choice.choice.id
+    fetch(`${URL}/choices/${id}`, {method: 'DELETE'})
+    this.props.deleteChoice(id)
   }
 
   render(){
+    console.log(this.props.choice)
     return(
       <Draggable 
-        draggableId={this.props.choice.id} 
+        draggableId={this.props.choice.choice.id} 
         index={this.props.index}
       >
         {provided => (
@@ -80,7 +84,7 @@ class ChoiceCard extends React.Component {
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
-        id={this.props.choice.id}
+        id={this.props.choice.choice.id}
         >
           <td className='name'>
             {this.props.choice.food.name}
@@ -89,7 +93,7 @@ class ChoiceCard extends React.Component {
             <input type='number'
             className='amount'
             name='amount'
-            value={this.props.choice.amount} 
+            value={this.props.choice.choice.amount} 
             onChange={this.handleAmountChange} 
             onBlur={this.updateInDB}
             >
@@ -97,7 +101,7 @@ class ChoiceCard extends React.Component {
             </td>
           <td>
             <select 
-            value={this.props.choice.measure} 
+            value={this.props.choice.choice.measure} 
             onChange={this.handleMeasureChange}
             name='measure'
             >
@@ -108,7 +112,11 @@ class ChoiceCard extends React.Component {
           <td className='fat'>{this.autoUpdateMacro('fat')}</td>
           <td className='carbs'>{this.autoUpdateMacro('carbs')}</td>
           <td className='protein'>{this.autoUpdateMacro('protein')}</td>
-          <td><button onClick={() => {this.props.deleteChoice(this.props.choice.id)}}>X</button></td>
+          {/* <td className='calories'>'calories'</td>
+          <td className='fat'>'fat'</td>
+          <td className='carbs'>'carbs'</td>
+          <td className='protein'>'protein'</td> */}
+          <td><button onClick={this.deleteChoice}>X</button></td>
         </tr>
         )}
       </Draggable>
