@@ -87,9 +87,9 @@ class ChoiceCard extends React.Component {
           <td className='name'>
             {this.props.choiceFood.food.name}
           </td>
-          <td className='centered'>
+          <td className='amount'>
             <input type='number'
-            className='amount'
+            className=''
             name='amount'
             value={this.props.choiceFood.choice.amount} 
             onChange={this.handleAmountChange} 
@@ -97,8 +97,9 @@ class ChoiceCard extends React.Component {
             >
             </input>
             </td>
-          <td className='centered'>
+          <td className=''>
             <select 
+            className='measure'
             value={this.props.choiceFood.choice.measure} 
             onChange={this.handleMeasureChange}
             name='measure'
@@ -110,7 +111,7 @@ class ChoiceCard extends React.Component {
           <td className='macro fat'>{this.autoUpdateMacro('fat')}</td>
           <td className='macro carbs'>{this.autoUpdateMacro('carbs')}</td>
           <td className='macro protein'>{this.autoUpdateMacro('protein')}</td>
-          <td className='centered' ><button onClick={this.deleteChoice} className='x'>X</button></td>
+          <td className='deleteColumn' ><button onClick={this.deleteChoice} className='x'>X</button></td>
         </tr>
         )}
       </Draggable>
