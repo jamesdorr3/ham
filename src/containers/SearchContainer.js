@@ -40,8 +40,8 @@ class SearchContainer extends React.Component {
 
   render(){
     return(
-      <tr>
-        <td>
+      <tr className='centered'>
+        <td colSpan='8' >
           <form onSubmit={this.handleSubmit}>
             <input type='text' 
               value={this.state.text} 

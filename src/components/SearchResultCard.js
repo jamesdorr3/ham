@@ -19,8 +19,8 @@ class SearchResultCard extends React.Component {
     // console.log(this.props.categoryId)
     return(
       <li>
-        {this.props.food.food_name}{this.props.food.brand_name ? `- ${this.props.food.brand_name}` : null}
         <button onClick={this.handleAddChoice}>+</button>
+        {this.props.food.food_name}{this.props.food.brand_name ? `- ${this.props.food.brand_name}` : null}
       </li>
     )
   }

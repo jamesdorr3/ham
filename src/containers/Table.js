@@ -40,7 +40,7 @@ class ChoiceContainer extends React.Component {
   }
 
   goalsSelector = (goals) => {
-    return <select value={this.props.goal.id}>
+    return <select value={this.props.goal.id} className='goalsSelect'>
       {goals.map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
       <option>add</option>
     </select>
@@ -60,6 +60,7 @@ class ChoiceContainer extends React.Component {
             <th className='macro fat' >fat</th>
             <th className='macro carbs' >carbs</th>
             <th className='macro protein' >protein</th>
+            <th className='xcol'></th>
           </tr>
           <tr>
             <th colSpan='1'>Goals: </th>
@@ -68,7 +69,7 @@ class ChoiceContainer extends React.Component {
             <th><input onChange={this.handleChange} className='macro' type='number' name='fat' value={this.props.goal.fat} /></th>
             <th><input onChange={this.handleChange} className='macro' type='number' name='carbs' value={this.props.goal.carbs} /></th>
             <th><input onChange={this.handleChange} className='macro' type='number' name='protein' value={this.props.goal.protein} /></th>
-            {this.state.goalChanged ? <th><button onClick={this.saveGoals} >Save</button></th> : null }
+            <th className='xcol'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</th>
           </tr>
           <tr>
             <th colSpan='2'></th>
@@ -77,6 +78,7 @@ class ChoiceContainer extends React.Component {
             <th className='macro'>{this.autoSum('fat')}</th>
             <th className='macro'>{this.autoSum('carbs')}</th>
             <th className='macro'>{this.autoSum('protein')}</th>
+            <th className='xcol'></th>
           </tr>
         </tbody>
         {this.props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {

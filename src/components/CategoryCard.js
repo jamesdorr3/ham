@@ -33,11 +33,12 @@ class CategoryCard extends React.Component {
         >
           <tr className='categoryHeader'>
             <td colSpan='2'>{this.props.category.name}</td>
-            <td colSpan='1'>Totals: </td>
+            <td colSpan='1' className='centered'>Totals: </td>
             <td className='macro'>{this.autoSum('calories')}</td>
             <td className='macro'>{this.autoSum('fat')}</td>
             <td className='macro'>{this.autoSum('carbs')}</td>
             <td className='macro'>{this.autoSum('protein')}</td>
+            <th className='xrow'></th>
           </tr>
           {this.mySortedChoices().map((choiceFood, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
           choiceFood={choiceFood} 

@@ -6,7 +6,7 @@ html, body {
 .categoryHeader {
   font-style: italic;
   text-decoration: underline;
-  font-size: 20px
+  font-size: 18px
 }
 
 /* START TUES STYLING */
@@ -19,7 +19,8 @@ html, body {
   height: 60px;
   display: block;
   background-color: rgb(200, 100, 50);
-  color: white
+  color: white;
+  z-index: 2;
 }
 
 .header div{
@@ -62,42 +63,37 @@ html, body {
 /* TABLE */
 
 .table {
-  background-color: rgb(231, 231, 231);
+  /* background-color: rgb(231, 231, 231); */
   position: relative;
   width: 90%;
   min-width: 650px;
   margin: auto;
-  top: 60px;
+  top: 70px;
   bottom: 60px;
-  height: auto;
 }
 
-/* table {
-  margin: auto;
-  max-width: 1000px;
-  min-width: 600px;
-  border: 1px black solid;
-  margin-bottom: 100px;
-}
-table, tbody, tr {
-  position: relative;
-  margin: auto;
-  width: 90%;
-  max-width: 1000px;
-  min-width: 600px;
-}
-
-table, tbody, tr, th, td {
-  border: none
-} */
-
+/* TDs */
 .name {
-  width: 33%;
+  position: relative;
+  width: 30%;
   overflow: hidden
 }
 
+.amount, .measure, .calories, .fat, .carbs, .protein, .xcol, .macro {
+  position: relative;
+  width: 10%
+}
+
+
+/* .xcol {
+  position: relative;
+  width: 5%
+} */
+
+/* TDs */
+
 .centered {
-  text-align: center
+  text-align: center;
 }
 
 button.centered{
@@ -112,6 +108,36 @@ tr:hover {
   background-color: rgb(240, 160, 120)
 }
 
+tr.choice:hover {
+  transform: scale(1.01);
+  background-color: rgb(240, 160, 120);
+  box-shadow: 5px 5px rgba(100, 100, 100, 0.767)
+}
+
+ul {
+  position: fixed;
+  background-color: rgb(240, 160, 120);
+  z-index: 1;
+  max-height: 300px;
+  overflow: scroll;
+  margin: 1px
+}
+
+li {
+  position: relative;
+  text-align: left;
+  list-style: none;
+}
+
+li button {
+  position: relative;
+  right: 20px
+}
+
+li:hover {
+  background-color: lightgray;
+}
+
 td { overflow: hidden; white-space: nowrap}
 
 .macro {
@@ -123,6 +149,16 @@ tbody:nth-child(even) {
 
 }
 
+tbody, tr{
+  position: relative;
+  width: 100%;
+}
+
+.x {
+  background-color: rgba(255, 255, 255, 0);
+  border: none
+}
+
 /* FOOTER */
 
 .footer {
@@ -131,6 +167,7 @@ tbody:nth-child(even) {
   height: 70px;
   width: 100%;
   background-color: rgb(200, 100, 50);
+  z-index: 2;
 }
 
 .footer h2 {
@@ -139,3 +176,8 @@ tbody:nth-child(even) {
   margin-right: 5%;
   background-color: rgb(200, 100, 50);
 }
+
+.daySelect, .goalsSelect {
+  width: auto
+}
+
