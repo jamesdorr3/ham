@@ -16,7 +16,7 @@ class SearchResultCard extends React.Component {
   }
 
   render(){
-    // console.log(this.props.categoryId)
+    // console.log(this.props)
     return(
       <li>
         <button onClick={this.handleAddChoice}>+</button>

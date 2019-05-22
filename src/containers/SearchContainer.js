@@ -23,8 +23,8 @@ class SearchContainer extends React.Component {
       fetch(`${URL}search/many?q=${this.state.text}`, {headers: HEADERS()})
       .then(r => r.json())
       .then(r => {
-        // console.log(r)
-        if (r.common > 0 || r.branded > 0) {
+        // debugger
+        if (r.common.length > 0 || r.branded.length > 0) {
           this.setState({branded: r.branded, common: r.common})
         }else{
           this.setState({error: 'No Results'})
@@ -42,6 +42,7 @@ class SearchContainer extends React.Component {
   }
 
   render(){
+    console.log(this.state)
     return(
       <tr className='centered' >
         <td colSpan='8' >

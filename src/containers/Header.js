@@ -63,7 +63,7 @@ class Header extends React.Component {
           <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id} class='daySelect'>
             {this.dayOptions()}
           </select>
-          <button onClick={this.props.createDay}>New Day</button>
+          <button onClick={this.props.createDay} className='newday'>New Day</button>
           </div>
           : null
         }
