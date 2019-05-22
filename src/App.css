@@ -43,7 +43,7 @@ html, body {
   width: 100px;
 }
 
-.header div input[type='submit'], .header div button {
+.header div input[type='submit'] {
   width: 106px
 }
 
@@ -120,7 +120,9 @@ ul {
   z-index: 1;
   max-height: 300px;
   overflow: scroll;
-  margin: 1px
+  margin: 1px 0px 0px 10%;
+  border-radius: 5px;
+  box-shadow: inset 0 0 4px #000000
 }
 
 li {
@@ -181,3 +183,6 @@ tbody, tr{
   width: auto
 }
 
+.newday {
+  width: auto
+}
