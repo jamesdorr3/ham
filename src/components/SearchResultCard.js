@@ -7,8 +7,8 @@ class SearchResultCard extends React.Component {
   handleAddChoice = () => {
     this.props.clearForm()
     const props = (this.props.food.nix_item_id) ? 
-      `id=${this.props.food.nix_item_id}`: 
-      `name=${this.props.food.food_name}`
+      `id=${this.props.food.nix_item_id}&categoryId=${this.props.categoryId}`: 
+      `name=${this.props.food.food_name}&categoryId=${this.props.categoryId}`
     this.props.selectSearchResult(props)
     // fetch(`${URL}search?${props}`, {headers: HEADERS()})
     // .then(r => r.json())
@@ -16,6 +16,7 @@ class SearchResultCard extends React.Component {
   }
 
   render(){
+    // console.log(this.props.categoryId)
     return(
       <li>
         {this.props.food.food_name}{this.props.food.brand_name ? `- ${this.props.food.brand_name}` : null}

@@ -54,7 +54,6 @@ class SignUpCard extends React.Component {
     return(
       <div className='modal' style={{display: `${this.props.showSignup ? 'block' : 'none'}`}}>
       <form onSubmit={this.handleSubmit}>
-      <button onClick={this.props.toggleSignup} className='x'>X</button>
         <input value={this.state.username} name='username' onChange={this.handleChange} type='text' placeholder='username' />
         <input value={this.state.email} name='email' onChange={this.handleChange} type='text' placeholder='email' />
         <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='password'/>

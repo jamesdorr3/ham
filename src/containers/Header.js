@@ -45,7 +45,7 @@ class Header extends React.Component {
     // const days = this.props.days.filter(day => day.id !== this.props.day.id)
     const days = this.props.days.sort((x, y) => y.created_at - x.created_at)
     return days.map(day => {
-      return <option value={day.id} >{this.prettyDayDisplay(day)}</option>
+      return <option value={day.id} key={day.id} >{this.prettyDayDisplay(day)}</option>
     })
   }
 
@@ -54,34 +54,27 @@ class Header extends React.Component {
   }
 
   render(){
-    console.log(this.props.day)
+    // console.log(this.props.day)
     return(
-      <>
-      <table className='header'>
-        <tbody>
-          <tr>
-          {this.signedIn() ? <td>{this.props.user.email}</td> : <td className='doublewide'>Use HAM, no strings attached. Log In or Sign Up to save your goals and foods.</td>}
-          {this.signedIn() ? 
-            <td>
-            <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id}>
-              {/* <option selected>{this.prettyDayDisplay(this.props.day)}</option> */}
-              {this.dayOptions()}
-            </select> 
-            <button onClick={this.props.createDay}>New Day</button>
-            </td>
-            : null
-          }
-          <td>
-          {this.signedIn()?
-          <button onClick={this.handleSignOut}>Sign Out</button> :
-          < LoginCard state={this.state} toggleSignup={this.toggleSignup} handleChange={this.handleChange} login={this.login} />
-          }
-          </td>
-          </tr>
-        </tbody>
-      </table>
-        < SignUpCard toggleSignup={this.toggleSignup} showSignup={this.state.showSignup}/>
-      </>
+      <div className='header'>
+        {this.signedIn() ? <div className="third centered">{this.props.user.email}</div> : <div className='twothirds'>Use HAM, no strings attached. Log In or Sign Up to save your goals and foods.</div>}
+        {this.signedIn() ? 
+          <div className='third centered'>
+          <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id}>
+            {this.dayOptions()}
+          </select>
+          <button onClick={this.props.createDay}>New Day</button>
+          </div>
+          : null
+        }
+        <div className='third'>
+        {this.signedIn()?
+        <button onClick={this.handleSignOut} className='centered'>Sign Out</button> :
+        < LoginCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} handleChange={this.handleChange} login={this.login} />
+        }
+        </div>
+        < SignUpCard showSignup={this.state.showSignup}/>
+      </div>
     )
   }
 }

@@ -40,49 +40,50 @@ class ChoiceContainer extends React.Component {
   }
 
   goalsSelector = (goals) => {
-    return <select>
+    return <select value={this.props.goal.id}>
       {goals.map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
+      <option>add</option>
     </select>
   }
 
   render(){
     // console.log(this.props.categories)
     return(
-      <>
+      <div className='table'>
       <table>
         <tbody>
           <tr>
             <th className='name'>name</th>
             <th className='amount'>amount</th>
             <th className='measure' >measure</th>
-            <th className='calories' >calories</th>
-            <th className='fat' >fat</th>
-            <th className='carbs' >carbs</th>
-            <th className='protein' >protein</th>
+            <th className='macro calories' >calories</th>
+            <th className='macro fat' >fat</th>
+            <th className='macro carbs' >carbs</th>
+            <th className='macro protein' >protein</th>
           </tr>
           <tr>
             <th colSpan='1'>Goals: </th>
-            <th colSpan='2'>{this.goalsSelector(this.props.goals)}</th>
-            <th><input onChange={this.handleChange} type='number' name='calories' value={this.props.goal.calories} /></th>
-            <th><input onChange={this.handleChange} type='number' name='fat' value={this.props.goal.fat} /></th>
-            <th><input onChange={this.handleChange} type='number' name='carbs' value={this.props.goal.carbs} /></th>
-            <th><input onChange={this.handleChange} type='number' name='protein' value={this.props.goal.protein} /></th>
-            {this.state.goalChanged ? <th><button onClick={this.saveGoals} >Save Goals</button></th> : null }
+            <th colSpan='2'>{this.goalsSelector(this.props.goals)}<button>+</button></th>
+            <th><input onChange={this.handleChange} className='macro' type='number' name='calories' value={this.props.goal.calories} /></th>
+            <th><input onChange={this.handleChange} className='macro' type='number' name='fat' value={this.props.goal.fat} /></th>
+            <th><input onChange={this.handleChange} className='macro' type='number' name='carbs' value={this.props.goal.carbs} /></th>
+            <th><input onChange={this.handleChange} className='macro' type='number' name='protein' value={this.props.goal.protein} /></th>
+            {this.state.goalChanged ? <th><button onClick={this.saveGoals} >Save</button></th> : null }
           </tr>
           <tr>
             <th colSpan='2'></th>
             <th colSpan='1'>Totals: </th>
-            <th>{this.autoSum('calories')}</th>
-            <th>{this.autoSum('fat')}</th>
-            <th>{this.autoSum('carbs')}</th>
-            <th>{this.autoSum('protein')}</th>
+            <th className='macro'>{this.autoSum('calories')}</th>
+            <th className='macro'>{this.autoSum('fat')}</th>
+            <th className='macro'>{this.autoSum('carbs')}</th>
+            <th className='macro'>{this.autoSum('protein')}</th>
           </tr>
         </tbody>
-        {this.props.categories.sort((x, y) => x.index - y.index).map(category => {
-          return <CategoryCard category={category} />
+        {this.props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
+        return <CategoryCard category={category} key={category.id} />
         })}
       </table>
-      </>
+      </div>
     )
   }
 }

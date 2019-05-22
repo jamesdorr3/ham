@@ -31,38 +31,50 @@ class SearchContainer extends React.Component {
     }
   }
 
+  clearResults = () => {
+    this.setState({
+      branded: [],
+      common: []
+    })
+  }
+
   render(){
     return(
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type='text' 
-            value={this.state.text} 
-            onChange={this.handleChange}
-            placeholder='Search for any food!'
-            >
-          </input>
-          <input type='submit' value='search' />
-        </form>
-        <ul>
-          {this.state.common.map(food => (
-            < SearchResultCard 
-            key={food.food_name} 
-            food={food} 
-            addChoice={this.props.addChoice}
-            clearForm={() => this.setState({text: '', branded: [], common: []})}
-            />)
-          )}
-          {this.state.branded.map(food =>(
-            < SearchResultCard 
-            key={food.nix_item_id} 
-            food={food} 
-            addChoice={this.props.addChoice}
-            clearForm={() => this.setState({text: '', branded: [], common: []})}
-            />
-          ))}
-          {/* {this.state.error ? <li>No Results</li> : null} */}
-        </ul>
-      </div>
+      <tr>
+        <td>
+          <form onSubmit={this.handleSubmit}>
+            <input type='text' 
+              value={this.state.text} 
+              onChange={this.handleChange}
+              placeholder='Search for any food!'
+              >
+            </input>
+            <input type='submit' value='search' />
+            {this.state.common.length > 0 || this.state.branded.length > 0 ? <button onClick={this.clearResults}>X</button> : null}
+          </form>
+          <ul>
+            {this.state.common.map(food => (
+              < SearchResultCard 
+              categoryId={this.props.categoryId}
+              key={food.food_name} 
+              food={food} 
+              addChoice={this.props.addChoice}
+              clearForm={() => this.setState({text: '', branded: [], common: []})}
+              />)
+            )}
+            {this.state.branded.map(food =>(
+              < SearchResultCard 
+              categoryId={this.props.categoryId}
+              key={food.nix_item_id} 
+              food={food} 
+              addChoice={this.props.addChoice}
+              clearForm={() => this.setState({text: '', branded: [], common: []})}
+              />
+            ))}
+            {/* {this.state.error ? <li>No Results</li> : null} */}
+          </ul>
+        </td>
+      </tr>
     )
   }
 }

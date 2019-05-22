@@ -107,10 +107,10 @@ class ChoiceCard extends React.Component {
               {this.generateMeasures()}
             </select>
           </td>
-          <td className='calories'>{this.autoUpdateMacro('calories')}</td>
-          <td className='fat'>{this.autoUpdateMacro('fat')}</td>
-          <td className='carbs'>{this.autoUpdateMacro('carbs')}</td>
-          <td className='protein'>{this.autoUpdateMacro('protein')}</td>
+          <td className='macro calories'>{this.autoUpdateMacro('calories')}</td>
+          <td className='macro fat'>{this.autoUpdateMacro('fat')}</td>
+          <td className='macro carbs'>{this.autoUpdateMacro('carbs')}</td>
+          <td className='macro protein'>{this.autoUpdateMacro('protein')}</td>
           <td><button onClick={this.deleteChoice}>X</button></td>
         </tr>
         )}

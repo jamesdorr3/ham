@@ -1,90 +1,141 @@
-td {
-  text-align: center
-}
 
-td.name {
-  text-align: left
-}
-
-.header {
-  position: relative;
-  background-color: #c60;
-  width: 100%;
-  height: 70px
-}
-
-.header td {
-  float: left;
-  list-style: none;
-  width: 30%;
-  margin: 0px
-}
-
-.header td input, .header td button {
-  display: inline;
-  margin: 7px 7px;
-  width: 100px;
-  padding: 5px;
-  border-radius: 25px
-}
-
-.header td.doublewide {
-  width: 66%
-}
-
-.modal {
-  position: absolute;
-  top: 0px;
-  float: center;
-  z-index: 1;
+html, body {
   height: 100%;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.925)
+  text-transform: uppercase
 }
-
-.modal form {
-  position: absolute;
-  top: 50px;
-  margin-left: 40%;
-  width: auto;
-  border-radius: 10px;
-  background-color: #e67300;
-}
-
-.modal form input {
-  display: block;
-  margin: 7px 7px;
-  width: 200px;
-  padding: 10px;
-  border-radius: 25px
-}
-
-.modal form input[type='submit'] {
-  position: relative;
-  width: auto;
-}
-
-.x {
-  position: relative;
-  float: right;
-  border: none;
-  background-color: rgba(255, 255, 255, 0)
-}
-
 .categoryHeader {
   font-style: italic;
   text-decoration: underline;
-  font-size: 12px
+  font-size: 20px
 }
 
-table {
-  width: 100%
+/* START TUES STYLING */
+
+.header {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  min-width: 644px;
+  height: 60px;
+  display: block;
+  background-color: rgb(200, 100, 50);
+  color: white
 }
 
-tbody.category:nth-child(odd) {
-  background: lightgrey;
+.header div{
+  display: inline;
+  float: left
+}
+.third {
+  width: 33%;
+  margin-top: 15px
 }
 
-tbody.category:nth-child(even) {
-  background: rgb(253, 216, 146);
+.twothirds {
+  width: 66%;
+  margin-top: 20px;
+  padding-left: 1%;
+  white-space: wrap
+}
+
+.header div input[type='text'], .header div input[type='password'] {
+  width: 100px;
+}
+
+.header div input[type='submit'], .header div button {
+  width: 106px
+}
+
+.modal {
+  z-index: 1;
+  position: fixed;
+  max-width: 250px;
+  top: 60px;
+  left: 66%;
+  background-color: rgb(240, 160, 120)
+}
+
+.modal form {
+  padding: 15px
+}
+
+/* TABLE */
+
+.table {
+  background-color: rgb(231, 231, 231);
+  position: relative;
+  width: 90%;
+  min-width: 650px;
+  margin: auto;
+  top: 60px;
+  bottom: 60px;
+  height: auto;
+}
+
+/* table {
+  margin: auto;
+  max-width: 1000px;
+  min-width: 600px;
+  border: 1px black solid;
+  margin-bottom: 100px;
+}
+table, tbody, tr {
+  position: relative;
+  margin: auto;
+  width: 90%;
+  max-width: 1000px;
+  min-width: 600px;
+}
+
+table, tbody, tr, th, td {
+  border: none
+} */
+
+.name {
+  width: 33%;
+  overflow: hidden
+}
+
+.centered {
+  text-align: center
+}
+
+button.centered{
+  margin-left: 33%
+}
+
+tr {
+  height: 20px;
+}
+
+tr:hover {
+  background-color: rgb(240, 160, 120)
+}
+
+td { overflow: hidden; white-space: nowrap}
+
+.macro {
+  text-align: center
+}
+
+tbody:nth-child(even) {
+  background-color: lightgray;
+
+}
+
+/* FOOTER */
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  height: 70px;
+  width: 100%;
+  background-color: rgb(200, 100, 50);
+}
+
+.footer h2 {
+  position: relative;
+  float: right;
+  margin-right: 5%;
+  background-color: rgb(200, 100, 50);
 }

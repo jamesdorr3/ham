@@ -5,7 +5,6 @@ export const selectSearchResult = (prop) => {
     return fetch(`${URL}search/make_choice?${prop}`, {headers: HEADERS()})
     .then(r => r.json())
     .then(choiceAndFood => {
-      // debugger
       dispatch({ type: 'ADD_CHOICE', payload: choiceAndFood})
     })
   }

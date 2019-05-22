@@ -5,6 +5,7 @@ import Table from './containers/Table'
 import Header from './containers/Header'
 import {DragDropContext} from 'react-beautiful-dnd';
 import {connect} from 'react-redux'
+import Footer from './components/Footer'
 
 class App extends React.Component {
 
@@ -34,7 +35,8 @@ class App extends React.Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
           < Table />
         </DragDropContext>
-        < SearchContainer />
+        < Footer />
+        {/* < SearchContainer /> */}
       </div>
     );
   }
