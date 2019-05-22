@@ -51,6 +51,7 @@ class SearchContainer extends React.Component {
             </input>
             <input type='submit' value='search' />
             {this.state.common.length > 0 || this.state.branded.length > 0 ? <button onClick={this.clearResults}>X</button> : null}
+            <button>Add Your Own</button>
           </form>
           <ul>
             {this.state.common.map(food => (

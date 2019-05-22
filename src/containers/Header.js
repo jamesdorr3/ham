@@ -73,7 +73,7 @@ class Header extends React.Component {
         < LoginCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} handleChange={this.handleChange} login={this.login} />
         }
         </div>
-        < SignUpCard showSignup={this.state.showSignup}/>
+        < SignUpCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} />
       </div>
     )
   }

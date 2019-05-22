@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import '../constants.js'
 import {URL, HEADERS} from '../constants.js'
+import {createUser} from '../actions/usersActions'
 
 class SignUpCard extends React.Component {
 
@@ -16,22 +17,7 @@ class SignUpCard extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.password && this.state.username && this.state.email && this.state.password === this.state.password2){
-      fetch(`${URL}/users`, {
-        method: 'POST',
-        headers: HEADERS(),
-        body: JSON.stringify({
-          user: this.state
-        })
-      })
-      .then(r => r.json())
-      .then(resp => {
-        if (resp.user && resp.jwt) {
-          this.props.selectUser(resp)
-          localStorage.setItem('token', resp.jwt)
-        }else{
-          this.setState({error: resp.message})
-        }
-      })
+      this.props.createUser(this.state)
     }
   }
 
@@ -52,7 +38,7 @@ class SignUpCard extends React.Component {
 
   render(){
     return(
-      <div className='modal' style={{display: `${this.props.showSignup ? 'block' : 'none'}`}}>
+      <div className='modal' style={{display: `${ this.props.showSignup && !this.props.user.email ? 'block' : 'none'}`}}>
       <form onSubmit={this.handleSubmit}>
         <input value={this.state.username} name='username' onChange={this.handleChange} type='text' placeholder='username' />
         <input value={this.state.email} name='email' onChange={this.handleChange} type='text' placeholder='email' />
@@ -66,10 +52,15 @@ class SignUpCard extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return state
+}
+
 const mapDispatchToProps = dispatch => {
   return {
-    selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user})
+    selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
+    createUser: user => dispatch(createUser(user))
   }
 }
 
-export default connect(null, mapDispatchToProps)(SignUpCard)
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpCard)
