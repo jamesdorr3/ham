@@ -50,7 +50,7 @@ class LoginCard extends React.Component {
         <input value={this.state.usernameOrEmail} name='usernameOrEmail' onChange={this.handleChange} type='text' placeholder='username or email' />
         <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='password' />
         <input value='Log In' type='submit' />
-        <button onClick={this.props.toggleSignup}>Sign Up</button>
+        <button onClick={this.props.toggleSignup}>{this.props.showSignup ? 'Close Sign Up': 'Sign Up'}</button>
       </form>
       <p>{this.state.error}</p>
       </>

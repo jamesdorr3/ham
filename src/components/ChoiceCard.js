@@ -78,7 +78,6 @@ class ChoiceCard extends React.Component {
       >
         {provided => (
         <tr 
-        className='Container'
         className='choice'
         {...provided.draggableProps}
         {...provided.dragHandleProps}
@@ -88,7 +87,7 @@ class ChoiceCard extends React.Component {
           <td className='name'>
             {this.props.choiceFood.food.name}
           </td>
-          <td>
+          <td className='centered'>
             <input type='number'
             className='amount'
             name='amount'
@@ -98,7 +97,7 @@ class ChoiceCard extends React.Component {
             >
             </input>
             </td>
-          <td>
+          <td className='centered'>
             <select 
             value={this.props.choiceFood.choice.measure} 
             onChange={this.handleMeasureChange}
@@ -107,11 +106,11 @@ class ChoiceCard extends React.Component {
               {this.generateMeasures()}
             </select>
           </td>
-          <td className='calories'>{this.autoUpdateMacro('calories')}</td>
-          <td className='fat'>{this.autoUpdateMacro('fat')}</td>
-          <td className='carbs'>{this.autoUpdateMacro('carbs')}</td>
-          <td className='protein'>{this.autoUpdateMacro('protein')}</td>
-          <td><button onClick={this.deleteChoice}>X</button></td>
+          <td className='macro calories'>{this.autoUpdateMacro('calories')}</td>
+          <td className='macro fat'>{this.autoUpdateMacro('fat')}</td>
+          <td className='macro carbs'>{this.autoUpdateMacro('carbs')}</td>
+          <td className='macro protein'>{this.autoUpdateMacro('protein')}</td>
+          <td className='centered' ><button onClick={this.deleteChoice} className='x'>X</button></td>
         </tr>
         )}
       </Draggable>

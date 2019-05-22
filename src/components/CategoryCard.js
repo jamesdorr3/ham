@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Droppable} from 'react-beautiful-dnd'
 import ChoiceCard from '../components/ChoiceCard'
+import SearchContainer from '../containers/SearchContainer'
 
 class CategoryCard extends React.Component {
 
@@ -32,11 +33,12 @@ class CategoryCard extends React.Component {
         >
           <tr className='categoryHeader'>
             <td colSpan='2'>{this.props.category.name}</td>
-            <td colSpan='1'>Totals: </td>
-            <td>{this.autoSum('calories')}</td>
-            <td>{this.autoSum('fat')}</td>
-            <td>{this.autoSum('carbs')}</td>
-            <td>{this.autoSum('protein')}</td>
+            <td colSpan='1' className='centered'>Totals: </td>
+            <td className='macro'>{this.autoSum('calories')}</td>
+            <td className='macro'>{this.autoSum('fat')}</td>
+            <td className='macro'>{this.autoSum('carbs')}</td>
+            <td className='macro'>{this.autoSum('protein')}</td>
+            <th className='xrow'></th>
           </tr>
           {this.mySortedChoices().map((choiceFood, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
           choiceFood={choiceFood} 
@@ -45,6 +47,7 @@ class CategoryCard extends React.Component {
           deleteChoice={this.props.deleteChoice} 
           /> )}
           {provided.placeholder}
+        < SearchContainer categoryId={this.props.category.id} />
         </tbody>
       )}
     </Droppable>

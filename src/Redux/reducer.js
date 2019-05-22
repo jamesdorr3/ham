@@ -1,7 +1,11 @@
 import {URL, HEADERS} from '../constants.js'
 
 const initialState = {
-  categories: [],
+  categories: [
+    {name: 'Breakfast', created_at: 1, id: 1},
+    {name: 'Lunch', created_at: 2, id: 2},
+    {name: 'Dinner', created_at: 3, id: 3}
+  ],
   day: {},
   days: [],
   choiceFoods: [],
@@ -15,8 +19,10 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_CHOICE': {
-      // debugger
-      return {...state, choiceFoods: [...state.choiceFoods, action.payload]}
+      return {...state, choiceFoods: [...state.choiceFoods, {
+        choice: {...action.payload.choice, id: action.payload.choice.id || Date.now()},
+        food: action.payload.food
+      }]}
     }
     case 'ADD_CHOICES': {
       debugger
@@ -68,8 +74,10 @@ const reducer = (state = initialState, action) => {
       // console.log('sign out')
       return {
         ...state,
-        user: {},
-        choiceFoods: []
+        choiceFoods: [],
+        goal: {},
+        goals: [],
+        user: {}
       }
     }
     case 'HANDLE_DROP': {
@@ -91,6 +99,7 @@ const reducer = (state = initialState, action) => {
     case 'ADD_DAY': {
       return {
         ...state,
+        choiceFoods: [],
         day: action.payload,
         days: [...state.days, {...action.payload, goal_id: action.payload.goal.id}],
         goal: action.payload.goal
@@ -100,7 +109,6 @@ const reducer = (state = initialState, action) => {
       // debugger
       return {
         ...state,
-        categories: action.payload.unique_categories,
         choiceFoods: action.payload.choice_foods,
         day: {
           created_at: action.payload.created_at,
@@ -108,6 +116,12 @@ const reducer = (state = initialState, action) => {
           name: action.payload.name
         },
         goal: action.payload.goal,
+      }
+    }
+    case 'ADD_FOOD': {
+      return {
+        ...state,
+        choiceFoods: [...state.choiceFoods, action.payload]
       }
     }
     default: {
