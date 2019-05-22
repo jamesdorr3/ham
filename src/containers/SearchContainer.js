@@ -1,6 +1,7 @@
 import React from 'react'
 import SearchResultCard from '../components/SearchResultCard'
 import {URL, HEADERS} from '../constants.js'
+import MakeFoodCard from '../components/MakeFoodCard'
 
 class SearchContainer extends React.Component {
 
@@ -9,7 +10,8 @@ class SearchContainer extends React.Component {
     branded: [],
     common: [],
     internal: [],
-    error: false
+    error: false,
+    addFood: false
   }
 
   handleChange = e => this.setState({text: e.target.value})
@@ -22,7 +24,7 @@ class SearchContainer extends React.Component {
       .then(r => r.json())
       .then(r => {
         // console.log(r)
-        if (r.common || r.branded) {
+        if (r.common > 0 || r.branded > 0) {
           this.setState({branded: r.branded, common: r.common})
         }else{
           this.setState({error: 'No Results'})
@@ -34,25 +36,27 @@ class SearchContainer extends React.Component {
   clearResults = () => {
     this.setState({
       branded: [],
-      common: []
+      common: [],
+      error: false
     })
   }
 
   render(){
     return(
-      <tr className='centered'>
+      <tr className='centered' >
         <td colSpan='8' >
           <form onSubmit={this.handleSubmit}>
             <input type='text' 
               value={this.state.text} 
               onChange={this.handleChange}
-              placeholder='Search for any food!'
+              placeholder='search for any food'
               >
             </input>
             <input type='submit' value='search' />
-            {this.state.common.length > 0 || this.state.branded.length > 0 ? <button onClick={this.clearResults}>X</button> : null}
-            <button>Add Your Own</button>
+            {this.state.common.length > 0 || this.state.branded.length > 0  || this.state.error ? <button onClick={this.clearResults}>X</button> : null}
+            <button onClick={() => this.setState({addFood: !this.state.addFood})}>{this.state.addFood ? 'Close Form' : 'Add Your Own'}</button>
           </form>
+          < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} />
           <ul>
             {this.state.common.map(food => (
               < SearchResultCard 
@@ -72,6 +76,7 @@ class SearchContainer extends React.Component {
               clearForm={() => this.setState({text: '', branded: [], common: []})}
               />
             ))}
+            {this.state.error ? <li>{this.state.error}</li> : null}
             {/* {this.state.error ? <li>No Results</li> : null} */}
           </ul>
         </td>

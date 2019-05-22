@@ -3,7 +3,6 @@ import ChoiceCard from '../components/ChoiceCard'
 import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
 import {Droppable} from 'react-beautiful-dnd'
-import fetchChoices from '../actions/choicesActions'
 import CategoryCard from '../components/CategoryCard'
 import {updateGoal} from '../actions/goalsActions'
 
@@ -42,7 +41,6 @@ class ChoiceContainer extends React.Component {
   goalsSelector = (goals) => {
     return <select value={this.props.goal.id} className='goalsSelect'>
       {goals.map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
-      <option>add</option>
     </select>
   }
 
@@ -100,8 +98,7 @@ const mapDispatchToProps = dispatch => {
     addChoices: (choices) => dispatch({ type: 'ADD_CHOICES', payload: choices}),
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
     changeGoal: (info) => dispatch({ type: 'CHANGE_GOAL', payload: info}),
-    updateGoal: (goal) => dispatch(updateGoal(goal)),
-    fetchChoices: () => dispatch(fetchChoices())
+    updateGoal: (goal) => dispatch(updateGoal(goal))
   }
 }
 

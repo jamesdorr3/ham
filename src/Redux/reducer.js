@@ -74,8 +74,10 @@ const reducer = (state = initialState, action) => {
       // console.log('sign out')
       return {
         ...state,
-        user: {},
-        choiceFoods: []
+        choiceFoods: [],
+        goal: {},
+        goals: [],
+        user: {}
       }
     }
     case 'HANDLE_DROP': {
@@ -114,6 +116,12 @@ const reducer = (state = initialState, action) => {
           name: action.payload.name
         },
         goal: action.payload.goal,
+      }
+    }
+    case 'ADD_FOOD': {
+      return {
+        ...state,
+        choiceFoods: [...state.choiceFoods, action.payload]
       }
     }
     default: {
