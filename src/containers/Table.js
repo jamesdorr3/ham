@@ -19,7 +19,7 @@ class ChoiceContainer extends React.Component {
       fetch(`${URL}days/${dayId}`, {
         method: 'PATCH',
         headers: HEADERS(),
-        body: JSON.stringify({goal_id: goalId,})
+        body: JSON.stringify({goal_id: goalId})
       })
     })
   }
@@ -59,8 +59,7 @@ class ChoiceContainer extends React.Component {
     // console.log(this.props.categories)
     return(
       <div className='table'>
-        <div className='categoryRowContainer'>
-          <ul className='row choiceRow'>
+          <ul className='grid key'>
             <li className='name'>name</li>
             <li className='amount'>amount</li>
             <li className='measure' >measure</li>
@@ -70,7 +69,7 @@ class ChoiceContainer extends React.Component {
             <li className='macro protein' >protein</li>
             <li className='deleteColumn'></li>
           </ul>
-          <ul className='row highlightRow choiceRow goalsRow'>
+          <ul className='grid goals'>
             <li className='goals'><span>Goals:</span></li>
             <li className='goalsSelect'>{this.goalsSelector(this.props.goals)}<button>+</button></li>
             <li className='calories'><input onChange={this.handleChange}  type='number' name='calories' value={this.props.goal.calories} /></li>
@@ -79,7 +78,7 @@ class ChoiceContainer extends React.Component {
             <li className='protein'><input onChange={this.handleChange} type='number' name='protein' value={this.props.goal.protein} /></li>
             <li className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</li>
           </ul>
-          <ul className='row highlightRow choiceRow'>
+          <ul className='grid totals'>
             <li className='totals'><span>Totals:</span></li>
             <li className='calories'>{this.autoSum('calories')}</li>
             <li className='fat'>{this.autoSum('fat')}</li>
@@ -90,7 +89,6 @@ class ChoiceContainer extends React.Component {
         {this.props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
         return <CategoryCard category={category} key={category.id} />
         })}
-        </div>
       </div>
     )
   }

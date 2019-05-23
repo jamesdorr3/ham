@@ -26,12 +26,12 @@ class CategoryCard extends React.Component {
     return(
       <Droppable droppableId={this.props.category.id}>
       {(provided) => (
-        <div
-          className="categoryRowContainer"
+        <div className='category'>
+        <ul
+          className="grid"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
-          <ul className='categoryRow'>
             <li className='name' >{this.props.category.name}</li>
             <li className='totals'>Totals: </li>
             <li className='calories'>{this.autoSum('calories')}</li>

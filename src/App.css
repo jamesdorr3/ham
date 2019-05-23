@@ -79,17 +79,6 @@ button.centered{
 /* HEADER */
 /* TABLE */
 
-li{list-style: none;}
-ul{padding: 0px; clear: both;}
-.categoryRowContainer{margin: 0; padding: 5px; width: 100%}
-.categoryRow li {float: left}
-.choiceRow li{float: left;}
-.categoryRow .totals{width: 20%}
-.goals{width: 40.5%}
-.goals span{margin-left: 100px}
-.totals span{margin-left: 100px}
-.goalsRow input {text-align: center; font-size: 16px; font-weight: bold}
-
 .table {
   position: absolute;
   top: 60px;
@@ -102,69 +91,28 @@ ul{padding: 0px; clear: both;}
   padding: 10px;
 }
 
-.x {
-  background-color: rgba(255, 255, 255, 0);
-  border: none
-}
-.name{width: 30%}
-.amount, .measure, .calories, .fat, .carbs, .protein {width: 10%; text-align: center}
-.totals{width: 50.5%}
-.amount input {width: 50px;}
-.measure select {width: 100%;}
-.deleteColumn{width: 5%}
-.calories input, .fat input, .carbs input, .protein input{position: relative; width: 70%}
-.goalsSelect{background: lime; width: 200%}
-/*
-.amount { left: 35%; }
-.measure { left: 45%; }
-.calories { left: 55%; }
-.fat { left: 65%; }
-.carbs { left: 75%; }
-.protein { left: 85%; }
+.grid {display: grid; grid-template-columns: 30% 1fr 15% repeat(4, 1fr) 5%; margin: 5px 0px; text-align: center}
+li {list-style: none; padding: 0 0 0 4px}
+ul {padding: 0 0 0 5px}
+.name{grid-column: 1; overflow: hidden; white-space: nowrap; text-align: left}
+.amount {grid-column: 2}
+.measure {grid-column: 3}
+.calories {grid-column: 4}
+.fat {grid-column: 5}
+.carbs {grid-column: 6}
+.protein {grid-column: 7}
+.deleteColumn {grid-column: 8}
+.grandTotals, .goals {grid-column: 2}
+.goalsSelect, .totals {grid-column: 3}
+.goals li input {width: 70px}
+.key li {text-transform: uppercase}
+.choice li input {width: 70px}
+.category{border-radius: 5px;}
+.category:nth-child(even){background: rgb(240, 160, 120)}
+/* .category:nth-child(even) .choice {background: lightgray} */
+.category:nth-child(odd){background: lightgray}
+/* .category:nth-child(odd) .choice {background: rgb(240, 160, 120)} */
 
-.deleteColumn{
-  position: absolute;
-  width: 5%;
-  left: 95%;
-  text-align: center;
-}
-
-.category {
-  border-radius: 5px;
-  padding: 10px
-}
-
-.category:hover {
-  box-shadow: inset 0 0 4px #000000;
-  box-shadow:  0 0 4px #000000;
-  z-index: 1
-}
-
-.category:nth-child(even) {
-  background: lightgray;
-}
-
-.amount input {
-  position: absolute;
-  left: 25%;
-  width: 50px;
-  align: center
-}
-
-.highlightRow:hover {
-  background: lime
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-} */
 
 /* TABLE */
 /* SEARCH RESULT MODAL */
@@ -187,7 +135,7 @@ li {
 
 .searchResult button {
   position: relative;
-  right: 20px
+  right: 5px
 }
 
 .searchResult:hover {

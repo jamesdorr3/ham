@@ -82,46 +82,42 @@ class ChoiceCard extends React.Component {
         index={this.props.index}
       >
         {provided => (
-        <div 
-        className='choice choiceRowContainer'
+        <ul 
+        className='choice grid'
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
         id={this.props.choiceFood.choice.id}
         >
-          <ul className='choiceRow'>
-            <div className='test'>
-            <li className='name'>
-                {this.props.choiceFood.food.name}
+          <li className='name'>
+              {this.props.choiceFood.food.name}
+            </li>
+          <li className='amount'>
+              <input type='number'
+              className=''
+              name='amount'
+              value={this.state.amount} 
+              onChange={this.handleAmountChange} 
+              onBlur={this.updateInDB}
+              >
+              </input>
               </li>
-            <li className='amount'>
-                <input type='number'
-                className=''
-                name='amount'
-                value={this.state.amount} 
-                onChange={this.handleAmountChange} 
-                onBlur={this.updateInDB}
-                >
-                </input>
-                </li>
-            <li className='measure'>
-                <select 
-                className=''
-                value={this.state.measure} 
-                onChange={this.handleMeasureChange}
-                name='measure'
-                >
-                  {this.generateMeasures()}
-                </select>
-              </li>
-            <li className='macro calories'>{this.autoUpdateMacro('calories')}</li>
-            <li className='macro fat'>{this.autoUpdateMacro('fat')}</li>
-            <li className='macro carbs'>{this.autoUpdateMacro('carbs')}</li>
-            <li className='macro protein'>{this.autoUpdateMacro('protein')}</li>
-            <li className='deleteColumn' ><button onClick={this.deleteChoice} className='x'>X</button></li>
-            </div>
-          </ul>
-        </div>
+          <li className='measure'>
+              <select 
+              className=''
+              value={this.state.measure} 
+              onChange={this.handleMeasureChange}
+              name='measure'
+              >
+                {this.generateMeasures()}
+              </select>
+            </li>
+          <li className='macro calories'>{this.autoUpdateMacro('calories')}</li>
+          <li className='macro fat'>{this.autoUpdateMacro('fat')}</li>
+          <li className='macro carbs'>{this.autoUpdateMacro('carbs')}</li>
+          <li className='macro protein'>{this.autoUpdateMacro('protein')}</li>
+          <li className='deleteColumn' ><button onClick={this.deleteChoice} className='x'>X</button></li>
+        </ul>
         )}
       </Draggable>
     )
