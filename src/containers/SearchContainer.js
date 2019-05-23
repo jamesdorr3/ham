@@ -57,7 +57,7 @@ class SearchContainer extends React.Component {
             <button onClick={() => this.setState({addFood: !this.state.addFood})}>{this.state.addFood ? 'Close Form' : 'Add Your Own'}</button>
           </form>
           < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} />
-          <ul>
+          <ul className='searchResultContainer'>
             {this.state.common.map(food => (
               < SearchResultCard 
               categoryId={this.props.categoryId}

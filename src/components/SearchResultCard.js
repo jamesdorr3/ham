@@ -18,7 +18,7 @@ class SearchResultCard extends React.Component {
   render(){
     // console.log(this.props)
     return(
-      <li>
+      <li className='searchResult'>
         <button onClick={this.handleAddChoice}>+</button>
         {this.props.food.food_name}{this.props.food.brand_name ? `- ${this.props.food.brand_name}` : null}
       </li>
