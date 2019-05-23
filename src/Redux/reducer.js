@@ -29,17 +29,6 @@ const reducer = (state = initialState, action) => {
     case 'DELETE_CHOICE': {
       return {...state, choiceFoods: state.choiceFoods.filter(x => x.choice.id !== action.payload)}
     }
-    case 'UPDATE_CHOICE': {
-      const choiceFood = state.choiceFoods.find(x => x.choice.id === parseInt(action.payload.id))
-      // debugger
-      return {
-        ...state,
-        choiceFoods: [
-          ...state.choiceFoods.filter(x => x.choice.id !== parseInt(action.payload.id)),
-          {choice: {...choiceFood.choice, [action.payload.name]: action.payload.amount}, food: choiceFood.food}
-        ]
-      }
-    }
     case 'SELECT_USER': {
       // debugger
       return {
@@ -56,7 +45,7 @@ const reducer = (state = initialState, action) => {
         }
       }
     }
-    case 'CHANGE_GOAL': {
+    case 'EDIT_GOAL': {
       // debugger
       return {
         ...state,
@@ -64,6 +53,14 @@ const reducer = (state = initialState, action) => {
           ...state.goal,
           ...action.payload
         }
+      }
+    }
+    case 'CHANGE_GOAL': {
+      const id = action.payload
+      const goal = state.goals.find(x => x.id === parseInt(id))
+      return {
+        ...state,
+        goal: goal
       }
     }
     case 'SIGN_OUT': {
@@ -81,6 +78,7 @@ const reducer = (state = initialState, action) => {
       const choicesIds = action.payload.choicesIds
       for (let i = 0; i < choicesIds.length; i ++) {
         const choiceFood = state.choiceFoods.find(x => x.choice.id === parseInt(choicesIds[i]))
+
         // debugger
         newChoices.push({choice: {...choiceFood.choice, index: i}, food: choiceFood.food})
       }
@@ -118,6 +116,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         choiceFoods: [...state.choiceFoods, action.payload]
+      }
+    }
+    case 'EDIT_CHOICE': {
+      const choiceFood = state.choiceFoods.find(x => x.choice.id == action.payload.id)
+      return {
+        ...state,
+        choiceFoods: [
+          ...state.choiceFoods.filter(x => x.choice.id != choiceFood.choice.id),
+          {
+            food: choiceFood.food, choice: {...choiceFood.choice, ...action.payload.choice}
+          }
+        ]
       }
     }
     default: {

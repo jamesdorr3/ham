@@ -13,7 +13,6 @@ code {
 }
 
 .categoryHeader {
-  font-style: italic;
   text-decoration: underline;
   font-size: 18px
 }
@@ -29,7 +28,7 @@ code {
   display: block;
   background-color: rgb(200, 100, 50);
   color: white;
-  z-index: 2;
+  z-index: 1;
 }
 
 .header div{
@@ -80,6 +79,17 @@ button.centered{
 /* HEADER */
 /* TABLE */
 
+li{list-style: none;}
+ul{padding: 0px; clear: both;}
+.categoryRowContainer{margin: 0; padding: 5px; width: 100%}
+.categoryRow li {float: left}
+.choiceRow li{float: left;}
+.categoryRow .totals{width: 20%}
+.goals{width: 40.5%}
+.goals span{margin-left: 100px}
+.totals span{margin-left: 100px}
+.goalsRow input {text-align: center; font-size: 16px; font-weight: bold}
+
 .table {
   position: absolute;
   top: 60px;
@@ -96,28 +106,15 @@ button.centered{
   background-color: rgba(255, 255, 255, 0);
   border: none
 }
-
-.row{
-  position: relative;
-  display: block;
-  clear: both;
-  padding: 7px 0px 0 0;
-}
-
-.name {
-  /* position: absolute; IT MUST BE AUTO OR THE ROWS OVERLAP!*/
-  float: left;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.amount, .measure, .calories, .fat, .carbs, .protein {
-  position: absolute;
-  float: left;
-  width: 10%;
-  text-align: center;
-}
-
+.name{width: 30%}
+.amount, .measure, .calories, .fat, .carbs, .protein {width: 10%; text-align: center}
+.totals{width: 50.5%}
+.amount input {width: 50px;}
+.measure select {width: 100%;}
+.deleteColumn{width: 5%}
+.calories input, .fat input, .carbs input, .protein input{position: relative; width: 70%}
+.goalsSelect{background: lime; width: 200%}
+/*
 .amount { left: 35%; }
 .measure { left: 45%; }
 .calories { left: 55%; }
@@ -154,31 +151,46 @@ button.centered{
   align: center
 }
 
+.highlightRow:hover {
+  background: lime
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+} */
+
 /* TABLE */
 /* SEARCH RESULT MODAL */
-ul {
+.searchResultContainer {
   position: fixed;
   background-color: rgb(240, 160, 120);
-  z-index: 1;
+  z-index: 2;
   max-height: 310px;
   overflow: scroll;
   margin: 1px 0px 0px 20%;
   border-radius: 5px;
-  box-shadow: inset 0 0 4px #000000
+  box-shadow: inset 0 0 4px #000000;
 }
 
-li {
+.searchResult {
   position: relative;
   text-align: left;
   list-style: none;
 }
 
-li button {
+.searchResult button {
   position: relative;
   right: 20px
 }
 
-li:hover {
+.searchResult:hover {
   background-color: lightgray;
 }
 
@@ -194,7 +206,7 @@ li:hover {
   height: 70px;
   width: 100%;
   background-color: rgb(200, 100, 50);
-  z-index: 2;
+  z-index: 1;
 }
 
 .footer h2 {
