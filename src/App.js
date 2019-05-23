@@ -15,7 +15,7 @@ class App extends React.Component {
       return;
     }
     const choicesIds = []
-    document.querySelectorAll('tr.choice').forEach(x => choicesIds.push(parseInt(x.id)))
+    document.querySelectorAll('.choice').forEach(x => choicesIds.push(parseInt(x.id)))
     // const movedId = choicesIds.splice(source.index, 1)[0]
     // choicesIds.splice(destination.index, 0, movedId)
     const fromIndex = choicesIds.indexOf(draggableId)

@@ -42,10 +42,9 @@ class SearchContainer extends React.Component {
   }
 
   render(){
-    console.log(this.state)
     return(
-      <tr className='centered' >
-        <td colSpan='8' >
+      <div className='centered row' >
+        <span colSpan='8' >
           <form onSubmit={this.handleSubmit}>
             <input type='text' 
               value={this.state.text} 
@@ -80,8 +79,8 @@ class SearchContainer extends React.Component {
             {this.state.error ? <li>{this.state.error}</li> : null}
             {/* {this.state.error ? <li>No Results</li> : null} */}
           </ul>
-        </td>
-      </tr>
+        </span>
+      </div>
     )
   }
 }

@@ -48,41 +48,37 @@ class ChoiceContainer extends React.Component {
     // console.log(this.props.categories)
     return(
       <div className='table'>
-      <table>
-        <tbody>
-          <tr>
-            <th className='name'>name</th>
-            <th className='amount'>amount</th>
-            <th className='measure' >measure</th>
-            <th className='macro calories' >calories</th>
-            <th className='macro fat' >fat</th>
-            <th className='macro carbs' >carbs</th>
-            <th className='macro protein' >protein</th>
-            <th className='xcol'></th>
-          </tr>
-          <tr>
-            <th colSpan='1'>Goals: </th>
-            <th colSpan='2'>{this.goalsSelector(this.props.goals)}<button>+</button></th>
-            <th><input onChange={this.handleChange} className='macro' type='number' name='calories' value={this.props.goal.calories} /></th>
-            <th><input onChange={this.handleChange} className='macro' type='number' name='fat' value={this.props.goal.fat} /></th>
-            <th><input onChange={this.handleChange} className='macro' type='number' name='carbs' value={this.props.goal.carbs} /></th>
-            <th><input onChange={this.handleChange} className='macro' type='number' name='protein' value={this.props.goal.protein} /></th>
-            <th className='xcol'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</th>
-          </tr>
-          <tr>
-            <th colSpan='2'></th>
-            <th colSpan='1'>Totals: </th>
-            <th className='macro'>{this.autoSum('calories')}</th>
-            <th className='macro'>{this.autoSum('fat')}</th>
-            <th className='macro'>{this.autoSum('carbs')}</th>
-            <th className='macro'>{this.autoSum('protein')}</th>
-            <th className='xcol'></th>
-          </tr>
-        </tbody>
+          <div className='row'>
+            <span className='name'>name</span>
+            <span className='amount'>amount</span>
+            <span className='measure' >measure</span>
+            <span className='macro calories' >calories</span>
+            <span className='macro fat' >fat</span>
+            <span className='macro carbs' >carbs</span>
+            <span className='macro protein' >protein</span>
+            <span className='deleteColumn'></span>
+          </div>
+          <div className='row highlightRow'>
+            <span colSpan='1'>Goals: </span>
+            <span colSpan='2'>{this.goalsSelector(this.props.goals)}<button>+</button></span>
+            <span><input onChange={this.handleChange} className='calories' type='number' name='calories' value={this.props.goal.calories} /></span>
+            <span><input onChange={this.handleChange} className='fat' type='number' name='fat' value={this.props.goal.fat} /></span>
+            <span><input onChange={this.handleChange} className='carbs' type='number' name='carbs' value={this.props.goal.carbs} /></span>
+            <span><input onChange={this.handleChange} className='protein' type='number' name='protein' value={this.props.goal.protein} /></span>
+            <span className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</span>
+          </div>
+          <div className='row highlightRow'>
+            <span colSpan='2'></span>
+            <span colSpan='1'>Totals: </span>
+            <span className='calories'>{this.autoSum('calories')}</span>
+            <span className='fat'>{this.autoSum('fat')}</span>
+            <span className='carbs'>{this.autoSum('carbs')}</span>
+            <span className='protein'>{this.autoSum('protein')}</span>
+            <span className='deleteColumn'></span>
+          </div>
         {this.props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
         return <CategoryCard category={category} key={category.id} />
         })}
-      </table>
       </div>
     )
   }
