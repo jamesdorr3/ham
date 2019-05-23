@@ -27,18 +27,18 @@ class CategoryCard extends React.Component {
       <Droppable droppableId={this.props.category.id}>
       {(provided) => (
         <div
-          className="row"
+          className="row category"
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
-          <div className='categoryHeader'>
+          <div className='categoryHeader highlightRow'>
             <span colSpan='2'>{this.props.category.name}</span>
             <span colSpan='1' className='centered'>Totals: </span>
-            <span className='macro'>{this.autoSum('calories')}</span>
-            <span className='macro'>{this.autoSum('fat')}</span>
-            <span className='macro'>{this.autoSum('carbs')}</span>
-            <span className='macro'>{this.autoSum('protein')}</span>
-            <th className='xrow'></th>
+            <span className='calories'>{this.autoSum('calories')}</span>
+            <span className='fat'>{this.autoSum('fat')}</span>
+            <span className='carbs'>{this.autoSum('carbs')}</span>
+            <span className='protein'>{this.autoSum('protein')}</span>
+            <th className='deleteColumn'></th>
           </div>
           {this.mySortedChoices().map((choiceFood, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
           choiceFood={choiceFood} 

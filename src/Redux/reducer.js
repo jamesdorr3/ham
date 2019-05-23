@@ -1,5 +1,3 @@
-import {URL, HEADERS} from '../constants.js'
-
 const initialState = {
   categories: [
     {name: 'Breakfast', created_at: 1, id: 1},
@@ -32,15 +30,13 @@ const reducer = (state = initialState, action) => {
       return {...state, choiceFoods: state.choiceFoods.filter(x => x.choice.id !== action.payload)}
     }
     case 'UPDATE_CHOICE': {
-      // debugger
-      const choice = state.choiceFoods.find(x => x.choice.id === parseInt(action.payload.id))
-      choice.choice[action.payload.name] = action.payload.value // ?
+      const choiceFood = state.choiceFoods.find(x => x.choice.id === parseInt(action.payload.id))
       // debugger
       return {
         ...state,
         choiceFoods: [
           ...state.choiceFoods.filter(x => x.choice.id !== parseInt(action.payload.id)),
-          {...choice, [action.payload.name]: action.payload.value}
+          {choice: {...choiceFood.choice, [action.payload.name]: action.payload.amount}, food: choiceFood.food}
         ]
       }
     }

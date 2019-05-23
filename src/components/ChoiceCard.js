@@ -26,28 +26,25 @@ class ChoiceCard extends React.Component {
     })
   }
 
-  handleAmountChange = (e) => {
-    // debugger
-    this.props.updateChoice({id: e.target.parentElement.parentElement.id, name: e.target.name, value: e.target.value})
+  handleChoiceChange = (e) => {
+    this.props.updateChoice({id: e.target.parentElement.parentElement.id, name: e.target.name, amount: e.target.value})
   }
 
   handleMeasureChange = (e) => {
-    this.handleAmountChange(e)
+    this.handleChoiceChange(e)
     const id = e.target.parentElement.parentElement.id
-    const name = e.target.name
-    const value = e.target.value
-    const numberPart = e.target.parentElement.parentElement.querySelectorAll('td')[1].querySelector('input')
-    const amount = numberPart.value
+    const measure = e.target.value
+    const amount = e.target.parentElement.parentElement.querySelector('span.amount input').value 
     const serving_unit_amount = this.props.choiceFood.food.serving_unit_amount
     const serving_grams = this.props.choiceFood.food.serving_grams
-    console.log(id, name, value, amount, serving_unit_amount, serving_grams)
+    // console.log(id, name, value, amount, serving_unit_amount, serving_grams)
     let newAmount;
-    if (value === 'grams') {
+    if (measure == "grams") {
       newAmount = (amount / serving_unit_amount * serving_grams)
     }else{
       newAmount = (amount / serving_grams * serving_unit_amount)
     }
-    this.props.updateChoice({id: id, name: 'amount', value: newAmount})
+    this.props.updateChoice({id: id, name: 'amount', amount: newAmount})
     // this.props.updateChoice({id: e.target.parentElement.parentElement.id, measure: e.target.name, value: e.target.value})
   }
 
@@ -77,27 +74,27 @@ class ChoiceCard extends React.Component {
         index={this.props.index}
       >
         {provided => (
-        <tr 
-        className='choice'
+        <div 
+        className='choice row highlightRow'
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
         id={this.props.choiceFood.choice.id}
         >
-          <td className='name'>
+         <span className='name'>
             {this.props.choiceFood.food.name}
-          </td>
-          <td className='amount'>
+          </span>
+         <span className='amount'>
             <input type='number'
             className=''
             name='amount'
             value={this.props.choiceFood.choice.amount} 
-            onChange={this.handleAmountChange} 
+            onChange={this.handleChoiceChange} 
             onBlur={this.updateInDB}
             >
             </input>
-            </td>
-          <td className=''>
+            </span>
+         <span className=''>
             <select 
             className='measure'
             value={this.props.choiceFood.choice.measure} 
@@ -106,13 +103,13 @@ class ChoiceCard extends React.Component {
             >
               {this.generateMeasures()}
             </select>
-          </td>
-          <td className='macro calories'>{this.autoUpdateMacro('calories')}</td>
-          <td className='macro fat'>{this.autoUpdateMacro('fat')}</td>
-          <td className='macro carbs'>{this.autoUpdateMacro('carbs')}</td>
-          <td className='macro protein'>{this.autoUpdateMacro('protein')}</td>
-          <td className='deleteColumn' ><button onClick={this.deleteChoice} className='x'>X</button></td>
-        </tr>
+          </span>
+         <span className='macro calories'>{this.autoUpdateMacro('calories')}</span>
+         <span className='macro fat'>{this.autoUpdateMacro('fat')}</span>
+         <span className='macro carbs'>{this.autoUpdateMacro('carbs')}</span>
+         <span className='macro protein'>{this.autoUpdateMacro('protein')}</span>
+         <span className='deleteColumn' ><button onClick={this.deleteChoice} className='x'>X</button></span>
+        </div>
         )}
       </Draggable>
     )

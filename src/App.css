@@ -101,10 +101,11 @@ button.centered{
   position: relative;
   display: block;
   clear: both;
+  padding: 7px 0px 0 0;
 }
 
 .name {
-  /* position: absolute; */
+  /* position: absolute; IT MUST BE AUTO OR THE ROWS OVERLAP!*/
   float: left;
   overflow: hidden;
   white-space: nowrap;
@@ -114,7 +115,6 @@ button.centered{
   position: absolute;
   float: left;
   width: 10%;
-  background: lime;
   text-align: center;
 }
 
@@ -132,15 +132,37 @@ button.centered{
   text-align: center;
 }
 
+.category {
+  border-radius: 5px;
+  padding: 10px
+}
+
+.category:hover {
+  box-shadow: inset 0 0 4px #000000;
+  box-shadow:  0 0 4px #000000;
+  z-index: 1
+}
+
+.category:nth-child(even) {
+  background: lightgray;
+}
+
+.amount input {
+  position: absolute;
+  left: 25%;
+  width: 50px;
+  align: center
+}
+
 /* TABLE */
 /* SEARCH RESULT MODAL */
 ul {
   position: fixed;
   background-color: rgb(240, 160, 120);
   z-index: 1;
-  max-height: 300px;
+  max-height: 310px;
   overflow: scroll;
-  margin: 1px 0px 0px 10%;
+  margin: 1px 0px 0px 20%;
   border-radius: 5px;
   box-shadow: inset 0 0 4px #000000
 }

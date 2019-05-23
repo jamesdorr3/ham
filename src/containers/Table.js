@@ -58,7 +58,7 @@ class ChoiceContainer extends React.Component {
             <span className='macro protein' >protein</span>
             <span className='deleteColumn'></span>
           </div>
-          <div className='row'>
+          <div className='row highlightRow'>
             <span colSpan='1'>Goals: </span>
             <span colSpan='2'>{this.goalsSelector(this.props.goals)}<button>+</button></span>
             <span><input onChange={this.handleChange} className='calories' type='number' name='calories' value={this.props.goal.calories} /></span>
@@ -67,7 +67,7 @@ class ChoiceContainer extends React.Component {
             <span><input onChange={this.handleChange} className='protein' type='number' name='protein' value={this.props.goal.protein} /></span>
             <span className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</span>
           </div>
-          <div className='row'>
+          <div className='row highlightRow'>
             <span colSpan='2'></span>
             <span colSpan='1'>Totals: </span>
             <span className='calories'>{this.autoSum('calories')}</span>
