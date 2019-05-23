@@ -57,7 +57,7 @@ class Header extends React.Component {
     // console.log(this.props.day)
     return(
       <div className='header'>
-        {this.signedIn() ? <div className="third centered">{this.props.user.email}</div> : <div className='twothirds'>Use HAM, no strings attached. Log In or Sign Up to save your goals and foods.</div>}
+        {this.signedIn() ? <div className="third centered email">{this.props.user.email}</div> : <div className='twothirds'>Use HAM, no strings attached. Log In or Sign Up to save your goals and foods.</div>}
         {this.signedIn() ? 
           <div className='third centered'>
           <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id} class='daySelect'>

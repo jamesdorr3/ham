@@ -59,6 +59,15 @@ class ChoiceContainer extends React.Component {
     // console.log(this.props.categories)
     return(
       <div className='table'>
+          <ul className='grid goals'>
+            <li className='goals'><span>Goals:</span></li>
+            <li className='goalsSelect'>{this.goalsSelector(this.props.goals)}<button>+</button></li>
+            <li className='calories'><input onChange={this.handleChange}  type='number' name='calories' value={this.props.goal.calories} /></li>
+            <li className='fat'><input onChange={this.handleChange} type='number' name='fat' value={this.props.goal.fat} /></li>
+            <li className='carbs'><input onChange={this.handleChange} type='number' name='carbs' value={this.props.goal.carbs} /></li>
+            <li className='protein'><input onChange={this.handleChange} type='number' name='protein' value={this.props.goal.protein} /></li>
+            <li className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</li>
+          </ul>
           <ul className='grid key'>
             <li className='name'>name</li>
             <li className='amount'>amount</li>
@@ -69,16 +78,7 @@ class ChoiceContainer extends React.Component {
             <li className='macro protein' >protein</li>
             <li className='deleteColumn'></li>
           </ul>
-          <ul className='grid goals'>
-            <li className='goals'><span>Goals:</span></li>
-            <li className='goalsSelect'>{this.goalsSelector(this.props.goals)}<button>+</button></li>
-            <li className='calories'><input onChange={this.handleChange}  type='number' name='calories' value={this.props.goal.calories} /></li>
-            <li className='fat'><input onChange={this.handleChange} type='number' name='fat' value={this.props.goal.fat} /></li>
-            <li className='carbs'><input onChange={this.handleChange} type='number' name='carbs' value={this.props.goal.carbs} /></li>
-            <li className='protein'><input onChange={this.handleChange} type='number' name='protein' value={this.props.goal.protein} /></li>
-            <li className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</li>
-          </ul>
-          <ul className='grid totals'>
+          <ul className='grid totalsRow'>
             <li className='totals'><span>Totals:</span></li>
             <li className='calories'>{this.autoSum('calories')}</li>
             <li className='fat'>{this.autoSum('fat')}</li>
