@@ -43,17 +43,17 @@ code {
 .twothirds {
   width: 66%;
   margin-top: 20px;
-  padding-left: 1%;
-  white-space: wrap
+  text-align: center;
+  white-space: wrap;
+  text-transform: uppercase;
+  font-weight: bold; 
+  color: rgb(240, 240, 240); 
+  font-size: 18px
 }
 
-.header div input[type='text'], .header div input[type='password'] {
-  width: 100px;
-}
+.header div input[type='text'], .header div input[type='password'] {width: 100px;}
 
-.header div input[type='submit'] {
-  width: 106px
-}
+.header div input[type='submit'] {width: 106px}
 
 .modal {
   z-index: 1;
@@ -64,31 +64,14 @@ code {
   background-color: rgb(240, 160, 120)
 }
 
-.modal form {
-  padding: 15px
-}
+.modal form {padding: 15px}
 
-.centered {
-  text-align: center;
-}
+.centered {text-align: center;}
 
-button.centered{
-  margin-left: 33%
-}
+button.centered{margin-left: 33%}
 
 /* HEADER */
 /* TABLE */
-
-li{list-style: none;}
-ul{padding: 0px; clear: both;}
-.categoryRowContainer{margin: 0; padding: 5px; width: 100%}
-.categoryRow li {float: left}
-.choiceRow li{float: left;}
-.categoryRow .totals{width: 20%}
-.goals{width: 40.5%}
-.goals span{margin-left: 100px}
-.totals span{margin-left: 100px}
-.goalsRow input {text-align: center; font-size: 16px; font-weight: bold}
 
 .table {
   position: absolute;
@@ -102,70 +85,44 @@ ul{padding: 0px; clear: both;}
   padding: 10px;
 }
 
-.x {
-  background-color: rgba(255, 255, 255, 0);
-  border: none
-}
-.name{width: 30%}
-.amount, .measure, .calories, .fat, .carbs, .protein {width: 10%; text-align: center}
-.totals{width: 50.5%}
-.amount input {width: 50px;}
-.measure select {width: 100%;}
-.deleteColumn{width: 5%}
-.calories input, .fat input, .carbs input, .protein input{position: relative; width: 70%}
-.goalsSelect{background: lime; width: 200%}
-/*
-.amount { left: 35%; }
-.measure { left: 45%; }
-.calories { left: 55%; }
-.fat { left: 65%; }
-.carbs { left: 75%; }
-.protein { left: 85%; }
+.grid {display: grid; grid-template-columns: 30% 1fr 15% repeat(4, 1fr) 5%; margin: 5px 0px; text-align: center}
+li {list-style: none; padding: 0 0 0 4px}
+ul {padding: 0 0 0 5px}
+.name{grid-column: 1; overflow: hidden; white-space: nowrap; text-align: left}
+.categoryName {grid-column: 1 / 3; margin-left: 59%}
+.categoryGrid {text-transform: uppercase; font-weight: bold;}
+.email {text-transform: uppercase; font-weight: bold; color: rgb(240, 240, 240); font-size: 18px}
+.amount {grid-column: 2}
+.measure {grid-column: 3}
+.measure select {max-width: 100%}
+.calories {grid-column: 4}
+.fat {grid-column: 5}
+.carbs {grid-column: 6}
+.protein {grid-column: 7}
+.deleteColumn {grid-column: 8}
+.grandTotals, .goals {grid-column: 2}
+.goalsSelect, .totals {grid-column: 3}
+.goals li input {width: 100%}
+.key li {text-transform: uppercase;}
+.key, .goals, .totalsRow {font-weight: bold}
+.choice li input {width: 70px}
+.category{border-radius: 5px; padding: 7px 0 7px 0 }
+.category:nth-child(even){background: rgb(240, 160, 120)}
+/* .category:nth-child(even) .choice {background: lightgray} */
+.category:nth-child(odd){background: rgb(240, 240, 240)}
+/* .category:nth-child(odd) .choice {background: rgb(240, 160, 120)} */
+.choice {background: rgba(255, 255, 255, 0.205); border-radius: 25px}
+.choice:hover {transform: scale(1.01); box-shadow: 0px 1px 5px rgb(90, 90, 90)}
 
-.deleteColumn{
-  position: absolute;
-  width: 5%;
-  left: 95%;
-  text-align: center;
-}
-
-.category {
-  border-radius: 5px;
-  padding: 10px
-}
-
-.category:hover {
-  box-shadow: inset 0 0 4px #000000;
-  box-shadow:  0 0 4px #000000;
-  z-index: 1
-}
-
-.category:nth-child(even) {
-  background: lightgray;
-}
-
-.amount input {
-  position: absolute;
-  left: 25%;
-  width: 50px;
-  align: center
-}
-
-.highlightRow:hover {
-  background: lime
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-} */
-
+.searchButton{position: relative; height: 15px; bottom: -3px; padding: 0 5px}
+img.addButton{position: relative; height: 15px; bottom: -3px; padding: 0 5px}
+button.addButton{background: none; border: none; margin: 0; padding: 0}
+button.editButton{background: none; border: none; margin: 0; padding: 0}
+img.editButton{position: relative; height: 15px; bottom: -3px; padding: 0}
+button.deleteButton{background: none; border: none; margin: 0; padding: 0}
+img.deleteButton{position: relative; height: 15px; bottom: -3px; padding: 0 5px;}
+button.iconButton{background: none; border: none; margin: 0; padding: 0}
+button.closeButton{background: none; border: none; margin: 0; padding: 5px 0 0 0; margin-left: 90%}
 /* TABLE */
 /* SEARCH RESULT MODAL */
 .searchResultContainer {
@@ -187,7 +144,7 @@ li {
 
 .searchResult button {
   position: relative;
-  right: 20px
+  right: 5px
 }
 
 .searchResult:hover {
@@ -213,7 +170,7 @@ li {
   position: absolute;
   float: right;
   right: 5%;
-  background-color: rgb(200, 100, 50);
+  color: rgb(245, 245, 245)
 }
 
 .daySelect, .goalsSelect {

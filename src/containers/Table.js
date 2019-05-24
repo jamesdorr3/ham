@@ -19,7 +19,7 @@ class ChoiceContainer extends React.Component {
       fetch(`${URL}days/${dayId}`, {
         method: 'PATCH',
         headers: HEADERS(),
-        body: JSON.stringify({goal_id: goalId,})
+        body: JSON.stringify({goal_id: goalId})
       })
     })
   }
@@ -49,18 +49,38 @@ class ChoiceContainer extends React.Component {
     this.props.changeGoal(e.target.value)
   }
 
-  goalsSelector = (goals) => {
+  goalsSelector = () => {
     return <select value={this.props.goal.id} className='goalsSelect' onChange={this.changeGoal}>
-      {goals.map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
+      {this.props.goals.map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
     </select>
+  }
+
+  addGoal = () => {
+    console.log('add goal')
   }
 
   render(){
     // console.log(this.props.categories)
     return(
       <div className='table'>
-        <div className='categoryRowContainer'>
-          <ul className='row choiceRow'>
+          <ul className='grid goals'>
+            <li className='goals'><span>Goals:</span></li>
+            <li className='goalsSelect'>
+              {this.goalsSelector()}
+              <button onClick={this.addGoal} className='newGoal addButton' alt='add new goal' >
+                <img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img>
+              </button>
+              <button onClick={this.editGoalName} className='editGoalName editButton' alt='edit goal name' >
+                <img src='edit-icon.png' className='editGoalName editButton' alt='edit goal name'></img>
+              </button>
+            </li>
+            <li className='calories'><input onChange={this.handleChange}  type='number' name='calories' value={this.props.goal.calories} /></li>
+            <li className='fat'><input onChange={this.handleChange} type='number' name='fat' value={this.props.goal.fat} /></li>
+            <li className='carbs'><input onChange={this.handleChange} type='number' name='carbs' value={this.props.goal.carbs} /></li>
+            <li className='protein'><input onChange={this.handleChange} type='number' name='protein' value={this.props.goal.protein} /></li>
+            <li className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</li>
+          </ul>
+          <ul className='grid key'>
             <li className='name'>name</li>
             <li className='amount'>amount</li>
             <li className='measure' >measure</li>
@@ -70,16 +90,7 @@ class ChoiceContainer extends React.Component {
             <li className='macro protein' >protein</li>
             <li className='deleteColumn'></li>
           </ul>
-          <ul className='row highlightRow choiceRow goalsRow'>
-            <li className='goals'><span>Goals:</span></li>
-            <li className='goalsSelect'>{this.goalsSelector(this.props.goals)}<button>+</button></li>
-            <li className='calories'><input onChange={this.handleChange}  type='number' name='calories' value={this.props.goal.calories} /></li>
-            <li className='fat'><input onChange={this.handleChange} type='number' name='fat' value={this.props.goal.fat} /></li>
-            <li className='carbs'><input onChange={this.handleChange} type='number' name='carbs' value={this.props.goal.carbs} /></li>
-            <li className='protein'><input onChange={this.handleChange} type='number' name='protein' value={this.props.goal.protein} /></li>
-            <li className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</li>
-          </ul>
-          <ul className='row highlightRow choiceRow'>
+          <ul className='grid totalsRow'>
             <li className='totals'><span>Totals:</span></li>
             <li className='calories'>{this.autoSum('calories')}</li>
             <li className='fat'>{this.autoSum('fat')}</li>
@@ -90,7 +101,6 @@ class ChoiceContainer extends React.Component {
         {this.props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
         return <CategoryCard category={category} key={category.id} />
         })}
-        </div>
       </div>
     )
   }

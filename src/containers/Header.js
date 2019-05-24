@@ -52,18 +52,23 @@ class Header extends React.Component {
   dayChange = () => {
     console.log('DAY CHANGE@')
   }
+  
+  editDay = () => {
+    console.log('edit day)')
+  }
 
   render(){
     // console.log(this.props.day)
     return(
       <div className='header'>
-        {this.signedIn() ? <div className="third centered">{this.props.user.email}</div> : <div className='twothirds'>Use HAM, no strings attached. Log In or Sign Up to save your goals and foods.</div>}
+        {this.signedIn() ? <div className="third centered email">{this.props.user.email}</div> : <div className='twothirds'>Use HAM free. Log in to record data</div>}
         {this.signedIn() ? 
           <div className='third centered'>
           <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id} class='daySelect'>
             {this.dayOptions()}
           </select>
-          <button onClick={this.props.createDay} className='newday'>New Day</button>
+          <button onClick={this.props.createDay} className='newDay addButton' alt='add new day' ><img src='add-icon-circle.png' className='newDay addButton' alt='add new day'></img></button>
+          <button onClick={this.editDay} className='editDay editButton' alt='edit day' ><img src='edit-icon.png' className='editDay editButton' alt='edit day'></img></button>
           </div>
           : null
         }
