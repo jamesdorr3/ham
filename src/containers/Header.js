@@ -64,7 +64,7 @@ class Header extends React.Component {
         {this.signedIn() ? <div className="third centered email">{this.props.user.email}</div> : <div className='twothirds'>Use HAM free. Log in to record data</div>}
         {this.signedIn() ? 
           <div className='third centered'>
-          <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id} class='daySelect'>
+          <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id} className='daySelect'>
             {this.dayOptions()}
           </select>
           <button onClick={this.props.createDay} className='newDay addButton' alt='add new day' ><img src='add-icon-circle.png' className='newDay addButton' alt='add new day'></img></button>

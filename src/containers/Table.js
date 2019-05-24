@@ -12,6 +12,16 @@ class ChoiceContainer extends React.Component {
     goalChanged: false
   }
 
+  // componentDidMount(){
+  //   window.addEventListener('beforeunload', e => {
+  //     fetch(`${URL}/saveall`, {
+  //       method: 'PATCH',
+  //       headers: HEADERS(),
+  //       body: JSON.stringify(this.props)
+  //     })
+  //   })
+  // }
+
   componentDidMount(){
     window.addEventListener('beforeunload', e => {
       const dayId = this.props.day.id
@@ -60,7 +70,7 @@ class ChoiceContainer extends React.Component {
   }
 
   render(){
-    // console.log(this.props.categories)
+    console.log(this.props)
     return(
       <div className='table'>
           <ul className='grid goals'>
