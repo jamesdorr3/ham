@@ -44,20 +44,28 @@ class SearchContainer extends React.Component {
   render(){
     return(
       <div className='centered row' >
-        <span colSpan='8' >
-          <form onSubmit={this.handleSubmit}>
+        <span >
+          <form onSubmit={this.handleSubmit} className='searchForm'>
             <input type='text' 
               value={this.state.text} 
               onChange={this.handleChange}
-              placeholder='search for any food'
+              placeholder='Search for any food...'
+              className='searchText'
               >
             </input>
-            <input type='submit' value='search' />
-            {this.state.common.length > 0 || this.state.branded.length > 0  || this.state.error ? <button onClick={this.clearResults}>X</button> : null}
-            <button onClick={() => this.setState({addFood: !this.state.addFood})}>{this.state.addFood ? 'Close Form' : 'Add Your Own'}</button>
+            <input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input>
+            <button onClick={() => this.setState({addFood: !this.state.addFood})} className='iconButton'>{this.state.addFood ?
+              <img src='delete-icon-circle.png' alt='close new food form' className='deleteButton' />
+              :
+              <img src='add-icon-circle.png' alt='open new food form' className='addButton'/>
+            }
+            </button>
           </form>
           < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} />
           <ul className='searchResultContainer'>
+            {this.state.common.length > 0 || this.state.branded.length > 0  || this.state.error ? 
+            <button onClick={this.clearResults} className='closeButton'><img src='delete-icon-circle.png' alt='close search results' className='deleteButton' /></button> 
+            : null}
             {this.state.common.map(food => (
               < SearchResultCard 
               categoryId={this.props.categoryId}

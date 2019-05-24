@@ -49,10 +49,14 @@ class ChoiceContainer extends React.Component {
     this.props.changeGoal(e.target.value)
   }
 
-  goalsSelector = (goals) => {
+  goalsSelector = () => {
     return <select value={this.props.goal.id} className='goalsSelect' onChange={this.changeGoal}>
-      {goals.map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
+      {this.props.goals.map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
     </select>
+  }
+
+  addGoal = () => {
+    console.log('add goal')
   }
 
   render(){
@@ -61,7 +65,15 @@ class ChoiceContainer extends React.Component {
       <div className='table'>
           <ul className='grid goals'>
             <li className='goals'><span>Goals:</span></li>
-            <li className='goalsSelect'>{this.goalsSelector(this.props.goals)}<button>+</button></li>
+            <li className='goalsSelect'>
+              {this.goalsSelector()}
+              <button onClick={this.addGoal} className='newGoal addButton' alt='add new goal' >
+                <img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img>
+              </button>
+              <button onClick={this.editGoalName} className='editGoalName editButton' alt='edit goal name' >
+                <img src='edit-icon.png' className='editGoalName editButton' alt='edit goal name'></img>
+              </button>
+            </li>
             <li className='calories'><input onChange={this.handleChange}  type='number' name='calories' value={this.props.goal.calories} /></li>
             <li className='fat'><input onChange={this.handleChange} type='number' name='fat' value={this.props.goal.fat} /></li>
             <li className='carbs'><input onChange={this.handleChange} type='number' name='carbs' value={this.props.goal.carbs} /></li>
