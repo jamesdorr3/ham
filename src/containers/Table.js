@@ -9,7 +9,8 @@ import {updateGoal} from '../actions/goalsActions'
 class ChoiceContainer extends React.Component {
 
   state = {
-    goalChanged: false
+    goalChanged: false,
+    editGoalName: false
   }
 
   // componentDidMount(){
@@ -74,7 +75,7 @@ class ChoiceContainer extends React.Component {
   }
 
   render(){
-    console.log(this.props)
+    // console.log(this.props)
     return(
       <div className='table'>
         {localStorage.getItem('token') ? null : 
@@ -87,7 +88,7 @@ class ChoiceContainer extends React.Component {
           <ul className='grid goals'>
             <li className='goals'><span>Goals:</span></li>
             <li className='goalsSelect'>
-              {this.goalsSelector()}
+              {this.state.editGoalName ? null : this.goalsSelector()}
               <button onClick={this.addGoal} className='newGoal addButton' alt='add new goal' >
                 <img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img>
                 <span className='tooltiptext'>Add New Goal</span>

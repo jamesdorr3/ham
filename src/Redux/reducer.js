@@ -130,6 +130,21 @@ const reducer = (state = initialState, action) => {
         ]
       }
     }
+    case 'EDIT_DAY_NAME': {
+      return {
+        ...state,
+        day: {
+          ...state.day,
+          name: action.payload
+        },
+        days: [
+          ...state.days.filter(x => x.id !== state.day.id),
+        {...state.day,
+          name: action.payload
+        }
+        ]
+      }
+    }
     default: {
       return state
     }

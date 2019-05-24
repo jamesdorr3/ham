@@ -4,10 +4,17 @@ import LoginCard from '../components/LoginCard'
 import SignUpCard from '../components/SignUpCard'
 import {auth, reauth} from '../actions/authActions'
 import {createDay, selectDay} from '../actions/daysActions'
+import {URL, HEADERS} from '../constants.js'
 
 class Header extends React.Component {
 
   state = {
+    username: '',
+    email: '',
+    usernameOrEmail: '',
+    password: '',
+    signup: false,
+    editDayName: false,
     showSignup: false
   }
 
@@ -21,7 +28,9 @@ class Header extends React.Component {
       email: '',
       usernameOrEmail: '',
       password: '',
-      signup: false
+      signup: false,
+      editDayName: false,
+      dayName: ''
     })
     localStorage.removeItem('token');
     this.props.signOut()
@@ -29,7 +38,7 @@ class Header extends React.Component {
 
   toggleSignup = (e) => {
     e.preventDefault()
-    this.setState({showSignup: !this.state.showSignup})
+    this.setState({u: !this.state.showSignup})
   }
 
   signedIn = () => {
@@ -49,8 +58,25 @@ class Header extends React.Component {
     })
   }
   
-  editDay = () => {
-    console.log('edit day)')
+  editDayToggle = () => {
+    this.setState({editDayName: !this.state.editDayName})
+  }
+
+  handleDayNameChange = (e) => {
+    this.setState({dayName: e.target.value})
+  }
+
+  submitDayName = (e) => {
+    e.preventDefault()
+    this.setState({editDayName: false})
+    if (this.state.dayName && this.state.dayName !== this.props.day.name) {
+      this.props.editDayName(this.state.dayName)
+      fetch(`${URL}days/${this.props.day.id}`, {
+        method: 'PATCH',
+        headers: HEADERS(),
+        body: JSON.stringify({name: this.state.dayName})
+      })
+    }
   }
 
   render(){
@@ -60,11 +86,22 @@ class Header extends React.Component {
         {this.signedIn() ? <div className="third centered email">{this.props.user.email}</div> : <div className='twothirds'><p>Use HAM free. Log in to record data</p></div>}
         {this.signedIn() ? 
           <div className='third centered'>
-          <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id} className='daySelect'>
-            {this.dayOptions()}
-          </select>
-          <button onClick={this.props.createDay} className='newDay addButton' alt='add new day' ><span className='tooltiptext'>Add New Day</span><img src='add-icon-circle.png' className='newDay addButton' alt='add new day'></img></button>
-          <button onClick={this.editDay} className='editDay editButton' alt='edit day' ><span className='tooltiptext'>Edit Day Name</span><img src='edit-icon.png' className='editDay editButton' alt='edit day'></img></button>
+            {this.state.editDayName 
+              ? 
+              <form onSubmit={this.submitDayName}>
+                <input type='text' defaultValue={this.props.day.name} value={this.state.dayName} onChange={this.handleDayNameChange}></input>
+                <input type='submit'></input>
+              </form>
+              : 
+              <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id} className='daySelect'>
+                {this.dayOptions()}
+              </select>
+            }
+            <button onClick={this.props.createDay} className='newDay addButton' alt='add new day' ><span className='tooltiptext'>Add New Day</span><img src='add-icon-circle.png' className='newDay addButton' alt='add new day'></img></button>
+            <button onClick={this.editDayToggle} className='editDay editButton' alt='edit day' >
+              <span className='tooltiptext'>{this.state.editDayName ? 'Close Edit Name' : 'Edit Day Name'}</span>
+              <img src={this.state.editDayName ? 'delete-icon-circle.png' : 'edit-icon.png'} className='editDay editButton' alt='edit day' />
+            </button>
           </div>
           : null
         }
@@ -89,7 +126,8 @@ const mapDispatchToProps = dispatch => {
     signOut: () => dispatch({ type: 'SIGN_OUT'}),
     reauth: () => dispatch(reauth()),
     createDay: () => dispatch(createDay()),
-    selectDay: (info) => dispatch(selectDay(info))
+    selectDay: (info) => dispatch(selectDay(info)),
+    editDayName: (dayName) => dispatch({type: 'EDIT_DAY_NAME', payload: dayName})
   }
 }
 
