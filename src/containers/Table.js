@@ -69,19 +69,32 @@ class ChoiceContainer extends React.Component {
     console.log('add goal')
   }
 
+  editGoalName = () => {
+    console.log('edit goal')
+  }
+
   render(){
     console.log(this.props)
     return(
       <div className='table'>
+        {localStorage.getItem('token') ? null : 
+          <div className='welcome'>
+          <h1>WELCOME TO HAM</h1>
+          <h2>a simple macronutrient tracker</h2>
+          <hr/>
+          </div>
+        }
           <ul className='grid goals'>
             <li className='goals'><span>Goals:</span></li>
             <li className='goalsSelect'>
               {this.goalsSelector()}
               <button onClick={this.addGoal} className='newGoal addButton' alt='add new goal' >
                 <img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img>
+                <span className='tooltiptext'>Add New Goal</span>
               </button>
               <button onClick={this.editGoalName} className='editGoalName editButton' alt='edit goal name' >
                 <img src='edit-icon.png' className='editGoalName editButton' alt='edit goal name'></img>
+                <span className='tooltiptext'>Edit Goal Name</span>
               </button>
             </li>
             <li className='calories'><input onChange={this.handleChange}  type='number' name='calories' value={this.props.goal.calories} /></li>

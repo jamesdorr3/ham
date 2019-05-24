@@ -55,17 +55,24 @@ class SearchContainer extends React.Component {
             >
           </input>
           <input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input>
+          {/* <span className='tooltip'><input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input><span className='tooltiptext'>Search</span></span> */}
           <button onClick={() => this.setState({addFood: !this.state.addFood})} className='iconButton'>{this.state.addFood ?
+            <>
             <img src='delete-icon-circle.png' alt='close new food form' className='deleteButton' />
+            <span className='tooltiptext'>Close Form</span>
+            </>
             :
+            <>
             <img src='add-icon-circle.png' alt='open new food form' className='addButton'/>
+            <span className='tooltiptext'>Add Your Own</span>
+            </>
           }
           </button>
         </form>
         < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} />
         <ul className='searchResultContainer'>
           {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
-          <button onClick={this.clearResults} className='closeButton'><img src='delete-icon-circle.png' alt='close search results' className='deleteButton' /></button> 
+          <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='delete-icon-circle.png' alt='close search results' className='deleteButton' /></button> 
           : null}
           {this.state.internal.map(food => (
             < InternalSearchResultCard 

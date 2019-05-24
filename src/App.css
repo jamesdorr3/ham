@@ -42,14 +42,14 @@ code {
 
 .twothirds {
   width: 66%;
-  margin-top: 20px;
-  text-align: center;
+  text-align: left;
   white-space: wrap;
   text-transform: uppercase;
   font-weight: bold; 
   color: rgb(240, 240, 240); 
-  font-size: 18px
+  font-size: 18px;
 }
+.twothirds p {padding-left: 5%}
 
 .header div input[type='text'], .header div input[type='password'] {width: 100px;}
 
@@ -85,6 +85,8 @@ button.centered{margin-left: 33%}
   padding: 10px;
 }
 
+.welcome h1, .welcome h2{text-align: right; margin-right: 5%}
+
 .grid {display: grid; grid-template-columns: 30% 1fr 15% repeat(4, 1fr) 5%; margin: 5px 0px; text-align: center;}
 li {list-style: none; padding: 0 0 0 4px}
 ul {padding: 0 0 0 5px}
@@ -107,9 +109,9 @@ ul {padding: 0 0 0 5px}
 .key, .goals, .totalsRow {font-weight: bold}
 .choice li input {width: 100%}
 .category{border-radius: 5px; padding: 7px 0 7px 0 }
-.category:nth-child(even){background: rgb(240, 160, 120)}
+.category:nth-child(odd){background: rgb(240, 160, 120)}
 /* .category:nth-child(even) .choice {background: lightgray} */
-.category:nth-child(odd){background: rgb(240, 240, 240)}
+.category:nth-child(even){background: rgb(240, 240, 240)}
 /* .category:nth-child(odd) .choice {background: rgb(240, 160, 120)} */
 .choice {background: rgba(255, 255, 255, 0.205); border-radius: 25px}
 .choice:hover {transform: scale(1.01); box-shadow: 0px 1px 5px rgb(90, 90, 90)}
@@ -123,6 +125,22 @@ button.deleteButton{background: none; border: none; margin: 0; padding: 0}
 img.deleteButton{position: relative; height: 15px; bottom: -3px; padding: 0 5px;}
 button.iconButton{background: none; border: none; margin: 0; padding: 0}
 button.closeButton{background: none; border: none; margin: 0; padding: 5px 0 0 0; margin-left: 90%}
+img:hover {cursor: pointer}
+button, .tooltip {position: relative}
+button:focus, .tooltip:focus {outline-width: 0px}
+.tooltiptext{position: absolute; background-color: lime; visibility: hidden; 
+  width: 80px; white-space: nowrap; padding: 3px 5px; border-radius: 5px; z-index: 3}
+button:hover .tooltiptext, .tooltip:hover .tooltiptext {visibility: visible; bottom: -30px; right: -29px}
+button .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;  /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent lime transparent;
+}
 /* TABLE */
 /* FOOD FORM */
 

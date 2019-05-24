@@ -48,10 +48,6 @@ class Header extends React.Component {
       return <option value={day.id} key={day.id} >{this.prettyDayDisplay(day)}</option>
     })
   }
-
-  dayChange = () => {
-    console.log('DAY CHANGE@')
-  }
   
   editDay = () => {
     console.log('edit day)')
@@ -61,14 +57,14 @@ class Header extends React.Component {
     // console.log(this.props.day)
     return(
       <div className='header'>
-        {this.signedIn() ? <div className="third centered email">{this.props.user.email}</div> : <div className='twothirds'>Use HAM free. Log in to record data</div>}
+        {this.signedIn() ? <div className="third centered email">{this.props.user.email}</div> : <div className='twothirds'><p>Use HAM free. Log in to record data</p></div>}
         {this.signedIn() ? 
           <div className='third centered'>
           <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id} className='daySelect'>
             {this.dayOptions()}
           </select>
-          <button onClick={this.props.createDay} className='newDay addButton' alt='add new day' ><img src='add-icon-circle.png' className='newDay addButton' alt='add new day'></img></button>
-          <button onClick={this.editDay} className='editDay editButton' alt='edit day' ><img src='edit-icon.png' className='editDay editButton' alt='edit day'></img></button>
+          <button onClick={this.props.createDay} className='newDay addButton' alt='add new day' ><span className='tooltiptext'>Add New Day</span><img src='add-icon-circle.png' className='newDay addButton' alt='add new day'></img></button>
+          <button onClick={this.editDay} className='editDay editButton' alt='edit day' ><span className='tooltiptext'>Edit Day Name</span><img src='edit-icon.png' className='editDay editButton' alt='edit day'></img></button>
           </div>
           : null
         }
