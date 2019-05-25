@@ -10,16 +10,13 @@ class SearchResultCard extends React.Component {
       `id=${this.props.food.nix_item_id}&categoryId=${this.props.categoryId}`: 
       `name=${this.props.food.food_name}&categoryId=${this.props.categoryId}`
     this.props.selectSearchResult(props)
-    // fetch(`${URL}search?${props}`, {headers: HEADERS()})
-    // .then(r => r.json())
-    // .then(choice => this.props.addChoice(choice))
   }
 
   render(){
     // console.log(this.props)
     return(
       <li className='searchResult'>
-        <button onClick={this.handleAddChoice}>+</button>
+        <button onClick={this.handleAddChoice} className='addButton'><img src='add-icon-circle.png' alt='choose search results' className='addButton' /></button>
         {this.props.food.food_name}{this.props.food.brand_name ? `- ${this.props.food.brand_name}` : null}
       </li>
     )
@@ -28,7 +25,6 @@ class SearchResultCard extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addChoice: (choice) => dispatch({ type: 'ADD_CHOICES', payload: [choice]}),
     selectSearchResult: prop => dispatch(selectSearchResult(prop))
   }
 }

@@ -61,37 +61,32 @@ class MakeFoodCard extends React.Component {
 
   render(){
     return(
-      <form style={{display: this.props.addFood ? 'block' : 'none'}} onSubmit={this.handleSubmit}>
-      <input type='text' value={this.state.name} onChange={this.handleChange} name='name' placeholder='Food name' /> by 
-      <input type='text' value={this.state.brand} onChange={this.handleChange} name='brand' placeholder='food brand (optional)' /> has a serving size of
-      <input type='number' value={this.state.serving_unit_amount} onChange={this.handleChange} name='serving_unit_amount' placeholder='X' />
-      <select name='serving_unit_name' value={this.state.serving_unit_name} onChange={this.handleChange} placeholder="units">
-        <option value='unit' name='unit' >unit</option>
-        <option value='package' name='package' >package</option>
-        <option value='piece' name='piece' >piece</option>
-      </select> which equals
-      <input type='number' value={this.state.serving_grams} onChange={this.handleChange} name='serving_grams' placeholder='X' /> grams
-      <br/>
-      Per serving, it has
-      <input type='number' value={this.state.calories} onChange={this.handleChange} name='calories' placeholder='X' />calories,
-      <input type='number' value={this.state.fat} onChange={this.handleChange} name='fat' placeholder='X' />fat,
-      <input type='number' value={this.state.carbs} onChange={this.handleChange} name='carbs' placeholder='X' />carbs, and
-      <input type='number' value={this.state.protein} onChange={this.handleChange} name='protein' placeholder='X' /> protein
-      <br/>
-      (Optional) and
-      <input type='number' value={this.state.cholesterol} onChange={this.handleChange} name='cholesterol' placeholder='X' />cholesterol,
-      <input type='number' value={this.state.dietary_fiber} onChange={this.handleChange} name='dietary_fiber' placeholder='X' />dietary_fiber,
-      <input type='number' value={this.state.potassium} onChange={this.handleChange} name='potassium' placeholder='X' />potassium,
-      <br/>
-      <input type='number' value={this.state.saturated_fat} onChange={this.handleChange} name='saturated_fat' placeholder='X' />saturated_fat,
-      <input type='number' value={this.state.sodium} onChange={this.handleChange} name='sodium' placeholder='X' />sodium, and
-      <input type='number' value={this.state.sugars} onChange={this.handleChange} name='sugars' placeholder='X' />sugars
-      <br/>
-      (Optional) - the whole package is this many
-      <input type='number' value={this.state.unit_size} onChange={this.handleChange} name='unit_size' placeholder='grams' />, and the UPC is
-      <input type='number' value={this.state.upc} onChange={this.handleChange} name='upc' placeholder='UPC' />
-      <input type='submit' />
-    </form>
+      <form style={{display: this.props.addFood ? 'block' : 'none'}} onSubmit={this.handleSubmit} className='foodForm'>
+        <ul className='newFoodGrid'>
+          <input type='text' value={this.state.name} onChange={this.handleChange} name='name' placeholder='Food name' />
+          <input type='text' value={this.state.brand} onChange={this.handleChange} name='brand' placeholder='food brand (optional)' />
+          <input type='number' value={this.state.serving_unit_amount} onChange={this.handleChange} name='serving_unit_amount' placeholder='serving amount' />
+          <select name='serving_unit_name' value={this.state.serving_unit_name} onChange={this.handleChange} placeholder="unit">
+              {['unit','package','piece'].map(measure => {
+                return <option value={measure} name='measure' >{measure} </option>}
+              )}
+          </select>
+          <input type='number' value={this.state.serving_grams} onChange={this.handleChange} name='serving_grams' placeholder='grams/serving' />
+          <input type='number' value={this.state.calories} onChange={this.handleChange} name='calories' placeholder='calories' />
+          <input type='number' value={this.state.fat} onChange={this.handleChange} name='fat' placeholder='fat' />
+          <input type='number' value={this.state.carbs} onChange={this.handleChange} name='carbs' placeholder='carbs' />
+          <input type='number' value={this.state.protein} onChange={this.handleChange} name='protein' placeholder='protein' />
+          <input type='number' value={this.state.cholesterol} onChange={this.handleChange} name='cholesterol' placeholder='cholesterol' />
+          <input type='number' value={this.state.dietary_fiber} onChange={this.handleChange} name='dietary_fiber' placeholder='dietary fiber' />
+          <input type='number' value={this.state.potassium} onChange={this.handleChange} name='potassium' placeholder='potassium' />
+          <input type='number' value={this.state.saturated_fat} onChange={this.handleChange} name='saturated_fat' placeholder='saturated fat' />
+          <input type='number' value={this.state.sodium} onChange={this.handleChange} name='sodium' placeholder='sodium' />
+          <input type='number' value={this.state.sugars} onChange={this.handleChange} name='sugars' placeholder='sugars' />
+          <input type='number' value={this.state.unit_size} onChange={this.handleChange} name='unit_size' placeholder='unit size' />
+          <input type='number' value={this.state.upc} onChange={this.handleChange} name='upc' placeholder='UPC code' />
+          <input type='submit' />
+        </ul>
+      </form>
     )
   }
 }
