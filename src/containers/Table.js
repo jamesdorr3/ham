@@ -10,30 +10,36 @@ class ChoiceContainer extends React.Component {
 
   state = {
     goalChanged: false,
-    editGoalName: false
+    showEditGoalForm: false,
+    editGoalName: null
+  }
+
+  componentDidMount(){
+    window.addEventListener('beforeunload', e => {
+      fetch(`${URL}/saveall`, {
+        method: 'PATCH',
+        headers: HEADERS(),
+        body: JSON.stringify(this.props)
+      })
+    })
   }
 
   // componentDidMount(){
   //   window.addEventListener('beforeunload', e => {
-  //     fetch(`${URL}/saveall`, {
+  //     const dayId = this.props.day.id
+  //     const goalId = this.props.goal.id
+  //     fetch(`${URL}days/${dayId}`, {
   //       method: 'PATCH',
   //       headers: HEADERS(),
-  //       body: JSON.stringify(this.props)
+  //       body: JSON.stringify({goal_id: goalId})
   //     })
   //   })
+  //   document.addEventListener('keydown', e => {
+  //     if (e.metaKey && e.code === 'KeyS') {
+  //       e.preventDefault()
+  //     }
+  //   } )
   // }
-
-  componentDidMount(){
-    window.addEventListener('beforeunload', e => {
-      const dayId = this.props.day.id
-      const goalId = this.props.goal.id
-      fetch(`${URL}days/${dayId}`, {
-        method: 'PATCH',
-        headers: HEADERS(),
-        body: JSON.stringify({goal_id: goalId})
-      })
-    })
-  }
 
   autoSum = (macro) => {
     let sum = 0
@@ -66,12 +72,16 @@ class ChoiceContainer extends React.Component {
     </select>
   }
 
-  addGoal = () => {
-    console.log('add goal')
-  }
+  addGoal = () => {console.log('add goal')}
 
-  editGoalName = () => {
-    console.log('edit goal')
+  toggleEditGoalForm = () => {this.setState({showEditGoalForm: !this.state.showEditGoalForm})}
+
+  editGoalName = (e) => {
+    e.preventDefault()
+    this.setState({showEditGoalForm: false, editGoalName: null})
+    if (this.state.editGoalName && this.state.editGoalName !== this.props.goal.name){
+      console.log(this.state.editGoalName)
+    }
   }
 
   render(){
@@ -88,12 +98,19 @@ class ChoiceContainer extends React.Component {
           <ul className='grid goals'>
             <li className='goals'><span>Goals:</span></li>
             <li className='goalsSelect'>
-              {this.state.editGoalName ? null : this.goalsSelector()}
+              {this.state.showEditGoalForm 
+                ? 
+                <form onSubmit={this.editGoalName}>
+                  <input type='text' defaultValue={this.props.goal.name} placeholder='Edit Goal Name' value={this.state.editGoalName} onChange={(e) => this.setState({editGoalName: e.target.value})} />
+                  <input type='submit' value='Add New Goal' />
+                </form>
+                : 
+                this.goalsSelector()}
               <button onClick={this.addGoal} className='newGoal addButton' alt='add new goal' >
                 <img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img>
                 <span className='tooltiptext'>Add New Goal</span>
               </button>
-              <button onClick={this.editGoalName} className='editGoalName editButton' alt='edit goal name' >
+              <button onClick={this.toggleEditGoalForm} className='editGoalName editButton' alt='edit goal name' >
                 <img src='edit-icon.png' className='editGoalName editButton' alt='edit goal name'></img>
                 <span className='tooltiptext'>Edit Goal Name</span>
               </button>

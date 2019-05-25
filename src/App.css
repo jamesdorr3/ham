@@ -32,8 +32,7 @@ code {
 }
 
 .header div{
-  display: inline;
-  float: left
+  float: left;
 }
 .third {
   width: 33%;
@@ -104,7 +103,7 @@ ul {padding: 0 0 0 5px}
 .deleteColumn {grid-column: 8}
 .grandTotals, .goals {grid-column: 2}
 .goalsSelect, .totals {grid-column: 3}
-.goals li input {width: 100%}
+.goals li input {width: 90%}
 .key li {text-transform: uppercase; overflow: hidden}
 .key, .goals, .totalsRow {font-weight: bold}
 .choice li input {width: 100%}

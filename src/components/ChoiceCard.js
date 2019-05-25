@@ -10,11 +10,11 @@ class ChoiceCard extends React.Component {
     measure: this.props.choiceFood.choice.measure
   }
   
-  componentDidMount(){
-    window.addEventListener('beforeunload', e => {
-      this.updateInDB()
-    })
-  }
+  // componentDidMount(){
+  //   window.addEventListener('beforeunload', e => {
+  //     this.updateInDB()
+  //   })
+  // }
   
   autoUpdateMacro = macro => {
     const choiceFood = this.props.choiceFood

@@ -68,7 +68,7 @@ class Header extends React.Component {
 
   submitDayName = (e) => {
     e.preventDefault()
-    this.setState({editDayName: false})
+    this.setState({editDayName: false, dayName: null})
     if (this.state.dayName && this.state.dayName !== this.props.day.name) {
       this.props.editDayName(this.state.dayName)
       fetch(`${URL}days/${this.props.day.id}`, {
@@ -89,7 +89,7 @@ class Header extends React.Component {
             {this.state.editDayName 
               ? 
               <form onSubmit={this.submitDayName}>
-                <input type='text' defaultValue={this.props.day.name} value={this.state.dayName} onChange={this.handleDayNameChange}></input>
+                <input type='text' defaultValue={this.props.day.name} value={this.state.dayName} onChange={this.handleDayNameChange}  placeholder='Name This Day' ></input>
                 <input type='submit'></input>
               </form>
               : 
