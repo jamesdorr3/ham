@@ -49,6 +49,7 @@ code {
   font-size: 18px;
 }
 .twothirds p {padding-left: 5%}
+select.daySelect {max-width: 100%}
 
 .header div input[type='text'], .header div input[type='password'] {width: 100px;}
 
@@ -196,10 +197,9 @@ button .tooltiptext::after {
   color: rgb(245, 245, 245)
 }
 
-.daySelect, .goalsSelect {
-  width: auto
-}
-
-.newday {
-  width: auto
-}
+.daySelect, .goalsSelect {width: auto}
+.goalsSelect select {width: 90%}
+.goalsSelect form {position: relative}
+.goalsSelect input[type='text'] {width: 73%}
+.goalsSelect input[type='submit'] {width: 20%; padding: 1.5px 0; margin: 0px}
+.newday {width: auto}

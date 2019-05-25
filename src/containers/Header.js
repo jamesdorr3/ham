@@ -5,6 +5,7 @@ import SignUpCard from '../components/SignUpCard'
 import {auth, reauth} from '../actions/authActions'
 import {createDay, selectDay} from '../actions/daysActions'
 import {URL, HEADERS} from '../constants.js'
+import {saveAll} from '../actions/saveAllAction'
 
 class Header extends React.Component {
 
@@ -38,7 +39,7 @@ class Header extends React.Component {
 
   toggleSignup = (e) => {
     e.preventDefault()
-    this.setState({u: !this.state.showSignup})
+    this.setState({showSignup: !this.state.showSignup})
   }
 
   signedIn = () => {
@@ -79,6 +80,11 @@ class Header extends React.Component {
     }
   }
 
+  dayChangeHandler = e => {
+    this.props.saveAll(this.props) // doesn't work?
+    this.props.selectDay(e)
+  }
+
   render(){
     // console.log(this.props.day)
     return(
@@ -93,7 +99,7 @@ class Header extends React.Component {
                 <input type='submit'></input>
               </form>
               : 
-              <select onChange={(e) =>this.props.selectDay(e)} value={this.props.day.id} className='daySelect'>
+              <select onChange={this.dayChangeHandler} value={this.props.day.id} className='daySelect'>
                 {this.dayOptions()}
               </select>
             }
@@ -127,7 +133,8 @@ const mapDispatchToProps = dispatch => {
     reauth: () => dispatch(reauth()),
     createDay: () => dispatch(createDay()),
     selectDay: (info) => dispatch(selectDay(info)),
-    editDayName: (dayName) => dispatch({type: 'EDIT_DAY_NAME', payload: dayName})
+    editDayName: (dayName) => dispatch({type: 'EDIT_DAY_NAME', payload: dayName}),
+    saveAll: (state) => dispatch(saveAll(state))
   }
 }
 

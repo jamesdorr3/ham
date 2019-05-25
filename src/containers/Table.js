@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {Droppable} from 'react-beautiful-dnd'
 import CategoryCard from '../components/CategoryCard'
 import {updateGoal} from '../actions/goalsActions'
+import {saveAll} from '../actions/saveAllAction'
 
 class ChoiceContainer extends React.Component {
 
@@ -16,30 +17,15 @@ class ChoiceContainer extends React.Component {
 
   componentDidMount(){
     window.addEventListener('beforeunload', e => {
-      fetch(`${URL}/saveall`, {
-        method: 'PATCH',
-        headers: HEADERS(),
-        body: JSON.stringify(this.props)
-      })
+      this.props.saveAll(this.props)
+    })
+    document.addEventListener('keydown', e => {
+      if (e.metaKey && e.code === 'KeyS') {
+        e.preventDefault()
+        this.props.saveAll(this.props)
+      }
     })
   }
-
-  // componentDidMount(){
-  //   window.addEventListener('beforeunload', e => {
-  //     const dayId = this.props.day.id
-  //     const goalId = this.props.goal.id
-  //     fetch(`${URL}days/${dayId}`, {
-  //       method: 'PATCH',
-  //       headers: HEADERS(),
-  //       body: JSON.stringify({goal_id: goalId})
-  //     })
-  //   })
-  //   document.addEventListener('keydown', e => {
-  //     if (e.metaKey && e.code === 'KeyS') {
-  //       e.preventDefault()
-  //     }
-  //   } )
-  // }
 
   autoSum = (macro) => {
     let sum = 0
@@ -80,12 +66,12 @@ class ChoiceContainer extends React.Component {
     e.preventDefault()
     this.setState({showEditGoalForm: false, editGoalName: null})
     if (this.state.editGoalName && this.state.editGoalName !== this.props.goal.name){
-      console.log(this.state.editGoalName)
+      this.props.editGoal({name: this.state.editGoalName})
     }
   }
 
   render(){
-    // console.log(this.props)
+    console.log(this.props)
     return(
       <div className='table'>
         {localStorage.getItem('token') ? null : 
@@ -102,17 +88,28 @@ class ChoiceContainer extends React.Component {
                 ? 
                 <form onSubmit={this.editGoalName}>
                   <input type='text' defaultValue={this.props.goal.name} placeholder='Edit Goal Name' value={this.state.editGoalName} onChange={(e) => this.setState({editGoalName: e.target.value})} />
-                  <input type='submit' value='Add New Goal' />
+                  <input type='submit' value='✔︎' />
                 </form>
                 : 
                 this.goalsSelector()}
+                {/* <br/> */}
               <button onClick={this.addGoal} className='newGoal addButton' alt='add new goal' >
                 <img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img>
                 <span className='tooltiptext'>Add New Goal</span>
               </button>
               <button onClick={this.toggleEditGoalForm} className='editGoalName editButton' alt='edit goal name' >
-                <img src='edit-icon.png' className='editGoalName editButton' alt='edit goal name'></img>
-                <span className='tooltiptext'>Edit Goal Name</span>
+                {this.state.showEditGoalForm
+                ?
+                <>
+                <img src='delete-icon-circle.png' className='closeEditForm deleteButton' alt='Close Edit Form'></img>
+                <span className='tooltiptext'>Close Edit Form</span>
+                </>
+                :
+                <>
+                <img src='edit-icon.png' className='editGoalName editButton' alt='Edit Goal Name'></img>
+                <span className='tooltiptext'>EditGoalName</span>
+                </>
+                }
               </button>
             </li>
             <li className='calories'><input onChange={this.handleChange}  type='number' name='calories' value={this.props.goal.calories} /></li>
@@ -158,7 +155,9 @@ const mapDispatchToProps = dispatch => {
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
     editGoal: (info) => dispatch({ type: 'EDIT_GOAL', payload: info}),
     changeGoal: (id) => dispatch({ type: 'CHANGE_GOAL', payload: id}),
-    updateGoal: (goal) => dispatch(updateGoal(goal))
+    updateGoal: (goal) => dispatch(updateGoal(goal)),
+    saveAll: (state) => dispatch(saveAll(state)),
+    editGoalName: (name) => dispatch({ type: 'EDIT_GOAL_NAME', payload: name})
   }
 }
 

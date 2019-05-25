@@ -52,7 +52,14 @@ const reducer = (state = initialState, action) => {
         goal: {
           ...state.goal,
           ...action.payload
-        }
+        },
+        goals: [
+          ...state.goals.filter(x => x.id !== state.goal.id),
+          {
+            ...state.goal,
+            ...action.payload
+          }
+        ]
       }
     }
     case 'CHANGE_GOAL': {
