@@ -15,6 +15,7 @@ class LoginCard extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     if (this.state.password) {
+      this.props.startLoading()
       fetch(`${URL}/auth`, {
         method: 'POST',
         headers: HEADERS(),
@@ -28,6 +29,7 @@ class LoginCard extends React.Component {
       .then(r => r.json())
       .then(resp => {
         // debugger
+        this.props.stopLoading()
         if (resp.user && resp.jwt) {
           localStorage.setItem('token', resp.jwt)
           this.props.selectUser(resp)
@@ -60,7 +62,9 @@ class LoginCard extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user})
+    selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
+    startLoading: () => dispatch({type: 'START_LOADING'}),
+    stopLoading: () => dispatch({type: 'STOP_LOADING'})
   }
 }
 

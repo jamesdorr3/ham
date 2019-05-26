@@ -3,6 +3,7 @@ import SearchResultCard from '../components/SearchResultCard'
 import InternalSearchResultCard from '../components/InternalSearchResultCard'
 import {URL, HEADERS} from '../constants.js'
 import MakeFoodCard from '../components/MakeFoodCard'
+import {connect} from 'react-redux'
 
 class SearchContainer extends React.Component {
 
@@ -21,9 +22,11 @@ class SearchContainer extends React.Component {
     e.preventDefault()
     if (this.state.text){
       // console.log('submit')
+      this.props.startLoading()
       fetch(`${URL}search/many?q=${this.state.text}`, {headers: HEADERS()})
       .then(r => r.json())
       .then(r => {
+        this.props.stopLoading()
         if (r.common.length > 0 || r.branded.length > 0 || r.internal.length > 0) {
           this.setState({branded: r.branded, common: r.common, internal: r.internal})
         }else{
@@ -109,4 +112,11 @@ class SearchContainer extends React.Component {
   }
 }
 
-export default SearchContainer
+const mapDispatchToProps = dispatch => {
+  return {
+    startLoading: () => dispatch({type: 'START_LOADING'}),
+    stopLoading: () => dispatch({type: 'STOP_LOADING'})
+  }
+}
+
+export default connect(null, mapDispatchToProps)(SearchContainer)

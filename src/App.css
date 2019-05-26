@@ -40,7 +40,8 @@ code {
   margin-top: 15px
 }
 
-.third form input[type='submit'] {background: lime; }
+.dayNameForm {background: lime; position: relative}
+.dayNameForm input[type='submit']{background: pink; position: relative; width: 10%}
 
 .twothirds {
   width: 66%;
@@ -209,3 +210,22 @@ button .tooltiptext::after {
 .goalsSelect input[type='text'] {width: 73%}
 .goalsSelect input[type='submit'] {width: 20%; padding: 1.5px 0; margin: 0px}
 .newday {width: auto}
+
+/* LOADING  */
+.loading {
+  position: fixed;
+  margin-left: 15%;
+  bottom: 15%;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid rgb(200, 100, 50); /* Blue */
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* LOADING  */

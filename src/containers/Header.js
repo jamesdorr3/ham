@@ -72,11 +72,13 @@ class Header extends React.Component {
     this.setState({editDayName: false, dayName: null})
     if (this.state.dayName && this.state.dayName !== this.props.day.name) {
       this.props.editDayName(this.state.dayName)
+      this.props.startLoading()
       fetch(`${URL}days/${this.props.day.id}`, {
         method: 'PATCH',
         headers: HEADERS(),
         body: JSON.stringify({name: this.state.dayName})
       })
+      .then(r => this.props.stopLoading())
     }
   }
 
@@ -94,7 +96,7 @@ class Header extends React.Component {
           <div className='third centered'>
             {this.state.editDayName 
               ?
-              <form onSubmit={this.submitDayName}>
+              <form onSubmit={this.submitDayName} className='dayNameForm'>
                 <input type='text' defaultValue={this.props.day.name} value={this.state.dayName} onChange={this.handleDayNameChange}  placeholder='Name This Day' ></input>
                 <input type='submit' value='✔︎' />
                 <button onClick={this.editDayToggle} className='deleteButton closeEditDay' alt='Close Edit Form' >
@@ -140,7 +142,9 @@ const mapDispatchToProps = dispatch => {
     createDay: () => dispatch(createDay()),
     selectDay: (info) => dispatch(selectDay(info)),
     editDayName: (dayName) => dispatch({type: 'EDIT_DAY_NAME', payload: dayName}),
-    saveAll: (state) => dispatch(saveAll(state))
+    saveAll: (state) => dispatch(saveAll(state)),
+    startLoading: () => dispatch({type: 'START_LOADING'}),
+    stopLoading: () => dispatch({type: 'STOP_LOADING'})
   }
 }
 

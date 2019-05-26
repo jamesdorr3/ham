@@ -36,10 +36,19 @@ class App extends React.Component {
         <DragDropContext onDragEnd={this.onDragEnd}>
           < Table />
         </DragDropContext>
+        <div className='loading'
+          style={{display: this.props.loading ? 'block' : 'none'}}
+        ></div>
         < Footer />
         {/* < SearchContainer /> */}
       </div>
     );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    loading: state.loading
   }
 }
 
@@ -51,4 +60,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

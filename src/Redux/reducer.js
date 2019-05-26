@@ -10,7 +10,8 @@ const initialState = {
   goal: {},
   goals: [],
   user: {},
-  error: {}
+  error: {},
+  loading: true
 }
 
 
@@ -160,6 +161,18 @@ const reducer = (state = initialState, action) => {
           ...state.goals,
           action.payload
         ]
+      }
+    }
+    case 'START_LOADING': {
+      return {
+        ...state,
+        loading: true
+      }
+    }
+    case 'STOP_LOADING': {
+      return {
+        ...state,
+        loading: false
       }
     }
     default: {
