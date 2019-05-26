@@ -33,7 +33,7 @@ class CategoryCard extends React.Component {
           {...provided.droppableProps}
         >
             <li className='name categoryName' >{this.props.category.name}</li>
-            <li className='totals'>Totals: </li>
+            <li className='totals'>Subtotals: </li>
             <li className='calories'>{this.autoSum('calories')}</li>
             <li className='fat'>{this.autoSum('fat')}</li>
             <li className='carbs'>{this.autoSum('carbs')}</li>
