@@ -152,6 +152,16 @@ const reducer = (state = initialState, action) => {
         ]
       }
     }
+    case 'ADD_GOAL': {
+      return {
+        ...state,
+        goal: action.payload,
+        goals: [
+          ...state.goals,
+          action.payload
+        ]
+      }
+    }
     default: {
       return state
     }

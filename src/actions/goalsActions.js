@@ -13,3 +13,15 @@ export const updateGoal = (goal) => {
     // })
   }
 }
+
+export const createGoal = (goal) => {
+  return (dispatch) => {
+    return fetch(`${URL}/goals`, {
+      method: 'POST', 
+      headers: HEADERS(),
+      body: JSON.stringify({goal})
+    })
+    .then(r => r.json())
+    .then(goal => dispatch({type: 'ADD_GOAL', payload: goal}))
+  }
+}

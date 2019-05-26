@@ -5,14 +5,20 @@ import {connect} from 'react-redux'
 import {Droppable} from 'react-beautiful-dnd'
 import CategoryCard from '../components/CategoryCard'
 import {updateGoal} from '../actions/goalsActions'
+import {createGoal} from '../actions/goalsActions'
 import {saveAll} from '../actions/saveAllAction'
 
 class ChoiceContainer extends React.Component {
 
   state = {
-    goalChanged: false,
     showEditGoalForm: false,
-    editGoalName: null
+    editGoalName: null,
+    showNewGoalForm: false,
+    newGoalName: null,
+    calories: 0,
+    fat: 0,
+    carbs: 0,
+    protein: 0
   }
 
   componentDidMount(){
@@ -37,15 +43,18 @@ class ChoiceContainer extends React.Component {
     return sum
   }
 
-  handleChange = (e) => {
+  handleChangeMacros = (e) => {
     this.props.editGoal({[e.target.name]: e.target.value})
-    this.setState({goalChanged: true})
   }
 
-  saveGoals = () => {
-    this.setState({goalChanged: false})
-    this.props.updateGoal(this.props.goal)
+  handleNewGoalMacros = e => {
+    this.setState({[e.target.name]: e.target.value})
   }
+
+  // saveGoals = () => {
+  //   this.setState({goalChanged: false})
+  //   this.props.updateGoal(this.props.goal)
+  // }
 
   changeGoal = (e) => {
     this.setState({goalChanged: true})
@@ -58,20 +67,38 @@ class ChoiceContainer extends React.Component {
     </select>
   }
 
-  addGoal = () => {console.log('add goal')}
-
-  toggleEditGoalForm = () => {this.setState({showEditGoalForm: !this.state.showEditGoalForm})}
-
-  editGoalName = (e) => {
+  addOrEditGoal = e => {
     e.preventDefault()
-    this.setState({showEditGoalForm: false, editGoalName: null})
+    if (this.state.showEditGoalForm) {
+      this.editGoalName()
+    }
+    else if (this.state.showNewGoalForm) {
+      this.props.createGoal({
+        ...this.state,
+        user_id: this.props.user.id,
+        name: this.state.newGoalName
+      })
+    }
+    this.setState({
+      showEditGoalForm: false,
+      editGoalName: null,
+      showNewGoalForm: false,
+      newGoalName: null,
+      calories: 0,
+      fat: 0,
+      carbs: 0,
+      protein: 0
+    })
+  }
+
+  editGoalName = () => {
     if (this.state.editGoalName && this.state.editGoalName !== this.props.goal.name){
       this.props.editGoal({name: this.state.editGoalName})
     }
   }
 
   render(){
-    console.log(this.props)
+    // console.log(this.props)
     return(
       <div className='table'>
         {localStorage.getItem('token') ? null : 
@@ -84,39 +111,64 @@ class ChoiceContainer extends React.Component {
           <ul className='grid goals'>
             <li className='goals'><span>Goals:</span></li>
             <li className='goalsSelect'>
-              {this.state.showEditGoalForm 
+              {this.state.showEditGoalForm || this.state.showNewGoalForm
                 ? 
-                <form onSubmit={this.editGoalName}>
-                  <input type='text' defaultValue={this.props.goal.name} placeholder='Edit Goal Name' value={this.state.editGoalName} onChange={(e) => this.setState({editGoalName: e.target.value})} />
+                <>
+                <form onSubmit={this.addOrEditGoal}>
+                  {this.state.showEditGoalForm ? 
+                  <input type='text'
+                  defaultValue={this.props.goal.name} 
+                  placeholder='Edit Goal Name' 
+                  value={this.state.editGoalName} 
+                  onChange={(e) => this.setState({editGoalName: e.target.value})} 
+                  />
+                  :
+                  <input type='text'
+                  placeholder='New Goal Name' 
+                  value={this.state.newGoalName} 
+                  onChange={(e) => this.setState({newGoalName: e.target.value})} 
+                  />
+                  }
                   <input type='submit' value='✔︎' />
                 </form>
-                : 
-                this.goalsSelector()}
-                {/* <br/> */}
-              <button onClick={this.addGoal} className='newGoal addButton' alt='add new goal' >
-                <img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img>
-                <span className='tooltiptext'>Add New Goal</span>
-              </button>
-              <button onClick={this.toggleEditGoalForm} className='editGoalName editButton' alt='edit goal name' >
-                {this.state.showEditGoalForm
-                ?
-                <>
-                <img src='delete-icon-circle.png' className='closeEditForm deleteButton' alt='Close Edit Form'></img>
-                <span className='tooltiptext'>Close Edit Form</span>
+                <button onClick={() => this.setState({showEditGoalForm: false, showNewGoalForm: false})} className='closeEditForm deleteButton' alt='Close Edit Form'>
+                  <img src='delete-icon-circle.png' className='closeEditForm deleteButton' alt='Close Edit Form'></img>
+                  <span className='tooltiptext'>Close Edit Form</span>
+                </button>
                 </>
-                :
+                : 
                 <>
-                <img src='edit-icon.png' className='editGoalName editButton' alt='Edit Goal Name'></img>
-                <span className='tooltiptext'>EditGoalName</span>
+                {this.goalsSelector()}
+                <button onClick={() => this.setState({showNewGoalForm: true})} className='newGoal addButton' alt='add new goal' >
+                  <img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img>
+                  <span className='tooltiptext'>Add New Goal</span>
+                </button>
+                <button onClick={() => this.setState({showEditGoalForm: true})} className='editGoalName editButton' alt='edit goal name' >
+                  <img src='edit-icon.png' className='editGoalName editButton' alt='Edit Goal Name'></img>
+                  <span className='tooltiptext'>EditGoalName</span>
+                </button>
                 </>
                 }
-              </button>
             </li>
-            <li className='calories'><input onChange={this.handleChange}  type='number' name='calories' value={this.props.goal.calories} /></li>
-            <li className='fat'><input onChange={this.handleChange} type='number' name='fat' value={this.props.goal.fat} /></li>
-            <li className='carbs'><input onChange={this.handleChange} type='number' name='carbs' value={this.props.goal.carbs} /></li>
-            <li className='protein'><input onChange={this.handleChange} type='number' name='protein' value={this.props.goal.protein} /></li>
-            <li className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</li>
+            {this.state.showNewGoalForm ?
+            <>
+            <li className='calories'><input onChange={this.handleNewGoalMacros}  type='number' name='calories' value={this.state.calories} /></li>
+            <li className='fat'><input onChange={this.handleNewGoalMacros} type='number' name='fat' value={this.state.fat} /></li>
+            <li className='carbs'><input onChange={this.handleNewGoalMacros} type='number' name='carbs' value={this.state.carbs} /></li>
+            <li className='protein'><input onChange={this.handleNewGoalMacros} type='number' name='protein' value={this.state.protein} /></li>
+            <li className='deleteColumn'></li>
+            {/* <li className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</li> */}
+            </>
+            :
+            <>
+            <li className='calories'><input onChange={this.handleChangeMacros}  type='number' name='calories' value={this.props.goal.calories} /></li>
+            <li className='fat'><input onChange={this.handleChangeMacros} type='number' name='fat' value={this.props.goal.fat} /></li>
+            <li className='carbs'><input onChange={this.handleChangeMacros} type='number' name='carbs' value={this.props.goal.carbs} /></li>
+            <li className='protein'><input onChange={this.handleChangeMacros} type='number' name='protein' value={this.props.goal.protein} /></li>
+            <li className='deleteColumn'></li>
+            {/* <li className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</li> */}
+            </>
+            }
           </ul>
           <ul className='grid key'>
             <li className='name'>name</li>
@@ -129,8 +181,8 @@ class ChoiceContainer extends React.Component {
             <li className='deleteColumn'></li>
           </ul>
           <ul className='grid totalsRow'>
-            <li className='totals'><span>Totals:</span></li>
-            <li className='calories'>{this.autoSum('calories')}</li>
+            <li className='totals'><span>GRAND TOTALS:</span></li>
+            <li className='calories' placeholder='grams'>{this.autoSum('calories')}</li>
             <li className='fat'>{this.autoSum('fat')}</li>
             <li className='carbs'>{this.autoSum('carbs')}</li>
             <li className='protein'>{this.autoSum('protein')}</li>
@@ -156,6 +208,7 @@ const mapDispatchToProps = dispatch => {
     editGoal: (info) => dispatch({ type: 'EDIT_GOAL', payload: info}),
     changeGoal: (id) => dispatch({ type: 'CHANGE_GOAL', payload: id}),
     updateGoal: (goal) => dispatch(updateGoal(goal)),
+    createGoal: (state) => dispatch(createGoal(state)),
     saveAll: (state) => dispatch(saveAll(state)),
     editGoalName: (name) => dispatch({ type: 'EDIT_GOAL_NAME', payload: name})
   }
