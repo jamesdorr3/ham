@@ -240,7 +240,7 @@ button .tooltiptext::after {
 
 .searchForm {position: relative; z-index: 1}
 .rectangle {
-  position: relative;
+  position: relative; border-radius: 5px;
   padding: 5px;
   border: 5px solid black;
   background: black;
@@ -249,7 +249,7 @@ button .tooltiptext::after {
   border-right: 0px solid transparent
 }
 
-.rectangle::after {
+.rectangle::before {
   content: " ";
   position: absolute;
   bottom: 38px;
@@ -260,12 +260,12 @@ button .tooltiptext::after {
 }
 
 .arrow {position: relative; top: 30px; width: 130px; margin: auto; right: 20px;
-  animation: sway 2s linear infinite;
+  animation: sway 1.3s linear infinite;
 }
 
 @keyframes sway {
   0% { top: 30px; }
-  50% { top: 50px; }
+  50% { top: 40px; }
   100% { top: 30px; }
 }
 
