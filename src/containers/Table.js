@@ -187,13 +187,13 @@ class ChoiceContainer extends React.Component {
             }
           </ul>
           <ul className='grid key'>
-            <li className='name'>name</li>
-            <li className='amount'>amount</li>
-            <li className='measure' >measure</li>
-            <li className='macro calories' >calories</li>
-            <li className='macro fat' >fat</li>
-            <li className='macro carbs' >carbs</li>
-            <li className='macro protein' >protein</li>
+            <li className='name'>Name</li>
+            <li className='amount'>Amount</li>
+            <li className='measure' >Measure</li>
+            <li className='macro calories' >Calories</li>
+            <li className='macro fat' >Fat</li>
+            <li className='macro carbs' >Carbs</li>
+            <li className='macro protein' >Protein</li>
             <li className='deleteColumn'></li>
           </ul>
           <ul className='grid totalsRow'>
@@ -208,7 +208,7 @@ class ChoiceContainer extends React.Component {
         return <CategoryCard category={category} key={category.id} />
         })}
         <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
-          <span className='rectangle'>Start Here!</span>
+          <span className='rectangle'>Start Here</span>
         </div>
       </div>
     )

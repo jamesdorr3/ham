@@ -1,21 +1,9 @@
-/* body {
+@font-face { font-family: panton; src: url('panton.light-caps.otf')}
+body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: panton
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+* {
+  font-family: panton
 }
-
-input[type='number'] {
-  width: 50px
-}
-
-select {
-  width: 75px
-} */

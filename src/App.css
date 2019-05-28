@@ -1,21 +1,11 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .categoryHeader {
   text-decoration: underline;
   font-size: 18px
 }
+
+input[type='number'] {font-size: 14px; border-radius: 5px}
+input[type='text'], input[type='password'] {font-size: 12px; border-radius: 5px}
+.standardButton{border-radius: 5px}
 
 /* HEADER */
 
@@ -40,14 +30,12 @@ code {
   margin-top: 15px
 }
 
-/* .dayNameForm {background: lime; position: relative; display: block} */
 #submitDayName {width: 20px; padding: 2px 0;}
 
 .twothirds {
   width: 66%;
   text-align: left;
   white-space: wrap;
-  text-transform: uppercase;
   font-weight: bold; 
   color: rgb(240, 240, 240); 
   font-size: 18px;
@@ -57,18 +45,24 @@ select.daySelect {max-width: 100%}
 
 .header div input[type='text'], .header div input[type='password'] {width: 100px;}
 
-.header div input[type='submit'] {width: 106px}
+.signOut{padding: 5px 10px; border-radius: 5px; font-weight: bold; float: right}
+
+select {font-size: 13px}
 
 .modal {
   z-index: 1;
   position: fixed;
-  max-width: 250px;
+  max-width: 1000px;
+  width: 300px;
   top: 60px;
   left: 66%;
-  background-color: rgb(240, 160, 120)
+  background-color: rgb(240, 160, 120);
+  border-radius: 5px; border: 1px solid black
 }
 
 .modal form {padding: 15px}
+
+.signupForm{display: grid; grid-template-columns: 1fr 1fr}
 
 .centered {text-align: center;}
 
@@ -89,7 +83,7 @@ button.centered{margin-left: 33%}
   padding: 10px;
 }
 
-.saveButton {position: absolute; float: left; border-radius: 25px; padding: 10px; font-size: 18px; left: 16%; background: lime}
+.saveButton {position: absolute; float: left; border-radius: 25px; padding: 10px; font-size: 18px; left: 16%; border: 2px solid lime}
 
 .welcome h1, .welcome h2{text-align: right; margin-right: 5%}
 
@@ -98,8 +92,8 @@ li {list-style: none; padding: 0 0 0 4px}
 ul {padding: 0 0 0 5px}
 .name{grid-column: 1; overflow: hidden; white-space: nowrap; text-align: left; padding-left: 10px}
 .categoryName {grid-column: 1 / 3; margin-left: 59%}
-.categoryGrid {text-transform: uppercase; font-weight: bold;}
-.email {text-transform: uppercase; font-weight: bold; color: rgb(240, 240, 240); font-size: 18px}
+.categoryGrid { font-weight: bold;}
+.email { font-weight: bold; color: rgb(240, 240, 240); font-size: 18px}
 .amount {grid-column: 2}
 .measure {grid-column: 3}
 .measure select {width: 70%; max-width: 100%}
@@ -111,7 +105,7 @@ ul {padding: 0 0 0 5px}
 .grandTotals, .goals {grid-column: 2}
 .goalsSelect, .totals {grid-column: 3}
 .goals li input {width: 90%; margin-left: 5%}
-.key li {text-transform: uppercase; overflow: hidden}
+.key li { overflow: hidden}
 .key, .goals, .totalsRow {font-weight: bold}
 .choice li input {width: 100%}
 .category{border-radius: 5px; padding: 7px 0 7px 0px; }
@@ -155,7 +149,7 @@ button .tooltiptext::after {
 /* FOOD FORM */
 
 .createFoodContainer {position: relative}
-.foodForm {background: white; position: absolute; z-index: 2; width: 102%; left: -1%; border-radius: 5px; border: 1px solid black}
+.foodForm {background: white; position: absolute; z-index: 2; width: 104%; left: -2%; border-radius: 5px; border: 1px solid black}
 .newFoodGrid {display: grid; grid-template-columns: repeat(5, 1fr); width: 98%}
 .newFoodGrid input, .newFoodGrid select {width: 100%}
 .newFoodGrid label {font-size: 14px}
@@ -178,6 +172,9 @@ button .tooltiptext::after {
   text-align: left;
   list-style: none;
   padding: 0 10px 5px 2px; 
+  border-radius: 5px;
+  border: 1px solid black;
+  margin: 1px
 }
 
 .searchResult button {
@@ -270,7 +267,7 @@ button .tooltiptext::after {
 }
 
 /* ERROR MESSAGE */
-.errorMessage {background: lime; padding: 5px; border-radius: 5px}
+.errorMessage {background: black; padding: 5px; border-radius: 5px}
 /* ERROR MESSAGE */
 
 a {border: 1px solid black; padding: 2px; border-radius: 5px}
