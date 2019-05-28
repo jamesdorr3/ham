@@ -26,11 +26,12 @@ class CategoryCard extends React.Component {
     return(
       <Droppable droppableId={this.props.category.id}>
       {(provided) => (
-        <div className={`category number${this.props.category.id}`}>
+        <div className={`category number${this.props.category.id}`}
+        ref={provided.innerRef}
+        {...provided.droppableProps}
+        >
         <ul
           className="grid categoryGrid"
-          ref={provided.innerRef}
-          {...provided.droppableProps}
           >
             <li className='name categoryName' >{this.props.category.name}</li>
             <li className='totals'>Subtotals: </li>
