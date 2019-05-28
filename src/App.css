@@ -40,8 +40,8 @@ code {
   margin-top: 15px
 }
 
-.dayNameForm {background: lime; position: relative}
-.dayNameForm input[type='submit']{background: pink; position: relative; width: 10%}
+/* .dayNameForm {background: lime; position: relative; display: block} */
+#submitDayName {width: 20px; padding: 2px 0;}
 
 .twothirds {
   width: 66%;
@@ -108,7 +108,7 @@ ul {padding: 0 0 0 5px}
 .deleteColumn {grid-column: 8}
 .grandTotals, .goals {grid-column: 2}
 .goalsSelect, .totals {grid-column: 3}
-.goals li input {width: 90%}
+.goals li input {width: 90%; margin-left: 5%}
 .key li {text-transform: uppercase; overflow: hidden}
 .key, .goals, .totalsRow {font-weight: bold}
 .choice li input {width: 100%}
@@ -151,7 +151,11 @@ button .tooltiptext::after {
 /* TABLE */
 /* FOOD FORM */
 
-.newFoodGrid {display: grid; grid-template-columns: 30% 1fr 15% repeat(4, 1fr) 5%; margin: 5px 0px; text-align: center;}
+.createFoodContainer {position: relative}
+.foodForm {background: white; position: absolute; z-index: 2; width: 100%; border-radius: 5px}
+.newFoodGrid {display: grid; grid-template-columns: repeat(5, 1fr); width: 98%}
+.newFoodGrid input, .newFoodGrid select {width: 100%}
+.newFoodGrid label {font-size: 14px}
 
 /* FOOD FORM */
 /* SEARCH RESULT MODAL */
@@ -209,6 +213,7 @@ button .tooltiptext::after {
 .goalsSelect form {position: relative}
 .goalsSelect input[type='text'] {width: 73%}
 .goalsSelect input[type='submit'] {width: 20%; padding: 1.5px 0; margin: 0px}
+.goals input {text-align: center}
 .newday {width: auto}
 
 /* LOADING  */
@@ -229,15 +234,8 @@ button .tooltiptext::after {
   100% { transform: rotate(360deg); }
 }
 /* LOADING  */
-/* 
-.triangle {
-  position: relative;
-  width: 0; 
-  height: 0; 
-  border-top: 65px solid transparent;
-  border-bottom: 65px solid transparent;
-  border-left: 65px solid black;
-} */
+
+.searchForm {position: relative; z-index: 1}
 .rectangle {
   position: relative;
   padding: 5px;
@@ -251,14 +249,14 @@ button .tooltiptext::after {
 .rectangle::after {
   content: " ";
   position: absolute;
-  bottom: -5px;
-  left: 99%;
-  border-width: 21.5px;
+  bottom: 38px;
+  left: 23px;
+  border-width: 25px;
   border-style: solid;
-  border-color: transparent transparent transparent black;
+  border-color: transparent transparent black transparent;
 }
 
-.arrow {position: relative; top: -30px; left: 70px; width: 130px;
+.arrow {position: relative; top: 30px; width: 130px; margin: auto; right: 20px;
   animation: sway 2s linear infinite;
 }
 
@@ -266,7 +264,7 @@ button .tooltiptext::after {
 } */
 
 @keyframes sway {
-  0% { left: 40px; }
-  50% { left: 70px;}
-  100% { left: 40px; }
+  0% { top: 30px; }
+  50% { top: 50px; }
+  100% { top: 30px; }
 }

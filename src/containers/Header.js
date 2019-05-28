@@ -108,7 +108,7 @@ class Header extends React.Component {
               ?
               <form onSubmit={this.submitDayName} className='dayNameForm'>
                 <input type='text' defaultValue={this.props.day.name} value={this.state.dayName} onChange={this.handleDayNameChange}  placeholder='Name This Day' ></input>
-                <input type='submit' value='✔︎' />
+                <input id='submitDayName' type='submit' value='✔︎' />
                 <button onClick={this.editDayToggle} className='deleteButton closeEditDay' alt='Close Edit Form' >
                   <span className='tooltiptext'>Close Edit Name</span>
                   <img src='delete-icon-circle.png' className='closeEdit deleteButton' alt='Close Edit Form' />
