@@ -145,7 +145,7 @@ class Header extends React.Component {
         }
         <div className='third'>
         {this.signedIn()?
-        <button onClick={this.handleSignOut} className='centered'>Sign Out</button> :
+        <button onClick={this.handleSignOut} className='signOut'>Sign Out</button> :
         < LoginCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} handleChange={this.handleChange} login={this.login} />
         }
         </div>

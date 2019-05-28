@@ -31,7 +31,7 @@ class CategoryCard extends React.Component {
           className="grid categoryGrid"
           ref={provided.innerRef}
           {...provided.droppableProps}
-        >
+          >
             <li className='name categoryName' >{this.props.category.name}</li>
             <li className='totals'>Subtotals: </li>
             <li className='calories'>{this.autoSum('calories')}</li>

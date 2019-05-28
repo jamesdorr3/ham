@@ -49,10 +49,10 @@ class LoginCard extends React.Component {
     return(
       <>
       <form onSubmit={this.handleSubmit}>
-        <input value={this.state.usernameOrEmail} name='usernameOrEmail' onChange={this.handleChange} type='text' placeholder='username or email' />
+        <input value={this.state.usernameOrEmail} name='usernameOrEmail' onChange={this.handleChange} type='text' placeholder='username/email' />
         <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='password' />
-        <input value='Log In' type='submit' />
-        <button onClick={this.props.toggleSignup}>{this.props.showSignup ? 'Close Sign Up': 'Sign Up'}</button>
+        <input value='Log In' type='submit' className='standardButton' />
+        <button onClick={this.props.toggleSignup} className='standardButton'>{this.props.showSignup ? 'Close Sign Up': 'Sign Up'}</button>
       </form>
       {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
       </>

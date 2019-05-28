@@ -45,12 +45,26 @@ class SignUpCard extends React.Component {
   render(){
     return(
       <div className='modal' style={{display: `${ this.props.showSignup && !this.props.user.email ? 'block' : 'none'}`}}>
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className='signupForm'>
+        <li>
+        <label>Username</label><br/>
         <input value={this.state.username} name='username' onChange={this.handleChange} type='text' placeholder='username' />
-        <input value={this.state.email} name='email' onChange={this.handleChange} type='text' placeholder='email' />
-        <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='password'/>
-        <input value={this.state.password2} name='password2' onChange={this.handleChange} type='password' placeholder='password'/>
-        <input value='Sign Up' type='submit'/>
+        </li>
+        <li>
+          <label>Email</label><br/>
+          <input value={this.state.email} name='email' onChange={this.handleChange} type='text' placeholder='email' />
+        </li>
+        <li>
+          <label>Password</label><br/>
+          <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='password'/>
+        </li>
+        <li>
+          <label>Password</label><br/>
+          <input value={this.state.password2} name='password2' onChange={this.handleChange} type='password' placeholder='password'/>
+        </li>
+        <li>
+          <input value='Sign Up' type='submit'/>
+        </li>
       </form>
       {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
       </div>
