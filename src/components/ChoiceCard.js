@@ -24,11 +24,13 @@ class ChoiceCard extends React.Component {
 
   updateInDB = () => {
     const id = this.props.choiceFood.choice.id
+    this.props.startLoading()
     fetch(`${URL}choices/${id}`, {
       method: 'PATCH',
       headers: HEADERS(),
       body: JSON.stringify({choice: {...this.props.choiceFood.choice, ...this.state}})
     })
+    .then(r => this.props.stopLoading())
   }
 
   handleAmountChange = (e) => {
@@ -71,7 +73,9 @@ class ChoiceCard extends React.Component {
 
   deleteChoice = () => {
     const id = this.props.choiceFood.choice.id
+    this.props.startLoading()
     fetch(`${URL}/choices/${id}`, {method: 'DELETE'})
+    .then(r => this.props.stopLoading())
     this.props.deleteChoice(id)
   }
 
@@ -127,7 +131,9 @@ class ChoiceCard extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     deleteChoice: id => dispatch({ type: 'DELETE_CHOICE', payload: id}),
-    editChoice: info => dispatch({ type: 'EDIT_CHOICE', payload: info})
+    editChoice: info => dispatch({ type: 'EDIT_CHOICE', payload: info}),
+    startLoading: () => dispatch({type: 'START_LOADING'}),
+    stopLoading: () => dispatch({type: 'STOP_LOADING'})
   }
 }
 

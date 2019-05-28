@@ -2,7 +2,8 @@ import {URL, HEADERS} from '../constants'
 
 export const auth = (info) => {
   return (dispatch) => {
-    console.log(info)
+    dispatch({type: 'START_LOADING'})
+    // console.log(info)
     return fetch(`${URL}/auth`, {
       method: 'POST',
       headers: HEADERS(),
@@ -15,7 +16,8 @@ export const auth = (info) => {
     })
     .then(r => r.json())
     .then(jwtAndUser => {
-      debugger
+      // debugger
+      dispatch({type: 'STOP_LOADING'})
       if (jwtAndUser.user && jwtAndUser.jwt) {
         localStorage.setItem('token', jwtAndUser.jwt)
         dispatch({ type: 'SELECT_USER', payload: jwtAndUser})
@@ -29,6 +31,7 @@ export const auth = (info) => {
 
 export const reauth = () => {
   return (dispatch) => {
+    dispatch({type: 'START_LOADING'})
     return fetch(`${URL}/reauth`, {
       method: 'POST',
       headers: HEADERS()
@@ -38,6 +41,7 @@ export const reauth = () => {
     })
     .then(jwtAndUser => {
       // debugger
+      dispatch({type: 'STOP_LOADING'})
       if (jwtAndUser.user && jwtAndUser.jwt) {
         // console.log(jwtAndUser)
         dispatch({ type: 'SELECT_USER', payload: jwtAndUser})

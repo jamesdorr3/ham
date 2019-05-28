@@ -53,7 +53,7 @@ class Header extends React.Component {
 
   dayOptions = () => {
     // const days = this.props.days.filter(day => day.id !== this.props.day.id)
-    const days = this.props.days.sort((x, y) => y.created_at - x.created_at)
+    const days = this.props.days.sort((x, y) => new Date(y.created_at) - new Date(x.created_at))
     return days.map(day => {
       return <option value={day.id} key={day.id} >{this.prettyDayDisplay(day)}</option>
     })
@@ -72,17 +72,29 @@ class Header extends React.Component {
     this.setState({editDayName: false, dayName: null})
     if (this.state.dayName && this.state.dayName !== this.props.day.name) {
       this.props.editDayName(this.state.dayName)
+      this.props.startLoading()
       fetch(`${URL}days/${this.props.day.id}`, {
         method: 'PATCH',
         headers: HEADERS(),
         body: JSON.stringify({name: this.state.dayName})
       })
+      .then(r => this.props.stopLoading())
     }
   }
 
   dayChangeHandler = e => {
     this.props.saveAll(this.props) // doesn't work?
     this.props.selectDay(e)
+  }
+
+  todaysDate = () => {
+    const date = new Date()
+    const year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let day = date.getDate()
+    if (month < 10) {month = `0${month}`}
+    if (day < 10) {day = `0${day}`}
+    return `${year}-${month}-${day}`
   }
 
   render(){
@@ -94,9 +106,9 @@ class Header extends React.Component {
           <div className='third centered'>
             {this.state.editDayName 
               ?
-              <form onSubmit={this.submitDayName}>
+              <form onSubmit={this.submitDayName} className='dayNameForm'>
                 <input type='text' defaultValue={this.props.day.name} value={this.state.dayName} onChange={this.handleDayNameChange}  placeholder='Name This Day' ></input>
-                <input type='submit' value='✔︎' />
+                <input id='submitDayName' type='submit' value='✔︎' />
                 <button onClick={this.editDayToggle} className='deleteButton closeEditDay' alt='Close Edit Form' >
                   <span className='tooltiptext'>Close Edit Name</span>
                   <img src='delete-icon-circle.png' className='closeEdit deleteButton' alt='Close Edit Form' />
@@ -112,6 +124,7 @@ class Header extends React.Component {
                 <span className='tooltiptext'>{this.state.editDayName ? 'Close Edit Name' : 'Edit Day Name'}</span>
                 <img src={this.state.editDayName ? 'delete-icon-circle.png' : 'edit-icon.png'} className='editDay editButton' alt='edit day' />
               </button>
+              {/* <input type='date' min="2019-05-01" value={this.todaysDate()}/> */}
               </>
             }
           </div>
@@ -140,7 +153,9 @@ const mapDispatchToProps = dispatch => {
     createDay: () => dispatch(createDay()),
     selectDay: (info) => dispatch(selectDay(info)),
     editDayName: (dayName) => dispatch({type: 'EDIT_DAY_NAME', payload: dayName}),
-    saveAll: (state) => dispatch(saveAll(state))
+    saveAll: (state) => dispatch(saveAll(state)),
+    startLoading: () => dispatch({type: 'START_LOADING'}),
+    stopLoading: () => dispatch({type: 'STOP_LOADING'})
   }
 }
 
