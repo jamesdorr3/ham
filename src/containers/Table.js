@@ -181,7 +181,7 @@ class ChoiceContainer extends React.Component {
             <li className='deleteColumn'></li>
           </ul>
           <ul className='grid totalsRow'>
-            <li className='totals'><span>GRAND TOTALS:</span></li>
+            <li className='totals'><span>TOTALS:</span></li>
             <li className='calories' placeholder='grams'>{this.autoSum('calories')}</li>
             <li className='fat'>{this.autoSum('fat')}</li>
             <li className='carbs'>{this.autoSum('carbs')}</li>
@@ -191,6 +191,9 @@ class ChoiceContainer extends React.Component {
         {this.props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
         return <CategoryCard category={category} key={category.id} />
         })}
+        <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
+          <span className='rectangle'>Start Here!</span>
+        </div>
       </div>
     )
   }

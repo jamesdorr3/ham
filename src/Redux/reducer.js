@@ -11,7 +11,7 @@ const initialState = {
   goals: [],
   user: {},
   error: {},
-  loading: true
+  loading: false
 }
 
 

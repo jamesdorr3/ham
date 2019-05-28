@@ -229,3 +229,44 @@ button .tooltiptext::after {
   100% { transform: rotate(360deg); }
 }
 /* LOADING  */
+/* 
+.triangle {
+  position: relative;
+  width: 0; 
+  height: 0; 
+  border-top: 65px solid transparent;
+  border-bottom: 65px solid transparent;
+  border-left: 65px solid black;
+} */
+.rectangle {
+  position: relative;
+  padding: 5px;
+  border: 5px solid black;
+  background: black;
+  color: white;
+  font-size: 20px;
+  border-right: 0px solid transparent
+}
+
+.rectangle::after {
+  content: " ";
+  position: absolute;
+  bottom: -5px;
+  left: 99%;
+  border-width: 21.5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+
+.arrow {position: relative; top: -30px; left: 70px; width: 130px;
+  animation: sway 2s linear infinite;
+}
+
+/* animation: spin 1.5s linear infinite;
+} */
+
+@keyframes sway {
+  0% { left: 40px; }
+  50% { left: 70px;}
+  100% { left: 40px; }
+}

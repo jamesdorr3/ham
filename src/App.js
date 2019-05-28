@@ -16,17 +16,17 @@ class App extends React.Component {
       return;
     }
     const choicesIds = []
-    document.querySelectorAll('.choice').forEach(x => choicesIds.push(parseInt(x.id)))
+    const toCategory = destination.droppableId
+    document.querySelectorAll(`.choice`).forEach(x => choicesIds.push(parseInt(x.id)))
     // const movedId = choicesIds.splice(source.index, 1)[0]
     // choicesIds.splice(destination.index, 0, movedId)
     const fromIndex = choicesIds.indexOf(draggableId)
     const toIndex = destination.index
-    const toCategory = destination.droppableId
     const id = choicesIds.splice(fromIndex, 1)[0]
     choicesIds.splice(toIndex, 0, id)
     // debugger
     // this.props.updateIndex({choicesIds: choicesIds})
-    this.props.handleDrop(choicesIds, draggableId, destination.droppableId)
+    this.props.handleDrop(choicesIds, draggableId, toCategory)
   };
 
   render(){

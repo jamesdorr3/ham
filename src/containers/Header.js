@@ -53,7 +53,7 @@ class Header extends React.Component {
 
   dayOptions = () => {
     // const days = this.props.days.filter(day => day.id !== this.props.day.id)
-    const days = this.props.days.sort((x, y) => y.created_at - x.created_at)
+    const days = this.props.days.sort((x, y) => new Date(y.created_at) - new Date(x.created_at))
     return days.map(day => {
       return <option value={day.id} key={day.id} >{this.prettyDayDisplay(day)}</option>
     })
@@ -87,6 +87,16 @@ class Header extends React.Component {
     this.props.selectDay(e)
   }
 
+  todaysDate = () => {
+    const date = new Date()
+    const year = date.getFullYear()
+    let month = date.getMonth() + 1
+    let day = date.getDate()
+    if (month < 10) {month = `0${month}`}
+    if (day < 10) {day = `0${day}`}
+    return `${year}-${month}-${day}`
+  }
+
   render(){
     // console.log(this.props.day)
     return(
@@ -114,6 +124,7 @@ class Header extends React.Component {
                 <span className='tooltiptext'>{this.state.editDayName ? 'Close Edit Name' : 'Edit Day Name'}</span>
                 <img src={this.state.editDayName ? 'delete-icon-circle.png' : 'edit-icon.png'} className='editDay editButton' alt='edit day' />
               </button>
+              {/* <input type='date' min="2019-05-01" value={this.todaysDate()}/> */}
               </>
             }
           </div>
