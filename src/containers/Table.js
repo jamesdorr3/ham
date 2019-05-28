@@ -108,6 +108,7 @@ class ChoiceContainer extends React.Component {
           <hr/>
           </div>
         }
+        <button className='saveButton' onClick={() => this.props.saveAll()}>Save</button>
           <ul className='grid goals'>
             <li className='goals'><span>Goals:</span></li>
             <li className='goalsSelect'>
@@ -129,10 +130,10 @@ class ChoiceContainer extends React.Component {
                   onChange={(e) => this.setState({newGoalName: e.target.value})} 
                   />
                   }
-                  <input type='submit' value='✔︎' />
+                  <input id='submitGoalName' type='submit' value='✔︎' />
                 </form>
-                <button onClick={() => this.setState({showEditGoalForm: false, showNewGoalForm: false})} className='closeEditForm deleteButton' alt='Close Edit Form'>
-                  <img src='delete-icon-circle.png' className='closeEditForm deleteButton' alt='Close Edit Form'></img>
+                <button onClick={() => this.setState({showEditGoalForm: false, showNewGoalForm: false})} className='closeEditForm closeButton' alt='Close Edit Form'>
+                  <img src='close-icon.png' className='closeEditForm closeButton' alt='Close Edit Form'></img>
                   <span className='tooltiptext'>Close Edit Form</span>
                 </button>
                 </>

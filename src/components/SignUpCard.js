@@ -16,7 +16,13 @@ class SignUpCard extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.password && this.state.username && this.state.email && this.state.password === this.state.password2){
+    if (!this.state.password || !this.state.username || !this.state.email) {
+      this.setState({error: 'Username, email, and password required'})
+    }
+    else if (this.state.password !== this.state.password2){
+      this.setState({error: 'Passwords must match'})
+    }
+    else{
       this.props.createUser(this.state)
     }
   }
@@ -46,7 +52,7 @@ class SignUpCard extends React.Component {
         <input value={this.state.password2} name='password2' onChange={this.handleChange} type='password' placeholder='password'/>
         <input value='Sign Up' type='submit'/>
       </form>
-      <p>{this.state.error}</p>
+      {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
       </div>
     )
   }

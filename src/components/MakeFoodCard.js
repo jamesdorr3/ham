@@ -22,7 +22,8 @@ class MakeFoodCard extends React.Component {
     sodium: '',
     sugars: '',
     unit_size: '',
-    upc: ''
+    upc: '',
+    error: null
   }
 
   handleChange = (e) => {
@@ -56,6 +57,8 @@ class MakeFoodCard extends React.Component {
         unit_size: '',
         upc: ''
       })
+    }else{
+      this.setState({error: 'Please fill required fields'})
     }
   }
 
@@ -63,6 +66,7 @@ class MakeFoodCard extends React.Component {
     return(
       <div className='createFoodContainer'>
       <form style={{display: this.props.addFood ? 'block' : 'none'}} onSubmit={this.handleSubmit} className='foodForm'>
+        {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
         <ul className='newFoodGrid'>
           <li>
           <label>Food name</label>

@@ -89,6 +89,8 @@ button.centered{margin-left: 33%}
   padding: 10px;
 }
 
+.saveButton {position: relative; float: left; border-radius: 25px; padding: 10px; font-size: 18px; left: 16%; background: lime}
+
 .welcome h1, .welcome h2{text-align: right; margin-right: 5%}
 
 .grid {display: grid; grid-template-columns: 30% 1fr 15% repeat(4, 1fr) 5%; margin: 5px 0px; text-align: center;}
@@ -113,10 +115,8 @@ ul {padding: 0 0 0 5px}
 .key, .goals, .totalsRow {font-weight: bold}
 .choice li input {width: 100%}
 .category{border-radius: 5px; padding: 7px 0 7px 0px; }
-.category:nth-child(even){background: rgb(240, 160, 120)}
-/* .category:nth-child(even) .choice {background: lightgray} */
-.category:nth-child(odd){background: rgb(240, 240, 240)}
-/* .category:nth-child(odd) .choice {background: rgb(240, 160, 120)} */
+.category{background: rgb(240, 160, 120); border: 1px solid black; margin: 5px 0 0 0}
+/* .category:nth-child(odd){background: rgb(240, 240, 240)} */
 .choice {background: rgba(255, 255, 255, 0.205); border-radius: 5px; padding: 4px 0}
 .choice:hover {transform: scale(1.01); box-shadow: 0px 1px 5px rgb(90, 90, 90)}
 
@@ -125,11 +125,14 @@ img.addButton{position: relative; height: 15px; bottom: -3px; padding: 0 5px}
 button.addButton{background: none; border: none; margin: 0; padding: 0}
 button.editButton{background: none; border: none; margin: 0; padding: 0}
 img.editButton{position: relative; height: 15px; bottom: -3px; padding: 0}
-button.deleteButton{background: none; border: none; margin: 0; padding: 0}
-img.deleteButton{position: relative; height: 15px; bottom: -3px; padding: 0 5px;}
-button.iconButton{background: none; border: none; margin: 0; padding: 0}
-button.closeButton{background: none; border: none; margin: 0; padding: 5px 0 0 0; margin-left: 90%}
+button.closeButton {border: none; background: none; margin: 0; padding: 0}
+img.closeButton {position: relative; height: 15px; bottom: -3px; padding: 0 5px}
+img.deleteChoiceButton {position: relative; height: 15px; bottom: -1px}
+img.deleteButton {position: relative; height: 15px; bottom: -3px}
+button.deleteButton{border: none; background: none; margin: 0; padding: 0}
 img:hover {cursor: pointer}
+.iconButton {background: none; border: none; margin: 0; padding: 0}
+
 button, .tooltip {position: relative}
 button:focus, .tooltip:focus {outline-width: 0px}
 .tooltiptext{
@@ -212,7 +215,7 @@ button .tooltiptext::after {
 .goalsSelect select {width: 90%}
 .goalsSelect form {position: relative}
 .goalsSelect input[type='text'] {width: 73%}
-.goalsSelect input[type='submit'] {width: 20%; padding: 1.5px 0; margin: 0px}
+.goalsSelect input[type='submit'] {width: 19%; padding: 2px 0; margin: 0px; max-width: 19px}
 .goals input {text-align: center}
 .newday {width: auto}
 
@@ -260,11 +263,12 @@ button .tooltiptext::after {
   animation: sway 2s linear infinite;
 }
 
-/* animation: spin 1.5s linear infinite;
-} */
-
 @keyframes sway {
   0% { top: 30px; }
   50% { top: 50px; }
   100% { top: 30px; }
 }
+
+/* ERROR MESSAGE */
+.errorMessage {background: lime; padding: 5px; border-radius: 5px}
+/* ERROR MESSAGE */
