@@ -27,3 +27,10 @@ export const createGoal = (goal) => {
     })
   }
 }
+
+export const deleteGoal = id => {
+  return dispatch => {
+    dispatch({type: 'DELETE_GOAL', payload: id})
+    return fetch(`${URL}/goals/${id}`, {method: 'DELETE', headers: HEADERS()})
+  }
+}

@@ -99,9 +99,11 @@ class Header extends React.Component {
   }
 
   deleteDay = () => {
-    const anotherDay = this.props.days.filter(x => x.id !== this.props.day.id)[0]
-    this.props.selectDay(anotherDay.id)
-    this.props.deleteDay(this.props.day.id)
+    if (this.props.days.length > 1 && window.confirm('Are you sure you want to delete this day?')) {
+      const anotherDay = this.props.days.filter(x => x.id !== this.props.day.id)[0]
+      this.props.selectDay(anotherDay.id)
+      this.props.deleteDay(this.props.day.id)
+    }
   }
 
   render(){

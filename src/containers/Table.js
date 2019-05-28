@@ -7,6 +7,7 @@ import CategoryCard from '../components/CategoryCard'
 import {updateGoal} from '../actions/goalsActions'
 import {createGoal} from '../actions/goalsActions'
 import {saveAll} from '../actions/saveAllAction'
+import {deleteGoal} from '../actions/goalsActions'
 
 class ChoiceContainer extends React.Component {
 
@@ -97,6 +98,16 @@ class ChoiceContainer extends React.Component {
     }
   }
 
+  deleteGoal = () => {
+    this.setState({showEditGoalForm: false, showNewGoalForm: false})
+    if (this.props.goals.length > 1 && window.confirm('Are you sure you want to delete this day?')) {
+      const id = this.props.goal.id
+      const otherGoal = this.props.goals.filter(x => x.id !== id)[0]
+      this.props.changeGoal(otherGoal.id)
+      this.props.deleteGoal(id)
+    }
+  }
+
   render(){
     // console.log(this.props)
     return(
@@ -135,6 +146,10 @@ class ChoiceContainer extends React.Component {
                 <button onClick={() => this.setState({showEditGoalForm: false, showNewGoalForm: false})} className='closeEditForm closeButton' alt='Close Edit Form'>
                   <img src='close-icon.png' className='closeEditForm closeButton' alt='Close Edit Form'></img>
                   <span className='tooltiptext'>Close Edit Form</span>
+                </button>
+                <button onClick={this.deleteGoal} className='deleteChoice deleteButton' alt='delete choice'>
+                  <span className='tooltiptext'>Delete Goal</span>
+                  <img src='trash-icon.png' className='deleteChoice deleteButton' alt='delete choice'></img>
                 </button>
                 </>
                 : 
@@ -214,7 +229,8 @@ const mapDispatchToProps = dispatch => {
     updateGoal: (goal) => dispatch(updateGoal(goal)),
     createGoal: (state) => dispatch(createGoal(state)),
     saveAll: (state) => dispatch(saveAll(state)),
-    editGoalName: (name) => dispatch({ type: 'EDIT_GOAL_NAME', payload: name})
+    editGoalName: (name) => dispatch({ type: 'EDIT_GOAL_NAME', payload: name}),
+    deleteGoal: id => dispatch(deleteGoal(id))
   }
 }
 

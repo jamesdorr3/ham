@@ -178,8 +178,13 @@ const reducer = (state = initialState, action) => {
     case 'DELETE_DAY': {
       return {
         ...state,
-        days: state.days.filter(x => x.id !== parseInt(action.payload)),
-        day: state.days.filter(x => x.id !== parseInt(action.payload))[0]
+        days: state.days.filter(x => x.id !== parseInt(action.payload))
+      }
+    }
+    case 'DELETE_GOAL': {
+      return {
+        ...state,
+        goals: state.goals.filter(x => x.id !== parseInt(action.payload))
       }
     }
     default: {
