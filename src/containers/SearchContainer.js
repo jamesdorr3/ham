@@ -61,7 +61,7 @@ class SearchContainer extends React.Component {
           {/* <span className='tooltip'><input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input><span className='tooltiptext'>Search</span></span> */}
           <button onClick={() => this.setState({addFood: !this.state.addFood})} className='iconButton'>{this.state.addFood ?
             <>
-            <img src='delete-icon-circle.png' alt='close new food form' className='deleteButton' />
+            <img src='close-icon.png' alt='close new food form' className='closeButton' />
             <span className='tooltiptext'>Close Form</span>
             </>
             :
@@ -75,7 +75,7 @@ class SearchContainer extends React.Component {
         < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} />
         <ul className='searchResultContainer'>
           {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
-          <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='delete-icon-circle.png' alt='close search results' className='deleteButton' /></button> 
+          <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
           : null}
           {this.state.internal.map(food => (
             < InternalSearchResultCard 

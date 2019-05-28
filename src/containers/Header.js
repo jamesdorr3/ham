@@ -6,6 +6,7 @@ import {auth, reauth} from '../actions/authActions'
 import {createDay, selectDay} from '../actions/daysActions'
 import {URL, HEADERS} from '../constants.js'
 import {saveAll} from '../actions/saveAllAction'
+import {deleteDay} from '../actions/daysActions'
 
 class Header extends React.Component {
 
@@ -84,7 +85,7 @@ class Header extends React.Component {
 
   dayChangeHandler = e => {
     this.props.saveAll(this.props) // doesn't work?
-    this.props.selectDay(e)
+    this.props.selectDay(e.target.value)
   }
 
   todaysDate = () => {
@@ -95,6 +96,14 @@ class Header extends React.Component {
     if (month < 10) {month = `0${month}`}
     if (day < 10) {day = `0${day}`}
     return `${year}-${month}-${day}`
+  }
+
+  deleteDay = () => {
+    if (this.props.days.length > 1 && window.confirm('Are you sure you want to delete this day?')) {
+      const anotherDay = this.props.days.filter(x => x.id !== this.props.day.id)[0]
+      this.props.selectDay(anotherDay.id)
+      this.props.deleteDay(this.props.day.id)
+    }
   }
 
   render(){
@@ -109,9 +118,13 @@ class Header extends React.Component {
               <form onSubmit={this.submitDayName} className='dayNameForm'>
                 <input type='text' defaultValue={this.props.day.name} value={this.state.dayName} onChange={this.handleDayNameChange}  placeholder='Name This Day' ></input>
                 <input id='submitDayName' type='submit' value='✔︎' />
-                <button onClick={this.editDayToggle} className='deleteButton closeEditDay' alt='Close Edit Form' >
+                <button onClick={this.editDayToggle} className='closeButton closeEditDay' alt='Close Edit Form' >
                   <span className='tooltiptext'>Close Edit Name</span>
-                  <img src='delete-icon-circle.png' className='closeEdit deleteButton' alt='Close Edit Form' />
+                  <img src='close-icon.png' className='closeEdit closeButton' alt='Close Edit Form' />
+                </button>
+                <button onClick={this.deleteDay} className='deleteChoice deleteButton' alt='delete choice'>
+                  <span className='tooltiptext'>Delete Day</span>
+                  <img src='trash-icon.png' className='deleteChoice deleteButton' alt='delete choice'></img>
                 </button>
               </form>
               : 
@@ -122,7 +135,7 @@ class Header extends React.Component {
               <button onClick={this.props.createDay} className='newDay addButton' alt='add new day' ><span className='tooltiptext'>Add New Day</span><img src='add-icon-circle.png' className='newDay addButton' alt='add new day'></img></button>
               <button onClick={this.editDayToggle} className='editDay editButton' alt='edit day' >
                 <span className='tooltiptext'>{this.state.editDayName ? 'Close Edit Name' : 'Edit Day Name'}</span>
-                <img src={this.state.editDayName ? 'delete-icon-circle.png' : 'edit-icon.png'} className='editDay editButton' alt='edit day' />
+                <img src={this.state.editDayName ? 'close-icon.png' : 'edit-icon.png'} className='editDay editButton' alt='edit day' />
               </button>
               {/* <input type='date' min="2019-05-01" value={this.todaysDate()}/> */}
               </>
@@ -151,11 +164,12 @@ const mapDispatchToProps = dispatch => {
     signOut: () => dispatch({ type: 'SIGN_OUT'}),
     reauth: () => dispatch(reauth()),
     createDay: () => dispatch(createDay()),
-    selectDay: (info) => dispatch(selectDay(info)),
+    selectDay: (id) => dispatch(selectDay(id)),
     editDayName: (dayName) => dispatch({type: 'EDIT_DAY_NAME', payload: dayName}),
     saveAll: (state) => dispatch(saveAll(state)),
     startLoading: () => dispatch({type: 'START_LOADING'}),
-    stopLoading: () => dispatch({type: 'STOP_LOADING'})
+    stopLoading: () => dispatch({type: 'STOP_LOADING'}),
+    deleteDay: (id) => dispatch(deleteDay(id))
   }
 }
 

@@ -54,7 +54,7 @@ class LoginCard extends React.Component {
         <input value='Log In' type='submit' />
         <button onClick={this.props.toggleSignup}>{this.props.showSignup ? 'Close Sign Up': 'Sign Up'}</button>
       </form>
-      <p>{this.state.error}</p>
+      {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
       </>
     )
   }

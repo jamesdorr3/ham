@@ -15,15 +15,22 @@ export const createDay = () => {
   }
 }
 
-export const selectDay = (e) => {
+export const selectDay = (id) => {
   return (dispatch) => {
     dispatch({type: 'START_LOADING'})
-    const dayId = e.target.value
-    return fetch(`${URL}/days/${dayId}`, {headers: HEADERS()})
+    return fetch(`${URL}/days/${id}`, {headers: HEADERS()})
     .then(r => r.json())
     .then(dayAndInfo => {
       dispatch({type: 'STOP_LOADING'})
       dispatch({ type: 'SELECT_DAY', payload: dayAndInfo})
     })
+  }
+}
+
+export const deleteDay = id => {
+  // debugger
+  return dispatch => {
+    dispatch({type: 'DELETE_DAY', payload: id})
+    return fetch(`${URL}/days/${id}`, {method: 'DELETE', headers: HEADERS()})
   }
 }
