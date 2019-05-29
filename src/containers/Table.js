@@ -122,7 +122,7 @@ class ChoiceContainer extends React.Component {
         <button className='saveButton' onClick={() => this.props.saveAll(this.props)}>Save</button>
           <ul className='grid goals'>
             <li className='goals'><span>Goals:</span></li>
-            <li className='goalsSelect'>
+            <li className='goalsSelect' style={{display: this.props.user.email ? 'inline' : 'none'}}>
               {this.state.showEditGoalForm || this.state.showNewGoalForm
                 ? 
                 <>

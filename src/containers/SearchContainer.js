@@ -27,7 +27,6 @@ class SearchContainer extends React.Component {
       this.props.internalSearch(this.state.text)
       .then(r => r.json())
       .then(r => {
-        this.props.stopLoading()
         if (r.internal.length > 0){
           this.setState({
             internal: r.internal,
@@ -79,7 +78,8 @@ class SearchContainer extends React.Component {
           </input>
           <input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input>
           {/* <span className='tooltip'><input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input><span className='tooltiptext'>Search</span></span> */}
-          <button onClick={() => this.setState({addFood: !this.state.addFood})} className='iconButton'>{this.state.addFood ?
+          <button onClick={() => this.setState({addFood: !this.state.addFood})} className='iconButton' style={{display: this.props.user.email ? 'inline' : 'none'}}>
+            {this.state.addFood ?
             <>
             <img src='close-icon.png' alt='close new food form' className='closeButton' />
             <span className='tooltiptext'>Close Form</span>
@@ -132,6 +132,12 @@ class SearchContainer extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     startLoading: () => dispatch({type: 'START_LOADING'}),
@@ -141,4 +147,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(SearchContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)
