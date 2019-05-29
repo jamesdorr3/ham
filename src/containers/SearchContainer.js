@@ -27,11 +27,19 @@ class SearchContainer extends React.Component {
       .then(r => r.json())
       .then(r => {
         this.props.stopLoading()
-        if (r.common.length > 0 || r.branded.length > 0 || r.internal.length > 0) {
-          this.setState({branded: r.branded, common: r.common, internal: r.internal})
-        }else{
+        // debugger
+        if (r.internal.length > 0){
+          this.setState({internal: r.internal})
+        }
+        if (r.common.length > 0){
+          this.setState({common: r.common})
+        }
+        else{
           this.setState({error: 'No Results'})
         }
+        // if (r.branded.length > 0){
+        //   this.setState({branded: r.branded})
+        // }
       })
     }
   }
@@ -47,6 +55,7 @@ class SearchContainer extends React.Component {
   }
 
   render(){
+    console.log(this.state.common)
     return(
       <div className='centered row foodSearchContainer' >
         <form onSubmit={this.handleSubmit} className='searchForm'>
@@ -89,13 +98,13 @@ class SearchContainer extends React.Component {
           {this.state.common.map(food => (
             < SearchResultCard 
             categoryId={this.props.categoryId}
-            key={food.food_name} 
+            key={food.fdcId} 
             food={food} 
             addChoice={this.props.addChoice}
             clearForm={this.clearResults}
             />)
           )}
-          {this.state.branded.map(food =>(
+          {/* {this.state.branded.map(food =>(
             < SearchResultCard 
             categoryId={this.props.categoryId}
             key={food.nix_item_id} 
@@ -103,7 +112,7 @@ class SearchContainer extends React.Component {
             addChoice={this.props.addChoice}
             clearForm={this.clearResults}
             />
-          ))}
+          ))} */}
           {this.state.error ? <li>{this.state.error}</li> : null}
           {/* {this.state.error ? <li>No Results</li> : null} */}
         </ul>
