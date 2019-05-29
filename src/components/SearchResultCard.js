@@ -6,18 +6,15 @@ class SearchResultCard extends React.Component {
 
   handleAddChoice = () => {
     this.props.clearForm()
-    const props = (this.props.food.nix_item_id) ? 
-      `id=${this.props.food.nix_item_id}&categoryId=${this.props.categoryId}`: 
-      `name=${this.props.food.food_name}&categoryId=${this.props.categoryId}`
+    const props = `id=${this.props.food.fdcId}&categoryId=${this.props.categoryId}`
     this.props.selectSearchResult(props)
   }
 
   render(){
-    // console.log(this.props)
     return(
       <li className='searchResult'>
         <button onClick={this.handleAddChoice} className='addButton'><img src='add-icon-circle.png' alt='choose search results' className='addButton' /></button>
-        {this.props.food.food_name}{this.props.food.brand_name ? `- ${this.props.food.brand_name}` : null}
+        {this.props.food.description}{this.props.food.brandOwner ? `- ${this.props.food.brandOwner}` : null}
       </li>
     )
   }

@@ -177,10 +177,10 @@ class ChoiceContainer extends React.Component {
             </>
             :
             <>
-            <li className='calories'><input onChange={this.handleChangeMacros}  type='number' name='calories' value={this.props.goal.calories} /></li>
-            <li className='fat'><input onChange={this.handleChangeMacros} type='number' name='fat' value={this.props.goal.fat} /></li>
-            <li className='carbs'><input onChange={this.handleChangeMacros} type='number' name='carbs' value={this.props.goal.carbs} /></li>
-            <li className='protein'><input onChange={this.handleChangeMacros} type='number' name='protein' value={this.props.goal.protein} /></li>
+            <li className='calories'><input onChange={this.handleChangeMacros}  type='number' step="any" min='0' name='calories' value={this.props.goal.calories} /></li>
+            <li className='fat'><input onChange={this.handleChangeMacros} type='number' step="any" min='0' name='fat' value={this.props.goal.fat} /></li>
+            <li className='carbs'><input onChange={this.handleChangeMacros} type='number' step="any" min='0' name='carbs' value={this.props.goal.carbs} /></li>
+            <li className='protein'><input onChange={this.handleChangeMacros} type='number' step="any" min='0' name='protein' value={this.props.goal.protein} /></li>
             <li className='deleteColumn'></li>
             {/* <li className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</li> */}
             </>

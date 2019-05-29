@@ -94,7 +94,7 @@ class ChoiceCard extends React.Component {
         id={this.props.choiceFood.choice.id}
         >
           <li className='name'>
-              {this.props.choiceFood.food.name}
+              <span className='nameScroll'>{this.props.choiceFood.food.name}</span>
             </li>
           <li className='amount'>
               <input type='number'
