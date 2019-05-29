@@ -19,8 +19,14 @@ class SignUpCard extends React.Component {
     if (!this.state.password || !this.state.username || !this.state.email) {
       this.setState({error: 'Username, email, and password required'})
     }
+    else if (!(/\w+@\w+\.\w+/).test(this.state.email)) {
+      this.setState({error: 'Email is invalid'})
+    }
     else if (this.state.password !== this.state.password2){
       this.setState({error: 'Passwords must match'})
+    }
+    else if (this.state.password.length < 6){
+      this.setState({error: 'Password must be at least 6 characters'})
     }
     else{
       this.props.createUser(this.state)
@@ -56,11 +62,11 @@ class SignUpCard extends React.Component {
         </li>
         <li>
           <label>Password</label><br/>
-          <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='password'/>
+          <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='6 characters'/>
         </li>
         <li>
           <label>Password</label><br/>
-          <input value={this.state.password2} name='password2' onChange={this.handleChange} type='password' placeholder='password'/>
+          <input value={this.state.password2} name='password2' onChange={this.handleChange} type='password' placeholder='confirm'/>
         </li>
         <li>
           <input value='Sign Up' type='submit'/>

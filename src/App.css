@@ -275,7 +275,7 @@ button .tooltiptext::after {
 }
 
 /* ERROR MESSAGE */
-.errorMessage {background: black; padding: 5px; border-radius: 5px}
+.errorMessage {background: black; color: rgb(245, 245, 245); padding: 5px; border-radius: 5px}
 /* ERROR MESSAGE */
 
 a {border: 1px solid black; padding: 2px; border-radius: 5px}
