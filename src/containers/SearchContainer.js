@@ -4,6 +4,7 @@ import InternalSearchResultCard from '../components/InternalSearchResultCard'
 import {URL, HEADERS} from '../constants.js'
 import MakeFoodCard from '../components/MakeFoodCard'
 import {connect} from 'react-redux'
+import {internalSearch, externalSearch} from '../actions/searchActions'
 
 class SearchContainer extends React.Component {
 
@@ -23,14 +24,24 @@ class SearchContainer extends React.Component {
     if (this.state.text){
       // console.log('submit')
       this.props.startLoading()
-      fetch(`${URL}search/many?q=${this.state.text}`, {headers: HEADERS()})
+      this.props.internalSearch(this.state.text)
       .then(r => r.json())
       .then(r => {
         this.props.stopLoading()
-        // debugger
         if (r.internal.length > 0){
-          this.setState({internal: r.internal})
+          this.setState({
+            internal: r.internal,
+            // common: [{description: 'More results are loading'}]
+          })
         }
+      })
+      this.props.externalSearch(this.state.text)
+      .then(r => r.json())
+      .then(r => {
+        this.props.stopLoading()
+        // if (r.internal.length > 0){
+        //   this.setState({internal: r.internal})
+        // }
         if (r.common.length > 0){
           this.setState({common: r.common})
         }
@@ -124,7 +135,9 @@ class SearchContainer extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     startLoading: () => dispatch({type: 'START_LOADING'}),
-    stopLoading: () => dispatch({type: 'STOP_LOADING'})
+    stopLoading: () => dispatch({type: 'STOP_LOADING'}),
+    internalSearch: (searchTerm) => dispatch(internalSearch(searchTerm)),
+    externalSearch: (searchTerm) => dispatch(externalSearch(searchTerm))
   }
 }
 

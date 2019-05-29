@@ -24,3 +24,15 @@ export const selectInternalSearchResult = (idAndCategory) => {
     })
   }
 }
+
+export const internalSearch = (searchTerm) => {
+  return dispatch => {
+    return fetch(`${URL}search/internal_search?q=${searchTerm}`, {headers: HEADERS()})
+  }
+}
+
+export const externalSearch = searchTerm => {
+  return dispatch => {
+    return fetch(`${URL}search/many?q=${searchTerm}`, {headers: HEADERS()})
+  }
+}

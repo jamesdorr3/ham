@@ -141,6 +141,7 @@ button:focus, .tooltip:focus {outline-width: 0px}
   width: 80px; white-space: nowrap; padding: 5px 8px; border-radius: 5px; 
   z-index: 3; border-width: 1px; border-style: solid; border-color: black
 }
+
 button:hover .tooltiptext, .tooltip:hover .tooltiptext {visibility: visible; bottom: -35px; right: -37px}
 button .tooltiptext::after {
   content: " ";
@@ -229,6 +230,14 @@ button .tooltiptext::after {
 .goalsSelect input[type='submit'] {width: 19%; padding: 2px 0; margin: 0px; max-width: 19px}
 .goals input {text-align: center}
 .newday {width: auto}
+
+.footer:hover .hidden, .hidden:hover{top: 0%; animation: footerShow 1s;}
+.hidden{position: absolute; background: rgb(206, 101, 49); padding: 15px; bottom: 0px;
+  color: white; width: 100%; top: 100%; animation: footerHide 0.5s;
+}
+
+@keyframes footerShow {from {top: 100%;} to {top: 0%;}}
+@keyframes footerHide {from {top: 0%} to {top: 100%}}
 
 /* LOADING  */
 .loading {
