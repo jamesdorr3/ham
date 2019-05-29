@@ -4,6 +4,7 @@ import InternalSearchResultCard from '../components/InternalSearchResultCard'
 import {URL, HEADERS} from '../constants.js'
 import MakeFoodCard from '../components/MakeFoodCard'
 import {connect} from 'react-redux'
+import {internalSearch, externalSearch} from '../actions/searchActions'
 
 class SearchContainer extends React.Component {
 
@@ -23,14 +24,23 @@ class SearchContainer extends React.Component {
     if (this.state.text){
       // console.log('submit')
       this.props.startLoading()
-      fetch(`${URL}search/many?q=${this.state.text}`, {headers: HEADERS()})
+      this.props.internalSearch(this.state.text)
+      .then(r => r.json())
+      .then(r => {
+        if (r.internal.length > 0){
+          this.setState({
+            internal: r.internal,
+            // common: [{description: 'More results are loading'}]
+          })
+        }
+      })
+      this.props.externalSearch(this.state.text)
       .then(r => r.json())
       .then(r => {
         this.props.stopLoading()
-        // debugger
-        if (r.internal.length > 0){
-          this.setState({internal: r.internal})
-        }
+        // if (r.internal.length > 0){
+        //   this.setState({internal: r.internal})
+        // }
         if (r.common.length > 0){
           this.setState({common: r.common})
         }
@@ -68,7 +78,8 @@ class SearchContainer extends React.Component {
           </input>
           <input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input>
           {/* <span className='tooltip'><input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input><span className='tooltiptext'>Search</span></span> */}
-          <button onClick={() => this.setState({addFood: !this.state.addFood})} className='iconButton'>{this.state.addFood ?
+          <button onClick={() => this.setState({addFood: !this.state.addFood})} className='iconButton' style={{display: this.props.user.email ? 'inline' : 'none'}}>
+            {this.state.addFood ?
             <>
             <img src='close-icon.png' alt='close new food form' className='closeButton' />
             <span className='tooltiptext'>Close Form</span>
@@ -121,11 +132,19 @@ class SearchContainer extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    startLoading: () => dispatch({type: 'START_LOADING'}),
-    stopLoading: () => dispatch({type: 'STOP_LOADING'})
+    user: state.user
   }
 }
 
-export default connect(null, mapDispatchToProps)(SearchContainer)
+const mapDispatchToProps = dispatch => {
+  return {
+    startLoading: () => dispatch({type: 'START_LOADING'}),
+    stopLoading: () => dispatch({type: 'STOP_LOADING'}),
+    internalSearch: (searchTerm) => dispatch(internalSearch(searchTerm)),
+    externalSearch: (searchTerm) => dispatch(externalSearch(searchTerm))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)
