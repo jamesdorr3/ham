@@ -15,18 +15,31 @@ class App extends React.Component {
     if (!destination) {
       return;
     }
-    const choicesIds = []
-    const toCategory = destination.droppableId
-    document.querySelectorAll(`.choice`).forEach(x => choicesIds.push(parseInt(x.id)))
-    // const movedId = choicesIds.splice(source.index, 1)[0]
-    // choicesIds.splice(destination.index, 0, movedId)
-    const fromIndex = choicesIds.indexOf(draggableId)
-    const toIndex = destination.index
-    const id = choicesIds.splice(fromIndex, 1)[0]
-    choicesIds.splice(toIndex, 0, id)
-    // debugger
-    // this.props.updateIndex({choicesIds: choicesIds})
-    this.props.handleDrop(choicesIds, draggableId, toCategory)
+    // const choicesIds = []
+    // const toCategory = destination.droppableId
+    // document.querySelectorAll(`.choice`).forEach(x => choicesIds.push(parseInt(x.id)))
+    // // const movedId = choicesIds.splice(source.index, 1)[0]
+    // // choicesIds.splice(destination.index, 0, movedId)
+    // const fromIndex = choicesIds.indexOf(draggableId)
+    // const toIndex = destination.index
+    // const id = choicesIds.splice(fromIndex, 1)[0]
+    // choicesIds.splice(toIndex, 0, id)
+    // // debugger
+    // // this.props.updateIndex({choicesIds: choicesIds})
+    // this.props.handleDrop(choicesIds, draggableId, toCategory)
+    const choiceFood = this.props.choiceFoods.find(x => x.choice.id === draggableId)
+    const categoryId = destination.droppableId
+    const thisCatsChoices = this.props.choiceFoods.filter(x => x.choice.category_id === categoryId)
+    const orderedChoices = thisCatsChoices.sort((x, y) => x.choice.index - y.choice.index)
+    const orderedIds = orderedChoices.map(x => x.choice.id)
+    if (choiceFood.choice.category_id === categoryId){
+      const index = orderedIds.indexOf(choiceFood.choice.id)
+      orderedIds.splice(index, 1)
+    }
+    orderedIds.splice(destination.index, 0, choiceFood.choice.id)
+    orderedIds.forEach((id, i) => {
+      this.props.editChoice({id: id, choice: {index: i, category_id: categoryId}})
+    })
   };
 
   render(){
@@ -47,16 +60,15 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    loading: state.loading
-  }
+  return state
 }
 
 const mapDispatchToProps = dispatch => {
   return{
     handleDrop: (choicesIds, choiceId, categoryId) => dispatch({ type: 'HANDLE_DROP', payload: {choicesIds: choicesIds, choiceId: choiceId, categoryId: categoryId}}),
     updateIndex: choicesIds => dispatch({ type: 'UPDATE_INDEX', payload: choicesIds}),
-    updateCategory: (choiceId, categoryId) => dispatch({ type: 'UPDATE_CATEGORY', payload: {choiceId: choiceId, categoryId: categoryId}})
+    updateCategory: (choiceId, categoryId) => dispatch({ type: 'UPDATE_CATEGORY', payload: {choiceId: choiceId, categoryId: categoryId}}),
+    editChoice: info => dispatch({ type: 'EDIT_CHOICE', payload: info})
   }
 }
 
