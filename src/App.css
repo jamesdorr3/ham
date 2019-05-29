@@ -278,3 +278,5 @@ button .tooltiptext::after {
 /* ERROR MESSAGE */
 
 a {border: 1px solid black; padding: 2px; border-radius: 5px}
+
+/* .name:hover .nameScroll{} */
