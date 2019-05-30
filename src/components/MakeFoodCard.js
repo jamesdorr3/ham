@@ -78,7 +78,7 @@ class MakeFoodCard extends React.Component {
           </li>
           <li>
           <label>Serving Amount</label>
-          <input type='number' step="any" min='0' value={this.state.serving_unit_amount} onChange={this.handleChange} name='serving_unit_amount' placeholder='serving amount' />
+          <input type='number' step="any" min='1' value={this.state.serving_unit_amount} onChange={this.handleChange} name='serving_unit_amount' placeholder='serving amount' />
           </li>
           <li>
           <label>Serving Unit</label>
@@ -90,7 +90,7 @@ class MakeFoodCard extends React.Component {
           </li>
           <li>
             <label>Serving in Grams</label>
-            <input type='number' step="any" min='0' value={this.state.serving_grams} onChange={this.handleChange} name='serving_grams' placeholder='grams/serving' />
+            <input type='number' step="any" min='1' value={this.state.serving_grams} onChange={this.handleChange} name='serving_grams' placeholder='grams/serving' />
           </li>
           {/* <li></li> */}
           <li>

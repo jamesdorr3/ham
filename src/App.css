@@ -87,8 +87,8 @@ button.centered{margin-left: 33%}
   overflow: scroll
 }
 
-.saveButton {position: absolute; float: left; border-radius: 25px; padding: 10px; 
-  font-size: 18px; left: 16%; border: 2px solid lime; background: rgb(245, 245, 245)}
+.saveButton {position: relative; float: left; border-radius: 25px; padding: 10px;
+  font-size: 18px; left: 0px; top: -20px; border: 2px solid lime; background: rgb(245, 245, 245)}
 .saveButton:hover{background: lime}
 .saveButton:active{background: rgb(0, 216, 0)}
 
@@ -98,8 +98,8 @@ button.centered{margin-left: 33%}
 li {list-style: none; padding: 0 0 0 4px}
 ul {padding: 0 0 0 5px}
 .name{grid-column: 1; position: relative; overflow: hidden; white-space: nowrap; text-align: left; padding-left: 10px; font-family: panton-bold;}
-.choice li.name:hover {overflow: visible; z-index: 1;}
-.choice li.name:hover span.nameScroll{background: rgb(245, 245, 245); padding: 3px 0; width: auto; transition: max-width linear .5s;}
+.choice li.name:hover {overflow: visible; z-index: 1}
+.choice li.name:hover span.nameScroll{background: rgb(245, 245, 245); padding: 3px 10px 3px 0; width: auto; transition: max-width linear .5s;}
 /* span.nameScroll{position: absolute; transform: translateX(0); transition: 3s}
 .choice li.name:hover span.nameScroll{transform: translateX(calc(150px - 100%));} */
 
