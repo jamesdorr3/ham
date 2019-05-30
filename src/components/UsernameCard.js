@@ -25,7 +25,14 @@ class UsernameCard extends React.Component {
     else{
       bmrCals = this.mifflin()
     }
-    this.props.createGoal({calories: bmrCals, name: 'basal metabolic rate', user_id: this.props.user.id})
+    this.props.createGoal({
+      calories: bmrCals, 
+      fat: 1,
+      carbs: 1,
+      protein: 1,
+      name: 'basal metabolic rate', 
+      user_id: this.props.user.id
+    })
     this.setState({showUserInfo: false})
   }
 
@@ -73,6 +80,25 @@ class UsernameCard extends React.Component {
         <h2>User Info</h2>
         <p>username: {this.props.user.username}</p>
         <p>email: {this.props.user.email}</p>
+        <button className='tooltip explanation'> ?
+          <div className='explanationtext'>
+            <h2>How It Works</h2>
+            <p>If you did not supply a body fat percentage, we us the 
+              <a href='http://www.ksmithwriter.com/Mifflin_Equation_For_Weight_Control.html'>Mifflin Method</a> to 
+              calculate your basal 
+              metabolic rate (the amount of calories you burn each day). We 
+              average the Mifflin Method and 
+              the <a href='https://en.wikipedia.org/wiki/Basal_metabolic_rate'>Katch-McArdle</a> Formula 
+              if a body fat percentage was present.</p>
+              <p>The number we suggest should maintain your weight.
+                To gain or lose weight, change the calories you intake each day. 
+                We recommend small changes - 5% or 10% calorie decificts or surpluses at most so your body does not respond negatively. 
+                After time, these can be readjusted.
+              </p>
+            <h2>Macros: Fat, Carbs, and Protein</h2>
+            <p>HAM recommends <a href='https://shapescale.com/blog/health/nutrition/calculate-macronutrient-ratio/'>shapescale.com</a> to help you determine your macronutrient needs.</p>
+          </div>
+        </button>
         <h2>Generate Macros</h2>
         <form onSubmit={this.handleSubmit}>
           <label>Height</label>
