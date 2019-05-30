@@ -1,9 +1,13 @@
 import {URL, HEADERS} from '../constants'
 
-export const selectSearchResult = (prop) => {
+export const selectSearchResult = (props) => {
   return (dispatch) => {
     dispatch({type: 'START_LOADING'})
-    return fetch(`${URL}search/make_choice?${prop}`, {headers: HEADERS()})
+    return fetch(`${URL}search/make_choice`, {
+      method: 'POST',
+      headers: HEADERS(),
+      body: JSON.stringify(props)
+    })
     .then(r => r.json())
     .then(choiceAndFood => {
       dispatch({type: 'STOP_LOADING'})

@@ -6,7 +6,7 @@ class InternalSearchResultCard extends React.Component {
 
   handleAddChoice = () => {
     this.props.clearForm()
-    this.props.selectInternalSearchResult({foodId: this.props.food.id, categoryId: this.props.categoryId})
+    this.props.selectInternalSearchResult({foodId: this.props.food.id, categoryId: this.props.categoryId, dayId: this.props.day.id})
   }
 
   render(){
@@ -22,10 +22,16 @@ class InternalSearchResultCard extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    day: state.day
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     selectInternalSearchResult: idAndCategory => dispatch(selectInternalSearchResult(idAndCategory))
   }
 }
 
-export default connect(null, mapDispatchToProps)(InternalSearchResultCard)
+export default connect(mapStateToProps, mapDispatchToProps)(InternalSearchResultCard)

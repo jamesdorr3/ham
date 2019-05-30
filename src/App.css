@@ -98,14 +98,14 @@ button.centered{margin-left: 33%}
 li {list-style: none; padding: 0 0 0 4px}
 ul {padding: 0 0 0 5px}
 .name{grid-column: 1; position: relative; overflow: hidden; white-space: nowrap; text-align: left; padding-left: 10px; font-family: panton-bold;}
-/* .choice li.name:hover {overflow: visible; z-index: 1} */
-/* .choice li.name:hover span.nameScroll{background: rgb(245, 245, 245); padding: 3px 0} */
-span.nameScroll{position: absolute; transform: translateX(0); transition: 3s}
-.choice li.name:hover span.nameScroll{transform: translateX(calc(150px - 100%));}
+.choice li.name:hover {overflow: visible; z-index: 1;}
+.choice li.name:hover span.nameScroll{background: rgb(245, 245, 245); padding: 3px 0; width: auto; transition: max-width linear .5s;}
+/* span.nameScroll{position: absolute; transform: translateX(0); transition: 3s}
+.choice li.name:hover span.nameScroll{transform: translateX(calc(150px - 100%));} */
 
 .categoryName {grid-column: 1 / 3; margin-left: 59%}
 .categoryGrid { font-weight: bold;}
-.email { font-family: panton-bold; color: rgb(245, 245, 245); font-size: 18px}
+.email {color: rgb(245, 245, 245); font-size: 18px}
 .amount {grid-column: 2}
 .measure {grid-column: 3}
 .measure select {width: 70%; max-width: 100%}
