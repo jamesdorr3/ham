@@ -97,7 +97,12 @@ button.centered{margin-left: 33%}
 .grid {display: grid; grid-template-columns: 30% 1fr 15% repeat(4, 1fr) 5%; margin: 5px 0px; text-align: center;}
 li {list-style: none; padding: 0 0 0 4px}
 ul {padding: 0 0 0 5px}
-.name{grid-column: 1; overflow: hidden; white-space: nowrap; text-align: left; padding-left: 10px; font-family: panton-bold;}
+.name{grid-column: 1; position: relative; overflow: hidden; white-space: nowrap; text-align: left; padding-left: 10px; font-family: panton-bold;}
+/* .choice li.name:hover {overflow: visible; z-index: 1} */
+/* .choice li.name:hover span.nameScroll{background: rgb(245, 245, 245); padding: 3px 0} */
+span.nameScroll{position: absolute; transform: translateX(0); transition: 3s}
+.choice li.name:hover span.nameScroll{transform: translateX(calc(150px - 100%));}
+
 .categoryName {grid-column: 1 / 3; margin-left: 59%}
 .categoryGrid { font-weight: bold;}
 .email { font-family: panton-bold; color: rgb(245, 245, 245); font-size: 18px}
@@ -232,7 +237,7 @@ button .tooltiptext::after {
 .newday {width: auto}
 
 .footer:hover .hidden, .hidden:hover{top: 0%; animation: footerShow 1s;}
-.hidden{position: absolute; background: rgb(206, 101, 49); padding: 15px; bottom: 0px;
+.hidden{position: absolute; background: rgb(206, 101, 49); padding: 15px; margin-bottom: 0px;
   color: white; width: 100%; top: 100%; animation: footerHide 0.5s;
 }
 
