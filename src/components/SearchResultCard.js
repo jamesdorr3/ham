@@ -6,8 +6,7 @@ class SearchResultCard extends React.Component {
 
   handleAddChoice = () => {
     this.props.clearForm()
-    const props = `id=${this.props.food.fdcId}&categoryId=${this.props.categoryId}`
-    this.props.selectSearchResult(props)
+    this.props.selectSearchResult({fdcId: this.props.food.fdcId, categoryId: this.props.categoryId, dayId: this.props.day.id})
   }
 
   render(){
@@ -21,10 +20,16 @@ class SearchResultCard extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    day: state.day
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     selectSearchResult: prop => dispatch(selectSearchResult(prop))
   }
 }
 
-export default connect(null, mapDispatchToProps)(SearchResultCard)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResultCard)
