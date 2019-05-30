@@ -7,6 +7,7 @@ import {createDay, selectDay} from '../actions/daysActions'
 import {URL, HEADERS} from '../constants.js'
 import {saveAll} from '../actions/saveAllAction'
 import {deleteDay} from '../actions/daysActions'
+import UsernameCard from '../components/UsernameCard'
 
 class Header extends React.Component {
 
@@ -107,10 +108,13 @@ class Header extends React.Component {
   }
 
   render(){
-    // console.log(this.props.day)
+    console.log(this.props.day)
     return(
       <div className='header'>
-        {this.signedIn() ? <div className="third centered email">{this.props.user.email}</div> : <div className='twothirds'><p>Use HAM free. Log in to record data</p></div>}
+        {this.signedIn() 
+          ? 
+          < UsernameCard />
+          : <div className='twothirds'><p>Use HAM free. Log in to record data</p></div>}
         {this.signedIn() ? 
           <div className='third centered'>
             {this.state.editDayName 

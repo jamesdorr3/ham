@@ -15,22 +15,22 @@ input[type='text'], input[type='password'] {font-size: 12px; border-radius: 5px}
   position: fixed;
   top: 0px;
   width: 100%;
-  /* min-width: 644px; */
+  min-width: 688px;
   height: 60px;
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background-color: rgb(206, 101, 49);
   color: rgb(245, 245, 245);
   z-index: 1;
 }
 
-.header div{
-  float: left;
-}
 .third {
   position: relative;
-  width: 33%;
+  margin: auto;
   margin-top: 15px
 }
+
+.twothirds {grid-column: 1/3}
 
 #submitDayName {width: 20px; padding: 2px 0;}
 
@@ -51,6 +51,27 @@ select.daySelect {max-width: 100%}
 
 select {font-size: 13px}
 
+.userModal {
+  z-index: 2;
+  position: absolute;
+  max-width: 1000px;
+  width: 300px;
+  top: 50px;
+  left: 6%;
+  background-color: rgb(245, 245, 245);
+  border-radius: 5px; border: 1px solid black;
+  color: black;
+  padding: 5px;
+}
+
+.userModal form {display: grid; grid-template-columns: 1fr 1.5fr}
+
+.userModal input {width: 145px}
+input.height {width: 70px}
+.sensitive{-webkit-text-security: disc}
+.gender{grid-column: 1/3; text-align: center}
+.userModal form input[type='submit'] {grid-column: 1/3; margin: auto; width: auto; padding: 5px; margin: 5px; border-radius: 5px}
+
 .modal {
   z-index: 1;
   position: fixed;
@@ -67,7 +88,7 @@ select {font-size: 13px}
 
 .signupForm{display: grid; grid-template-columns: 1fr 1fr}
 
-.centered {text-align: center;}
+/* .centered {text-align: center;} */
 
 button.centered{margin-left: 33%}
 
@@ -98,7 +119,7 @@ button.centered{margin-left: 33%}
 li {list-style: none; padding: 0 0 0 4px}
 ul {padding: 0 0 0 5px}
 .name{grid-column: 1; position: relative; overflow: hidden; white-space: nowrap; text-align: left; padding-left: 10px; font-family: panton-bold;}
-.choice li.name:hover {overflow: visible; z-index: 1}
+.choice li.name:hover {overflow: visible;}
 .choice li.name:hover span.nameScroll{background: rgb(245, 245, 245); padding: 3px 10px 3px 0; width: auto; transition: max-width linear .5s;}
 /* span.nameScroll{position: absolute; transform: translateX(0); transition: 3s}
 .choice li.name:hover span.nameScroll{transform: translateX(calc(150px - 100%));} */
@@ -144,7 +165,7 @@ button:focus, .tooltip:focus {outline-width: 0px}
 .tooltiptext{
   position: absolute; background-color: white; visibility: hidden; 
   width: 80px; white-space: nowrap; padding: 5px 8px; border-radius: 5px; 
-  z-index: 3; border-width: 1px; border-style: solid; border-color: black
+  z-index: 2; border-width: 1px; border-style: solid; border-color: black
 }
 
 button:hover .tooltiptext, .tooltip:hover .tooltiptext {visibility: visible; bottom: -35px; right: -37px}
@@ -158,11 +179,13 @@ button .tooltiptext::after {
   border-style: solid;
   border-color: transparent transparent black transparent;
 }
+
+.foodSearchContainer { text-align: center}
 /* TABLE */
 /* FOOD FORM */
 
 .createFoodContainer {position: relative}
-.foodForm {background: rgb(245, 245, 245); position: absolute; z-index: 2; 
+.foodForm {background: rgb(245, 245, 245); position: absolute; z-index: 1; 
   width: 101%; left: -0.5%; border-radius: 5px; border: 1px solid black; box-shadow: 1px 2px 5px rgb(90, 90, 90)}
 .newFoodGrid {display: grid; grid-template-columns: repeat(5, 1fr); width: 98%}
 .newFoodGrid input, .newFoodGrid select {width: 100%}
@@ -174,7 +197,7 @@ button .tooltiptext::after {
 .searchResultContainer {
   position: absolute;
   background-color: rgb(245, 245, 245);
-  z-index: 2;
+  z-index: 1;
   max-height: 310px;
   overflow: scroll;
   margin: 1px 0px 0px 20%;
@@ -263,7 +286,7 @@ button .tooltiptext::after {
 }
 /* LOADING  */
 
-.searchForm {position: relative; z-index: 1}
+.searchForm {position: relative; z-index: 0}
 .rectangle {
   position: relative; border-radius: 5px;
   padding: 5px;
