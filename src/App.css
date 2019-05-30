@@ -140,6 +140,7 @@ ul {padding: 0 0 0 5px}
 .categoryName {grid-column: 1 / 3; margin-left: 59%}
 .categoryGrid { font-weight: bold;}
 .email {color: rgb(245, 245, 245); font-size: 18px}
+button.email{background: none; border: none}
 .amount {grid-column: 2}
 .measure {grid-column: 3}
 .measure select {width: 70%; max-width: 100%}
@@ -180,6 +181,8 @@ button:focus, .tooltip:focus {outline-width: 0px}
   width: 80px; white-space: nowrap; padding: 5px 8px; border-radius: 5px; 
   z-index: 2; border-width: 1px; border-style: solid; border-color: black
 }
+.insideModal{border: 1px solid black; border-radius: 5px; padding: 4px; margin-top: 15px;}
+.topRightClose {position: absolute; right: 0px; top: 0px}
 
 button:hover .tooltiptext, .tooltip:hover .tooltiptext {visibility: visible; bottom: -35px; right: -37px}
 button .tooltiptext::after {

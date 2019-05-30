@@ -75,8 +75,12 @@ class UsernameCard extends React.Component {
   render(){
     return(
       <>
-      <div className="third centered email" onClick={() => this.setState({showUserInfo: !this.state.showUserInfo})}>{this.props.user.username} {this.state.showUserInfo? '△' : '▽'}</div> 
+      <button className="third centered email" onClick={() => this.setState({showUserInfo: !this.state.showUserInfo})}>{this.props.user.username} {this.state.showUserInfo? '△' : '▽'}</button> 
       <div className='userModal' style={{display: this.state.showUserInfo ? 'inline' : 'none'}}>
+        <div className='insideModal'>
+        <button onClick={() => this.setState({showUserInfo: false})} className='topRightClose closeButton' alt='Close'>
+                  <img src='close-icon.png' className='topRightForm closeButton' alt='Close'></img>
+        </button>
         <h2>User Info</h2>
         <p>username: {this.props.user.username}</p>
         <p>email: {this.props.user.email}</p>
@@ -122,6 +126,7 @@ class UsernameCard extends React.Component {
           {this.activityLevelSelect()}
           <input type='submit' value='Generate Macros' />
         </form>
+        </div>
       </div>
       </>
     )
