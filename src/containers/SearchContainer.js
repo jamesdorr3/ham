@@ -37,15 +37,17 @@ class SearchContainer extends React.Component {
       this.props.externalSearch(this.state.text)
       .then(r => r.json())
       .then(r => {
+        debugger
         this.props.stopLoading()
+        // debugger
         // if (r.internal.length > 0){
         //   this.setState({internal: r.internal})
         // }
-        if (r.common.length > 0){
+        if (r.common && r.common.length > 0){
           this.setState({common: r.common})
         }
         else{
-          this.setState({error: 'No Results'})
+          this.setState({error: 'No More Results'})
         }
         // if (r.branded.length > 0){
         //   this.setState({branded: r.branded})

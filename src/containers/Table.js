@@ -167,40 +167,40 @@ class ChoiceContainer extends React.Component {
             </li>
             {this.state.showNewGoalForm ?
             <>
-            <li className='calories'><input onChange={this.handleNewGoalMacros} placeholder='cal'  type='number' name='calories' value={this.state.calories} /></li>
-            <li className='fat'><input onChange={this.handleNewGoalMacros} placeholder='grams' type='number' name='fat' value={this.state.fat} /></li>
-            <li className='carbs'><input onChange={this.handleNewGoalMacros} placeholder='grams' type='number' name='carbs' value={this.state.carbs} /></li>
-            <li className='protein'><input onChange={this.handleNewGoalMacros} placeholder='grams' type='number' name='protein' value={this.state.protein} /></li>
+            <li className='calories macro'><input onChange={this.handleNewGoalMacros} placeholder='cal'  type='number' name='calories' value={this.state.calories} /></li>
+            <li className='fat macro'><input onChange={this.handleNewGoalMacros} placeholder='grams' type='number' name='fat' value={this.state.fat} /></li>
+            <li className='carbs macro'><input onChange={this.handleNewGoalMacros} placeholder='grams' type='number' name='carbs' value={this.state.carbs} /></li>
+            <li className='protein macro'><input onChange={this.handleNewGoalMacros} placeholder='grams' type='number' name='protein' value={this.state.protein} /></li>
             <li className='deleteColumn'></li>
             {/* <li className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</li> */}
             </>
             :
             <>
-            <li className='calories'><input onChange={this.handleChangeMacros} placeholder='cal'  type='number' step="any" min='0' name='calories' value={this.props.goal.calories} /></li>
-            <li className='fat'><input onChange={this.handleChangeMacros} placeholder='grams' type='number' step="any" min='0' name='fat' value={this.props.goal.fat} /></li>
-            <li className='carbs'><input onChange={this.handleChangeMacros} placeholder='grams' type='number' step="any" min='0' name='carbs' value={this.props.goal.carbs} /></li>
-            <li className='protein'><input onChange={this.handleChangeMacros} placeholder='grams' type='number' step="any" min='0' name='protein' value={this.props.goal.protein} /></li>
+            <li className='calories macro'><input onChange={this.handleChangeMacros} placeholder='cal'  type='number' step="any" min='0' name='calories' value={this.props.goal.calories} /></li>
+            <li className='fat macro'><input onChange={this.handleChangeMacros} placeholder='grams' type='number' step="any" min='0' name='fat' value={this.props.goal.fat} /></li>
+            <li className='carbs macro'><input onChange={this.handleChangeMacros} placeholder='grams' type='number' step="any" min='0' name='carbs' value={this.props.goal.carbs} /></li>
+            <li className='protein macro'><input onChange={this.handleChangeMacros} placeholder='grams' type='number' step="any" min='0' name='protein' value={this.props.goal.protein} /></li>
             <li className='deleteColumn'></li>
             {/* <li className='deleteColumn'>{this.state.goalChanged ? <button onClick={this.saveGoals} >Save</button> : null }</li> */}
             </>
             }
           </ul>
           <ul className='grid key'>
-            <li className='name'>Name</li>
-            <li className='amount'>Amount</li>
-            <li className='measure' >Measure</li>
-            <li className='macro calories' >Calories</li>
-            <li className='macro fat' >Fat</li>
-            <li className='macro carbs' >Carbs</li>
-            <li className='macro protein' >Protein</li>
+            <li className='name'><div>Name</div></li>
+            <li className='amount'><div>Amount</div></li>
+            <li className='measure' ><div>Measure</div></li>
+            <li className='macro calories' ><div>cals</div></li>
+            <li className='macro fat' ><div>Fat</div></li>
+            <li className='macro carbs' ><div>Carb</div></li>
+            <li className='macro protein' ><div>Prot</div></li>
             <li className='deleteColumn'></li>
           </ul>
           <ul className='grid totalsRow'>
             <li className='totals'><span>TOTALS:</span></li>
-            <li className='calories' placeholder='grams'>{this.autoSum('calories')}</li>
-            <li className='fat'>{this.autoSum('fat')}</li>
-            <li className='carbs'>{this.autoSum('carbs')}</li>
-            <li className='protein'>{this.autoSum('protein')}</li>
+            <li className='calories macro' placeholder='grams'>{this.autoSum('calories')}</li>
+            <li className='fat macro'>{this.autoSum('fat')}</li>
+            <li className='carbs macro'>{this.autoSum('carbs')}</li>
+            <li className='protein macro'>{this.autoSum('protein')}</li>
             <li className='deleteColumn'></li>
           </ul>
         {this.props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
@@ -211,11 +211,11 @@ class ChoiceContainer extends React.Component {
         </div>
         <ul className='grid totalsRow'>
           <li className='totals'><span>TOTALS:</span></li>
-          <li className='calories' placeholder='grams'>{this.autoSum('calories')}</li>
-          <li className='fat'>{this.autoSum('fat')}</li>
-          <li className='carbs'>{this.autoSum('carbs')}</li>
-          <li className='protein'>{this.autoSum('protein')}</li>
-          <li className='deleteColumn'></li>
+          <li className='calories macro' placeholder='grams'>{this.autoSum('calories')}</li>
+          <li className='fat macro'>{this.autoSum('fat')}</li>
+          <li className='carbs macro'>{this.autoSum('carbs')}</li>
+          <li className='protein macro'>{this.autoSum('protein')}</li>
+          <li className='deleteColumn macro'></li>
         </ul>
         <button className='saveButton' onClick={() => this.props.saveAll(this.props)}>Save</button>
       </div>

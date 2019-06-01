@@ -34,11 +34,11 @@ class CategoryCard extends React.Component {
           className="grid categoryGrid"
           >
             <li className='name categoryName' >{this.props.category.name}</li>
-            <li className='totals'>Subtotals: </li>
-            <li className='calories'>{this.autoSum('calories')}</li>
-            <li className='fat'>{this.autoSum('fat')}</li>
-            <li className='carbs'>{this.autoSum('carbs')}</li>
-            <li className='protein'>{this.autoSum('protein')}</li>
+            <li className='subtotals'>Subtotals: </li>
+            <li className='calories macro'>{this.autoSum('calories')}</li>
+            <li className='fat macro'>{this.autoSum('fat')}</li>
+            <li className='carbs macro'>{this.autoSum('carbs')}</li>
+            <li className='protein macro'>{this.autoSum('protein')}</li>
             <li className='deleteColumn'></li>
           </ul>
           {this.mySortedChoices().map((choiceFood, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
