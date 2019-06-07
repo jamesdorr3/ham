@@ -37,7 +37,7 @@ class SearchContainer extends React.Component {
       this.props.externalSearch(this.state.text)
       .then(r => r.json())
       .then(r => {
-        debugger
+        // debugger
         this.props.stopLoading()
         // debugger
         // if (r.internal.length > 0){

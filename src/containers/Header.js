@@ -141,7 +141,6 @@ class Header extends React.Component {
                 <span className='tooltiptext'>{this.state.editDayName ? 'Close Edit Name' : 'Edit Day Name'}</span>
                 <img src={this.state.editDayName ? 'close-icon.png' : 'edit-icon.png'} className='editDay editButton' alt='edit day' />
               </button>
-              {/* <input type='date' min="2019-05-01" value={this.todaysDate()}/> */}
               </>
             }
           </div>

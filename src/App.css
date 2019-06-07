@@ -351,27 +351,44 @@ button .tooltiptext::after {
 img,.searchButton{height:15px}
 li{list-style:none;position:relative;overflow:hidden;white-space:nowrap;padding:1% 2%}
 li input,li select{width:100%}
-ul{margin:0;padding:0}
+ul{margin:0 1%;padding:0 0.5%;border-radius:5px}
+.macro input{position:absolute;left:0;text-align:center;width:100%}
+select{border-radius:5px;border:0.5px solid lightgray;background:white}
 /* UNIVERSAL */
 /* HEADER */
 .header{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;top:0;overflow:scroll;display:grid;grid-template-columns: 1fr 1fr 1fr}
 /* HEADER */
+/* GOALS */
+.goals input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
+/* GOALS */
 /* TABLE */
 .table{position:absolute;top:10%;bottom:10%;width:100%;overflow:scroll;font-size:.9em}
-.grid{display:grid;grid-template-columns: 2fr 2fr 2fr  repeat(4, 1fr) 5%}
-li.goals{grid-column:span 2}
+.grid{display:grid;grid-template-columns: 3fr 1fr 2fr  repeat(4, 1fr) 5%}
+.goals .goalsSelect{grid-column:span 2}
 .goals input{position:absolute;width:100%}
-.key{text-align:center}
-.totals{grid-column:span 3}
-.macro{text-align:center}
+.key{text-align:center; font-size: 0.5em}
+.key .calories{background:lime}
+.totals{grid-column:span 3;text-align:right}
+.amount input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
+.macro{text-align:center;padding: 4% 0 0 0}
+.deleteColumn button{padding:0}
+/* TABLE */
 /* CATEGORY */
-.category{background:rgb(255, 189, 156);border-radius:5px;margin:1% 0}
+.category{background:rgb(255, 189, 156);border-radius:5px;margin:1% 0;padding:1% 0}
 .subtotals{grid-column:span 2}
 .choice{background:white;border-top:1px solid rgba(194, 194, 194, 0.589);border-bottom:1px solid rgba(194, 194, 194, 0.589)}
 img.deleteChoice{position:relative;}
 /* CATEGORY */
-/* TABLE */
+/* DROPDOWN */
+.dropdownContainer{border:1px solid white;position:relative;text-align:center}
+.dropdown{display:none}
+.dropdownContainer:hover{border:1px solid black;position:relative;}
+.dropdownContainer:hover .dropdown, .dropdown:hover{display:block}
+/* DROPDOWN */
 /* FOOTER */
-.footer{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;bottom:0;overflow:scroll}
+.footer{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;bottom:0;overflow:scroll; display: grid; grid-template-columns: repeat(3, 1fr)}
+.attribution{grid-column:3;text-align:center;padding-top:10%;text-decoration:none;color:black}
+.attribution h2{margin:0}
+.hidden{display:none}
 /* FOOTER */
 }

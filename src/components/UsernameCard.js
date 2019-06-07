@@ -26,7 +26,7 @@ class UsernameCard extends React.Component {
       bmrCals = this.mifflin()
     }
     this.props.createGoal({
-      calories: bmrCals, 
+      calories: bmrCals.toFixed(), 
       fat: 1,
       carbs: 1,
       protein: 1,
