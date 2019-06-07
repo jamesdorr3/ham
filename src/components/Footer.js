@@ -8,7 +8,7 @@ class Footer extends React.Component {
     // console.log(this.props.categoryId)
     return(
       <div className='footer' >
-        <button>+</button>
+        
         <a href='http://ndb.nal.usda.gov' className='attribution'>
           <div className='small'>Powered by the</div>
           <h2>USDA</h2>

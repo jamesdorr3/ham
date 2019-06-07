@@ -17,23 +17,38 @@ class SearchContainer extends React.Component {
     addFood: false
   }
 
-  handleChange = e => this.setState({text: e.target.value})
+  handleChange = e => {
+    this.setState({text: e.target.value})
+    if(e.target.value.length > 0){
+      this.internalSearch(e.target.value)
+    }else{
+      this.setState({internal: []})
+    }
+  }
+  
+  internalSearch = (text) => {
+    this.props.internalSearch(text)
+    .then(r => r.json())
+    .then(r => {
+      if (r.internal.length > 0){
+        this.setState({
+          internal: r.internal,
+          // common: [{description: 'More results are loading'}]
+        })
+      }else{
+        this.setState({
+          internal: []
+        })
+      }
+    })
+  }
 
   handleSubmit = e => {
     e.preventDefault()
     if (this.state.text){
       // console.log('submit')
       this.props.startLoading()
-      this.props.internalSearch(this.state.text)
-      .then(r => r.json())
-      .then(r => {
-        if (r.internal.length > 0){
-          this.setState({
-            internal: r.internal,
-            // common: [{description: 'More results are loading'}]
-          })
-        }
-      })
+      this.internalSearch(this.state.text)
       this.props.externalSearch(this.state.text)
       .then(r => r.json())
       .then(r => {
