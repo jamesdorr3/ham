@@ -1,30 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import LoginCard from '../components/LoginCard'
-import SignUpCard from '../components/SignUpCard'
+import LoginCard from './LoginCard'
+import SignUpCard from './SignUpCard'
 import {auth, reauth} from '../actions/authActions'
 import {createDay, selectDay} from '../actions/daysActions'
 import {URL, HEADERS} from '../constants.js'
 import {saveAll} from '../actions/saveAllAction'
 import {deleteDay} from '../actions/daysActions'
-import UsernameCard from '../components/UsernameCard'
-import SignedInHeader from '../components/SignedInHeader'
-import NotSignedInHeader from '../components/NotSignedInHeader'
+import UsernameCard from './UsernameCard'
 
-class Header extends React.Component {
+class SignedInHeader extends React.Component {
 
   state = {
-    username: '',
-    email: '',
-    usernameOrEmail: '',
-    password: '',
-    signup: false,
-    editDayName: false,
-    showSignup: false
-  }
 
-  componentDidMount(){
-    if (localStorage.getItem('token')){this.props.reauth()} // thunk
   }
 
   handleSignOut = () => {
@@ -39,11 +27,6 @@ class Header extends React.Component {
     })
     localStorage.removeItem('token');
     this.props.signOut()
-  }
-
-  toggleSignup = (e) => {
-    e.preventDefault()
-    this.setState({showSignup: !this.state.showSignup})
   }
 
   prettyDayDisplay = (dayObj) => {
@@ -106,12 +89,36 @@ class Header extends React.Component {
   }
 
   render(){
+    console.log(this.props.day)
     return(
-      localStorage.getItem('token')
-      ? 
-      < SignedInHeader /> 
-      : 
-      < NotSignedInHeader /> 
+      <div className='header'>
+        <div className='menuButton'>
+          {this.props.user.username} ▷
+          <div className='sideMenu'>
+            <ul className='top'>
+              <li>{this.props.user.username}</li>
+              <li>{this.props.user.email}</li>
+              <li>Height</li>
+              <li>Weight</li>
+              <li>Body Fat Percentage</li>
+            </ul>
+            <ul className='bottom'>
+              <li>About</li>
+              <li onClick={this.handleSignOut}>Sign Out</li>
+            </ul>
+          </div>
+        </div>
+        <div className='daySelect'>
+          <select onChange={this.dayChangeHandler} value={this.props.day.id} className='daySelect'>
+            {this.dayOptions()}
+          </select>
+          <button onClick={this.props.createDay} className='newDay addButton' alt='add new day' ><span className='tooltiptext'>Add New Day</span><img src='add-icon-circle.png' className='newDay addButton' alt='add new day'></img></button>
+          <button onClick={this.editDayToggle} className='editDay editButton' alt='edit day' >
+            <span className='tooltiptext'>{this.state.editDayName ? 'Close Edit Name' : 'Edit Day Name'}</span>
+            <img src={this.state.editDayName ? 'close-icon.png' : 'edit-icon.png'} className='editDay editButton' alt='edit day' />
+          </button>
+        </div>
+      </div>
     )
   }
 }
@@ -134,4 +141,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(SignedInHeader)

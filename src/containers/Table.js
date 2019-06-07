@@ -34,6 +34,18 @@ class ChoiceContainer extends React.Component {
     return sum
   }
 
+  keyRow = 
+    <ul className='grid key'>
+      <li className='name'><div>Name</div></li>
+      <li className='amount'><div>Amount</div></li>
+      <li className='measure' ><div>Measure</div></li>
+      <li className='macro calories' ><div>Calories</div></li>
+      <li className='macro fat' ><div>Fat</div></li>
+      <li className='macro carbs' ><div>Carbs</div></li>
+      <li className='macro protein' ><div>Protein</div></li>
+      <li className='deleteColumn'></li>
+    </ul>
+
   render(){
     // console.log(this.props)
     return(
@@ -46,16 +58,6 @@ class ChoiceContainer extends React.Component {
           </div>
         }
         < GoalsRow />
-        <ul className='grid key'>
-          <li className='name'><div></div></li>
-          <li className='amount'><div></div></li>
-          <li className='measure' ><div></div></li>
-          <li className='macro calories' ><div>Calories</div></li>
-          <li className='macro fat' ><div>Fat</div></li>
-          <li className='macro carbs' ><div>Carbs</div></li>
-          <li className='macro protein' ><div>Protein</div></li>
-          <li className='deleteColumn'></li>
-        </ul>
         <ul className='grid totalsRow'>
           <li className='totals'><span>TOTALS:</span></li>
           <li className='calories macro' placeholder='grams'>{this.autoSum('calories')}</li>
@@ -64,12 +66,14 @@ class ChoiceContainer extends React.Component {
           <li className='protein macro'>{this.autoSum('protein')}</li>
           <li className='deleteColumn'></li>
         </ul>
+        {this.keyRow}
         {this.props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
         return <CategoryCard category={category} key={category.id} />
         })}
         <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
           <span className='rectangle'>Start Here</span>
         </div>
+        {this.keyRow}
         <ul className='grid totalsRow'>
           <li className='totals'><span>TOTALS:</span></li>
           <li className='calories macro' placeholder='grams'>{this.autoSum('calories')}</li>

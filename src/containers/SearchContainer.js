@@ -96,9 +96,9 @@ class SearchContainer extends React.Component {
         </form>
         < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} />
         <ul className='searchResultContainer'>
-          {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
+          {/* {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
           <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
-          : null}
+          : null} */}
           {this.state.internal.map(food => (
             < InternalSearchResultCard 
             categoryId={this.props.categoryId}

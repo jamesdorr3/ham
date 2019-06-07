@@ -11,8 +11,7 @@ class SearchResultCard extends React.Component {
 
   render(){
     return(
-      <li className='searchResult'>
-        <button onClick={this.handleAddChoice} className='addButton'><img src='add-icon-circle.png' alt='choose search results' className='addButton' /></button>
+      <li className='searchResult' onClick={this.handleAddChoice}>
         <span className='resultName'>{this.props.food.description}</span>
         {this.props.food.brandOwner ? <span className='brandName'> - {this.props.food.brandOwner}</span> : null}
       </li>

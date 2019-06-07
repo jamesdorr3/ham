@@ -357,6 +357,15 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white}
 /* UNIVERSAL */
 /* HEADER */
 .header{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;top:0;overflow:scroll;display:grid;grid-template-columns: 1fr 1fr 1fr}
+.notSignedInMessage{grid-column:span 2}
+.sideMenu{position:fixed;background:white;top:0;bottom:0;z-index:1;margin:0;border-radius:0px;border-right:5px solid rgb(206, 101, 49);visibility:hidden;width:50%;animation:menuDisappearLeft 0.5s;padding:5% 0}
+.menuButton:hover .sideMenu{visibility:visible; animation:menuAppearRight 0.5s}
+@keyframes menuAppearRight {from {left:-50%;} to {left: 0%;}}
+@keyframes menuDisappearLeft {from {visibility:visible; left:0%} to {left: -60%;}}
+.sideMenu ul{width:100%;margin:0;padding:0}
+.sideMenu ul li{padding:5% 2%;width:100%}
+.sideMenu .bottom{position:absolute;bottom:0;padding:10% 0}
+.daySelect{grid-column: 2}
 /* HEADER */
 /* GOALS */
 .goals input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
@@ -367,23 +376,35 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white}
 .goals .goalsSelect{grid-column:span 2}
 .goals input{position:absolute;width:100%}
 .key{text-align:center; font-size: 0.5em}
-.key .calories{background:lime}
 .totals{grid-column:span 3;text-align:right}
 .amount input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
 .macro{text-align:center;padding: 4% 0 0 0}
 .deleteColumn button{padding:0}
+.saveButton{visibility:hidden}
 /* TABLE */
 /* CATEGORY */
 .category{background:rgb(255, 189, 156);border-radius:5px;margin:1% 0;padding:1% 0}
 .subtotals{grid-column:span 2}
 .choice{background:white;border-top:1px solid rgba(194, 194, 194, 0.589);border-bottom:1px solid rgba(194, 194, 194, 0.589)}
 img.deleteChoice{position:relative;}
+.arrow{visibility:hidden}
 /* CATEGORY */
+/* SEARCH */
+.searchForm{text-align:left;margin-left:2%}
+.searchForm input[type='text']{display:none}
+.searchForm button{visibility:hidden}
+.foodForm{display:none}
+.foodSearchContainer:hover input{display:inline}
+.foodSearchContainer:hover button{visibility:visible}
+.foodSearchContainer:hover .foodForm{display:inline}
+/* SEARCH */
+/* SEARCH RESULT */
+.searchResultContainer{display:none;background:white;position:absolute;z-index:1;border-radius:0px;width:100%;padding:0px;margin:0;border:1px solid gray}
+.foodSearchContainer:hover .searchResultContainer{display:block}
+.searchResult{border-bottom:0.5px solid lightgray}
+/* SEARCH RESULT */
 /* DROPDOWN */
-.dropdownContainer{border:1px solid white;position:relative;text-align:center}
-.dropdown{display:none}
-.dropdownContainer:hover{border:1px solid black;position:relative;}
-.dropdownContainer:hover .dropdown, .dropdown:hover{display:block}
+
 /* DROPDOWN */
 /* FOOTER */
 .footer{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;bottom:0;overflow:scroll; display: grid; grid-template-columns: repeat(3, 1fr)}
