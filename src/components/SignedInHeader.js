@@ -93,14 +93,14 @@ class SignedInHeader extends React.Component {
     return(
       <div className='header'>
         <div className='menuButton'>
-          <span className='username'>{this.props.user.username} ▷</span>
+          <span className='username'>▷</span>
           <div className='sideMenu'>
             <ul className='top'>
               <li>{this.props.user.username}</li>
               <li>{this.props.user.email}</li>
               <li>Height</li>
               <li>Weight</li>
-              <li>Body Fat Percentage</li>
+              <li>Body Fat %</li>
             </ul>
             <ul className='bottom'>
               <li>About</li>
@@ -114,7 +114,7 @@ class SignedInHeader extends React.Component {
               {this.dayOptions()}
             </select>
             <span className="dropdownButton">
-              <button>=</button>
+              <button>▽</button>
               <ul className='dropdown'>
                 <li onClick={this.props.createDay}><button><img src='add-icon-circle.png' className='newDay addButton' alt='add new Day'></img></button>Add Day</li>
                 <li onClick={this.editDay}><button><img src='edit-icon.png' className='editDay editButton' alt='edit Day' /></button>Edit Day</li>
@@ -122,11 +122,9 @@ class SignedInHeader extends React.Component {
               </ul>
             </span>
           </span>
-          {/* <button onClick={this.props.createDay} className='newDay addButton' alt='add new day' ><span className='tooltiptext'>Add New Day</span><img src='add-icon-circle.png' className='newDay addButton' alt='add new day'></img></button>
-          <button onClick={this.editDayToggle} className='editDay editButton' alt='edit day' >
-            <span className='tooltiptext'>{this.state.editDayName ? 'Close Edit Name' : 'Edit Day Name'}</span>
-            <img src={this.state.editDayName ? 'close-icon.png' : 'edit-icon.png'} className='editDay editButton' alt='edit day' />
-          </button> */}
+        </div>
+        <div className='usernameArea'>
+          <span className='username'>{this.props.user.username}</span>
         </div>
       </div>
     )

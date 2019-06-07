@@ -22,7 +22,7 @@ class SearchContainer extends React.Component {
     if(e.target.value.length > 0){
       this.internalSearch(e.target.value)
     }else{
-      this.setState({internal: []})
+      this.setState({internal: [],common:[],error:false})
     }
   }
   

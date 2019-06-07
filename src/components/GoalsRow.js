@@ -20,6 +20,7 @@ class GoalsRow extends React.Component {
 
   addGoal = () => {
     this.props.createGoal(this.props.user.id)
+    .then(this.editGoal)
   }
   editGoal = () => {
     this.setState({showEditGoalForm: true})
@@ -65,6 +66,7 @@ class GoalsRow extends React.Component {
               <li onClick={this.addGoal}><button><img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img></button>Add Goal</li>
               <li onClick={this.editGoal}><button><img src='edit-icon.png' className='editGoal editButton' alt='edit goal' /></button>Edit Goal</li>
               <li onClick={this.deleteGoal}><button><img src='trash-icon.png' className='deleteChoice deleteButton' alt='delete choice' /></button>Delete Goal</li>
+              <li onClick={this.autogenerateMacros}><button>♾</button>Autogenerate Goal</li>
             </ul>
         </span>
       </ul>

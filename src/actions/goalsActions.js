@@ -31,7 +31,7 @@ export const createGoal = (userId) => {
 
 export const deleteGoal = id => {
   return dispatch => {
-    dispatch({type: 'DELETE_GOAL', payload: id})
     return fetch(`${URL}/goals/${id}`, {method: 'DELETE', headers: HEADERS()})
+    .then(r => dispatch({type: 'DELETE_GOAL', payload: id}))
   }
 }
