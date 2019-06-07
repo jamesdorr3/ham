@@ -93,7 +93,7 @@ class SignedInHeader extends React.Component {
     return(
       <div className='header'>
         <div className='menuButton'>
-          {this.props.user.username} ▷
+          <span className='username'>{this.props.user.username} ▷</span>
           <div className='sideMenu'>
             <ul className='top'>
               <li>{this.props.user.username}</li>
@@ -109,14 +109,24 @@ class SignedInHeader extends React.Component {
           </div>
         </div>
         <div className='daySelect'>
-          <select onChange={this.dayChangeHandler} value={this.props.day.id} className='daySelect'>
-            {this.dayOptions()}
-          </select>
-          <button onClick={this.props.createDay} className='newDay addButton' alt='add new day' ><span className='tooltiptext'>Add New Day</span><img src='add-icon-circle.png' className='newDay addButton' alt='add new day'></img></button>
+          <span className='daySelect'>
+            <select onChange={this.dayChangeHandler} value={this.props.day.id} className='daySelect'>
+              {this.dayOptions()}
+            </select>
+            <span className="dropdownButton">
+              <button>=</button>
+              <ul className='dropdown'>
+                <li onClick={this.props.createDay}><button><img src='add-icon-circle.png' className='newDay addButton' alt='add new Day'></img></button>Add Day</li>
+                <li onClick={this.editDay}><button><img src='edit-icon.png' className='editDay editButton' alt='edit Day' /></button>Edit Day</li>
+                <li onClick={this.deleteDay}><button><img src='trash-icon.png' className='deleteDay deleteButton' alt='delete Day' /></button>Delete Day</li>
+              </ul>
+            </span>
+          </span>
+          {/* <button onClick={this.props.createDay} className='newDay addButton' alt='add new day' ><span className='tooltiptext'>Add New Day</span><img src='add-icon-circle.png' className='newDay addButton' alt='add new day'></img></button>
           <button onClick={this.editDayToggle} className='editDay editButton' alt='edit day' >
             <span className='tooltiptext'>{this.state.editDayName ? 'Close Edit Name' : 'Edit Day Name'}</span>
             <img src={this.state.editDayName ? 'close-icon.png' : 'edit-icon.png'} className='editDay editButton' alt='edit day' />
-          </button>
+          </button> */}
         </div>
       </div>
     )

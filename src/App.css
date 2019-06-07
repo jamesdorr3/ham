@@ -353,12 +353,16 @@ li{list-style:none;position:relative;overflow:hidden;white-space:nowrap;padding:
 li input,li select{width:100%}
 ul{margin:0 1%;padding:0 0.5%;border-radius:5px}
 .macro input{position:absolute;left:0;text-align:center;width:100%}
-select{border-radius:5px;border:0.5px solid lightgray;background:white}
+select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-1}
 /* UNIVERSAL */
 /* HEADER */
-.header{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;top:0;overflow:scroll;display:grid;grid-template-columns: 1fr 1fr 1fr}
+.header{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;top:0;overflow:show;display:grid;grid-template-columns: 1fr 1fr 1fr;}
 .notSignedInMessage{grid-column:span 2}
 .sideMenu{position:fixed;background:white;top:0;bottom:0;z-index:1;margin:0;border-radius:0px;border-right:5px solid rgb(206, 101, 49);visibility:hidden;width:50%;animation:menuDisappearLeft 0.5s;padding:5% 0}
+.menuButton,div.daySelect{position:relative;}
+.username{width:100%}
+.username,span.daySelect{position:absolute;margin-top:15%;text-align:center}
+.daySelect .dropdownButton{width:15%}
 .menuButton:hover .sideMenu{visibility:visible; animation:menuAppearRight 0.5s}
 @keyframes menuAppearRight {from {left:-50%;} to {left: 0%;}}
 @keyframes menuDisappearLeft {from {visibility:visible; left:0%} to {left: -60%;}}
@@ -366,6 +370,8 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white}
 .sideMenu ul li{padding:5% 2%;width:100%}
 .sideMenu .bottom{position:absolute;bottom:0;padding:10% 0}
 .daySelect{grid-column: 2}
+
+.daySelect select{max-width:80%}
 /* HEADER */
 /* GOALS */
 .goals input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
@@ -404,7 +410,11 @@ img.deleteChoice{position:relative;}
 .searchResult{border-bottom:0.5px solid lightgray}
 /* SEARCH RESULT */
 /* DROPDOWN */
-
+.dropdownButton{position:relative;border:1px solid transparent;border-radius:5px;text-align:center}
+.dropdownButton:hover{position:relative;border:1px solid black;border-radius:5px;text-align:center}
+.dropdown{display:block;z-index:2;background:white;position:absolute;right:0px;padding:2%;border:1px solid black;visibility:hidden}
+.dropdown li{padding:10%;text-align:left;border-bottom:0.5px solid lightgray}
+.dropdownButton:hover .dropdown{visibility:visible}
 /* DROPDOWN */
 /* FOOTER */
 .footer{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;bottom:0;overflow:scroll; display: grid; grid-template-columns: repeat(3, 1fr)}

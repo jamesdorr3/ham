@@ -59,14 +59,14 @@ class GoalsRow extends React.Component {
         <li className='macro fat' ><div>{this.props.goal.fat}</div></li>
         <li className='macro carbs' ><div>{this.props.goal.carbs}</div></li>
         <li className='macro protein' ><div>{this.props.goal.protein}</div></li>
-        <li className='dropdownContainer'>
-          <span>▽</span>
-          <ul className='dropdown'>
-            <li onClick={this.addGoal}><button><img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img></button>Add Goal</li>
-            <li onClick={this.editGoal}><button><img src='edit-icon.png' className='editGoal editButton' alt='edit goal' /></button></li>
-            <li onClick={this.deleteGoal}><button><img src='trash-icon.png' className='deleteChoice deleteButton' alt='delete choice' /></button></li>
-          </ul>
-        </li>
+        <span className='dropdownButton'>
+            <span>▽</span>
+            <ul className='dropdown'>
+              <li onClick={this.addGoal}><button><img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img></button>Add Goal</li>
+              <li onClick={this.editGoal}><button><img src='edit-icon.png' className='editGoal editButton' alt='edit goal' /></button>Edit Goal</li>
+              <li onClick={this.deleteGoal}><button><img src='trash-icon.png' className='deleteChoice deleteButton' alt='delete choice' /></button>Delete Goal</li>
+            </ul>
+        </span>
       </ul>
       
     )
