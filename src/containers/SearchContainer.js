@@ -82,7 +82,6 @@ class SearchContainer extends React.Component {
   }
 
   render(){
-    console.log(this.state.common)
     return(
       <div className='centered row foodSearchContainer' >
         <form onSubmit={this.handleSubmit} className='searchForm'>

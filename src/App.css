@@ -356,7 +356,7 @@ ul{margin:0 1%;padding:0 0.5%;border-radius:5px}
 select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-1}
 /* UNIVERSAL */
 /* HEADER */
-.header{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;top:0;overflow:show;display:grid;grid-template-columns: 1fr 1fr 1fr;}
+.header{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;top:0;overflow:show;display:grid;grid-template-columns: 1fr 2fr 1fr;}
 .notSignedInMessage{grid-column:span 2}
 .sideMenu{position:fixed;background:white;top:0;bottom:0;z-index:1;margin:0;border-radius:0px;border-right:5px solid rgb(206, 101, 49);visibility:hidden;width:50%;animation:menuDisappearLeft 0.5s;padding:5% 0}
 .menuButton,div.daySelect,.usernameArea{position:relative;}

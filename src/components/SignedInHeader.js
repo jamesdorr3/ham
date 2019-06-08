@@ -87,7 +87,7 @@ class SignedInHeader extends React.Component {
   }
 
   render(){
-    console.log(this.props.days)
+    // console.log(this.props.days)
     return(
       <div className='header'>
         <div className='menuButton'>
@@ -131,7 +131,7 @@ class SignedInHeader extends React.Component {
           }
         </div>
         <div className='usernameArea'>
-          <span className='username'>{this.props.user.username}</span>
+          <span className='username'>HAM</span>
         </div>
       </div>
     )
