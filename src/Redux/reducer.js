@@ -113,7 +113,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         choiceFoods: action.payload.choice_foods,
         day: {
-          created_at: action.payload.created_at,
+          date: action.payload.date,
           id: action.payload.id,
           name: action.payload.name
         },
@@ -138,17 +138,17 @@ const reducer = (state = initialState, action) => {
         ]
       }
     }
-    case 'EDIT_DAY_NAME': {
+    case 'EDIT_DAY': {
       return {
         ...state,
         day: {
           ...state.day,
-          name: action.payload
+          ...action.payload
         },
         days: [
           ...state.days.filter(x => x.id !== state.day.id),
         {...state.day,
-          name: action.payload
+          ...action.payload
         }
         ]
       }

@@ -34,13 +34,23 @@ class CategoryCard extends React.Component {
           className="grid categoryGrid"
           >
             <li className='name categoryName' >{this.props.category.name}</li>
-            <li className='totals'>Subtotals: </li>
-            <li className='calories'>{this.autoSum('calories')}</li>
-            <li className='fat'>{this.autoSum('fat')}</li>
-            <li className='carbs'>{this.autoSum('carbs')}</li>
-            <li className='protein'>{this.autoSum('protein')}</li>
+            <li className='subtotals'>Subtotals: </li>
+            <li className='calories macro'>{this.autoSum('calories')}</li>
+            <li className='fat macro'>{this.autoSum('fat')}</li>
+            <li className='carbs macro'>{this.autoSum('carbs')}</li>
+            <li className='protein macro'>{this.autoSum('protein')}</li>
             <li className='deleteColumn'></li>
           </ul>
+          {/* <ul className='grid key'>
+            <li className='name'><div>Name</div></li>
+            <li className='amount'><div>Amount</div></li>
+            <li className='measure' ><div>Measure</div></li>
+            <li className='macro calories' ><div>Calories</div></li>
+            <li className='macro fat' ><div>Fat</div></li>
+            <li className='macro carbs' ><div>Carbs</div></li>
+            <li className='macro protein' ><div>Protein</div></li>
+            <li className='deleteColumn'></li>
+          </ul> */}
           {this.mySortedChoices().map((choiceFood, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
           choiceFood={choiceFood} 
           key={choiceFood.choice.id} 
@@ -48,7 +58,8 @@ class CategoryCard extends React.Component {
           deleteChoice={this.props.deleteChoice} 
           /> )}
           {provided.placeholder}
-        < SearchContainer categoryId={this.props.category.id} />
+          
+          < SearchContainer categoryId={this.props.category.id} />
         </div>
       )}
     </Droppable>

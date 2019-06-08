@@ -8,7 +8,11 @@ class Footer extends React.Component {
     // console.log(this.props.categoryId)
     return(
       <div className='footer' >
-        <h2>Powered by the USDA</h2>
+        
+        <a href='http://ndb.nal.usda.gov' className='attribution'>
+          <div className='small'>Powered by the</div>
+          <h2>USDA</h2>
+        </a>
         <span className='hidden'>Powered by the U.S. Department of Agriculture, Agricultural Research Service, 2019 <br/> USDA Branded Food Products Database - Nutrient Data Laboratory Home Page http://ndb.nal.usda.gov</span>
       </div>
     )

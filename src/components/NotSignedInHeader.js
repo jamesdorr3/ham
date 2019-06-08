@@ -1,17 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import LoginCard from '../components/LoginCard'
-import SignUpCard from '../components/SignUpCard'
+import LoginCard from './LoginCard'
+import SignUpCard from './SignUpCard'
 import {auth, reauth} from '../actions/authActions'
 import {createDay, selectDay} from '../actions/daysActions'
 import {URL, HEADERS} from '../constants.js'
 import {saveAll} from '../actions/saveAllAction'
 import {deleteDay} from '../actions/daysActions'
-import UsernameCard from '../components/UsernameCard'
-import SignedInHeader from '../components/SignedInHeader'
-import NotSignedInHeader from '../components/NotSignedInHeader'
+import UsernameCard from './UsernameCard'
 
-class Header extends React.Component {
+class NotSignedInHeader extends React.Component {
 
   state = {
     username: '',
@@ -44,6 +42,10 @@ class Header extends React.Component {
   toggleSignup = (e) => {
     e.preventDefault()
     this.setState({showSignup: !this.state.showSignup})
+  }
+
+  signedIn = () => {
+    return !!this.props.user.email
   }
 
   prettyDayDisplay = (dayObj) => {
@@ -107,11 +109,13 @@ class Header extends React.Component {
 
   render(){
     return(
-      localStorage.getItem('token')
-      ? 
-      < SignedInHeader /> 
-      : 
-      < NotSignedInHeader /> 
+      <div className='header'>
+      <div className='notSignedInMessage'><p>Use HAM free. Log in to record data</p></div>
+      <div>
+        < LoginCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} handleChange={this.handleChange} login={this.login} />
+        < SignUpCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} />
+      </div>
+      </div>
     )
   }
 }
@@ -134,4 +138,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(NotSignedInHeader)

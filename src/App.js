@@ -15,18 +15,7 @@ class App extends React.Component {
     if (!destination) {
       return;
     }
-    // const choicesIds = []
-    // const toCategory = destination.droppableId
-    // document.querySelectorAll(`.choice`).forEach(x => choicesIds.push(parseInt(x.id)))
-    // // const movedId = choicesIds.splice(source.index, 1)[0]
-    // // choicesIds.splice(destination.index, 0, movedId)
-    // const fromIndex = choicesIds.indexOf(draggableId)
-    // const toIndex = destination.index
-    // const id = choicesIds.splice(fromIndex, 1)[0]
-    // choicesIds.splice(toIndex, 0, id)
-    // // debugger
-    // // this.props.updateIndex({choicesIds: choicesIds})
-    // this.props.handleDrop(choicesIds, draggableId, toCategory)
+
     const choiceFood = this.props.choiceFoods.find(x => x.choice.id === draggableId)
     const categoryId = destination.droppableId
     const thisCatsChoices = this.props.choiceFoods.filter(x => x.choice.category_id === categoryId)
