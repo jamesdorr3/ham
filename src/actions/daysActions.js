@@ -34,3 +34,13 @@ export const deleteDay = id => {
     return fetch(`${URL}/days/${id}`, {method: 'DELETE', headers: HEADERS()})
   }
 }
+
+export const updateDay = day => {
+  return dispatch => {
+    return fetch(`${URL}days/${day.id}`, {
+      method: 'PATCH',
+      headers: HEADERS(),
+      body: JSON.stringify(day)
+    })
+  }
+}

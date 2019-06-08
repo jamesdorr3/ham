@@ -384,6 +384,9 @@ span.daySelect{position:absolute;width:100%}
 .goals input{position:absolute;width:100%}
 .key{text-align:center; font-size: 0.5em}
 .totals{grid-column:span 3;text-align:right}
+/* .under{border-bottom:2px solid yellow} */
+.over{border-bottom:2px solid red}
+.good{border-bottom:2px solid green}
 .amount input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
 .macro{text-align:center;padding: 4% 0 0 0}
 .deleteColumn button{padding:0}

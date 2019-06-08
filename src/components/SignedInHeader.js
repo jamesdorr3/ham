@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import LoginCard from './LoginCard'
 import SignUpCard from './SignUpCard'
 import {auth, reauth} from '../actions/authActions'
-import {createDay, selectDay} from '../actions/daysActions'
+import {createDay, selectDay, updateDay} from '../actions/daysActions'
 import {URL, HEADERS} from '../constants.js'
 import {saveAll} from '../actions/saveAllAction'
 import {deleteDay} from '../actions/daysActions'
@@ -22,46 +22,42 @@ class SignedInHeader extends React.Component {
       usernameOrEmail: '',
       password: '',
       signup: false,
-      editDayName: false,
-      dayName: ''
+      name: null,
+      date: null,
+      editDay: false
     })
     localStorage.removeItem('token');
     this.props.signOut()
   }
 
   prettyDayDisplay = (dayObj) => {
-    const day = new Date(dayObj.created_at)
-    return `${day.getMonth() + 1}-${day.getDate()}-${day.getFullYear()}` + (dayObj.name ? ` ${dayObj.name}` : '' )
+    const day = new Date(dayObj.date)
+    return `${day.getMonth() + 1}-${day.getDate() + 1}-${day.getFullYear()}` + (dayObj.name ? ` ${dayObj.name}` : '' )
   }
 
   dayOptions = () => {
     // const days = this.props.days.filter(day => day.id !== this.props.day.id)
-    const days = this.props.days.sort((x, y) => new Date(y.created_at) - new Date(x.created_at))
+    const days = this.props.days.sort((x, y) => new Date(y.date) - new Date(x.date))
     return days.map(day => {
       return <option value={day.id} key={day.id} >{this.prettyDayDisplay(day)}</option>
     })
   }
   
-  editDayToggle = () => {
-    this.setState({editDayName: !this.state.editDayName})
+  editDay = () => {
+    this.setState({editDay: true})
   }
 
-  handleDayNameChange = (e) => {
-    this.setState({dayName: e.target.value})
+  handleDayFormChange = (e) => {
+    this.setState({[e.target.name]: e.target.value})
   }
 
-  submitDayName = (e) => {
+  updateDay = (e) => {
     e.preventDefault()
-    this.setState({editDayName: false, dayName: null})
-    if (this.state.dayName && this.state.dayName !== this.props.day.name) {
-      this.props.editDayName(this.state.dayName)
-      this.props.startLoading()
-      fetch(`${URL}days/${this.props.day.id}`, {
-        method: 'PATCH',
-        headers: HEADERS(),
-        body: JSON.stringify({name: this.state.dayName})
-      })
-      .then(r => this.props.stopLoading())
+    this.setState({editDay: false, name: null, date: null})
+    if ((this.state.name && this.state.name !== this.props.day.name) || (this.state.date && this.state.date !== this.props.day.date)) {
+      const day = {...this.props.day, name: this.state.name || this.props.day.name, date: this.state.date || this.props.day.date }
+      this.props.editDay(day)
+      this.props.updateDay(day)
     }
   }
 
@@ -89,7 +85,7 @@ class SignedInHeader extends React.Component {
   }
 
   render(){
-    console.log(this.props.day)
+    console.log(this.props.days)
     return(
       <div className='header'>
         <div className='menuButton'>
@@ -109,6 +105,14 @@ class SignedInHeader extends React.Component {
           </div>
         </div>
         <div className='daySelect'>
+          {this.state.editDay
+          ?
+          <form className='dayEdit' onSubmit={this.updateDay}>
+            <input type='text' name='name' placeholder='name' defaultValue={this.props.day.name} value={this.state.name} onChange={this.handleDayFormChange} />
+            <input type='date' name='date' placeholder='date' defaultValue={this.props.day.date} value={this.state.date} onChange={this.handleDayFormChange} />
+            <input type='submit' />
+          </form>
+          :
           <span className='daySelect'>
             <select onChange={this.dayChangeHandler} value={this.props.day.id} className='daySelect'>
               {this.dayOptions()}
@@ -122,6 +126,7 @@ class SignedInHeader extends React.Component {
               </ul>
             </span>
           </span>
+          }
         </div>
         <div className='usernameArea'>
           <span className='username'>{this.props.user.username}</span>
@@ -138,10 +143,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return{
     signOut: () => dispatch({ type: 'SIGN_OUT'}),
+    editDay: (day) => dispatch({type: 'EDIT_DAY', payload: day}),
+    updateDay: day => dispatch(updateDay(day)),
     reauth: () => dispatch(reauth()),
     createDay: () => dispatch(createDay()),
     selectDay: (id) => dispatch(selectDay(id)),
-    editDayName: (dayName) => dispatch({type: 'EDIT_DAY_NAME', payload: dayName}),
     saveAll: (state) => dispatch(saveAll(state)),
     startLoading: () => dispatch({type: 'START_LOADING'}),
     stopLoading: () => dispatch({type: 'STOP_LOADING'}),

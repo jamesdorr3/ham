@@ -45,6 +45,15 @@ class ChoiceContainer extends React.Component {
       <li className='macro protein' ><div>Protein</div></li>
       <li className='deleteColumn'></li>
     </ul>
+  
+  compareForStyle = (macro) =>{
+    // debugger
+    if (this.autoSum(macro) < this.props.goal[macro] - 5) {
+      return 'under'
+    }else if(this.autoSum(macro) > this.props.goal[macro] + 5) {
+      return 'over'
+    }else{return 'good'}
+  }
 
   render(){
     // console.log(this.props)
@@ -60,10 +69,10 @@ class ChoiceContainer extends React.Component {
         < GoalsRow />
         <ul className='grid totalsRow'>
           <li className='totals'><span>TOTALS:</span></li>
-          <li className='calories macro' placeholder='grams'>{this.autoSum('calories')}</li>
-          <li className='fat macro'>{this.autoSum('fat')}</li>
-          <li className='carbs macro'>{this.autoSum('carbs')}</li>
-          <li className='protein macro'>{this.autoSum('protein')}</li>
+          <li className={`calories macro`} placeholder='grams'>{this.autoSum('calories')}</li>
+          <li className={`fat macro ${this.compareForStyle('fat')}`}>{this.autoSum('fat')}</li>
+          <li className={`carbs macro ${this.compareForStyle('carbs')}`}>{this.autoSum('carbs')}</li>
+          <li className={`protein macro ${this.compareForStyle('protein')}`}>{this.autoSum('protein')}</li>
           <li className='deleteColumn'></li>
         </ul>
         {this.keyRow}
