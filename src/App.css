@@ -372,7 +372,11 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 div.daySelect{grid-column: 2}
 span.daySelect{position:absolute;width:100%}
 .daySelect select{width:80%}
-.daySelect .dropdownButton button{padding:0;width:15%;color: rgb(245, 245, 245)}
+.daySelect .dropdownButton button.nonMenu{padding:0;width:15%;color: rgb(245, 245, 245)}
+.daySelect input[type='text']{text-align:center}
+.daySelect input[type='date']{width:65%;background:white}
+.daySelect input[type='submit']{padding:0 1.5%;color:white}
+.daySelect form{margin-top:5%}
 /* HEADER */
 /* GOALS */
 .goals input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
