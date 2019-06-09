@@ -15,6 +15,7 @@ During development, the system runs the backend on localhost:3001. I use Postgre
 * James Dorr - Initial Work - jamesdorr3@gmail.com
 
 ## License
+[MIT License](https://github.com/jamesdorr3/frontend-ham/blob/master/LICENSE)
 
 ## Acknowledgments
 
