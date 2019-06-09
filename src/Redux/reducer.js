@@ -123,6 +123,7 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'ADD_FOOD': {
+      // debugger
       return {
         ...state,
         choiceFoods: [...state.choiceFoods, action.payload]

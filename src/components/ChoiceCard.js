@@ -44,9 +44,9 @@ class ChoiceCard extends React.Component {
     const fromMeasure = this.props.choiceFood.measures.find(x => x.id === fromMeasureId)
     const toMeasureId = parseInt(e.target.value)
     const toMeasure = this.props.choiceFood.measures.find(x => x.id === toMeasureId)
+    const newAmount = fromMeasure.grams / toMeasure.grams * this.props.choiceFood.choice.amount 
     // debugger
-    const newAmount = this.props.choiceFood.choice.amount / fromMeasure.amount * toMeasure.amount 
-    this.props.editChoice({choice: {measure_id: toMeasureId, amount: newAmount, id: this.props.choiceFood.choice.id}})
+    this.props.editChoice({choice: {measure_id: toMeasureId, amount: newAmount.toFixed(2), id: this.props.choiceFood.choice.id}})
   }
 
   generateMeasures = () => {
@@ -68,7 +68,7 @@ class ChoiceCard extends React.Component {
   }
 
   render(){
-    console.log(this.props.choiceFood)
+    // console.log(this.props.choiceFood)
     return(
       <Draggable 
         draggableId={this.props.choiceFood.choice.id} 
