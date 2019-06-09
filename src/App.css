@@ -1,352 +1,6 @@
-@font-face { font-family: panton-bold; src: url('panton.black-caps.otf')}
-
-@media (min-aspect-ratio: 9/10) {
-.categoryHeader {
-  text-decoration: underline;
-  font-size: 18px
-}
-
-input[type='number'] {font-size: 14px; border-radius: 5px}
-input[type='text'], input[type='password'] {font-size: 12px; border-radius: 5px}
-.standardButton{border-radius: 5px}
-
-/* HEADER */
-
-.header {
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  min-width: 688px;
-  height: 60px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  background-color: rgb(206, 101, 49);
-  color: rgb(245, 245, 245);
-  z-index: 1;
-}
-
-.third {
-  position: relative;
-  margin: auto;
-  margin-top: 15px
-}
-
-.twothirds {grid-column: 1/3}
-
-#submitDayName {width: 20px; padding: 2px 0;}
-
-.twothirds {
-  width: 66%;
-  text-align: left;
-  white-space: wrap;
-  font-weight: bold; 
-  color: rgb(245, 245, 245); 
-  font-size: 18px;
-}
-.twothirds p {padding-left: 5%}
-select.daySelect {max-width: 100%}
-
-.header div input[type='text'], .header div input[type='password'] {width: 100px;}
-
-.signOut{padding: 5px 10px; border-radius: 5px; font-weight: bold; float: right}
-
-select {font-size: 13px}
-
-.userModal {
-  z-index: 2;
-  position: absolute;
-  max-width: 1000px;
-  width: 300px;
-  top: 50px;
-  left: 6%;
-  background-color: rgb(245, 245, 245);
-  border-radius: 5px; border: 1px solid black;
-  color: black;
-  padding: 5px;
-}
-
-.userModal form {display: grid; grid-template-columns: 1fr 1.5fr}
-
-.userModal input {width: 145px}
-input.height {width: 70px}
-.sensitive{-webkit-text-security: disc}
-.gender{grid-column: 1/3; text-align: center}
-.userModal form input[type='submit'] {grid-column: 1/3; margin: auto; width: auto; padding: 5px; margin: 5px; border-radius: 5px}
-
-.explanation {background: white; float: right; font-weight: bold; font-size: 14px; border-radius: 50%;
-  top: 8px}
-
-.explanation p {font-size: 13.5px}
-
-.explanationtext{
-  position: absolute; background-color: white; visibility: hidden; 
-  width: 400px; padding: 5px 8px; border-radius: 5px; 
-  z-index: 1; border-width: 1px; border-style: solid; border-color: black
-}
-
-button:hover .explanationtext, .tooltip:hover .explanationtext {visibility: visible;}
-
-.modal {
-  z-index: 1;
-  position: fixed;
-  max-width: 1000px;
-  width: 300px;
-  top: 60px;
-  left: 66%;
-  background-color: rgb(245, 245, 245);
-  border-radius: 5px; border: 1px solid black;
-  color: black
-}
-
-.modal form {padding: 15px}
-
-.signupForm{display: grid; grid-template-columns: 1fr 1fr}
-
-/* .centered {text-align: center;} */
-
-button.centered{margin-left: 33%}
-
-/* HEADER */
-/* TABLE */
-
-.table {
-  position: absolute;
-  top: 60px;
-  bottom: 70px;
-  width: 80%;
-  min-width: 600px;
-  margin-left: 10%;
-  margin-right: 10%;
-  box-shadow: inset 0 0 4px #000000;
-  padding: 10px;
-  overflow: scroll
-}
-
-.saveButton {position: relative; float: left; border-radius: 25px; padding: 10px;
-  font-size: 18px; left: 0px; top: -20px; border: 2px solid lime; background: rgb(245, 245, 245)}
-.saveButton:hover{background: lime}
-.saveButton:active{background: rgb(0, 216, 0)}
-
-.welcome h1, .welcome h2{text-align: right; margin-right: 5%}
-
-.grid {display: grid; grid-template-columns: 30% 1fr 15% repeat(4, 1fr) 5%; margin: 5px 0px; text-align: center;}
-li {list-style: none; padding: 0 0 0 4px}
-ul {padding: 0 0 0 5px}
-.name{grid-column: 1; position: relative; overflow: hidden; white-space: nowrap; text-align: left; padding-left: 10px; font-family: panton-bold;}
-.choice li.name:hover {overflow: visible;}
-.choice li.name:hover span.nameScroll{background: rgb(245, 245, 245); padding: 3px 10px 3px 0; width: auto; transition: max-width linear .5s;}
-/* span.nameScroll{position: absolute; transform: translateX(0); transition: 3s}
-.choice li.name:hover span.nameScroll{transform: translateX(calc(150px - 100%));} */
-
-.categoryName {grid-column: 1 / 3; margin-left: 59%}
-.categoryGrid { font-weight: bold;}
-.email {color: rgb(245, 245, 245); font-size: 18px}
-button.email{background: none; border: none}
-.amount {grid-column: 2}
-.measure {grid-column: 3}
-.measure select {width: 70%; max-width: 100%}
-.calories {grid-column: 4}
-.fat {grid-column: 5}
-.carbs {grid-column: 6}
-.protein {grid-column: 7}
-.deleteColumn {grid-column: 8}
-.grandTotals, .goals {grid-column: 2;}
-.totalsRow li, li.totals span {font-family: panton-bold}
-.goalsSelect, .totals {grid-column: 3}
-.goals li input {width: 90%; margin-left: 5%}
-.key li { overflow: hidden; font-family: panton-bold}
-.choice li input {width: 100%}
-.category{border-radius: 5px; padding: 7px 0 7px 0px; }
-.category{background: rgb(255, 189, 156); border: 1px solid black; margin: 5px 0 0 0}
-/* .category:nth-child(odd){background: rgb(240, 240, 240)} */
-.choice {background: rgb(245, 245, 245); border-radius: 5px; border: 1px solid black; padding: 4px 0}
-.choice:hover {transform: scale(1.01); box-shadow: 0px 1px 5px rgb(90, 90, 90)}
-
-.searchButton{position: relative; height: 15px; bottom: -3px; padding: 0 5px}
-img.addButton{position: relative; height: 15px; bottom: -3px; padding: 0 5px}
-button.addButton{background: none; border: none; margin: 0; padding: 0}
-button.editButton{background: none; border: none; margin: 0; padding: 0}
-img.editButton{position: relative; height: 15px; bottom: -3px; padding: 0}
-button.closeButton {border: none; background: none; margin: 0; padding: 0}
-img.closeButton {position: relative; height: 15px; bottom: -3px; padding: 0 5px}
-img.deleteChoiceButton {position: relative; height: 15px; bottom: -1px}
-img.deleteButton {position: relative; height: 15px; bottom: -3px}
-button.deleteButton{border: none; background: none; margin: 0; padding: 0}
-img:hover {cursor: pointer}
-.iconButton {background: none; border: none; margin: 0; padding: 0}
-
-button, .tooltip {position: relative}
-button:focus, .tooltip:focus {outline-width: 0px}
-.tooltiptext{
-  position: absolute; background-color: white; visibility: hidden; 
-  width: 80px; white-space: nowrap; padding: 5px 8px; border-radius: 5px; 
-  z-index: 2; border-width: 1px; border-style: solid; border-color: black
-}
-.insideModal{border: 1px solid black; border-radius: 5px; padding: 4px; margin-top: 15px;}
-.topRightClose {position: absolute; right: 0px; top: 0px}
-
-button:hover .tooltiptext, .tooltip:hover .tooltiptext {visibility: visible; bottom: -35px; right: -37px}
-button .tooltiptext::after {
-  content: " ";
-  position: absolute;
-  bottom: 100%;  /* At the top of the tooltip */
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent black transparent;
-}
-
-.foodSearchContainer { text-align: center}
-/* TABLE */
-/* FOOD FORM */
-
-.createFoodContainer {position: relative}
-.foodForm {background: rgb(245, 245, 245); position: absolute; z-index: 1; 
-  width: 101%; left: -0.5%; border-radius: 5px; border: 1px solid black; box-shadow: 1px 2px 5px rgb(90, 90, 90)}
-.newFoodGrid {display: grid; grid-template-columns: repeat(5, 1fr); width: 98%}
-.newFoodGrid input, .newFoodGrid select {width: 100%}
-.newFoodGrid label {font-size: 14px}
-.foodForm input[type='submit']{padding: 13px; border-radius: 5px}
-
-/* FOOD FORM */
-/* SEARCH RESULT MODAL */
-.searchResultContainer {
-  position: absolute;
-  background-color: rgb(245, 245, 245);
-  z-index: 1;
-  max-height: 310px;
-  overflow: scroll;
-  margin: 1px 0px 0px 20%;
-  border-radius: 5px;
-  box-shadow:  0px 0px 4px #000000;
-}
-
-.searchResult {
-  position: relative;
-  text-align: left;
-  list-style: none;
-  padding: 0 10px 5px 2px; 
-  border-radius: 5px;
-  border: 1px solid black;
-  margin: 1px;
-  background: white
-}
-
-.searchResult button {
-  position: relative;
-  right: 5px
-}
-
-.searchResult:hover {
-  background-color: rgb(255, 189, 156);
-}
-
-/* .resultName {font-family: panton-bold} */
-.resultName, .brandName{font-size: 14px}
-.resultMacros {font-size: 12px}
-
-/* SEARCH RESULT MODAL */
-/* COLUMNS */
-
-/* COLUMNS */
-/* FOOTER */
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  height: 70px;
-  width: 100%;
-  background-color:  rgb(206, 101, 49);
-  z-index: 1;
-}
-
-.footer h2 {
-  position: absolute;
-  float: right;
-  right: 5%;
-  color: rgb(245, 245, 245)
-}
-
-.daySelect, .goalsSelect {width: auto}
-.goalsSelect select {width: 90%}
-.goalsSelect form {position: relative}
-.goalsSelect input[type='text'] {width: 73%}
-.goalsSelect input[type='submit'] {width: 19%; padding: 2px 0; margin: 0px; max-width: 19px}
-.goals input {text-align: center}
-.newday {width: auto}
-
-.footer:hover .hidden, .hidden:hover{top: 0%; animation: footerShow 1s;}
-.hidden{position: absolute; background: rgb(206, 101, 49); padding: 15px; margin-bottom: 0px;
-  color: white; width: 100%; top: 100%; animation: footerHide 0.5s;
-}
-
-@keyframes footerShow {from {top: 100%;} to {top: 0%;}}
-@keyframes footerHide {from {top: 0%} to {top: 100%}}
-
-/* LOADING  */
-.loading {
-  position: fixed;
-  margin-left: 15%;
-  bottom: 15%;
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid rgb(206, 101, 49); /* Blue */
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  animation: spin 1.5s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-/* LOADING  */
-
-.searchForm {position: relative; z-index: 0}
-.rectangle {
-  position: relative; border-radius: 5px;
-  padding: 5px;
-  border: 5px solid black;
-  background: black;
-  color: white;
-  font-size: 20px;
-  border-right: 0px solid transparent
-}
-
-.rectangle::before {
-  content: " ";
-  position: absolute;
-  bottom: 38px;
-  left: 23px;
-  border-width: 25px;
-  border-style: solid;
-  border-color: transparent transparent black transparent;
-}
-
-.arrow {position: relative; top: 30px; width: 130px; margin: auto; right: 20px;
-  animation: sway 1.3s linear infinite;
-}
-
-@keyframes sway {
-  0% { top: 30px; }
-  50% { top: 40px; }
-  100% { top: 30px; }
-}
-
-/* ERROR MESSAGE */
-.errorMessage {background: black; color: rgb(245, 245, 245); padding: 5px; border-radius: 5px}
-/* ERROR MESSAGE */
-
-.showMore {border: 1px solid black; padding: 2px; border-radius: 5px}
-
-/* .name:hover .nameScroll{} */
-}
-
 
 /* MOBILE!!!!!!!!!!!!!!!  */
 
-@media (max-aspect-ratio: 9/10) {
 /* UNIVERSAL */
 img,.searchButton{height:15px}
 li{list-style:none;position:relative;overflow:hidden;white-space:nowrap;padding:1% 2%}
@@ -379,7 +33,7 @@ span.daySelect{position:absolute;width:100%}
 .daySelect form{margin-top:5%}
 /* HEADER */
 /* SIGNUP */
-.modal{background:white;position:fixed;z-index:1;margin-left:-20%;width:60%;border-radius:5px;border: 1px solid black}
+.modal{background:white;position:fixed;z-index:1;margin-left:-20%;width:60%;border-radius:5px;border: 1px solid black;right:0%}
 .modal form{position:relative;width:100%;padding:2%}
 .modal input{width:95%;position:relative;border:0.5px solid lightgray;border-radius:5px;padding:2%}
 /* SIGNUP */
@@ -387,7 +41,7 @@ span.daySelect{position:absolute;width:100%}
 .goals input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
 /* GOALS */
 /* TABLE */
-.table{position:absolute;top:10%;bottom:10%;width:100%;overflow:scroll;font-size:.9em}
+.table{position:absolute;top:10%;bottom:16%;width:100%;overflow:scroll;font-size:.9em}
 .grid{display:grid;grid-template-columns: 3fr 1fr 2fr  repeat(4, 1fr) 5%}
 .goals .goalsSelect{grid-column:span 2}
 .goals input{position:absolute;width:100%}
@@ -395,7 +49,7 @@ span.daySelect{position:absolute;width:100%}
 .totals{grid-column:span 3;text-align:right}
 /* .under{border-bottom:2px solid yellow} */
 .over{border-bottom:2px solid red}
-.good:after{border-bottom:2px solid green}
+.good{border-bottom:2px solid green}
 .amount input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
 .macro{text-align:center;padding: 4% 0 0 0}
 .deleteColumn button{padding:0}
@@ -407,7 +61,14 @@ span.daySelect{position:absolute;width:100%}
 .choice{background:white;border-top:1px solid rgba(194, 194, 194, 0.589);border-bottom:1px solid rgba(194, 194, 194, 0.589)}
 .choice:hover {transform: scale(1.01); box-shadow: 0px 1px 5px rgb(90, 90, 90)}
 img.deleteChoice{position:relative;}
-.arrow{display:sticky;z-index:3;background:lime;height:100px;width:100px;bottom:50%;left:50%}
+.arrow{position:absolute;bottom:10%;margin-left:20%;padding:2%;border-radius:5px;border:1px solid black;animation:sway 1.3s linear infinite;}
+.arrow:after{content:'';position:absolute;border-width:25px;border-style:solid;border-color:black transparent transparent transparent;right:110%}
+
+@keyframes sway {
+  0% { bottom: 0%; }
+  50% { bottom: 3%; }
+  100% { bottom: 0%; }
+}
 /* CATEGORY */
 /* SEARCH */
 .searchForm{text-align:center;margin-left:2%}
@@ -430,8 +91,12 @@ img.deleteChoice{position:relative;}
 /* DROPDOWN */
 /* FOOTER SEARCH */
 .footerSearch{position:absolute;bottom:11%;width:100%}
-.footerSearch input.searchText{display:inline;width:85%;border-radius:25px;padding:2.5%;border:1px solid rgb(206, 101, 49)}
+.footerSearch input.searchText{display:inline;width:85%;}
+.footerSearch .foodSearchContainer{border:1px solid rgb(206, 101, 49);border-radius:25px}
+.footerSearch .searchForm{margin:0;padding:0;position:relative}
+.footerSearch .searchText{margin-left:-10%;position:relative;padding:2%;border-radius:25px;border:0px solid transparent}
 .searchResultContainer{position:absolute;bottom:100%;max-height:800%;overflow:scroll;box-shadow:inset 2px 2px 2px gray}
+.searchForm .searchButton{position:absolute;height:100%}
 /* FOOTER SEARCH */
 /* FOOTER */
 .footer{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;bottom:0;overflow:scroll; display: grid; grid-template-columns: repeat(3, 1fr)}
@@ -439,4 +104,3 @@ img.deleteChoice{position:relative;}
 .attribution h2{margin:0;}
 .hidden{display:none}
 /* FOOTER */
-}

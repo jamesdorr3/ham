@@ -86,9 +86,6 @@ class ChoiceContainer extends React.Component {
         {this.props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
         return <CategoryCard category={category} key={category.id} />
         })}
-        <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
-          <span className='rectangle'>Start Here</span>
-        </div>
         {this.keyRow}
         <ul className='grid totalsRow'>
           <li className='totals'><span>TOTALS:</span></li>
@@ -99,6 +96,9 @@ class ChoiceContainer extends React.Component {
           <li className='deleteColumn macro'></li>
         </ul>
         <button className='saveButton' onClick={() => this.props.saveAll(this.props)}>Save</button>
+        <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
+          <span className='rectangle'>Start Here</span>
+        </div>
       </div>
     )
   }
