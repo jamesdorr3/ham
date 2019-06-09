@@ -20,7 +20,7 @@ class SearchContainer extends React.Component {
   handleChange = e => {
     this.setState({text: e.target.value})
     if(e.target.value.length > 0){
-      this.internalSearch(e.target.value)
+      // this.internalSearch(e.target.value)
     }else{
       this.setState({internal: [],common:[],error:false})
     }

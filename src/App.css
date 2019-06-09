@@ -50,6 +50,16 @@ span.daySelect{position:absolute;width:100%}
 /* CREATE FOOD */
 /* GOALS */
 .goals input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
+.autogenerateMacros{position:fixed;background:white;z-index:1;top:10%;bottom:10%;width:100%}
+.autogenerateMacros form{margin:2%}
+.autogenerateMacros div{position:relative;}
+.autogenerateMacros label.gender{width:100%;text-align:center}
+.autogenerateMacros .gender label{width:15%}
+.autogenerateMacros .gender input{width:65%}
+.autogenerateMacros label{position:relative;width:30%;display:inline-block;}
+.autogenerateMacros input{position:relative;width:33%}
+.autogenerateMacros button{position:absolute;z-index:1;top:1%;right:1%;border:1px solid black;border-radius:5px;background:rgb(206, 101, 49);color:white}
+.autogenerateMacros input[type='submit']{width:100%;margin-top:1%;border:1px solid black;border-radius:5px;background:rgb(206, 101, 49);color:white}
 /* GOALS */
 /* TABLE */
 .table{position:absolute;top:10%;bottom:16%;width:100%;overflow:scroll;font-size:.9em}
