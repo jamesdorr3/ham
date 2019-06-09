@@ -38,7 +38,7 @@ span.daySelect{position:absolute;width:100%}
 .modal input{width:95%;position:relative;border:0.5px solid lightgray;border-radius:5px;padding:2%}
 /* SIGNUP */
 /* CREATE FOOD */
-.createFoodContainer button{background:white;position:relative;float:right;border-radius:5px;border:1px solid black;padding:1%;z-index:1}
+.createFoodContainer button{background:white;position:relative;float:right;border-radius:5px;border:1px solid black;padding:1%;z-index:1;}
 .createFoodContainer{background:rgb(206, 101, 49);position:fixed;top:0%;width:100%;z-index:1;height:100%;overflow:scroll}
 .createFoodContainer form{position:relative;width:95%;display:block}
 .createFoodContainer li{padding:0%}
@@ -102,7 +102,7 @@ img.deleteChoice{position:relative;}
 /* DROPDOWN */
 /* FOOTER SEARCH */
 .footerSearch{position:absolute;bottom:11%;width:100%}
-.footerSearch input.searchText{display:inline;width:85%;}
+.footerSearch input.searchText{display:inline-block;width:85%;}
 .footerSearch .foodSearchContainer{border:1px solid rgb(206, 101, 49);border-radius:25px}
 .footerSearch .searchForm{margin:0;padding:0;position:relative}
 .footerSearch .searchText{margin-left:-10%;position:relative;padding:2%;border-radius:25px;border:0px solid transparent}
