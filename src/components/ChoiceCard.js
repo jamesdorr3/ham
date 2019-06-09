@@ -10,16 +10,14 @@ class ChoiceCard extends React.Component {
     measure: this.props.choiceFood.choice.measure
   }
   
-  // componentDidMount(){
-  //   window.addEventListener('beforeunload', e => {
-  //     this.updateInDB()
-  //   })
-  // }
-  
   autoUpdateMacro = macro => {
-    const choiceFood = this.props.choiceFood
-    const measurement = this.state.measure === 'grams' ? choiceFood.food.serving_grams : (choiceFood.food.serving_unit_amount || 1)
-    return (this.props.choiceFood.food[macro] / measurement * this.state.amount).toFixed()
+    const amount = this.props.choiceFood.choice.amount
+    const measure = this.props.choiceFood.measures.find(x => x.id === this.props.choiceFood.choice.measure_id)
+    const totalGrams = amount * measure.grams
+    const servingAmount = this.props.choiceFood.food.serving_grams
+    const servings = totalGrams / servingAmount
+
+    return (this.props.choiceFood.food[macro] * servings).toFixed()
   }
 
   updateInDB = () => {
@@ -28,7 +26,7 @@ class ChoiceCard extends React.Component {
     fetch(`${URL}choices/${id}`, {
       method: 'PATCH',
       headers: HEADERS(),
-      body: JSON.stringify({choice: {...this.props.choiceFood.choice, ...this.state}})
+      body: JSON.stringify({choice: this.props.choiceFood.choice})
     })
     .then(r => this.props.stopLoading())
   }
@@ -37,36 +35,26 @@ class ChoiceCard extends React.Component {
     if (e.target.value >= 0) {
       const id = this.props.choiceFood.choice.id
       this.setState({amount: e.target.value})
-      this.props.editChoice({id: id, choice: {amount: e.target.value}})
+      this.props.editChoice({choice: {amount: e.target.value, id: id}})
     }
   }
 
   handleMeasureChange = (e) => {
-    const id = this.props.choiceFood.choice.id
-    const measure = e.target.value
-    const amount = this.state.amount
-    const serving_unit_amount = this.props.choiceFood.food.serving_unit_amount
-    const serving_grams = this.props.choiceFood.food.serving_grams
-    // console.log(id, name, value, amount, serving_unit_amount, serving_grams)
-    let newAmount;
-    if (measure == "grams") {
-      newAmount = (amount / serving_unit_amount * serving_grams)
-    }else{
-      newAmount = (amount / serving_grams * serving_unit_amount)
-    }
-    this.setState({measure: measure, amount: newAmount})
-    this.props.editChoice({id: id, choice: {measure: measure, amount: newAmount}})
+    const fromMeasureId = this.props.choiceFood.choice.measure_id
+    const fromMeasure = this.props.choiceFood.measures.find(x => x.id === fromMeasureId)
+    const toMeasureId = parseInt(e.target.value)
+    const toMeasure = this.props.choiceFood.measures.find(x => x.id === toMeasureId)
+    const newAmount = fromMeasure.grams / toMeasure.grams * this.props.choiceFood.choice.amount 
+    // debugger
+    this.props.editChoice({choice: {measure_id: toMeasureId, amount: newAmount.toFixed(2), id: this.props.choiceFood.choice.id}})
   }
 
   generateMeasures = () => {
-    const measures = [this.props.choiceFood.choice.measure]
-    if (this.props.choiceFood.food.serving_grams && !measures.includes('grams')){measures.push('grams')}
-    if (this.props.choiceFood.food.serving_unit_name && !measures.includes(this.props.choiceFood.food.serving_unit_name)){
-      measures.push(this.props.choiceFood.food.serving_unit_name)
-    }
-    return measures.sort().map(measure => {
+    const measures = this.props.choiceFood.measures
+
+    return measures.sort((x,y) => x.name - y.name).map(measure => {
       return (
-        <option value={measure} key={measure}>{measure}</option>
+        <option value={measure.id} key={measure.id} >{measure.name}</option>
       )
     })
   }
@@ -80,6 +68,7 @@ class ChoiceCard extends React.Component {
   }
 
   render(){
+    // console.log(this.props.choiceFood)
     return(
       <Draggable 
         draggableId={this.props.choiceFood.choice.id} 
@@ -103,7 +92,7 @@ class ChoiceCard extends React.Component {
               <input type='number'
               className=''
               name='amount'
-              value={this.state.amount} 
+              value={this.props.choiceFood.choice.amount} 
               onChange={this.handleAmountChange} 
               onBlur={this.updateInDB}
               >
@@ -112,7 +101,7 @@ class ChoiceCard extends React.Component {
           <li className='measure'>
               <select 
               className=''
-              value={this.state.measure} 
+              value={this.props.choiceFood.choice.measure_id} 
               onChange={this.handleMeasureChange}
               name='measure'
               >
@@ -129,6 +118,10 @@ class ChoiceCard extends React.Component {
       </Draggable>
     )
   }
+}
+
+const mapStateToProps = state => {
+  return state
 }
 
 const mapDispatchToProps = dispatch => {

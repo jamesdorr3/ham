@@ -15,14 +15,21 @@ class CategoryCard extends React.Component {
     let sum = 0
     this.props.choiceFoods.filter(choiceFood => choiceFood.choice.category_id === this.props.category.id).forEach(choiceFood => {
       // console.log(choiceFood)
-      const measurement = ((choiceFood.choice.measure === 'grams') ? choiceFood.food.serving_grams : (choiceFood.food.serving_unit_amount || 1))
-      sum += parseInt((choiceFood.food[macro] / measurement * choiceFood.choice.amount).toFixed(0))
+      // const measurement = ((choiceFood.choice.measure === 'grams') ? choiceFood.food.serving_grams : (choiceFood.food.serving_unit_amount || 1))
+      // sum += parseInt((choiceFood.food[macro] / measurement * choiceFood.choice.amount).toFixed(0))
+      const amount = choiceFood.choice.amount
+      const measure = choiceFood.measures.find(x => x.id === choiceFood.choice.measure_id)
+      const totalGrams = amount * measure.grams
+      const servingAmount = choiceFood.food.serving_grams
+      const servings = totalGrams / servingAmount
+      // console.log(sum)
+      sum += parseInt(choiceFood.food[macro] * servings)
     })
-    return sum
+    return sum.toFixed()
   }
 
   render(){
-    // console.log(this.props)
+    // console.log(this.props.choiceFoods)
     return(
       <Droppable droppableId={this.props.category.id}>
       {(provided) => (

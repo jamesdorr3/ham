@@ -18,9 +18,11 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_CHOICE': {
+      // debugger
       return {...state, choiceFoods: [...state.choiceFoods, {
         choice: {...action.payload.choice, id: action.payload.choice.id || Date.now()},
-        food: action.payload.food
+        food: action.payload.food,
+        measures: action.payload.measures
       }]}
     }
     case 'ADD_CHOICES': {
@@ -88,7 +90,7 @@ const reducer = (state = initialState, action) => {
         const choiceFood = state.choiceFoods.find(x => x.choice.id === parseInt(choicesIds[i]))
 
         // debugger
-        newChoices.push({choice: {...choiceFood.choice, index: i}, food: choiceFood.food})
+        newChoices.push({...choiceFood, choice: {...choiceFood.choice, index: i}})
       }
       const choiceFood = newChoices.find(x => x.choice.id === action.payload.choiceId)
       choiceFood.choice.category_id = action.payload.categoryId
@@ -121,19 +123,22 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'ADD_FOOD': {
+      // debugger
       return {
         ...state,
         choiceFoods: [...state.choiceFoods, action.payload]
       }
     }
     case 'EDIT_CHOICE': {
-      const choiceFood = state.choiceFoods.find(x => x.choice.id == action.payload.id)
+      const choiceFood = state.choiceFoods.find(x => x.choice.id === action.payload.choice.id)
+      // debugger
       return {
         ...state,
         choiceFoods: [
           ...state.choiceFoods.filter(x => x.choice.id != choiceFood.choice.id),
           {
-            food: choiceFood.food, choice: {...choiceFood.choice, ...action.payload.choice}
+            ...choiceFood,
+            choice: {...choiceFood.choice, ...action.payload.choice}
           }
         ]
       }
