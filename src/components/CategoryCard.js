@@ -22,7 +22,7 @@ class CategoryCard extends React.Component {
   }
 
   render(){
-    // console.log(this.props)
+    // console.log(this.props.choiceFoods)
     return(
       <Droppable droppableId={this.props.category.id}>
       {(provided) => (

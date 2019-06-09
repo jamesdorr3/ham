@@ -27,7 +27,7 @@ class App extends React.Component {
     }
     orderedIds.splice(destination.index, 0, choiceFood.choice.id)
     orderedIds.forEach((id, i) => {
-      this.props.editChoice({id: id, choice: {index: i, category_id: categoryId}})
+      this.props.editChoice({choice: {id: id, index: i, category_id: categoryId}})
     })
   };
 
