@@ -20,7 +20,7 @@ class SearchContainer extends React.Component {
   handleChange = e => {
     this.setState({text: e.target.value})
     if(e.target.value.length > 0){
-      this.internalSearch(e.target.value)
+      // this.internalSearch(e.target.value)
     }else{
       this.setState({internal: [],common:[],error:false})
     }
@@ -93,7 +93,7 @@ class SearchContainer extends React.Component {
             >
           </input>
           <input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input>
-          {/* <span className='tooltip'><input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input><span className='tooltiptext'>Search</span></span> */}
+          {/* <span className='tooltip'><input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input><span className='tooltiptext'>Search</span></span>
           <button onClick={() => this.setState({addFood: !this.state.addFood})} className='iconButton' style={{display: this.props.user.email ? 'inline' : 'none'}}>
             {this.state.addFood ?
             <>
@@ -106,9 +106,9 @@ class SearchContainer extends React.Component {
             <span className='tooltiptext'>Add Your Own</span>
             </>
           }
-          </button>
+          </button> */}
         </form>
-        < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} />
+        {/* < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} /> */}
         <ul className='searchResultContainer'>
           {/* {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
           <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 

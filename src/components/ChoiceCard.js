@@ -15,7 +15,8 @@ class ChoiceCard extends React.Component {
     const measure = this.props.choiceFood.measures.find(x => x.id === this.props.choiceFood.choice.measure_id)
     const totalGrams = amount * measure.grams
     const servingAmount = this.props.choiceFood.food.serving_grams
-    const servings = totalGrams / servingAmount
+    const measureAmount = measure.amount? measure.amount : 1
+    const servings = (totalGrams / servingAmount) / measureAmount
 
     return (this.props.choiceFood.food[macro] * servings).toFixed()
   }

@@ -8,6 +8,7 @@ import {URL, HEADERS} from '../constants.js'
 import {saveAll} from '../actions/saveAllAction'
 import {deleteDay} from '../actions/daysActions'
 import UsernameCard from './UsernameCard'
+import MakeFoodCard from './MakeFoodCard'
 
 class SignedInHeader extends React.Component {
 
@@ -56,8 +57,8 @@ class SignedInHeader extends React.Component {
   updateDay = (e) => {
     e.preventDefault()
     this.setState({editDay: false, name: null, date: null})
-    if ((this.state.name && this.state.name !== this.props.day.name) || (this.state.date && this.state.date !== this.props.day.date)) {
-      const day = {...this.props.day, name: this.state.name || this.props.day.name, date: this.state.date || this.props.day.date }
+    if ((this.state.name !== this.props.day.name) || (this.state.date && this.state.date !== this.props.day.date)) {
+      const day = {...this.props.day, name: this.state.name, date: this.state.date || this.props.day.date }
       this.props.editDay(day)
       this.props.updateDay(day)
     }
@@ -86,6 +87,10 @@ class SignedInHeader extends React.Component {
     }
   }
 
+  toggleNewFoodForm = () => {
+    this.setState({showNewFoodForm: !this.state.showNewFoodForm})
+  }
+
   render(){
     // console.log(this.props.days)
     return(
@@ -96,11 +101,13 @@ class SignedInHeader extends React.Component {
             <ul className='top'>
               <li>{this.props.user.username}</li>
               <li>{this.props.user.email}</li>
-              <li>Height</li>
+              {/* <li>Height</li>
               <li>Weight</li>
-              <li>Body Fat %</li>
+              <li>Body Fat %</li> */}
             </ul>
             <ul className='bottom'>
+              <li onClick={this.toggleNewFoodForm}>Create Your Own Food</li>
+              < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id}/>
               <li>About</li>
               <li onClick={this.handleSignOut}>Sign Out</li>
             </ul>

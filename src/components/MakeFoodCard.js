@@ -36,7 +36,7 @@ class MakeFoodCard extends React.Component {
     const s = this.state
     if (s.name && s.serving_unit_amount && s.serving_unit_name && s.serving_grams && s.calories && s.fat && s.carbs && s.protein) {
       this.props.createFood({...this.state, categoryId: this.props.categoryId})
-      this.props.closeAddFood()
+      this.props.toggleNewFoodForm()
       this.setState({
         name: '',
         brand: '',
@@ -64,8 +64,9 @@ class MakeFoodCard extends React.Component {
 
   render(){
     return(
-      <div className='createFoodContainer'>
-      <form style={{display: this.props.addFood ? 'block' : 'none'}} onSubmit={this.handleSubmit} className='foodForm'>
+      <div className='createFoodContainer' style={{display: this.props.showNewFoodForm ? 'block' : 'none'}}>
+      <button className='closeButton' onClick={this.props.toggleNewFoodForm}>Close</button>
+      <form onSubmit={this.handleSubmit} className='foodForm'>
         {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
         <ul className='newFoodGrid'>
           <li>
@@ -78,19 +79,19 @@ class MakeFoodCard extends React.Component {
           </li>
           <li>
           <label>Serving Amount</label>
-          <input type='number' step="any" min='1' value={this.state.serving_unit_amount} onChange={this.handleChange} name='serving_unit_amount' placeholder='serving amount' />
+          <input type='number' step="any" min='0.1' value={this.state.serving_unit_amount} onChange={this.handleChange} name='serving_unit_amount' placeholder='serving amount' />
           </li>
           <li>
           <label>Serving Unit</label>
           <select name='serving_unit_name' value={this.state.serving_unit_name} onChange={this.handleChange} placeholder="unit">
-              {['unit','tbsp','package','piece', 'small', 'medium', 'large'].map(measure => {
+              {['unit','tbsp','tsp','cup','package','piece', 'small', 'medium', 'large'].map(measure => {
                 return <option value={measure} name='measure' >{measure} </option>}
               )}
           </select>
           </li>
           <li>
             <label>Serving in Grams</label>
-            <input type='number' step="any" min='1' value={this.state.serving_grams} onChange={this.handleChange} name='serving_grams' placeholder='grams/serving' />
+            <input type='number' step="any" min='0.1' value={this.state.serving_grams} onChange={this.handleChange} name='serving_grams' placeholder='grams/serving' />
           </li>
           {/* <li></li> */}
           <li>
