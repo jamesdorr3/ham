@@ -96,11 +96,12 @@ class SignedInHeader extends React.Component {
             <ul className='top'>
               <li>{this.props.user.username}</li>
               <li>{this.props.user.email}</li>
-              <li>Height</li>
+              {/* <li>Height</li>
               <li>Weight</li>
-              <li>Body Fat %</li>
+              <li>Body Fat %</li> */}
             </ul>
             <ul className='bottom'>
+              <li>Create Your Own Food</li>
               <li>About</li>
               <li onClick={this.handleSignOut}>Sign Out</li>
             </ul>

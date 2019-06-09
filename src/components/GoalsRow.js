@@ -34,7 +34,8 @@ class GoalsRow extends React.Component {
   }
 
   handleChange = (e) => {
-    this.setState({[e.target.name]: e.target.value})
+    // console.log({[e.target.name]: e.target.value})
+    this.props.editGoal({[e.target.name]: e.target.value})
   }
 
   render(){
@@ -46,10 +47,10 @@ class GoalsRow extends React.Component {
         <li className='goalsSelect'>
           <div><input type='text' name='name' placeholder='name' defaultValue={this.props.goal.name} value={this.state.name} onChange={this.handleChange} /></div>
         </li>
-        <li className='macro calories' ><div><input type='number' name='calories' min='0' placeholder='kcal' defaultValue={this.props.goal.calories} onChange={this.handleChange} /></div></li>
-        <li className='macro fat' ><div><input type='number' name='fat' min='0' placeholder='grams' defaultValue={this.props.goal.fat} onChange={this.handleChange} /></div></li>
-        <li className='macro carbs' ><div><input type='number' name='carbs' min='0' placeholder='grams' defaultValue={this.props.goal.carbs} onChange={this.handleChange} /></div></li>
-        <li className='macro protein' ><div><input type='number' name='protein' min='0' placeholder='grams' defaultValue={this.props.goal.protein} onChange={this.handleChange} /></div></li>
+        <li className='macro calories' ><div><input type='number' name='calories' min='0' placeholder='kcal' value={this.props.goal.calories} onChange={this.handleChange} /></div></li>
+        <li className='macro fat' ><div><input type='number' name='fat' min='0' placeholder='grams' value={this.props.goal.fat} onChange={this.handleChange} /></div></li>
+        <li className='macro carbs' ><div><input type='number' name='carbs' min='0' placeholder='grams' value={this.props.goal.carbs} onChange={this.handleChange} /></div></li>
+        <li className='macro protein' ><div><input type='number' name='protein' min='0' placeholder='grams' value={this.props.goal.protein} onChange={this.handleChange} /></div></li>
         <li><input type='submit' /></li>
       </form>
       :
@@ -84,7 +85,8 @@ const mapDispatchToProps = dispatch => {
     changeGoal: (id) => dispatch({ type: 'CHANGE_GOAL', payload: id}),
     updateGoal: (goal) => dispatch(updateGoal(goal)),
     createGoal: (userId) => dispatch(createGoal(userId)),
-    deleteGoal: id => dispatch(deleteGoal(id))
+    deleteGoal: id => dispatch(deleteGoal(id)),
+    editGoal: info => dispatch({ type: 'EDIT_GOAL', payload: info})
   }
 }
 
