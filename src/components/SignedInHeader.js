@@ -56,8 +56,8 @@ class SignedInHeader extends React.Component {
   updateDay = (e) => {
     e.preventDefault()
     this.setState({editDay: false, name: null, date: null})
-    if ((this.state.name && this.state.name !== this.props.day.name) || (this.state.date && this.state.date !== this.props.day.date)) {
-      const day = {...this.props.day, name: this.state.name || this.props.day.name, date: this.state.date || this.props.day.date }
+    if ((this.state.name !== this.props.day.name) || (this.state.date && this.state.date !== this.props.day.date)) {
+      const day = {...this.props.day, name: this.state.name, date: this.state.date || this.props.day.date }
       this.props.editDay(day)
       this.props.updateDay(day)
     }
