@@ -8,6 +8,7 @@ import {URL, HEADERS} from '../constants.js'
 import {saveAll} from '../actions/saveAllAction'
 import {deleteDay} from '../actions/daysActions'
 import UsernameCard from './UsernameCard'
+import MakeFoodCard from './MakeFoodCard'
 
 class SignedInHeader extends React.Component {
 
@@ -86,6 +87,10 @@ class SignedInHeader extends React.Component {
     }
   }
 
+  toggleNewFoodForm = () => {
+    this.setState({showNewFoodForm: !this.state.showNewFoodForm})
+  }
+
   render(){
     // console.log(this.props.days)
     return(
@@ -101,7 +106,8 @@ class SignedInHeader extends React.Component {
               <li>Body Fat %</li> */}
             </ul>
             <ul className='bottom'>
-              <li>Create Your Own Food</li>
+              <li onClick={this.toggleNewFoodForm}>Create Your Own Food</li>
+              < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm}/>
               <li>About</li>
               <li onClick={this.handleSignOut}>Sign Out</li>
             </ul>

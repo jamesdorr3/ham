@@ -21,7 +21,7 @@ class CategoryCard extends React.Component {
       const measure = choiceFood.measures.find(x => x.id === choiceFood.choice.measure_id)
       const totalGrams = amount * measure.grams
       const servingAmount = choiceFood.food.serving_grams
-      const servings = totalGrams / servingAmount
+      const servings = (totalGrams / servingAmount) / measure.amount
       // console.log(sum)
       sum += parseInt(choiceFood.food[macro] * servings)
     })

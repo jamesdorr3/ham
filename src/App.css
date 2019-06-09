@@ -37,6 +37,17 @@ span.daySelect{position:absolute;width:100%}
 .modal form{position:relative;width:100%;padding:2%}
 .modal input{width:95%;position:relative;border:0.5px solid lightgray;border-radius:5px;padding:2%}
 /* SIGNUP */
+/* CREATE FOOD */
+.createFoodContainer button{background:white;position:relative;float:right;border-radius:5px;border:1px solid black;padding:1%;z-index:1}
+.createFoodContainer{background:rgb(206, 101, 49);position:fixed;top:0%;width:100%;z-index:1;height:100%;overflow:scroll}
+.createFoodContainer form{position:relative;width:95%;display:block}
+.createFoodContainer li{padding:0%}
+.createFoodContainer label{color:white}
+.createFoodContainer label:after{content:': '}
+.createFoodContainer input,.createFoodContainer select{width:50%;position:absolute;right:1%;border-radius:5px}
+.createFoodContainer select{z-index:2}
+.createFoodContainer input[type='submit']{background:white;position:relative;padding:1%;border:1px solid black;width:100%}
+/* CREATE FOOD */
 /* GOALS */
 .goals input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
 /* GOALS */

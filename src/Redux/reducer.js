@@ -49,7 +49,6 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'EDIT_GOAL': {
-      console.log(action.payload)
       return {
         ...state,
         goal: {
