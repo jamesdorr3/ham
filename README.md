@@ -14,6 +14,7 @@ During development, the system runs the backend on localhost:3001. I use Postgre
 
 ## Contributing
 
+* Improve the food search
 * CSS, styling, UI
 * Any suggestions for features, organization, or best practice guidelines
 
