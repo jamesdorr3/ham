@@ -10,6 +10,9 @@ During development, the system runs the backend on localhost:3001. I use Postgre
 
 ## Contributing
 
+* CSS, styling, UI
+* Any suggestions for features, organization, or best practice guidelines
+
 ## Authors
 
 * James Dorr - Initial Work - jamesdorr3@gmail.com
