@@ -58,7 +58,7 @@ class SignUpCard extends React.Component {
         </li>
         <li>
           <label>Email</label><br/>
-          <input value={this.state.email} name='email' onChange={this.handleChange} type='text' placeholder='email' />
+          <input value={this.state.email} name='email' onChange={this.handleChange} type='email' placeholder='email' />
         </li>
         <li>
           <label>Password</label><br/>

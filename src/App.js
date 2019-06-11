@@ -11,7 +11,6 @@ class App extends React.Component {
 
   onDragEnd = result => {
     const {destination, source, draggableId} = result;
-    console.log(result)
     if (!destination) {
       return;
     }
