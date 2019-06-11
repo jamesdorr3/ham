@@ -96,7 +96,7 @@ class SearchContainer extends React.Component {
           {/* <datalist id='popularSearches'>
             <option>poo</option>
           </datalist> */}
-          <input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input>
+          <input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton searchIcon'></input>
           {/* <span className='tooltip'><input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input><span className='tooltiptext'>Search</span></span>
           <button onClick={() => this.setState({addFood: !this.state.addFood})} className='iconButton' style={{display: this.props.user.email ? 'inline' : 'none'}}>
             {this.state.addFood ?

@@ -127,7 +127,7 @@ class SignedInHeader extends React.Component {
               {this.dayOptions()}
             </select>
             <span className="dropdownButton">
-              <button className='nonMenu'>▽</button>
+              <button className='nonMenu'>⋯</button>
               <ul className='dropdown'>
                 <li onClick={this.props.createDay}><button><img src='add-icon-circle.png' className='newDay addButton' alt='add new Day'></img></button>Add Day</li>
                 <li onClick={this.editDay}><button><img src='edit-icon.png' className='editDay editButton' alt='edit Day' /></button>Edit Day</li>

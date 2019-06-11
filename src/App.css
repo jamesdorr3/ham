@@ -15,7 +15,7 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 .sideMenu{position:fixed;background:white;top:0;bottom:0;z-index:1;margin:0;border-radius:0px;border-right:5px solid rgb(206, 101, 49);visibility:hidden;width:50%;animation:menuDisappearLeft 0.5s;padding:5% 0}
 .menuButton,div.daySelect,.usernameArea{position:relative;}
 .username{width:100%;color:rgb(245, 245, 245)}
-.username,span.daySelect{position:absolute;margin-top:15%;text-align:center}
+.username,span.daySelect{position:absolute;bottom:40%;text-align:center;width:100%}
 .daySelect .dropdownButton{width:15%}
 .menuButton:hover .sideMenu{visibility:visible; animation:menuAppearRight 0.5s}
 @keyframes menuAppearRight {from {left:-50%;} to {left: 0%;}}
@@ -23,8 +23,7 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 .sideMenu ul{width:100%;margin:0;padding:0}
 .sideMenu ul li{padding:5% 2%;width:100%}
 .sideMenu .bottom{position:absolute;bottom:0;padding:10% 0}
-div.daySelect{grid-column: 2}
-span.daySelect{position:absolute;width:100%}
+div.daySelect{grid-column: 2;position:relative}
 .daySelect select{width:80%}
 .daySelect .dropdownButton button.nonMenu{padding:0;width:15%;color: rgb(245, 245, 245)}
 .daySelect input[type='text']{text-align:center}
@@ -82,6 +81,10 @@ span.daySelect{position:absolute;width:100%}
 .choice{background:white;border-top:1px solid rgba(194, 194, 194, 0.589);border-bottom:1px solid rgba(194, 194, 194, 0.589)}
 .choice:hover {transform: scale(1.01); box-shadow: 0px 1px 5px rgb(90, 90, 90)}
 img.deleteChoice{position:relative;}
+
+/* .choice li.name:hover {background:lime} */
+.choice li.name:hover span.nameScroll{position:fixed;z-index:1;background:white;}
+
 .arrow{position:absolute;bottom:10%;margin-left:20%;padding:2%;border-radius:5px;border:1px solid black;animation:sway 1.3s linear infinite;}
 .arrow:after{content:'';position:absolute;border-width:25px;border-style:solid;border-color:black transparent transparent transparent;right:110%}
 
@@ -116,11 +119,11 @@ img.deleteChoice{position:relative;}
 /* FOOTER SEARCH */
 .footerSearch{position:absolute;bottom:11%;width:100%}
 .footerSearch input.searchText{display:inline-block;width:85%;}
-.footerSearch .foodSearchContainer{border:1px solid rgb(206, 101, 49);border-radius:25px}
+.footerSearch .foodSearchContainer{border:1px solid rgb(206, 101, 49);border-radius:25px;background:white}
 .footerSearch .searchForm{margin:0;padding:0;position:relative}
 .footerSearch .searchText{margin-left:-10%;position:relative;padding:2%;border-radius:25px;border:0px solid transparent}
 .searchResultContainer{position:absolute;bottom:100%;max-height:800%;overflow:scroll;box-shadow:inset 2px 2px 2px gray}
-.searchForm .searchButton{position:absolute;height:100%}
+.searchForm .searchButton{position:absolute;height:100%;background:white}
 /* FOOTER SEARCH */
 /* FOOTER */
 .footer{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;bottom:0;overflow:scroll; display: grid; grid-template-columns: repeat(3, 1fr)}
@@ -128,3 +131,11 @@ img.deleteChoice{position:relative;}
 .attribution h2{margin:0;}
 .hidden{display:none}
 /* FOOTER */
+
+
+
+@media only screen and (min-width: 768px) {
+.table{width:70%;border-right:1px solid black;height:80%;}
+.footerSearch .foodSearchContainer{position:fixed;top:11%;right:1%;width:28%;}
+.searchResultContainer{display:block;position:fixed;top:15%;bottom:11%;width:28%}
+}
