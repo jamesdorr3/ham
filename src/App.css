@@ -23,9 +23,10 @@ img.menuButton{position:relative;height:100%}
 .menuButton:hover .sideMenu{visibility:visible; animation:menuAppearRight 0.5s;left:0%}
 @keyframes menuAppearRight {from {left:-50%;} to {left: 0%;}}
 @keyframes menuDisappearLeft {from {visibility:visible; left:0%} to {left: -60%;}}
-.sideMenu ul{width:100%;margin:0;padding:0 2% 0 0}
+.sideMenu ul{width:100%;margin:0 2% 0 0;padding:0}
 .sideMenu ul li{padding:5% 2%;width:100%}
 .sideMenu .bottom{position:absolute;bottom:0;padding:10% 0}
+.contact a{text-decoration:none;color:black}
 div.daySelect{grid-column: 2;position:relative}
 .daySelect select{width:80%}
 .daySelect .dropdownButton button.nonMenu{padding:0;width:15%;color: rgb(245, 245, 245);background:transparent;border:none;font-weight:bold;font-size:1em}
@@ -147,7 +148,7 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 .footerSearch .foodSearchContainer{position:fixed;top:11%;right:1%;width:28%;}
 .searchResultContainer{display:block;position:fixed;top:15%;bottom:11%;width:28%}
 .arrow{background:white;position:fixed;top:5%;right:14%;padding:1% 2%;height:2%;border-radius:5px;border:1px solid black;animation:sway 1.3s linear infinite;}
-.arrow:after{content:'';position:absolute;border-width:10px;border-style:solid;border-color:black transparent transparent transparent;right:-18%;top:68%}
+.arrow:after{content:'';position:absolute;border-width:10px;border-style:solid;border-color:black transparent transparent transparent;right:-18%;top:75%}
 @keyframes sway {
   0% { top: 4%; }
   50% { top: 6%; }

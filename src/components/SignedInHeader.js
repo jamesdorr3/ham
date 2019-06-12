@@ -3,10 +3,9 @@ import { connect } from 'react-redux'
 import LoginCard from './LoginCard'
 import SignUpCard from './SignUpCard'
 import {auth, reauth} from '../actions/authActions'
-import {createDay, selectDay, updateDay} from '../actions/daysActions'
+import {createDay, selectDay, updateDay, deleteDay, copyDay} from '../actions/daysActions'
 import {URL, HEADERS} from '../constants.js'
 import {saveAll} from '../actions/saveAllAction'
-import {deleteDay} from '../actions/daysActions'
 import UsernameCard from './UsernameCard'
 import MakeFoodCard from './MakeFoodCard'
 
@@ -91,6 +90,10 @@ class SignedInHeader extends React.Component {
     this.setState({showNewFoodForm: !this.state.showNewFoodForm})
   }
 
+  copyDay = () => {
+    this.props.copyDay(this.props.day.id)
+  }
+
   render(){
     // console.log(this.props.days)
     return(
@@ -108,7 +111,7 @@ class SignedInHeader extends React.Component {
               <ul className='bottom'>
                 <li onClick={this.toggleNewFoodForm}>Create Your Own Food</li>
                 < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id}/>
-                <li>About</li>
+                <li className='contact'><a href='mailto:jamesdorr3@gmail.com'>Contact</a></li>
                 <li onClick={this.handleSignOut}>Sign Out</li>
               </ul>
             </div>
@@ -132,6 +135,7 @@ class SignedInHeader extends React.Component {
               <ul className='dropdown'>
                 <li onClick={this.props.createDay}><button><img src='add-icon-circle.png' className='newDay addButton' alt='add new Day'></img></button>Add Day</li>
                 <li onClick={this.editDay}><button><img src='edit-icon.png' className='editDay editButton' alt='edit Day' /></button>Edit Day</li>
+                <li onClick={this.copyDay}><button><img src='edit-icon.png' className='editDay editButton' alt='edit Day' /></button>Copy Day</li>
                 <li onClick={this.deleteDay}><button><img src='trash-icon.png' className='deleteDay deleteButton' alt='delete Day' /></button>Delete Day</li>
               </ul>
             </span>
@@ -161,7 +165,8 @@ const mapDispatchToProps = dispatch => {
     saveAll: (state) => dispatch(saveAll(state)),
     startLoading: () => dispatch({type: 'START_LOADING'}),
     stopLoading: () => dispatch({type: 'STOP_LOADING'}),
-    deleteDay: (id) => dispatch(deleteDay(id))
+    deleteDay: (id) => dispatch(deleteDay(id)),
+    copyDay: (id) => dispatch(copyDay(id))
   }
 }
 
