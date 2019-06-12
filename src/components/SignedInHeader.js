@@ -95,22 +95,23 @@ class SignedInHeader extends React.Component {
     // console.log(this.props.days)
     return(
       <div className='header'>
-        <div className='menuButton'>
-          <span className='username'><img src='menu-icon-white.png' className='menuButton' alt='menu button'></img></span>
-          <div className='sideMenu'>
-            <ul className='top'>
-              <li>{this.props.user.username}</li>
-              <li>{this.props.user.email}</li>
-              {/* <li>Height</li>
-              <li>Weight</li>
-              <li>Body Fat %</li> */}
-            </ul>
-            <ul className='bottom'>
-              <li onClick={this.toggleNewFoodForm}>Create Your Own Food</li>
-              < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id}/>
-              <li>About</li>
-              <li onClick={this.handleSignOut}>Sign Out</li>
-            </ul>
+        <div className='menu'>
+          <div className='menuButton'><img src='menu-icon-white.png' className='menuButton' alt='menu button'></img>
+            <div className='sideMenu'>
+              <ul className='top'>
+                <li>{this.props.user.username}</li>
+                <li>{this.props.user.email}</li>
+                {/* <li>Height</li>
+                <li>Weight</li>
+                <li>Body Fat %</li> */}
+              </ul>
+              <ul className='bottom'>
+                <li onClick={this.toggleNewFoodForm}>Create Your Own Food</li>
+                < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id}/>
+                <li>About</li>
+                <li onClick={this.handleSignOut}>Sign Out</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div className='daySelect'>
@@ -137,8 +138,8 @@ class SignedInHeader extends React.Component {
           </span>
           }
         </div>
-        <div className='usernameArea'>
-          <h1 className='username'>HAM</h1>
+        <div className='appName'>
+          <h1 className='appName'>HAM</h1>
         </div>
       </div>
     )

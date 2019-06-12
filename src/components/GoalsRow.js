@@ -60,7 +60,7 @@ class GoalsRow extends React.Component {
         <li className='macro fat' ><div><input type='number' name='fat' min='0' placeholder='grams' value={this.props.goal.fat} onChange={this.handleChange} /></div></li>
         <li className='macro carbs' ><div><input type='number' name='carbs' min='0' placeholder='grams' value={this.props.goal.carbs} onChange={this.handleChange} /></div></li>
         <li className='macro protein' ><div><input type='number' name='protein' min='0' placeholder='grams' value={this.props.goal.protein} onChange={this.handleChange} /></div></li>
-        <li><input type='submit' /></li>
+        <li className='submitGoal'><input className='submitGoal' type='submit' value='✔'/></li>
       </form>
       :
       <ul className='grid goals'>
