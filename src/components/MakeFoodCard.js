@@ -11,7 +11,7 @@ class MakeFoodCard extends React.Component {
     serving_unit_name: '',
     serving_grams: '',
     calories: '',
-    serving_unit_name: 'unit',
+    serving_unit_name: '',
     fat: '',
     carbs: '',
     protein: '',
@@ -44,7 +44,7 @@ class MakeFoodCard extends React.Component {
         serving_unit_name: '',
         serving_grams: '',
         calories: '',
-        serving_unit_name: 'unit',
+        serving_unit_name: '',
         fat: '',
         carbs: '',
         protein: '',
@@ -82,12 +82,13 @@ class MakeFoodCard extends React.Component {
           <input type='number' step="any" min='0.1' value={this.state.serving_unit_amount} onChange={this.handleChange} name='serving_unit_amount' placeholder='serving amount' />
           </li>
           <li>
-          <label>Serving Unit</label>
-          <select name='serving_unit_name' value={this.state.serving_unit_name} onChange={this.handleChange} placeholder="unit">
+            <label>Serving Unit</label>
+            <input type="text" list="units" name='serving_unit_name' value={this.state.serving_unit_name} onChange={this.handleChange} placeholder="unit"/>
+            <datalist id='units'>
               {['unit','tbsp','tsp','cup','package','piece', 'small', 'medium', 'large'].map(measure => {
                 return <option value={measure} name='measure' >{measure} </option>}
               )}
-          </select>
+            </datalist>
           </li>
           <li>
             <label>Serving in Grams</label>

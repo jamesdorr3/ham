@@ -36,6 +36,12 @@ export const internalSearch = (searchTerm) => {
   }
 }
 
+export const favoriteSearch = (searchTerm) => {
+  return dispatch => {
+    return fetch(`${URL}search/favorite_search?q=${searchTerm}`, {headers: HEADERS()})
+  }
+}
+
 export const externalSearch = searchTerm => {
   return dispatch => {
     return fetch(`${URL}search/many?q=${searchTerm}`, {headers: HEADERS()})

@@ -4,28 +4,48 @@ import InternalSearchResultCard from '../components/InternalSearchResultCard'
 import {URL, HEADERS} from '../constants.js'
 import MakeFoodCard from '../components/MakeFoodCard'
 import {connect} from 'react-redux'
-import {internalSearch, externalSearch} from '../actions/searchActions'
+import {internalSearch, externalSearch, favoriteSearch} from '../actions/searchActions'
 
 class SearchContainer extends React.Component {
 
   state = {
     text: '',
-    branded: [],
+    favorite: [],
     common: [],
     internal: [],
     error: false,
     addFood: false
   }
 
+  componentDidMount = () => {
+    this.favoriteSearch('')
+  }
+
   handleChange = e => {
     this.setState({text: e.target.value})
-    if(e.target.value.length > 0){
-      // this.internalSearch(e.target.value)
-    }else{
+    this.favoriteSearch(e.target.value)
+    if(e.target.value.length === 0) {
       this.setState({internal: [],common:[],error:false})
     }
   }
   
+  favoriteSearch = (text) => {
+    this.props.favoriteSearch(text)
+    .then(r => r.json())
+    .then(r => {
+      if (r.length > 0){
+        this.setState({
+          favorite: r,
+          // common: [{description: 'More results are loading'}]
+        })
+      }else{
+        this.setState({
+          favorite: []
+        })
+      }
+    })
+  }
+
   internalSearch = (text) => {
     this.props.internalSearch(text)
     .then(r => r.json())
@@ -52,7 +72,7 @@ class SearchContainer extends React.Component {
       this.props.externalSearch(this.state.text)
       .then(r => r.json())
       .then(r => {
-        // debugger
+        console.log(r.resp)
         this.props.stopLoading()
         // debugger
         // if (r.internal.length > 0){
@@ -85,14 +105,18 @@ class SearchContainer extends React.Component {
     return(
       <div className='centered row foodSearchContainer' >
         <form onSubmit={this.handleSubmit} className='searchForm'>
-          <input type='text' 
+          <input type='search' 
+            list='popularSearches'
             value={this.state.text} 
             onChange={this.handleChange}
             placeholder='Search for any food...'
             className='searchText'
             >
           </input>
-          <input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input>
+          {/* <datalist id='popularSearches'>
+            <option>poo</option>
+          </datalist> */}
+          <input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton searchIcon'></input>
           {/* <span className='tooltip'><input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input><span className='tooltiptext'>Search</span></span>
           <button onClick={() => this.setState({addFood: !this.state.addFood})} className='iconButton' style={{display: this.props.user.email ? 'inline' : 'none'}}>
             {this.state.addFood ?
@@ -113,6 +137,17 @@ class SearchContainer extends React.Component {
           {/* {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
           <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
           : null} */}
+          <h5>Favorites</h5>
+          {this.state.favorite.map(food => (
+            < InternalSearchResultCard 
+            categoryId={this.props.categoryId}
+            key={food.food_name} 
+            food={food} 
+            addChoice={this.props.addChoice}
+            clearForm={this.clearResults}
+            />)
+          )}
+          <h5>More Results</h5>
           {this.state.internal.map(food => (
             < InternalSearchResultCard 
             categoryId={this.props.categoryId}
@@ -159,6 +194,7 @@ const mapDispatchToProps = dispatch => {
     startLoading: () => dispatch({type: 'START_LOADING'}),
     stopLoading: () => dispatch({type: 'STOP_LOADING'}),
     internalSearch: (searchTerm) => dispatch(internalSearch(searchTerm)),
+    favoriteSearch: (searchTerm) => dispatch(favoriteSearch(searchTerm)),
     externalSearch: (searchTerm) => dispatch(externalSearch(searchTerm))
   }
 }

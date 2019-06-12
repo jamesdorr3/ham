@@ -40,7 +40,7 @@ export const reauth = () => {
       return response.json()
     })
     .then(jwtAndUser => {
-      console.log(jwtAndUser)
+      // console.log(jwtAndUser)
       dispatch({type: 'STOP_LOADING'})
       if (jwtAndUser.user && jwtAndUser.jwt) {
         // console.log(jwtAndUser)
