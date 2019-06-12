@@ -15,7 +15,11 @@ class InternalSearchResultCard extends React.Component {
       <li className='searchResult' onClick={this.handleAddChoice}>
         <span className='resultName'>{this.props.food.name}</span>
         {this.props.food.brand ? <span className='brandName'> - {this.props.food.brand}</span> : null}
-        <span className='resultMacros'> - calories: {this.props.food.calories.toFixed()}, fat: {this.props.food.fat.toFixed()}, carbs: {this.props.food.carbs.toFixed()}, protein: {this.props.food.protein.toFixed()}</span>
+        <ul className='resultMacros'>
+          <li>fat: {this.props.food.fat.toFixed()}</li>
+          <li>carbs: {this.props.food.carbs.toFixed()}</li>
+          <li>protein: {this.props.food.protein.toFixed()}</li>
+        </ul>
       </li>
     )
   }

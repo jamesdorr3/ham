@@ -16,6 +16,7 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 .menuButton,div.daySelect,.usernameArea{position:relative;}
 .username{width:100%;color:rgb(245, 245, 245)}
 .username,span.daySelect{position:absolute;bottom:40%;text-align:center;width:100%}
+h1.username{margin:0;bottom:30%;padding:0 0}
 .daySelect .dropdownButton{width:15%}
 .menuButton:hover .sideMenu{visibility:visible; animation:menuAppearRight 0.5s}
 @keyframes menuAppearRight {from {left:-50%;} to {left: 0%;}}
@@ -83,7 +84,7 @@ div.daySelect{grid-column: 2;position:relative}
 img.deleteChoice{position:relative;}
 
 /* .choice li.name:hover {background:lime} */
-.choice li.name:hover span.nameScroll{position:fixed;z-index:1;background:white;}
+.choice li.name:hover span.nameScroll{position:fixed;z-index:1;background:white;padding-right:1%}
 
 .arrow{position:absolute;bottom:10%;margin-left:20%;padding:2%;border-radius:5px;border:1px solid black;animation:sway 1.3s linear infinite;}
 .arrow:after{content:'';position:absolute;border-width:25px;border-style:solid;border-color:black transparent transparent transparent;right:110%}
@@ -123,6 +124,7 @@ img.deleteChoice{position:relative;}
 .footerSearch .searchForm{margin:0;padding:0;position:relative}
 .footerSearch .searchText{margin-left:-10%;position:relative;padding:2%;border-radius:25px;border:0px solid transparent}
 .searchResultContainer{position:absolute;bottom:100%;max-height:800%;overflow:scroll;box-shadow:inset 2px 2px 2px gray}
+.searchResultContainer h5{text-align:center;margin:2%;background:rgb(206, 101, 49);color:white}
 .searchForm .searchButton{position:absolute;height:100%;background:white}
 /* FOOTER SEARCH */
 /* FOOTER */
@@ -138,4 +140,7 @@ img.deleteChoice{position:relative;}
 .table{width:70%;border-right:1px solid black;height:80%;}
 .footerSearch .foodSearchContainer{position:fixed;top:11%;right:1%;width:28%;}
 .searchResultContainer{display:block;position:fixed;top:15%;bottom:11%;width:28%}
+.searchResult{}
+ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)}
+.arrow{background:lime}
 }

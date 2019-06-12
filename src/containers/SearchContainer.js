@@ -4,28 +4,48 @@ import InternalSearchResultCard from '../components/InternalSearchResultCard'
 import {URL, HEADERS} from '../constants.js'
 import MakeFoodCard from '../components/MakeFoodCard'
 import {connect} from 'react-redux'
-import {internalSearch, externalSearch} from '../actions/searchActions'
+import {internalSearch, externalSearch, favoriteSearch} from '../actions/searchActions'
 
 class SearchContainer extends React.Component {
 
   state = {
     text: '',
-    branded: [],
+    favorite: [],
     common: [],
     internal: [],
     error: false,
     addFood: false
   }
 
+  componentDidMount = () => {
+    this.favoriteSearch('')
+  }
+
   handleChange = e => {
     this.setState({text: e.target.value})
-    if(e.target.value.length > 0){
-      // this.internalSearch(e.target.value)
-    }else{
+    this.favoriteSearch(e.target.value)
+    if(e.target.value.length === 0) {
       this.setState({internal: [],common:[],error:false})
     }
   }
   
+  favoriteSearch = (text) => {
+    this.props.favoriteSearch(text)
+    .then(r => r.json())
+    .then(r => {
+      if (r.length > 0){
+        this.setState({
+          favorite: r,
+          // common: [{description: 'More results are loading'}]
+        })
+      }else{
+        this.setState({
+          favorite: []
+        })
+      }
+    })
+  }
+
   internalSearch = (text) => {
     this.props.internalSearch(text)
     .then(r => r.json())
@@ -117,6 +137,17 @@ class SearchContainer extends React.Component {
           {/* {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
           <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
           : null} */}
+          <h5>Favorites</h5>
+          {this.state.favorite.map(food => (
+            < InternalSearchResultCard 
+            categoryId={this.props.categoryId}
+            key={food.food_name} 
+            food={food} 
+            addChoice={this.props.addChoice}
+            clearForm={this.clearResults}
+            />)
+          )}
+          <h5>More Results</h5>
           {this.state.internal.map(food => (
             < InternalSearchResultCard 
             categoryId={this.props.categoryId}
@@ -163,6 +194,7 @@ const mapDispatchToProps = dispatch => {
     startLoading: () => dispatch({type: 'START_LOADING'}),
     stopLoading: () => dispatch({type: 'STOP_LOADING'}),
     internalSearch: (searchTerm) => dispatch(internalSearch(searchTerm)),
+    favoriteSearch: (searchTerm) => dispatch(favoriteSearch(searchTerm)),
     externalSearch: (searchTerm) => dispatch(externalSearch(searchTerm))
   }
 }

@@ -96,7 +96,7 @@ class SignedInHeader extends React.Component {
     return(
       <div className='header'>
         <div className='menuButton'>
-          <span className='username'>▷</span>
+          <span className='username'><img src='menu-icon-white.png' className='menuButton' alt='menu button'></img></span>
           <div className='sideMenu'>
             <ul className='top'>
               <li>{this.props.user.username}</li>
@@ -138,7 +138,7 @@ class SignedInHeader extends React.Component {
           }
         </div>
         <div className='usernameArea'>
-          <span className='username'>HAM</span>
+          <h1 className='username'>HAM</h1>
         </div>
       </div>
     )
