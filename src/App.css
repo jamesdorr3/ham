@@ -30,9 +30,9 @@ img.menuButton{position:relative;height:100%}
 div.daySelect{grid-column: 2;position:relative}
 .daySelect select{width:80%}
 .daySelect .dropdownButton button.nonMenu{padding:0;width:15%;color: rgb(245, 245, 245);background:transparent;border:none;font-weight:bold;font-size:1em}
-.daySelect input[type='text']{text-align:center}
-.daySelect input[type='date']{width:65%;background:white}
-.daySelect input[type='submit']{padding:0 1.5%;color:white;}
+.daySelect input[type='text']{text-align:center;width:90%}
+.daySelect input[type='date']{width:50%;background:white;min-width:auto}
+.daySelect input[type='submit']{position:relative;padding:1% 10%;margin-left:9%;color:white;background:none;border-radius:5px}
 .daySelect form{margin-top:5%}
 /* HEADER */
 /* SIGNUP */

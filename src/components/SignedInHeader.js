@@ -123,7 +123,7 @@ class SignedInHeader extends React.Component {
           <form className='dayEdit' onSubmit={this.updateDay}>
             <input type='text' name='name' placeholder='name' defaultValue={this.props.day.name} value={this.state.name} onChange={this.handleDayFormChange} />
             <input type='date' name='date' placeholder='date' defaultValue={this.props.day.date} value={this.state.date} onChange={this.handleDayFormChange} />
-            <input type='submit' />
+            <input type='submit' value='✔'/>
           </form>
           :
           <span className='daySelect'>
