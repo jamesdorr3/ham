@@ -135,7 +135,7 @@ class SignedInHeader extends React.Component {
               <ul className='dropdown'>
                 <li onClick={this.props.createDay}><button><img src='add-icon-circle.png' className='newDay addButton' alt='add new Day'></img></button>Add Day</li>
                 <li onClick={this.editDay}><button><img src='edit-icon.png' className='editDay editButton' alt='edit Day' /></button>Edit Day</li>
-                <li onClick={this.copyDay}><button><img src='edit-icon.png' className='editDay editButton' alt='edit Day' /></button>Copy Day</li>
+                <li onClick={this.copyDay}><button className='copyButton'><span className='copy'>𝍌</span></button>Copy Day</li>
                 <li onClick={this.deleteDay}><button><img src='trash-icon.png' className='deleteDay deleteButton' alt='delete Day' /></button>Delete Day</li>
               </ul>
             </span>

@@ -23,13 +23,14 @@ img.menuButton{position:relative;height:100%}
 .menuButton:hover .sideMenu{visibility:visible; animation:menuAppearRight 0.5s;left:0%}
 @keyframes menuAppearRight {from {left:-50%;} to {left: 0%;}}
 @keyframes menuDisappearLeft {from {visibility:visible; left:0%} to {left: -60%;}}
-.sideMenu ul{width:100%;margin:0 2% 0 0;padding:0}
-.sideMenu ul li{padding:5% 2%;width:100%}
+.sideMenu ul{width:100%;margin:0 2% 0 0;padding:0 2% 0 0}
+.sideMenu ul li{padding:5% 2%;margin:0 2% 0 0;width:100%}
 .sideMenu .bottom{position:absolute;bottom:0;padding:10% 0}
 .contact a{text-decoration:none;color:black}
 div.daySelect{grid-column: 2;position:relative}
 .daySelect select{width:80%}
 .daySelect .dropdownButton button.nonMenu{padding:0;width:15%;color: rgb(245, 245, 245);background:transparent;border:none;font-weight:bold;font-size:1em}
+.copy{font-size:18px;position:relative;right:19%}
 .daySelect input[type='text']{text-align:center;width:90%}
 .daySelect input[type='date']{width:50%;background:white;min-width:auto}
 .daySelect input[type='submit']{position:relative;padding:1% 10%;margin-left:9%;color:white;background:none;border-radius:5px}
