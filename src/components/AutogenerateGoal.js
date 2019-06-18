@@ -31,7 +31,7 @@ class AutogenerateGoal extends React.Component {
       fat: 1,
       carbs: 1,
       protein: 1,
-      name: 'basal metabolic rate', 
+      name: 'Total Daily Energy Expenditure', 
       user_id: this.props.user.id
     })
     this.props.toggleAutogenerate()

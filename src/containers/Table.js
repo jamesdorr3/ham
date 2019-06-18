@@ -63,6 +63,17 @@ class ChoiceContainer extends React.Component {
     }else{return 'good'}
   }
 
+  totalsRow = () => {
+    return  <ul className='grid totalsRow'>
+      <li className='totals'><span>TOTALS:</span></li>
+      <li className={`calories macro`} placeholder='grams'>{this.autoSum('calories')}</li>
+      <li className={`fat macro ${this.compareForStyle('fat')}`}>{this.autoSum('fat')}</li>
+      <li className={`carbs macro ${this.compareForStyle('carbs')}`}>{this.autoSum('carbs')}</li>
+      <li className={`protein macro ${this.compareForStyle('protein')}`}>{this.autoSum('protein')}</li>
+      <li className='deleteColumn'></li>
+    </ul>
+  }
+
   render(){
     // console.log(this.props)
     return(
@@ -75,27 +86,13 @@ class ChoiceContainer extends React.Component {
           </div>
         }
         < GoalsRow />
-        <ul className='grid totalsRow'>
-          <li className='totals'><span>TOTALS:</span></li>
-          <li className={`calories macro`} placeholder='grams'>{this.autoSum('calories')}</li>
-          <li className={`fat macro ${this.compareForStyle('fat')}`}>{this.autoSum('fat')}</li>
-          <li className={`carbs macro ${this.compareForStyle('carbs')}`}>{this.autoSum('carbs')}</li>
-          <li className={`protein macro ${this.compareForStyle('protein')}`}>{this.autoSum('protein')}</li>
-          <li className='deleteColumn'></li>
-        </ul>
+        {this.totalsRow()}
         {this.keyRow}
         {this.props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
         return <CategoryCard category={category} key={category.id} />
         })}
         {this.keyRow}
-        <ul className='grid totalsRow'>
-          <li className='totals'><span>TOTALS:</span></li>
-          <li className='calories macro' placeholder='grams'>{this.autoSum('calories')}</li>
-          <li className='fat macro'>{this.autoSum('fat')}</li>
-          <li className='carbs macro'>{this.autoSum('carbs')}</li>
-          <li className='protein macro'>{this.autoSum('protein')}</li>
-          <li className='deleteColumn macro'></li>
-        </ul>
+        {this.totalsRow()}
         <button className='saveButton' onClick={() => this.props.saveAll(this.props)}>Save</button>
         <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
           <span className='rectangle'>Start Here</span>

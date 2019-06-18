@@ -42,12 +42,7 @@ class CategoryCard extends React.Component {
           className="grid categoryGrid"
           >
             <li className='name categoryName' >{this.props.category.name}</li>
-            <li className='subtotals'>Subtotals: </li>
-            <li className='calories macro'>{this.autoSum('calories')}</li>
-            <li className='fat macro'>{this.autoSum('fat')}</li>
-            <li className='carbs macro'>{this.autoSum('carbs')}</li>
-            <li className='protein macro'>{this.autoSum('protein')}</li>
-            <li className='deleteColumn'></li>
+
           </ul>
           {/* <ul className='grid key'>
             <li className='name'><div>Name</div></li>
@@ -66,10 +61,22 @@ class CategoryCard extends React.Component {
           deleteChoice={this.props.deleteChoice} 
           /> )}
           {provided.placeholder}
+          <ul
+          className="grid categoryGrid"
+          >
+            <li className='name categoryName' ></li>
+            <li className='subtotals'>Subtotals: </li>
+            <li className='calories macro'>{this.autoSum('calories')}</li>
+            <li className='fat macro'>{this.autoSum('fat')}</li>
+            <li className='carbs macro'>{this.autoSum('carbs')}</li>
+            <li className='protein macro'>{this.autoSum('protein')}</li>
+            <li className='deleteColumn'></li>
+          </ul>
           
           < SearchContainer categoryId={this.props.category.id} />
         </div>
       )}
+      
     </Droppable>
     )
   }
