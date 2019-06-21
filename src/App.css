@@ -11,7 +11,9 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 /* UNIVERSAL */
 /* HEADER */
 .header{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;top:0;overflow:show;display:grid;grid-template-columns: 1fr 2fr 1fr;}
-.notSignedInMessage{grid-column:span 2}
+.header input,.header button{border-radius:5px}
+.notSignedInMessage{grid-column:span 2;padding-left:5%}
+.welcome{padding-left:1%}
 .sideMenu{position:fixed;background:white;top:0;bottom:0;z-index:1;margin:0;border-radius:0px;border-right:5px solid rgb(206, 101, 49);visibility:hidden;width:auto;animation:menuDisappearLeft 0.5s;padding:5% 0}
 
 h1.appName{color:white;text-align:right;margin-right:10%}
@@ -23,15 +25,17 @@ img.menuButton{position:relative;height:100%}
 .menuButton:hover .sideMenu{visibility:visible; animation:menuAppearRight 0.5s;left:0%}
 @keyframes menuAppearRight {from {left:-50%;} to {left: 0%;}}
 @keyframes menuDisappearLeft {from {visibility:visible; left:0%} to {left: -60%;}}
-.sideMenu ul{width:100%;margin:0;padding:0 2% 0 0}
-.sideMenu ul li{padding:5% 2%;width:100%}
+.sideMenu ul{width:100%;margin:0 2% 0 0;padding:0 2% 0 0}
+.sideMenu ul li{padding:5% 2%;margin:0 2% 0 0;width:100%}
 .sideMenu .bottom{position:absolute;bottom:0;padding:10% 0}
+.contact a{text-decoration:none;color:black}
 div.daySelect{grid-column: 2;position:relative}
 .daySelect select{width:80%}
 .daySelect .dropdownButton button.nonMenu{padding:0;width:15%;color: rgb(245, 245, 245);background:transparent;border:none;font-weight:bold;font-size:1em}
-.daySelect input[type='text']{text-align:center}
-.daySelect input[type='date']{width:65%;background:white}
-.daySelect input[type='submit']{padding:0 1.5%;color:white;}
+.copy{font-size:18px;position:relative;right:19%}
+.daySelect input[type='text']{text-align:center;width:90%}
+.daySelect input[type='date']{width:50%;background:white;min-width:auto}
+.daySelect input[type='submit']{position:relative;padding:1% 10%;margin-left:9%;color:white;background:none;border-radius:5px}
 .daySelect form{margin-top:5%}
 /* HEADER */
 /* SIGNUP */
@@ -41,14 +45,15 @@ div.daySelect{grid-column: 2;position:relative}
 /* SIGNUP */
 /* CREATE FOOD */
 .createFoodContainer button{background:white;position:relative;float:right;border-radius:5px;border:1px solid black;padding:1%;z-index:1;}
-.createFoodContainer{background:rgb(206, 101, 49);position:fixed;top:0%;width:100%;z-index:1;height:100%;overflow:scroll}
+.createFoodContainer{visibility:visible;background:rgb(206, 101, 49);position:fixed;top:0%;width:100%;z-index:1;height:100%;overflow:scroll;right:0}
 .createFoodContainer form{position:relative;width:95%;display:block}
-.createFoodContainer li{padding:0%}
-.createFoodContainer label{color:white}
+.createFoodContainer li{padding:0%;margin:0%}
+.createFoodContainer label{color:white;padding:0;margin:0}
 .createFoodContainer label:after{content:': '}
-.createFoodContainer input,.createFoodContainer select{width:50%;position:absolute;right:1%;border-radius:5px}
+.createFoodContainer input,.createFoodContainer select{width:50%;position:absolute;right:1%;border-radius:5px;padding:0;margin:0x}
 .createFoodContainer select{z-index:2}
 .createFoodContainer input[type='submit']{background:white;position:relative;padding:1%;border:1px solid black;width:100%}
+a.showMore{margin-left:30%;border:1px solid black;border-radius:5px;padding:1%;color:white}
 /* CREATE FOOD */
 /* GOALS */
 .goals input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
@@ -65,8 +70,8 @@ input.submitGoal{position:relative;height:100%;padding:0px}
 .autogenerateMacros input[type='submit']{width:100%;margin-top:1%;border:1px solid black;border-radius:5px;background:rgb(206, 101, 49);color:white}
 /* GOALS */
 /* TABLE */
-.table{position:absolute;top:10%;bottom:16%;width:100%;overflow:scroll;font-size:.9em}
-.grid{display:grid;grid-template-columns: 3fr 1fr 2fr  repeat(4, 1fr) 5%}
+.table{position:absolute;top:10%;bottom:16%;width:100%;overflow-y:scroll;overflow-x:hidden;font-size:.9em}
+.grid{display:grid;grid-template-columns: 3fr 1fr 2fr  repeat(4, 1fr) 1%}
 .goals .goalsSelect{grid-column:span 2}
 .goals input{position:absolute;width:100%}
 .key{text-align:center; font-size: 0.5em}
@@ -86,9 +91,14 @@ input.submitGoal{position:relative;height:100%;padding:0px}
 .choice:hover {transform: scale(1.01); box-shadow: 0px 1px 5px rgb(90, 90, 90)}
 img.deleteChoice{position:relative;margin-top:20%}
 button.deleteChoice{border:none;background:none}
+li.deleteColumn{position:relative}
+.choice .deleteButton{visibility:hidden}
+.choice:hover .deleteButton{visibility:visible;width:10px;position:fixed;padding:0;border:none}
+img.deleteChoice{position:relative;right:50%;margin-top:20%}
 
 /* .choice li.name:hover {background:lime} */
-.choice li.name:hover span.nameScroll{position:fixed;z-index:1;background:white;padding-right:1%}
+/* li.name{background:lime} */
+.choice li.name:hover span.nameScroll{position:fixed;z-index:1;background:white;padding:3px 1% 2px 0;top:0;}
 
 .arrow{position:absolute;bottom:10%;margin-left:20%;padding:2%;border-radius:5px;border:1px solid black;animation:sway 1.3s linear infinite;}
 .arrow:after{content:'';position:absolute;border-width:25px;border-style:solid;border-color:black transparent transparent transparent;right:110%}
@@ -118,6 +128,8 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 /* DROPDOWN */
 .dropdownButton{position:relative;border:1px solid transparent;border-radius:5px;text-align:center}
 .dropdownButton:hover{position:relative;border:1px solid black;border-radius:5px;text-align:center}
+.goals .dropdownButton{width:230%}
+.goals .dropdownButton:hover{width:230%}
 .dropdown{display:block;z-index:2;background:white;position:absolute;right:0px;padding:2%;border:1px solid black;visibility:hidden}
 .dropdown li{padding:10%;text-align:left;border-bottom:0.5px solid lightgray}
 .dropdown li button{background:none;border:none}
@@ -143,14 +155,21 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 
 
 @media only screen and (min-width: 768px) {
-.table{width:70%;border-right:1px solid black;height:80%;}
-.footerSearch .foodSearchContainer{position:fixed;top:11%;right:1%;width:28%;}
+.table{left:29%;width:70%;height:80%;}
+.autogenerateMacros{width:70%}
+select.daySelect{max-width:300px}
+.daySelect input[type='text']{width:50%}
+.daySelect input[type='date']{width:25%}
+.daySelect input[type='submit']{position:relative;padding:1% 9%;margin-left:0%;color:white;background:none;border-radius:5px}
+.footerSearch .foodSearchContainer{position:fixed;top:11%;left:0%;width:28%;}
 .searchResultContainer{display:block;position:fixed;top:15%;bottom:11%;width:28%}
-.arrow{background:white;position:fixed;top:5%;right:14%;padding:1% 2%;height:2%;border-radius:5px;border:1px solid black;animation:sway 1.3s linear infinite;}
-.arrow:after{content:'';position:absolute;border-width:10px;border-style:solid;border-color:black transparent transparent transparent;right:-18%;top:68%}
+.arrow{background:white;position:fixed;top:5%;left:-15%;padding:1% 2%;height:2%;border-radius:5px;border:1px solid black;animation:sway 1s linear infinite;}
+.arrow:after{content:'';position:absolute;border-width:10px;border-style:solid;border-color:black transparent transparent transparent;right:-18%;top:75%}
 @keyframes sway {
-  0% { top: 4%; }
+  0% { top: 5%; }
   50% { top: 6%; }
-  100% { top: 4%; }
+  100% { top: 5%; }
 }
+.createFoodContainer{width:50%;border-left:5px solid white}
+.createFoodContainer ul li{padding:1%}
 }

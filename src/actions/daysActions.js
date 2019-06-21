@@ -44,3 +44,16 @@ export const updateDay = day => {
     })
   }
 }
+
+export const copyDay = id => {
+  return dispatch => {
+    dispatch({type: 'START_LOADING'})
+    return fetch(`${URL}days/copy/${id}`, {headers: HEADERS()})
+    .then(r => r.json())
+    .then(r => {
+      dispatch({type: 'STOP_LOADING'})
+      dispatch({ type: 'ADD_DAY', payload: r})
+      dispatch({ type: 'SELECT_DAY', payload: r})
+    })
+  }
+}
