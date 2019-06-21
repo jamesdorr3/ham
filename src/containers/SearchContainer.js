@@ -99,6 +99,7 @@ class SearchContainer extends React.Component {
       text: '',
       error: false
     })
+    this.favoriteSearch('')
   }
 
   render(){

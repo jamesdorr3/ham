@@ -97,7 +97,8 @@ li.deleteColumn{position:relative}
 img.deleteChoice{position:relative;right:50%;margin-top:20%}
 
 /* .choice li.name:hover {background:lime} */
-.choice li.name:hover span.nameScroll{position:fixed;z-index:1;background:white;padding-right:1%}
+/* li.name{background:lime} */
+.choice li.name:hover span.nameScroll{position:fixed;z-index:1;background:white;padding:3px 1% 2px 0;top:0;}
 
 .arrow{position:absolute;bottom:10%;margin-left:20%;padding:2%;border-radius:5px;border:1px solid black;animation:sway 1.3s linear infinite;}
 .arrow:after{content:'';position:absolute;border-width:25px;border-style:solid;border-color:black transparent transparent transparent;right:110%}
@@ -155,6 +156,11 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 
 @media only screen and (min-width: 768px) {
 .table{left:29%;width:70%;height:80%;}
+.autogenerateMacros{width:70%}
+select.daySelect{max-width:300px}
+.daySelect input[type='text']{width:50%}
+.daySelect input[type='date']{width:25%}
+.daySelect input[type='submit']{position:relative;padding:1% 9%;margin-left:0%;color:white;background:none;border-radius:5px}
 .footerSearch .foodSearchContainer{position:fixed;top:11%;left:0%;width:28%;}
 .searchResultContainer{display:block;position:fixed;top:15%;bottom:11%;width:28%}
 .arrow{background:white;position:fixed;top:5%;left:-15%;padding:1% 2%;height:2%;border-radius:5px;border:1px solid black;animation:sway 1s linear infinite;}

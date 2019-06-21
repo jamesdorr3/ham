@@ -92,6 +92,7 @@ class ChoiceCard extends React.Component {
           <li className='amount'>
               <input type='number'
               className=''
+              min='0'
               name='amount'
               value={this.props.choiceFood.choice.amount} 
               onChange={this.handleAmountChange} 
