@@ -1,4 +1,5 @@
-export const URL = 'https://ham-backend.herokuapp.com/'
+// export const URL = 'https://ham-backend.herokuapp.com/'
+export const URL = 'http://localhost:3001/'
 
 export const HEADERS = () => ({
   'Content-Type':'application/json',

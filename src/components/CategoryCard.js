@@ -34,7 +34,7 @@ class CategoryCard extends React.Component {
     return(
       <Droppable droppableId={this.props.category.id}>
       {(provided) => (
-        <div className={`category number${this.props.category.id}`}
+        <div className='category'
         ref={provided.innerRef}
         {...provided.droppableProps}
         >
