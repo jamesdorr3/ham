@@ -142,7 +142,7 @@ class SearchContainer extends React.Component {
           {this.state.favorite.map(food => (
             < InternalSearchResultCard 
             categoryId={this.props.categoryId}
-            key={food.food_name} 
+            key={food.id} 
             food={food} 
             addChoice={this.props.addChoice}
             clearForm={this.clearResults}

@@ -68,7 +68,7 @@ class AutogenerateGoal extends React.Component {
       {name: 'extremely active', multiplier: 1.9}]
     return <select name='activityLevel' onChange={this.handleChange}>
     {levels.map(opt => {
-        return <option name={opt.name} value={opt.multiplier} >{opt.name}</option>
+        return <option name={opt.name} key={opt.name} value={opt.multiplier} >{opt.name}</option>
       })}
     </select>
   }

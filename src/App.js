@@ -10,7 +10,7 @@ import Footer from './components/Footer'
 class App extends React.Component {
 
   onDragEnd = result => {
-    const {destination, source, draggableId} = result;
+    const {destination, draggableId} = result;
     if (!destination) {
       return;
     }

@@ -130,11 +130,10 @@ const reducer = (state = initialState, action) => {
     }
     case 'EDIT_CHOICE': {
       const choiceFood = state.choiceFoods.find(x => x.choice.id === action.payload.choice.id)
-      // debugger
       return {
         ...state,
         choiceFoods: [
-          ...state.choiceFoods.filter(x => x.choice.id != choiceFood.choice.id),
+          ...state.choiceFoods.filter(x => parseInt(x.choice.id) !== parseInt(choiceFood.choice.id)),
           {
             ...choiceFood,
             choice: {...choiceFood.choice, ...action.payload.choice}
