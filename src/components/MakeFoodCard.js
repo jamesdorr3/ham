@@ -86,7 +86,7 @@ class MakeFoodCard extends React.Component {
             <input type="text" list="units" name='serving_unit_name' value={this.state.serving_unit_name} onChange={this.handleChange} placeholder="unit"/>
             <datalist id='units'>
               {['unit','tbsp','tsp','cup','package','piece', 'small', 'medium', 'large'].map(measure => {
-                return <option value={measure} name='measure' >{measure} </option>}
+                return <option value={measure} key={measure} name='measure' >{measure} </option>}
               )}
             </datalist>
           </li>
