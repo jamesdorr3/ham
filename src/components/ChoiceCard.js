@@ -9,6 +9,10 @@ class ChoiceCard extends React.Component {
     amount: this.props.choiceFood.choice.amount,
     measure: this.props.choiceFood.choice.measure
   }
+
+  componentDidMount(){
+    this.amountInput.focus()
+  }
   
   autoUpdateMacro = macro => {
     const amount = this.props.choiceFood.choice.amount
@@ -48,6 +52,7 @@ class ChoiceCard extends React.Component {
     else{newAmount = newAmount.toFixed()}
     // debugger
     this.props.editChoice({choice: {measure_id: toMeasureId, amount: newAmount, id: this.props.choiceFood.choice.id}})
+    this.updateInDB()
   }
 
   generateMeasures = () => {
@@ -67,7 +72,7 @@ class ChoiceCard extends React.Component {
   }
 
   render(){
-    // console.log(this.props.choiceFood)
+    console.log(this.props.choiceFood.choice)
     return(
       <Draggable 
         draggableId={this.props.choiceFood.choice.id} 
@@ -89,7 +94,7 @@ class ChoiceCard extends React.Component {
           </li>
           <li className='amount'>
               <input type='number'
-              className=''
+              ref={(input) => { this.amountInput = input; }} 
               min='0'
               name='amount'
               value={this.props.choiceFood.choice.amount} 
@@ -112,7 +117,7 @@ class ChoiceCard extends React.Component {
           <li className='macro fat'>{this.autoUpdateMacro('fat')}</li>
           <li className='macro carbs'>{this.autoUpdateMacro('carbs')}</li>
           <li className='macro protein'>{this.autoUpdateMacro('protein')}</li>
-          <li className='deleteColumn' ><button onClick={this.deleteChoice} className='deleteChoice deleteButton' alt='delete choice'><img src='trash-icon.png' className='deleteChoice deleteChoiceButton' alt='delete choice'></img></button></li>
+          <li className='deleteColumn' ><button onClick={this.deleteChoice} className='deleteChoice deleteButton' alt='delete choice'><img src='trash-icon.png' className='deleteChoice' alt='delete choice'></img></button></li>
         </ul>
         )}
       </Draggable>
