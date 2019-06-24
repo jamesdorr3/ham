@@ -56,6 +56,7 @@ class ChoiceContainer extends React.Component {
   
   compareForStyle = (macro) =>{
     // debugger
+    if (!this.props.user.email){return null}
     if (this.autoSum(macro) < this.props.goal[macro] - 5) {
       return 'under'
     }else if(this.autoSum(macro) > this.props.goal[macro] + 5) {
@@ -97,6 +98,8 @@ class ChoiceContainer extends React.Component {
         <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
           <span className='rectangle'>Start Here</span>
         </div>
+        {this.props.loading? <div className='loading'></div> : null}
+        {/* <div className='loading'></div> */}
       </div>
     )
   }

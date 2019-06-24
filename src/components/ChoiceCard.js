@@ -23,13 +23,11 @@ class ChoiceCard extends React.Component {
 
   updateInDB = () => {
     const id = this.props.choiceFood.choice.id
-    this.props.startLoading()
     fetch(`${URL}choices/${id}`, {
       method: 'PATCH',
       headers: HEADERS(),
       body: JSON.stringify({choice: this.props.choiceFood.choice})
     })
-    .then(r => this.props.stopLoading())
   }
 
   handleAmountChange = (e) => {
@@ -45,9 +43,11 @@ class ChoiceCard extends React.Component {
     const fromMeasure = this.props.choiceFood.measures.find(x => x.id === fromMeasureId)
     const toMeasureId = parseInt(e.target.value)
     const toMeasure = this.props.choiceFood.measures.find(x => x.id === toMeasureId)
-    const newAmount = fromMeasure.grams / toMeasure.grams * this.props.choiceFood.choice.amount 
+    let newAmount = (fromMeasure.grams / toMeasure.grams * this.props.choiceFood.choice.amount) * (toMeasure.amount / fromMeasure.amount)
+    if (!/^gram(s)?$/i.test(toMeasure.name)){newAmount = newAmount.toFixed(2)}
+    else{newAmount = newAmount.toFixed()}
     // debugger
-    this.props.editChoice({choice: {measure_id: toMeasureId, amount: newAmount.toFixed(2), id: this.props.choiceFood.choice.id}})
+    this.props.editChoice({choice: {measure_id: toMeasureId, amount: newAmount, id: this.props.choiceFood.choice.id}})
   }
 
   generateMeasures = () => {
@@ -62,9 +62,7 @@ class ChoiceCard extends React.Component {
 
   deleteChoice = () => {
     const id = this.props.choiceFood.choice.id
-    this.props.startLoading()
     fetch(`${URL}/choices/${id}`, {method: 'DELETE'})
-    .then(r => this.props.stopLoading())
     this.props.deleteChoice(id)
   }
 
@@ -130,8 +128,6 @@ const mapDispatchToProps = dispatch => {
   return {
     deleteChoice: id => dispatch({ type: 'DELETE_CHOICE', payload: id}),
     editChoice: info => dispatch({ type: 'EDIT_CHOICE', payload: info}),
-    startLoading: () => dispatch({type: 'START_LOADING'}),
-    stopLoading: () => dispatch({type: 'STOP_LOADING'})
   }
 }
 
