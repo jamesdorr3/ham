@@ -109,9 +109,9 @@ class NotSignedInHeader extends React.Component {
 
   render(){
     return(
-      <div className='header'>
+      <div className='notSignedInHeader'>
       <div className='notSignedInMessage'><p>Use HAM free. Log in to record data</p></div>
-      <div>
+      <div className='login'>
         < LoginCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} handleChange={this.handleChange} login={this.login} />
         < SignUpCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} />
       </div>

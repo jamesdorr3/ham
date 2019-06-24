@@ -10,9 +10,14 @@ ul{margin:0 1%;padding:0 0.5%;border-radius:5px}
 select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-1}
 /* UNIVERSAL */
 /* HEADER */
-.header{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;top:0;overflow:show;display:grid;grid-template-columns: 1fr 2fr 1fr;}
+.header,.notSignedInHeader{background:rgb(206, 101, 49);position:absolute;height:10%;width:100%;top:0;overflow:hidden;display:grid;}
+.header{grid-template-columns: 1fr 2fr 1fr;}
+.notSignedInHeader{grid-template-columns:1fr 1fr}
 .header input,.header button{border-radius:5px}
-.notSignedInMessage{grid-column:span 2;padding-left:5%}
+.notSignedInHeader input[type='text'],.notSignedInHeader input[type='password']{width:40%;margin:1%;border-radius:5px}
+.notSignedInHeader input[type='submit'],.notSignedInHeader button{margin:1%;border-radius:5px;background:white}
+.notSignedInMessage{padding-left:5%;color:white}
+.login{position:relative;padding-top:10px}
 .welcome{padding-left:1%}
 .sideMenu{position:fixed;background:white;top:0;bottom:0;z-index:1;margin:0;border-radius:0px;border-right:5px solid rgb(206, 101, 49);visibility:hidden;width:auto;animation:menuDisappearLeft 0.5s;padding:5% 0}
 
@@ -88,17 +93,16 @@ input.submitGoal{position:relative;height:100%;padding:0px}
 .category{background:rgb(255, 189, 156);border-radius:5px;margin:1% 0;padding:1% 0}
 .subtotals{grid-column:span 2}
 .choice{background:white;border-top:1px solid rgba(194, 194, 194, 0.589);border-bottom:1px solid rgba(194, 194, 194, 0.589)}
-.choice:hover {transform: scale(1.01); box-shadow: 0px 1px 5px rgb(90, 90, 90)}
-img.deleteChoice{position:relative;margin-top:20%}
+.choice:hover {transform: scaleX(1.01); box-shadow: 0px 1px 5px rgb(90, 90, 90)}
 button.deleteChoice{border:none;background:none}
 li.deleteColumn{position:relative}
-.choice .deleteButton{visibility:hidden}
-.choice:hover .deleteButton{visibility:visible;width:10px;position:fixed;padding:0;border:none}
+.choice .deleteButton{visibility:hidden;position:fixed}
+.choice:hover .deleteButton{visibility:visible;position:fixed;padding:0;border:none;top:0}
 img.deleteChoice{position:relative;right:50%;margin-top:20%}
 
 /* .choice li.name:hover {background:lime} */
 /* li.name{background:lime} */
-.choice li.name:hover span.nameScroll{position:fixed;z-index:1;background:white;padding:3px 1% 2px 0;top:0;}
+.choice li.name:hover span.nameScroll{position:fixed;z-index:1;background:white;}
 
 .arrow{position:absolute;bottom:10%;margin-left:20%;padding:2%;border-radius:5px;border:1px solid black;animation:sway 1.3s linear infinite;}
 .arrow:after{content:'';position:absolute;border-width:25px;border-style:solid;border-color:black transparent transparent transparent;right:110%}
@@ -137,7 +141,7 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 /* DROPDOWN */
 /* FOOTER SEARCH */
 .footerSearch{position:absolute;bottom:11%;width:100%}
-.footerSearch input.searchText{display:inline-block;width:85%;}
+.footerSearch input.searchText{display:inline-block;width:85%;font-size:1em}
 .footerSearch .foodSearchContainer{border:1px solid rgb(206, 101, 49);border-radius:25px;background:white}
 .footerSearch .searchForm{margin:0;padding:0;position:relative}
 .footerSearch .searchText{margin-left:-10%;position:relative;padding:2%;border-radius:25px;border:0px solid transparent}
@@ -161,8 +165,9 @@ select.daySelect{max-width:300px}
 .daySelect input[type='text']{width:50%}
 .daySelect input[type='date']{width:25%}
 .daySelect input[type='submit']{position:relative;padding:1% 9%;margin-left:0%;color:white;background:none;border-radius:5px}
-.footerSearch .foodSearchContainer{position:fixed;top:11%;left:0%;width:28%;}
-.searchResultContainer{display:block;position:fixed;top:15%;bottom:11%;width:28%}
+.footerSearch .foodSearchContainer{position:fixed;top:11%;left:0%;width:28%;padding:1% 0}
+.searchText{font-size:0.8em;}
+.searchResultContainer{display:block;position:fixed;top:18%;bottom:11%;width:28%}
 .arrow{background:white;position:fixed;top:5%;left:-15%;padding:1% 2%;height:2%;border-radius:5px;border:1px solid black;animation:sway 1s linear infinite;}
 .arrow:after{content:'';position:absolute;border-width:10px;border-style:solid;border-color:black transparent transparent transparent;right:-18%;top:75%}
 @keyframes sway {
