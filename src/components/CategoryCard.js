@@ -55,6 +55,7 @@ class CategoryCard extends React.Component {
             <li className='deleteColumn'></li>
           </ul> */}
           {this.mySortedChoices().map((choiceFood, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
+          // animationEnd={console.log('END!')}
           choiceFood={choiceFood} 
           key={choiceFood.choice.id} 
           index={index}

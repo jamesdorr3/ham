@@ -3,6 +3,8 @@ import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
 import {Draggable} from 'react-beautiful-dnd'
 
+import ReactTransitionGroup from 'react-addons-transition-group'
+
 class ChoiceCard extends React.Component {
 
   state = {
@@ -66,13 +68,14 @@ class ChoiceCard extends React.Component {
   }
 
   deleteChoice = () => {
+    // debugger
     const id = this.props.choiceFood.choice.id
     fetch(`${URL}/choices/${id}`, {method: 'DELETE'})
     this.props.deleteChoice(id)
   }
 
   render(){
-    console.log(this.props.choiceFood.choice)
+    // console.log(this.props.choiceFood.choice)
     return(
       <Draggable 
         draggableId={this.props.choiceFood.choice.id} 
