@@ -11,10 +11,6 @@ class ChoiceCard extends React.Component {
     amount: this.props.choiceFood.choice.amount,
     measure: this.props.choiceFood.choice.measure
   }
-
-  componentDidMount(){
-    this.amountInput.focus()
-  }
   
   autoUpdateMacro = macro => {
     const amount = this.props.choiceFood.choice.amount
