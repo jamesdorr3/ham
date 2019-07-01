@@ -76,7 +76,7 @@ input.submitGoal{position:relative;height:100%;padding:0px}
 /* GOALS */
 /* TABLE */
 .table{position:absolute;top:10%;bottom:16%;width:100%;overflow-y:scroll;overflow-x:hidden;font-size:.9em}
-.grid{display:grid;grid-template-columns: 3fr 1fr 2fr  repeat(4, 1fr) 1%}
+.grid{display:grid;grid-template-columns: 3fr 1fr 2fr  repeat(4, 1fr) 3%}
 .goals .goalsSelect{grid-column:span 2}
 .goals input{position:absolute;width:100%}
 .key{text-align:center; font-size: 0.5em}
@@ -114,12 +114,12 @@ input.submitGoal{position:relative;height:100%;padding:0px}
 .choice{background:white;border-top:1px solid rgba(194, 194, 194, 0.589);border-bottom:1px solid rgba(194, 194, 194, 0.589);transition:0.25s;overflow:hidden;height:20px}
 .choice:hover {transform: scaleX(1.01);transition:0.25s;box-shadow: 0px 1px 5px rgb(90, 90, 90)}
 button.deleteButton{border:none;background:none}
-li.deleteColumn{position:relative;right:200%}
+/* li.deleteColumn{position:relative;right:200%} */
 
-.choice button.deleteButton{visibility:visible;position:fixed;padding:0;border:none;}
-.choice:hover button.deleteButton{visibility:visible;}
-img.deleteChoice{position:relative;background:none;border-radius:0px;padding:10%;transition:0.25s;right:0}
-.choice:hover img.deleteChoice{position:relative;background:rgb(255, 90, 90);border-radius:25px;border:0.25px solid black;padding:10% 20%;transition:0.25s;right:15%;}
+.choice button.deleteButton{padding:1px 0;border:none;}
+/* .choice:hover button.deleteButton{visibility:visible;} */
+/* img.deleteChoice{position:relative;background:none;border-radius:0px;padding:10%;transition:0.25s;right:0} */
+.choice:hover img.deleteChoice{background:rgb(255, 90, 90);border-radius:25px;border:0.25px solid black;transition:0.25s;padding:5%}
 
 /* .choice li.name:hover {background:lime} */
 /* li.name{background:lime} */
@@ -188,7 +188,7 @@ select.daySelect{max-width:300px}
 .daySelect input[type='date']{width:25%}
 .daySelect input[type='submit']{position:relative;padding:1% 9%;margin-left:0%;color:white;background:none;border-radius:5px}
 
-li.deleteColumn{right:150%}
+/* li.deleteColumn{right:150%} */
 
 .footerSearch .foodSearchContainer{position:fixed;top:11%;left:0%;width:28%;padding:1% 0}
 .searchText{font-size:0.8em;}
@@ -206,7 +206,7 @@ li.deleteColumn{right:150%}
 
 /* ONLY DESKTOP */
 @media only screen and (min-width: 992px) {
-  li.deleteColumn{right:100%}
+  /* li.deleteColumn{right:100%} */
 img.deleteChoice{visibility:hidden;opacity:0}
-.choice:hover img.deleteChoice{visibility:visible;opacity:1}
+.choice:hover img.deleteChoice{visibility:visible;opacity:1;}
 } 
