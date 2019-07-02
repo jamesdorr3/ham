@@ -75,7 +75,7 @@ input.submitGoal{position:relative;height:100%;padding:0px}
 .autogenerateMacros input[type='submit']{width:100%;margin-top:1%;border:1px solid black;border-radius:5px;background:rgb(221, 103, 44);color:white}
 /* GOALS */
 /* TABLE */
-.table{position:absolute;top:10%;bottom:16%;width:100%;overflow-y:scroll;overflow-x:hidden;font-size:.9em}
+.table{position:absolute;top:10%;bottom:16%;width:100%;overflow-y:scroll;overflow-x:hidden;font-size:.9em;padding-top:3%}
 .grid{display:grid;grid-template-columns: 3fr 1fr 2fr  repeat(4, 1fr) 3%}
 .goals .goalsSelect{grid-column:span 2}
 .goals input{position:absolute;width:100%}
@@ -125,13 +125,15 @@ button.deleteButton{border:none;background:none}
 /* li.name{background:lime} */
 .choice li.name:hover span.nameScroll{position:fixed;z-index:1;background:white;}
 
-.arrow{position:absolute;bottom:10%;margin-left:20%;padding:2%;border-radius:5px;border:1px solid black;animation:sway 1.3s linear infinite;}
+/* .arrow{position:fixed;bottom:50%;margin-left:20%;padding:2%;border-radius:5px;border:1px solid black;animation:sway 1.3s linear infinite;}*/
+div.arrow{position:fixed;bottom:20%;border:1px solid black;border-radius:5px;padding:1%;background:white;color:black;left:15%;animation:sway 1.3s infinite}
 .arrow:after{content:'';position:absolute;border-width:25px;border-style:solid;border-color:black transparent transparent transparent;right:110%}
 
+
 @keyframes sway {
-  0% { bottom: 0%; }
-  50% { bottom: 3%; }
-  100% { bottom: 0%; }
+  0% { bottom: 18%; }
+  50% { bottom: 19%; }
+  100% { bottom: 18%; }
 }
 /* CATEGORY */
 /* SEARCH */
@@ -172,7 +174,7 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 .searchForm .searchButton{position:absolute;height:100%;background:white}
 /* FOOTER SEARCH */
 /* FOOTER */
-.footer{background:linear-gradient(rgb(221, 103, 44),rgb(226, 123, 72));position:absolute;height:10%;width:100%;bottom:0;overflow:scroll;}
+.footer{background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));position:absolute;height:10%;width:100%;bottom:0;overflow:scroll;}
 .attribution{position:absolute;text-align:center;text-decoration:none;color:rgb(245, 245, 245);white-space:nowrap;right:5%;bottom:20%}
 .attribution h2{margin:0;}
 .hidden{display:none}
@@ -193,12 +195,12 @@ select.daySelect{max-width:300px}
 .footerSearch .foodSearchContainer{position:fixed;top:11%;left:0%;width:28%;padding:1% 0}
 .searchText{font-size:0.8em;}
 .searchResultContainer{display:block;position:fixed;top:18%;bottom:11%;width:28%}
-.arrow{background:white;position:fixed;top:5%;left:-15%;padding:1% 2%;height:2%;border-radius:5px;border:1px solid black;animation:sway 1s linear infinite;}
-.arrow:after{content:'';position:absolute;border-width:10px;border-style:solid;border-color:black transparent transparent transparent;right:-18%;top:75%}
+.arrow{background:white;position:fixed;top:4%;left:-15%;padding:1%;height:2%;border-radius:5px;border:1px solid black;animation:sway 1s linear infinite;}
+/* .arrow:after{content:'';position:absolute;border-width:10px;border-style:solid;border-color:black transparent transparent transparent;right:-18%;top:75%} */
 @keyframes sway {
-  0% { top: 5%; }
-  50% { top: 6%; }
-  100% { top: 5%; }
+  0% { top: 4%; }
+  50% { top: 5.5%; }
+  100% { top: 4%; }
 }
 .createFoodContainer{width:50%;border-left:5px solid white}
 .createFoodContainer ul li{padding:1%}

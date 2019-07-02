@@ -105,6 +105,10 @@ class SearchContainer extends React.Component {
 
   render(){
     return(
+      <>
+      <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
+        <span className='rectangle'>Start Here</span>
+      </div>
       <div className='centered row foodSearchContainer' >
         <form onSubmit={this.handleSubmit} className='searchForm'>
           <input type='search' 
@@ -181,14 +185,13 @@ class SearchContainer extends React.Component {
           {/* {this.state.error ? <li>No Results</li> : null} */}
         </ul>
       </div>
+      </>
     )
   }
 }
 
 const mapStateToProps = state => {
-  return {
-    user: state.user
-  }
+  return state
 }
 
 const mapDispatchToProps = dispatch => {

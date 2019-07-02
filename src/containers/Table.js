@@ -95,13 +95,10 @@ class ChoiceContainer extends React.Component {
         {this.keyRow}
         {this.totalsRow()}
         <button className='saveButton' onClick={() => this.props.saveAll(this.props)}>Save</button>
-        <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
-          <span className='rectangle'>Start Here</span>
-        </div>
         {this.props.loading? <div className='loading'></div> : null}
         {/* <div className='loading'></div> */}
       </div>
-    )
+    ) 
   }
 }
 
