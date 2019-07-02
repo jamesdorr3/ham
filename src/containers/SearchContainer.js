@@ -23,7 +23,7 @@ class SearchContainer extends React.Component {
 
   handleChange = e => {
     this.setState({text: e.target.value})
-    this.favoriteSearch(e.target.value)
+    // this.favoriteSearch(e.target.value)
     if(e.target.value.length === 0) {
       this.setState({internal: [],common:[],error:false})
     }
@@ -68,7 +68,8 @@ class SearchContainer extends React.Component {
     if (this.state.text){
       // console.log('submit')
       this.props.startLoading()
-      this.internalSearch(this.state.text)
+      this.favoriteSearch(this.state.text)
+      // this.internalSearch(this.state.text)
       this.props.externalSearch(this.state.text)
       .then(r => r.json())
       .then(r => {
@@ -104,6 +105,10 @@ class SearchContainer extends React.Component {
 
   render(){
     return(
+      <>
+      <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
+        <span className='rectangle'>Start Here</span>
+      </div>
       <div className='centered row foodSearchContainer' >
         <form onSubmit={this.handleSubmit} className='searchForm'>
           <input type='search' 
@@ -180,14 +185,13 @@ class SearchContainer extends React.Component {
           {/* {this.state.error ? <li>No Results</li> : null} */}
         </ul>
       </div>
+      </>
     )
   }
 }
 
 const mapStateToProps = state => {
-  return {
-    user: state.user
-  }
+  return state
 }
 
 const mapDispatchToProps = dispatch => {

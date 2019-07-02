@@ -31,10 +31,14 @@ class SignedInHeader extends React.Component {
   }
 
   prettyDayDisplay = (dayObj) => {
-    const day = new Date(dayObj.date)
-    let year = day.getFullYear();
-    year = year.toString().substr(2,2);
-    return `${day.getMonth() + 1}-${day.getDate() + 1}-${year}` + (dayObj.name ? ` ${dayObj.name}` : '' )
+    const day = dayObj.date
+    // console.log(dayObj.date)
+    // debugger
+    // const day = new Date(dayObj.date)
+    // let year = day.getFullYear();
+    // year = year.toString().substr(2,2);
+    // return `${day.getMonth() + 1}-${day.getDate() + 1}-${year}` + (dayObj.name ? ` ${dayObj.name}` : '' )
+    return `${day.slice(5,7)}-${day.slice(8,10)}-${day.slice(2,4)}` + (dayObj.name ? ` ${dayObj.name}` : '' )
   }
 
   dayOptions = () => {

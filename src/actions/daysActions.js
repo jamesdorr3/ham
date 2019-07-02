@@ -2,10 +2,12 @@ import {URL, HEADERS} from '../constants'
 
 export const createDay = () => {
   return (dispatch) => {
+    // debugger
     dispatch({type: 'START_LOADING'})
     return fetch(`${URL}/days`, {
       method: 'POST', 
-      headers: HEADERS()
+      headers: HEADERS(),
+      body: JSON.stringify({date: (new Date).toLocaleString()})
     })
     .then(r => r.json())
     .then(day => {

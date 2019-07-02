@@ -45,7 +45,7 @@ class ChoiceCard extends React.Component {
     const fromMeasure = this.props.choiceFood.measures.find(x => x.id === fromMeasureId)
     const toMeasureId = parseInt(e.target.value)
     const toMeasure = this.props.choiceFood.measures.find(x => x.id === toMeasureId)
-    let newAmount = (fromMeasure.grams / toMeasure.grams * this.props.choiceFood.choice.amount) * (toMeasure.amount / fromMeasure.amount)
+    let newAmount = (fromMeasure.grams / toMeasure.grams * this.props.choiceFood.choice.amount) * ((toMeasure.amount || 1) / (fromMeasure.amount || 1))
     if (!/^gram(s)?$/i.test(toMeasure.name)){newAmount = newAmount.toFixed(2)}
     else{newAmount = newAmount.toFixed()}
     // debugger
@@ -71,7 +71,7 @@ class ChoiceCard extends React.Component {
   }
 
   render(){
-    // console.log(this.props.choiceFood.choice)
+    // console.log(this.props.choiceFood.food)
     return(
       <Draggable 
         draggableId={this.props.choiceFood.choice.id} 

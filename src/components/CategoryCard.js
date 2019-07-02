@@ -73,8 +73,6 @@ class CategoryCard extends React.Component {
             <li className='protein macro'>{this.autoSum('protein')}</li>
             <li className='deleteColumn'></li>
           </ul>
-          
-          < SearchContainer categoryId={this.props.category.id} />
         </div>
       )}
       
