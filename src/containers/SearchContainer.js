@@ -23,7 +23,7 @@ class SearchContainer extends React.Component {
 
   handleChange = e => {
     this.setState({text: e.target.value})
-    this.favoriteSearch(e.target.value)
+    // this.favoriteSearch(e.target.value)
     if(e.target.value.length === 0) {
       this.setState({internal: [],common:[],error:false})
     }
@@ -68,6 +68,7 @@ class SearchContainer extends React.Component {
     if (this.state.text){
       // console.log('submit')
       this.props.startLoading()
+      this.favoriteSearch(this.state.text)
       this.internalSearch(this.state.text)
       this.props.externalSearch(this.state.text)
       .then(r => r.json())

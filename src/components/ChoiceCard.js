@@ -71,7 +71,7 @@ class ChoiceCard extends React.Component {
   }
 
   render(){
-    // console.log(this.props.choiceFood.choice)
+    // console.log(this.props.choiceFood.food)
     return(
       <Draggable 
         draggableId={this.props.choiceFood.choice.id} 
