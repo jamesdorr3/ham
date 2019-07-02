@@ -69,7 +69,7 @@ class SearchContainer extends React.Component {
       // console.log('submit')
       this.props.startLoading()
       this.favoriteSearch(this.state.text)
-      this.internalSearch(this.state.text)
+      // this.internalSearch(this.state.text)
       this.props.externalSearch(this.state.text)
       .then(r => r.json())
       .then(r => {
