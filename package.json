@@ -2,6 +2,7 @@
   "name": "frontend-ham",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jamesdorr3.github.io/ham",
   "dependencies": {
     "react": "^16.8.6",
     "react-addons-transition-group": "^15.6.2",
@@ -17,7 +18,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -b master -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,5 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
   }
 }
