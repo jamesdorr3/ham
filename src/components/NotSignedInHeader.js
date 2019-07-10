@@ -69,21 +69,6 @@ class NotSignedInHeader extends React.Component {
     this.setState({dayName: e.target.value})
   }
 
-  submitDayName = (e) => {
-    e.preventDefault()
-    this.setState({editDayName: false, dayName: null})
-    if (this.state.dayName && this.state.dayName !== this.props.day.name) {
-      this.props.editDayName(this.state.dayName)
-      this.props.startLoading()
-      fetch(`${URL}days/${this.props.day.id}`, {
-        method: 'PATCH',
-        headers: HEADERS(),
-        body: JSON.stringify({name: this.state.dayName})
-      })
-      .then(r => this.props.stopLoading())
-    }
-  }
-
   dayChangeHandler = e => {
     this.props.saveAll(this.props) // doesn't work?
     this.props.selectDay(e.target.value)
