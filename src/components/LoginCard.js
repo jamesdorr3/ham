@@ -16,26 +16,19 @@ class LoginCard extends React.Component {
     e.preventDefault()
     if (this.state.password) {
       this.props.startLoading()
-      fetch(`${URL}/auth`, {
-        method: 'POST',
-        headers: HEADERS(),
-        body: JSON.stringify({
-          user: {
-            username_or_email: this.state.usernameOrEmail,
-            password: this.state.password
-          }
-        })
+      this.props.auth({username_or_email: this.state.usernameOrEmail, password: this.state.password})
+      .then(response => {
+        return response.json()
       })
-      .then(r => r.json())
-      .then(resp => {
-        // debugger
+      .then(response => {
+        // console.log(jwtAndUser)
         this.props.stopLoading()
-        if (resp.user && resp.jwt) {
-          localStorage.setItem('token', resp.jwt)
-          this.props.selectUser(resp)
+        if (response.user && response.jwt) {
+          localStorage.setItem('token', response.jwt)
+          this.props.selectUser(response)
         }
         else {
-          this.setState({error: resp.message})
+          this.setState({error: response.message})
         }
       })
     }
@@ -64,7 +57,8 @@ const mapDispatchToProps = dispatch => {
   return {
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
     startLoading: () => dispatch({type: 'START_LOADING'}),
-    stopLoading: () => dispatch({type: 'STOP_LOADING'})
+    stopLoading: () => dispatch({type: 'STOP_LOADING'}),
+    auth: (info) => dispatch(auth(info))
   }
 }
 

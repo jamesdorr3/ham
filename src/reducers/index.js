@@ -1,9 +1,9 @@
-import { combineReducers } from "redux";
-// import thatReducer from './thatReducer'
+// import { combineReducers } from "redux";
+// // import thatReducer from './thatReducer'
  
-const rootReducer = combineReducers({
-  // authors: authorsReducer,
-  // books: booksReducer
-});
+// const rootReducer = combineReducers({
+//   // authors: authorsReducer,
+//   // books: booksReducer
+// });
  
-export default rootReducer;
+// export default rootReducer;

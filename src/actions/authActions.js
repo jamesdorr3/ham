@@ -3,28 +3,12 @@ import {URL, HEADERS} from '../constants'
 export const auth = (info) => {
   return (dispatch) => {
     dispatch({type: 'START_LOADING'})
-    // console.log(info)
     return fetch(`${URL}/auth`, {
       method: 'POST',
       headers: HEADERS(),
       body: JSON.stringify({
-        user: {
-          username_or_email: info.usernameOrEmail,
-          password: info.password
-        }
+        user: {...info}
       })
-    })
-    .then(r => r.json())
-    .then(jwtAndUser => {
-      // debugger
-      dispatch({type: 'STOP_LOADING'})
-      if (jwtAndUser.user && jwtAndUser.jwt) {
-        localStorage.setItem('token', jwtAndUser.jwt)
-        dispatch({ type: 'SELECT_USER', payload: jwtAndUser})
-      }
-      else {
-        debugger
-      }
     })
   }
 }

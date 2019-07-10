@@ -2,6 +2,7 @@ import React from 'react'
 import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
 import {Draggable} from 'react-beautiful-dnd'
+import {updateChoice, destroyChoice} from '../actions/choicesActions'
 
 import ReactTransitionGroup from 'react-addons-transition-group'
 
@@ -25,11 +26,7 @@ class ChoiceCard extends React.Component {
 
   updateInDB = () => {
     const id = this.props.choiceFood.choice.id
-    fetch(`${URL}choices/${id}`, {
-      method: 'PATCH',
-      headers: HEADERS(),
-      body: JSON.stringify({choice: this.props.choiceFood.choice})
-    })
+    this.props.updateChoice({...this.props.choiceFood.choice})
   }
 
   handleAmountChange = (e) => {
@@ -66,8 +63,8 @@ class ChoiceCard extends React.Component {
   deleteChoice = () => {
     // debugger
     const id = this.props.choiceFood.choice.id
-    fetch(`${URL}/choices/${id}`, {method: 'DELETE'})
     this.props.deleteChoice(id)
+    this.props.destroyChoice(id)
   }
 
   render(){
@@ -132,6 +129,8 @@ const mapDispatchToProps = dispatch => {
   return {
     deleteChoice: id => dispatch({ type: 'DELETE_CHOICE', payload: id}),
     editChoice: info => dispatch({ type: 'EDIT_CHOICE', payload: info}),
+    updateChoice: info => dispatch(updateChoice(info)),
+    destroyChoice: info => dispatch(destroyChoice(info)),
   }
 }
 
