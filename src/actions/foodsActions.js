@@ -15,3 +15,9 @@ export const createFood = (food) => {
     })
   }
 }
+
+export const foodsIndex = (searchTerm) => {
+  return dispatch => {
+    return fetch(`${URL}/foods?q=${searchTerm}`, {headers: HEADERS()})
+  }
+}

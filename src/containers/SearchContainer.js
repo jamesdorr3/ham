@@ -5,12 +5,13 @@ import {URL, HEADERS} from '../constants.js'
 import MakeFoodCard from '../components/MakeFoodCard'
 import {connect} from 'react-redux'
 import {internalSearch, externalSearch, favoriteSearch} from '../actions/searchActions'
+import {foodsIndex} from '../actions/foodsActions'
 
 class SearchContainer extends React.Component {
 
   state = {
     text: '',
-    favorite: [],
+    favorites: [],
     common: [],
     internal: [],
     error: false,
@@ -18,32 +19,25 @@ class SearchContainer extends React.Component {
   }
 
   componentDidMount = () => {
-    this.favoriteSearch('')
+    this.foodsIndex('')
+  }
+
+  foodsIndex = (text) => {
+    this.props.foodsIndex(text)
+    .then(r => r.json())
+    .then(r => {
+      console.log(r)
+      this.setState(r)
+    })
   }
 
   handleChange = e => {
     this.setState({text: e.target.value})
     // this.favoriteSearch(e.target.value)
     if(e.target.value.length === 0) {
+      this.foodsIndex('')
       this.setState({internal: [],common:[],error:false})
     }
-  }
-  
-  favoriteSearch = (text) => {
-    this.props.favoriteSearch(text)
-    .then(r => r.json())
-    .then(r => {
-      if (r.length > 0){
-        this.setState({
-          favorite: r,
-          // common: [{description: 'More results are loading'}]
-        })
-      }else{
-        this.setState({
-          favorite: []
-        })
-      }
-    })
   }
 
   internalSearch = (text) => {
@@ -51,6 +45,7 @@ class SearchContainer extends React.Component {
     .then(r => r.json())
     .then(r => {
       if (r.internal.length > 0){
+        // debugger
         this.setState({
           internal: r.internal,
           // common: [{description: 'More results are loading'}]
@@ -68,17 +63,12 @@ class SearchContainer extends React.Component {
     if (this.state.text){
       // console.log('submit')
       this.props.startLoading()
-      this.favoriteSearch(this.state.text)
-      // this.internalSearch(this.state.text)
+      this.foodsIndex(this.state.text)
       this.props.externalSearch(this.state.text)
       .then(r => r.json())
       .then(r => {
-        console.log(r.resp)
+        // console.log(r.resp)
         this.props.stopLoading()
-        // debugger
-        // if (r.internal.length > 0){
-        //   this.setState({internal: r.internal})
-        // }
         if (r.common && r.common.length > 0){
           this.setState({common: r.common})
         }
@@ -100,7 +90,7 @@ class SearchContainer extends React.Component {
       text: '',
       error: false
     })
-    this.favoriteSearch('')
+    this.foodsIndex('')
   }
 
   render(){
@@ -144,7 +134,7 @@ class SearchContainer extends React.Component {
           <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
           : null} */}
           <h5>Favorites</h5>
-          {this.state.favorite.map(food => (
+          {this.state.favorites.map(food => (
             < InternalSearchResultCard 
             categoryId={this.props.categoryId}
             key={food.id} 
@@ -199,8 +189,9 @@ const mapDispatchToProps = dispatch => {
     startLoading: () => dispatch({type: 'START_LOADING'}),
     stopLoading: () => dispatch({type: 'STOP_LOADING'}),
     internalSearch: (searchTerm) => dispatch(internalSearch(searchTerm)),
-    favoriteSearch: (searchTerm) => dispatch(favoriteSearch(searchTerm)),
-    externalSearch: (searchTerm) => dispatch(externalSearch(searchTerm))
+    // favoriteSearch: (searchTerm) => dispatch(favoriteSearch(searchTerm)),
+    externalSearch: (searchTerm) => dispatch(externalSearch(searchTerm)),
+    foodsIndex: (searchTerm) => dispatch(foodsIndex(searchTerm))
   }
 }
 
