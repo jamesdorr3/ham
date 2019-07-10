@@ -6,7 +6,7 @@ import {auth, reauth} from '../actions/authActions'
 import {createDay, selectDay} from '../actions/daysActions'
 import {URL, HEADERS} from '../constants.js'
 import {saveAll} from '../actions/saveAllAction'
-import {deleteDay} from '../actions/daysActions'
+import {deleteDay, updateDay} from '../actions/daysActions'
 import UsernameCard from '../components/UsernameCard'
 import SignedInHeader from '../components/SignedInHeader'
 import NotSignedInHeader from '../components/NotSignedInHeader'
@@ -67,21 +67,6 @@ class Header extends React.Component {
     this.setState({dayName: e.target.value})
   }
 
-  submitDayName = (e) => {
-    e.preventDefault()
-    this.setState({editDayName: false, dayName: null})
-    if (this.state.dayName && this.state.dayName !== this.props.day.name) {
-      this.props.editDayName(this.state.dayName)
-      this.props.startLoading()
-      fetch(`${URL}days/${this.props.day.id}`, {
-        method: 'PATCH',
-        headers: HEADERS(),
-        body: JSON.stringify({name: this.state.dayName})
-      })
-      .then(r => this.props.stopLoading())
-    }
-  }
-
   dayChangeHandler = e => {
     this.props.saveAll(this.props) // doesn't work?
     this.props.selectDay(e.target.value)
@@ -130,7 +115,8 @@ const mapDispatchToProps = dispatch => {
     saveAll: (state) => dispatch(saveAll(state)),
     startLoading: () => dispatch({type: 'START_LOADING'}),
     stopLoading: () => dispatch({type: 'STOP_LOADING'}),
-    deleteDay: (id) => dispatch(deleteDay(id))
+    deleteDay: (id) => dispatch(deleteDay(id)),
+    updateDay: (dayObj) => dispatch(updateDay(dayObj))
   }
 }
 

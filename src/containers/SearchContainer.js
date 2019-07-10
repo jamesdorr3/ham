@@ -26,7 +26,7 @@ class SearchContainer extends React.Component {
     this.props.foodsIndex(text)
     .then(r => r.json())
     .then(r => {
-      console.log(r)
+      // console.log(r)
       this.setState(r)
     })
   }
