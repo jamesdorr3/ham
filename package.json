@@ -5,7 +5,6 @@
   "homepage": "https://jamesdorr3.github.io/ham",
   "dependencies": {
     "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
     "lodash": "^4.17.14",
     "react": "^16.8.6",
     "react-addons-transition-group": "^15.6.2",
