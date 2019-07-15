@@ -93,6 +93,13 @@ class SearchContainer extends React.Component {
     this.foodsIndex('')
   }
 
+  categoryByTime = () => {
+    const hour = new Date().getHours()
+    if (hour < 9){return this.props.categories.find(x => x.name == 'Breakfast').id}
+    else if (hour < 16){return this.props.categories.find(x => x.name == 'Lunch').id}
+    else{return this.props.categories.find(x => x.name == 'Dinner').id}
+  }
+
   render(){
     return(
       <>
@@ -136,7 +143,7 @@ class SearchContainer extends React.Component {
           <h5>Favorites</h5>
           {this.state.favorites.map(food => (
             < InternalSearchResultCard 
-            categoryId={this.props.categoryId}
+            categoryId={this.categoryByTime()}
             key={food.id} 
             food={food} 
             addChoice={this.props.addChoice}
@@ -146,7 +153,7 @@ class SearchContainer extends React.Component {
           <h5>More Results</h5>
           {this.state.internal.map(food => (
             < InternalSearchResultCard 
-            categoryId={this.props.categoryId}
+            categoryId={this.categoryByTime()}
             key={food.food_name} 
             food={food} 
             addChoice={this.props.addChoice}
@@ -155,7 +162,7 @@ class SearchContainer extends React.Component {
           )}
           {this.state.common.map(food => (
             < SearchResultCard 
-            categoryId={this.props.categoryId}
+            categoryId={this.categoryByTime()}
             key={food.fdcId} 
             food={food} 
             addChoice={this.props.addChoice}

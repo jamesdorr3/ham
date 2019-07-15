@@ -27,7 +27,8 @@ class InternalSearchResultCard extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    day: state.day
+    day: state.day,
+    categories: state.categories
   }
 }
 
