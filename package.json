@@ -4,9 +4,8 @@
   "private": true,
   "homepage": "https://jamesdorr3.github.io/ham",
   "dependencies": {
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
     "lodash": "^4.17.14",
+    "querystringify": "^2.1.1",
     "react": "^16.8.6",
     "react-addons-transition-group": "^15.6.2",
     "react-beautiful-dnd": "^11.0.3",
@@ -21,7 +20,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -b master -d build"
@@ -42,6 +42,9 @@
     ]
   },
   "devDependencies": {
+    "babel-jest": "^24.8.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "gh-pages": "^2.0.1"
   }
 }
