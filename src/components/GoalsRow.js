@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {createGoal, updateGoal, deleteGoal} from '../actions/goalsActions'
 import AutogenerateGoal from './AutogenerateGoal'
+import {updateDay} from '../actions/daysActions'
 
 class GoalsRow extends React.Component {
 
@@ -17,6 +18,7 @@ class GoalsRow extends React.Component {
 
   changeGoal = (e) => {
     this.props.changeGoal(e.target.value)
+    this.props.updateDay({id: this.props.day.id,goal_id: e.target.value})
   }
 
   addGoal = () => {
@@ -101,7 +103,8 @@ const mapDispatchToProps = dispatch => {
     updateGoal: (goal) => dispatch(updateGoal(goal)),
     createGoal: (userId) => dispatch(createGoal(userId)),
     deleteGoal: id => dispatch(deleteGoal(id)),
-    editGoal: info => dispatch({ type: 'EDIT_GOAL', payload: info})
+    editGoal: info => dispatch({ type: 'EDIT_GOAL', payload: info}),
+    updateDay: info => dispatch(updateDay(info))
   }
 }
 
