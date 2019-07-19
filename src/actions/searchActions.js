@@ -18,6 +18,7 @@ export const selectSearchResult = (props) => {
 }
 
 export const selectInternalSearchResult = (idAndCategory) => {
+  // debugger
   return (dispatch) => {
     dispatch({type: 'START_LOADING'})
     return fetch(`${URL}/choices`, {method: 'POST', headers: HEADERS(), body: JSON.stringify(idAndCategory)})
