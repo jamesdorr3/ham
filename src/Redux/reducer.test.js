@@ -16,24 +16,12 @@ const initialState = {
   loading: false
 }
 
-describe('reducer', () => {
-  expect(reducer(undefined, {})).toEqual(
-    {
-      categories: [
-        {name: 'Beakfast', created_at: 1, id: 1},
-        {name: 'Lunch', created_at: 2, id: 2},
-        {name: 'Dinner', created_at: 3, id: 3}
-      ],
-      day: {},
-      days: [],
-      choiceFoods: [],
-      goal: {},
-      goals: [],
-      user: {},
-      error: {},
-      loading: false
-    }
-  )
+describe('undefined reducer', () => {
+  it('should return the initial state', () => {
+    expect(reducer(undefined, {})).toEqual(
+      initialState
+    )
+  })
 })
 
 
