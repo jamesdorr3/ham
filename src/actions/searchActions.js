@@ -43,8 +43,8 @@ export const favoriteSearch = (searchTerm) => {
   }
 }
 
-export const externalSearch = searchTerm => {
+export const externalSearch = (searchTerm, pageNumber = 1) => {
   return dispatch => {
-    return fetch(`${URL}search/many?q=${searchTerm}`, {headers: HEADERS()})
+    return fetch(`${URL}search/many?q=${searchTerm}&pageNumber=${pageNumber}`, {headers: HEADERS()})
   }
 }
