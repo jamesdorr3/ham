@@ -169,15 +169,16 @@ class SearchContainer extends React.Component {
             clearForm={this.clearResults}
             />)
           )}
-          {/* {this.state.branded.map(food =>(
-            < SearchResultCard 
-            categoryId={this.props.categoryId}
-            key={food.nix_item_id} 
+          <h5>Recently Deleted</h5>
+          {this.props.removed.map(food => (
+            < InternalSearchResultCard 
+            categoryId={this.categoryByTime()}
+            key={food.food_name} 
             food={food} 
             addChoice={this.props.addChoice}
             clearForm={this.clearResults}
-            />
-          ))} */}
+            />)
+          )}
           {this.state.error ? <li>{this.state.error}</li> : null}
           {/* {this.state.error ? <li>No Results</li> : null} */}
         </ul>
