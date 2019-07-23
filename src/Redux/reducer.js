@@ -11,7 +11,8 @@ const initialState = {
   goals: [],
   user: {},
   error: {},
-  loading: false
+  loading: false,
+  removed: []
 }
 
 
@@ -30,11 +31,19 @@ const reducer = (state = initialState, action) => {
       return {...state, choiceFoods: [...state.choiceFoods, ...action.payload]}
     }
     case 'DELETE_CHOICE': {
-      return {...state, choiceFoods: state.choiceFoods.filter(x => x.choice.id !== action.payload)}
+      const removedChoice = state.choiceFoods.find(x => x.choice.id === action.payload)
+      return {...state, 
+        choiceFoods: state.choiceFoods.filter(x => x.choice.id !== action.payload),
+        removed: [
+          ...state.removed.filter(x => x.id !== removedChoice.food.id),
+          removedChoice.food
+        ]
+      }
     }
     case 'SELECT_USER': {
       // debugger
       return {
+        ...state,
         categories: action.payload.user.categories,
         choiceFoods: action.payload.user.choice_foods,
         day: action.payload.user.day,

@@ -15,7 +15,9 @@ class SearchContainer extends React.Component {
     common: [],
     internal: [],
     error: false,
-    addFood: false
+    addFood: false,
+    currentPage: 0,
+    totalPages: 0
   }
 
   componentDidMount = () => {
@@ -36,7 +38,7 @@ class SearchContainer extends React.Component {
     // this.favoriteSearch(e.target.value)
     if(e.target.value.length === 0) {
       this.foodsIndex('')
-      this.setState({internal: [],common:[],error:false})
+      this.clearResults()
     }
   }
 
@@ -64,22 +66,26 @@ class SearchContainer extends React.Component {
       // console.log('submit')
       this.props.startLoading()
       this.foodsIndex(this.state.text)
-      this.props.externalSearch(this.state.text)
-      .then(r => r.json())
-      .then(r => {
-        // console.log(r.resp)
-        this.props.stopLoading()
-        if (r.common && r.common.length > 0){
-          this.setState({common: r.common})
-        }
-        else{
-          this.setState({error: 'No More Results'})
-        }
-        // if (r.branded.length > 0){
-        //   this.setState({branded: r.branded})
-        // }
-      })
+      this.externalSearch(this.state.text, 1)
     }
+  }
+
+  externalSearch(searchPhrase, pageNumber = 1){
+    this.props.externalSearch(searchPhrase, pageNumber)
+    .then(r => r.json())
+    .then(r => {
+      console.log(r)
+      this.props.stopLoading()
+      if (r.common && r.common.length > 0){
+        this.setState({common: this.state.common.concat(r.common), currentPage: r.current_page, totalPages: r.total_pages})
+      }
+      else{
+        this.setState({error: 'No More Results'})
+      }
+      // if (r.branded.length > 0){
+      //   this.setState({branded: r.branded})
+      // }
+    })
   }
 
   clearResults = () => {
@@ -88,7 +94,9 @@ class SearchContainer extends React.Component {
       common: [],
       internal: [],
       text: '',
-      error: false
+      error: false,
+      currentPage: 0,
+      totalPages: 0
     })
     this.foodsIndex('')
   }
@@ -169,15 +177,35 @@ class SearchContainer extends React.Component {
             clearForm={this.clearResults}
             />)
           )}
-          {/* {this.state.branded.map(food =>(
-            < SearchResultCard 
-            categoryId={this.props.categoryId}
-            key={food.nix_item_id} 
-            food={food} 
-            addChoice={this.props.addChoice}
-            clearForm={this.clearResults}
-            />
-          ))} */}
+
+          {this.state.currentPage < this.state.totalPages
+          ?
+          <li 
+          className='searchResult loadMore'
+          onClick={()=>this.externalSearch(this.state.text, this.state.currentPage + 1)}
+          >
+            Load More - Showing {(this.state.currentPage/this.state.totalPages*100).toFixed()}% of results
+          </li>
+          :
+          null
+          }
+
+          {this.props.removed.length > 0 
+            ? 
+            <>
+            <h5>Recently Deleted</h5>
+            {this.props.removed.map(food => (
+              < InternalSearchResultCard 
+              categoryId={this.categoryByTime()}
+              key={food.food_name} 
+              food={food} 
+              addChoice={this.props.addChoice}
+              clearForm={this.clearResults}
+              />)
+            )}
+            </>
+            : null
+          }
           {this.state.error ? <li>{this.state.error}</li> : null}
           {/* {this.state.error ? <li>No Results</li> : null} */}
         </ul>
@@ -197,7 +225,7 @@ const mapDispatchToProps = dispatch => {
     stopLoading: () => dispatch({type: 'STOP_LOADING'}),
     internalSearch: (searchTerm) => dispatch(internalSearch(searchTerm)),
     // favoriteSearch: (searchTerm) => dispatch(favoriteSearch(searchTerm)),
-    externalSearch: (searchTerm) => dispatch(externalSearch(searchTerm)),
+    externalSearch: (searchTerm, pageNumber = 1) => dispatch(externalSearch(searchTerm, pageNumber)),
     foodsIndex: (searchTerm) => dispatch(foodsIndex(searchTerm))
   }
 }
