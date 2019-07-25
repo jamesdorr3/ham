@@ -11,8 +11,13 @@ class GoalsRow extends React.Component {
   }
 
   goalsSelector = () => {
+    const sortedGoals = this.props.goals.sort(function(a,b){
+      if (a.name.toLowerCase() > b.name.toLowerCase()){return 1}
+      if (a.name.toLowerCase() < b.name.toLowerCase()){return -1}
+      return 0
+    })
     return <select value={this.props.goal.id} className='goalsSelect' onChange={this.changeGoal}>
-      {this.props.goals.sort((a,b) => a.name - b.name).map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
+      {sortedGoals.map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
     </select>
   }
 

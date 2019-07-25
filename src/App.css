@@ -69,6 +69,7 @@ input.submitGoal{position:relative;height:100%;padding:0px}
 .autogenerateMacros label.gender{width:100%;text-align:center}
 .autogenerateMacros .gender label{width:15%}
 .autogenerateMacros .gender input{width:65%}
+.autogenerateMacros select{max-width:50%}
 .autogenerateMacros label{position:relative;width:30%;display:inline-block;}
 .autogenerateMacros input{position:relative;width:33%}
 .autogenerateMacros button{position:absolute;z-index:1;top:1%;right:1%;border:1px solid black;border-radius:5px;background:rgb(221, 103, 44);color:white}
@@ -192,6 +193,7 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 @media only screen and (min-width: 768px) {
 .table{left:29%;width:70%;height:80%;}
 .autogenerateMacros{width:70%}
+.autogenerateMacros select{max-width:70%}
 select.daySelect{max-width:300px}
 .daySelect input[type='text']{width:50%}
 .daySelect input[type='date']{width:25%}
