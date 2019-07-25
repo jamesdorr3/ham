@@ -42,7 +42,7 @@ class GoalsRow extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({showEditGoalForm: false})
-    this.props.updateGoal({...this.state, id: this.props.goal.id})
+    this.props.updateGoal(this.props.goal)
   }
 
   handleChange = (e) => {
