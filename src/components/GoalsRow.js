@@ -37,7 +37,11 @@ class GoalsRow extends React.Component {
   editGoal = () => {
     this.setState({showEditGoalForm: true})
   }
-  deleteGoal = () => this.props.deleteGoal(this.props.goal.id)
+  deleteGoal = () => {
+    if(this.props.goals.length > 1){
+      this.props.deleteGoal(this.props.goal.id)
+    }
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
