@@ -10,7 +10,7 @@ export const selectSearchResult = (props) => {
     })
     .then(r => r.json())
     .then(choiceAndFood => {
-      console.log(choiceAndFood.resp)
+      debugger
       dispatch({type: 'STOP_LOADING'})
       dispatch({ type: 'ADD_CHOICE', payload: choiceAndFood})
     })
