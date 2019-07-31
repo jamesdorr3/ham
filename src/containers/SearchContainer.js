@@ -64,6 +64,7 @@ class SearchContainer extends React.Component {
     e.preventDefault()
     if (this.state.text){
       // console.log('submit')
+      this.setState({common: []})
       this.props.startLoading()
       this.foodsIndex(this.state.text)
       this.externalSearch(this.state.text, 1)
