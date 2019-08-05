@@ -3,6 +3,7 @@ import {URL, HEADERS} from '../constants'
 export const selectSearchResult = (props) => {
   return (dispatch) => {
     dispatch({type: 'START_LOADING'})
+    unfocusSearch()
     return fetch(`${URL}search/make_choice`, {
       method: 'POST',
       headers: HEADERS(),
@@ -17,8 +18,13 @@ export const selectSearchResult = (props) => {
   }
 }
 
+function unfocusSearch(){
+  document.querySelector('.table').focus()
+}
+
 export const selectInternalSearchResult = (idAndCategory) => {
   // debugger
+  unfocusSearch()
   return (dispatch) => {
     dispatch({type: 'START_LOADING'})
     return fetch(`${URL}/choices`, {method: 'POST', headers: HEADERS(), body: JSON.stringify(idAndCategory)})
