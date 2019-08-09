@@ -116,7 +116,7 @@ class SignedInHeader extends React.Component {
                 <li onClick={this.toggleNewFoodForm}>Create Your Own Food</li>
                 < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id}/>
                 <li className='contact'><a href='mailto:jamesdorr3@gmail.com'>Contact</a></li>
-                <li onClick={this.handleSignOut}>Sign Out</li>
+                <li className='signOut' onClick={this.handleSignOut}>Sign Out</li>
               </ul>
             </div>
           </div>
