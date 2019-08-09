@@ -146,9 +146,13 @@ div.arrow{position:fixed;bottom:20%;border:1px solid black;border-radius:5px;pad
 .category .foodSearchContainer{display: none}
 /* SEARCH */
 /* SEARCH RESULT */
-.searchResultContainer{display:none;background:white;position:absolute;z-index:1;border-radius:0px;width:99%;padding:0px;margin:0;border:1px solid gray;transition:0.25s}
-
-.foodSearchContainer:hover .searchResultContainer{display:block;animation:slideUpDisplay 0.25s}
+.foodSearchContainer:hover .searchResultContainer, .foodSearchContainer:hover .searchResultContainerHidden{display:block}
+.searchResultContainerHidden{display:none;background:white;bottom:100%;position:absolute;z-index:1;border-radius:0px;width:99%;height:0px;padding:0px;margin:0;border:1px solid gray;animation:slideDownHide 0.25s;overflow:hidden}
+@keyframes slideDownHide {
+  from{height:800%}
+  to{height: 0px}
+}
+.searchResultContainer{display:none;background:white;position:absolute;z-index:1;border-radius:0px;width:99%;padding:0px;margin:0;border:1px solid gray;animation:slideUpDisplay 0.25s}
 @keyframes slideUpDisplay {
   from{height:0px}
   to{height: 800%}
@@ -216,8 +220,8 @@ select.daySelect{max-width:300px}
 /* ONLY DESKTOP */
 @media only screen and (min-width: 992px) {
   /* li.deleteColumn{right:100%} */
-img.deleteChoice{visibility:hidden;opacity:0}
-.choice:hover img.deleteChoice{visibility:visible;opacity:1;}
+  img.deleteChoice{visibility:hidden;opacity:0}
+  .choice:hover img.deleteChoice{visibility:visible;opacity:1;}
 } 
 
 @media only screen and (max-height: 550px){

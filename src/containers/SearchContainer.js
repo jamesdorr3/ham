@@ -107,6 +107,10 @@ class SearchContainer extends React.Component {
     this.setState({showResults: true})
   }
 
+  hideResults = () => {
+    this.setState({showResults: false})
+  }
+
   render(){
     return(
       <>
@@ -143,7 +147,7 @@ class SearchContainer extends React.Component {
           </button> */}
         </form>
         {/* < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} /> */}
-        <ul className='searchResultContainer' style={{visibility: this.state.showResults ? 'visible' : 'hidden'}}>
+        <ul className={this.state.showResults ? 'searchResultContainer' : 'searchResultContainerHidden'} >
           {/* {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
           <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
           : null} */}
