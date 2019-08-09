@@ -15,7 +15,8 @@ class SearchContainer extends React.Component {
     common: [],
     internal: [],
     error: false,
-    addFood: false
+    addFood: false,
+    showResults: false
   }
 
   componentDidMount = () => {
@@ -84,11 +85,13 @@ class SearchContainer extends React.Component {
 
   clearResults = () => {
     this.setState({
+      favorites: [],
       branded: [],
       common: [],
       internal: [],
       text: '',
-      error: false
+      error: false,
+      showResults: false
     })
     this.foodsIndex('')
   }
@@ -100,13 +103,17 @@ class SearchContainer extends React.Component {
     else{return this.props.categories.find(x => x.name == 'Dinner').id}
   }
 
+  showResults = () => {
+    this.setState({showResults: true})
+  }
+
   render(){
     return(
       <>
       <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
         <span className='rectangle'>Start Here</span>
       </div>
-      <div className='centered row foodSearchContainer' >
+      <div className='centered row foodSearchContainer' onFocus={this.showResults}>
         <form onSubmit={this.handleSubmit} className='searchForm'>
           <input type='search' 
             list='popularSearches'
@@ -136,7 +143,7 @@ class SearchContainer extends React.Component {
           </button> */}
         </form>
         {/* < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} /> */}
-        <ul className='searchResultContainer'>
+        <ul className='searchResultContainer' style={{visibility: this.state.showResults ? 'visible' : 'hidden'}}>
           {/* {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
           <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
           : null} */}

@@ -4,13 +4,19 @@ import {connect} from 'react-redux'
 import {Draggable} from 'react-beautiful-dnd'
 import {updateChoice, destroyChoice} from '../actions/choicesActions'
 
-import ReactTransitionGroup from 'react-addons-transition-group'
-
 class ChoiceCard extends React.Component {
 
   state = {
     amount: this.props.choiceFood.choice.amount,
-    measure: this.props.choiceFood.choice.measure
+    measure: this.props.choiceFood.choice.measure,
+    className: 'choice grid'
+  }
+
+  componentDidMount(){
+    this.setState({className: 'grid toExpand'})
+    setTimeout(() => {
+      this.setState({className: 'choice grid'})
+    }, 500)
   }
   
   autoUpdateMacro = macro => {
@@ -62,9 +68,12 @@ class ChoiceCard extends React.Component {
 
   deleteChoice = () => {
     // debugger
-    const id = this.props.choiceFood.choice.id
-    this.props.deleteChoice(id)
-    this.props.destroyChoice(id)
+    this.setState({className: 'grid shrunk'})
+    setTimeout(() => {
+      const id = this.props.choiceFood.choice.id
+      this.props.deleteChoice(id)
+      this.props.destroyChoice(id)
+    }, 500)
   }
 
   render(){
@@ -76,7 +85,7 @@ class ChoiceCard extends React.Component {
       >
         {provided => (
         <ul 
-        className='choice grid'
+        className={this.state.className}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
@@ -115,6 +124,7 @@ class ChoiceCard extends React.Component {
           <li className='macro protein'>{this.autoUpdateMacro('protein')}</li>
           <li className='deleteColumn' ><button onClick={this.deleteChoice} className='deleteChoice deleteButton' alt='delete choice'><img src='trash-icon.png' className='deleteChoice' alt='delete choice'></img></button></li>
         </ul>
+        
         )}
       </Draggable>
     )
