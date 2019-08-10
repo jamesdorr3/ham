@@ -4,7 +4,8 @@
   "private": true,
   "homepage": "https://jamesdorr3.github.io/ham",
   "dependencies": {
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.15",
+    "lodash.template": "^4.5.0",
     "querystringify": "^2.1.1",
     "react": "^16.8.6",
     "react-addons-transition-group": "^15.6.2",
@@ -23,7 +24,7 @@
     "test:watch": "npm test -- --watch",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"

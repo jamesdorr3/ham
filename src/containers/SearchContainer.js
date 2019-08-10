@@ -17,7 +17,7 @@ class SearchContainer extends React.Component {
     internal: [],
     error: false,
     addFood: false,
-    showResults: false
+    showResults: false,
     currentPage: 0,
     totalPages: 0
   }
@@ -104,7 +104,7 @@ class SearchContainer extends React.Component {
       internal: [],
       text: '',
       error: false,
-      showResults: false
+      showResults: false,
       currentPage: 0,
       totalPages: 0
     })
