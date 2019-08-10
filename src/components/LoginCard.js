@@ -1,8 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import '../constants.js'
-import {URL, HEADERS} from '../constants.js'
-import {auth, reauth} from '../actions/authActions'
+import {auth} from '../actions/authActions'
 
 class LoginCard extends React.Component {
 

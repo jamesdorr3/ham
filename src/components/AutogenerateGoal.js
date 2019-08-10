@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {selectSearchResult} from '../actions/searchActions'
 import {createGoal} from '../actions/goalsActions'
 
 class AutogenerateGoal extends React.Component {

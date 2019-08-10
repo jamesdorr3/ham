@@ -1,13 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import LoginCard from '../components/LoginCard'
-import SignUpCard from '../components/SignUpCard'
-import {auth, reauth} from '../actions/authActions'
+
+import {reauth} from '../actions/authActions'
 import {createDay, selectDay} from '../actions/daysActions'
-import {URL, HEADERS} from '../constants.js'
 import {saveAll} from '../actions/saveAllAction'
 import {deleteDay, updateDay} from '../actions/daysActions'
-import UsernameCard from '../components/UsernameCard'
 import SignedInHeader from '../components/SignedInHeader'
 import NotSignedInHeader from '../components/NotSignedInHeader'
 
@@ -25,6 +22,15 @@ class Header extends React.Component {
 
   componentDidMount(){
     if (localStorage.getItem('token')){this.props.reauth()} // thunk
+    window.addEventListener('beforeunload', e => {
+      this.props.saveAll(this.props)
+    })
+    document.addEventListener('keydown', e => {
+      if (e.metaKey && e.code === 'KeyS') {
+        e.preventDefault()
+        this.props.saveAll(this.props)
+      }
+    })
   }
 
   handleSignOut = () => {

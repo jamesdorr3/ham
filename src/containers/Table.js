@@ -1,8 +1,5 @@
 import React from 'react'
-import ChoiceCard from '../components/ChoiceCard'
-import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
-import {Droppable} from 'react-beautiful-dnd'
 import CategoryCard from '../components/CategoryCard'
 import GoalsRow from '../components/GoalsRow'
 import {updateGoal} from '../actions/goalsActions'
@@ -10,23 +7,11 @@ import {createGoal} from '../actions/goalsActions'
 import {saveAll} from '../actions/saveAllAction'
 import {deleteGoal} from '../actions/goalsActions'
 
-class ChoiceContainer extends React.Component {
+const ChoiceContainer = props => {
 
-  componentDidMount(){
-    window.addEventListener('beforeunload', e => {
-      this.props.saveAll(this.props)
-    })
-    document.addEventListener('keydown', e => {
-      if (e.metaKey && e.code === 'KeyS') {
-        e.preventDefault()
-        this.props.saveAll(this.props)
-      }
-    })
-  }
-
-  autoSum = (macro) => {
+  const autoSum = (macro) => {
     let sum = 0
-    this.props.choiceFoods.forEach(choiceFood => {
+    props.choiceFoods.forEach(choiceFood => {
       // console.log(choiceFood)
       // const measurement = ((choiceFood.choice.measure === 'grams') ? choiceFood.food.serving_grams : (choiceFood.food.serving_unit_amount || 1))
       // sum += parseInt((choiceFood.food[macro] / measurement * choiceFood.choice.amount).toFixed(0))
@@ -42,7 +27,7 @@ class ChoiceContainer extends React.Component {
     return sum.toFixed()
   }
 
-  keyRow = 
+  const keyRow = 
     <ul className='grid key'>
       <li className='name'><div>Name</div></li>
       <li className='amount'><div>Amount</div></li>
@@ -54,29 +39,29 @@ class ChoiceContainer extends React.Component {
       <li className='deleteColumn'></li>
     </ul>
   
-  compareForStyle = (macro) =>{
+  const compareForStyle = (macro) =>{
     // debugger
-    if (!this.props.user.email){return null}
-    if (this.autoSum(macro) < this.props.goal[macro] - 5) {
+    if (!props.user.email){return null}
+    if (autoSum(macro) < props.goal[macro] - 5) {
       return 'under'
-    }else if(this.autoSum(macro) > this.props.goal[macro] + 5) {
+    }else if(autoSum(macro) > props.goal[macro] + 5) {
       return 'over'
     }else{return 'good'}
   }
 
-  totalsRow = () => {
+  const totalsRow = () => {
     return  <ul className='grid totalsRow'>
       <li className='totals'><span>TOTALS:</span></li>
-      <li className={`calories macro`} placeholder='grams'>{this.autoSum('calories')}</li>
-      <li className={`fat macro ${this.compareForStyle('fat')}`}>{this.autoSum('fat')}</li>
-      <li className={`carbs macro ${this.compareForStyle('carbs')}`}>{this.autoSum('carbs')}</li>
-      <li className={`protein macro ${this.compareForStyle('protein')}`}>{this.autoSum('protein')}</li>
+      <li className={`calories macro`} placeholder='grams'>{autoSum('calories')}</li>
+      <li className={`fat macro ${compareForStyle('fat')}`}>{autoSum('fat')}</li>
+      <li className={`carbs macro ${compareForStyle('carbs')}`}>{autoSum('carbs')}</li>
+      <li className={`protein macro ${compareForStyle('protein')}`}>{autoSum('protein')}</li>
       <li className='deleteColumn'></li>
     </ul>
   }
 
-  render(){
-    // console.log(this.props)
+
+    // console.log(props)
     return(
       <div className='table'>
         {localStorage.getItem('token') ? null : 
@@ -87,19 +72,19 @@ class ChoiceContainer extends React.Component {
           </div>
         }
         < GoalsRow />
-        {this.totalsRow()}
-        {this.keyRow}
-        {this.props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
+        {totalsRow()}
+        {keyRow}
+        {props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
         return <CategoryCard category={category} key={category.id} />
         })}
-        {this.keyRow}
-        {this.totalsRow()}
-        <button className='saveButton' onClick={() => this.props.saveAll(this.props)}>Save</button>
-        {this.props.loading? <div className='loading'></div> : null}
+        {keyRow}
+        {totalsRow()}
+        <button className='saveButton' onClick={() => props.saveAll(props)}>Save</button>
+        {props.loading? <div className='loading'></div> : null}
         {/* <div className='loading'></div> */}
       </div>
     ) 
-  }
+  
 }
 
 const mapStateToProps = (state) => { // LIMIT TO WHAT THIS COMPONENT IS USING!

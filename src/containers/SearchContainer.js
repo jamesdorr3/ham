@@ -1,10 +1,9 @@
 import React from 'react'
 import SearchResultCard from '../components/SearchResultCard'
 import InternalSearchResultCard from '../components/InternalSearchResultCard'
-import {URL, HEADERS} from '../constants.js'
-import MakeFoodCard from '../components/MakeFoodCard'
+
 import {connect} from 'react-redux'
-import {internalSearch, externalSearch, favoriteSearch} from '../actions/searchActions'
+import {internalSearch, externalSearch} from '../actions/searchActions'
 import {foodsIndex} from '../actions/foodsActions'
 
 class SearchContainer extends React.Component {
@@ -35,7 +34,7 @@ class SearchContainer extends React.Component {
     this.props.foodsIndex(text)
     .then(r => r.json())
     .then(r => {
-      // console.log(r)
+      // debugger
       this.setState({filteredFavorites: r.favorites})
     })
   }
@@ -82,7 +81,7 @@ class SearchContainer extends React.Component {
     this.props.externalSearch(searchPhrase, pageNumber)
     .then(r => r.json())
     .then(r => {
-      console.log(r)
+      // console.log(this.state)
       this.props.stopLoading()
       if (r.common && r.common.length > 0){
         this.setState({common: this.state.common.concat(r.common), currentPage: r.current_page, totalPages: r.total_pages})
@@ -113,9 +112,9 @@ class SearchContainer extends React.Component {
 
   categoryByTime = () => {
     const hour = new Date().getHours()
-    if (hour < 9){return this.props.categories.find(x => x.name == 'Breakfast').id}
-    else if (hour < 16){return this.props.categories.find(x => x.name == 'Lunch').id}
-    else{return this.props.categories.find(x => x.name == 'Dinner').id}
+    if (hour < 9){return this.props.categories.find(x => x.name === 'Breakfast').id}
+    else if (hour < 16){return this.props.categories.find(x => x.name === 'Lunch').id}
+    else{return this.props.categories.find(x => x.name === 'Dinner').id}
   }
 
   showResults = () => {

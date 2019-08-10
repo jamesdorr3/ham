@@ -2,12 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import LoginCard from './LoginCard'
 import SignUpCard from './SignUpCard'
-import {auth, reauth} from '../actions/authActions'
+import {reauth} from '../actions/authActions'
 import {createDay, selectDay} from '../actions/daysActions'
-import {URL, HEADERS} from '../constants.js'
 import {saveAll} from '../actions/saveAllAction'
 import {deleteDay} from '../actions/daysActions'
-import UsernameCard from './UsernameCard'
 
 class NotSignedInHeader extends React.Component {
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import {URL, HEADERS} from '../constants.js'
 import {connect} from 'react-redux'
 import {Draggable} from 'react-beautiful-dnd'
 import {updateChoice, destroyChoice} from '../actions/choicesActions'
@@ -31,7 +30,7 @@ class ChoiceCard extends React.Component {
   }
 
   updateInDB = () => {
-    const id = this.props.choiceFood.choice.id
+    // const id = this.props.choiceFood.choice.id
     this.props.updateChoice({...this.props.choiceFood.choice})
   }
 
@@ -44,15 +43,16 @@ class ChoiceCard extends React.Component {
   }
 
   handleMeasureChange = (e) => {
-    const fromMeasureId = this.props.choiceFood.choice.measure_id
-    const fromMeasure = this.props.choiceFood.measures.find(x => x.id === fromMeasureId)
-    const toMeasureId = parseInt(e.target.value)
-    const toMeasure = this.props.choiceFood.measures.find(x => x.id === toMeasureId)
-    let newAmount = (fromMeasure.grams / toMeasure.grams * this.props.choiceFood.choice.amount) * ((toMeasure.amount || 1) / (fromMeasure.amount || 1))
-    if (!/^gram(s)?$/i.test(toMeasure.name)){newAmount = newAmount.toFixed(2)}
-    else{newAmount = newAmount.toFixed()}
-    // debugger
-    this.props.editChoice({choice: {measure_id: toMeasureId, amount: newAmount, id: this.props.choiceFood.choice.id}})
+    // const fromMeasureId = this.props.choiceFood.choice.measure_id
+    // const fromMeasure = this.props.choiceFood.measures.find(x => x.id === fromMeasureId)
+    // const toMeasureId = parseInt(e.target.value)
+    // const toMeasure = this.props.choiceFood.measures.find(x => x.id === toMeasureId)
+    // let newAmount = (fromMeasure.grams / toMeasure.grams * this.props.choiceFood.choice.amount) * ((toMeasure.amount || 1) / (fromMeasure.amount || 1))
+    // if (!/^gram(s)?$/i.test(toMeasure.name)){newAmount = newAmount.toFixed(2)}
+    // else{newAmount = newAmount.toFixed()}
+    // // debugger
+    // this.props.editChoice({choice: {measure_id: toMeasureId, amount: newAmount, id: this.props.choiceFood.choice.id}})
+    this.props.editChoice({choice: {measure_id: parseInt(e.target.value), id: this.props.choiceFood.choice.id}})
     this.updateInDB()
   }
 

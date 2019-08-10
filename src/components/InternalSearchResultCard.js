@@ -2,27 +2,24 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {selectInternalSearchResult} from '../actions/searchActions'
 
-class InternalSearchResultCard extends React.Component {
+const InternalSearchResultCard = props => {
 
-  handleAddChoice = () => {
-    this.props.clearForm()
-    this.props.selectInternalSearchResult({foodId: this.props.food.id, categoryId: this.props.categoryId, dayId: this.props.day.id})
+  const handleAddChoice = () => {
+    props.clearForm()
+    props.selectInternalSearchResult({foodId: props.food.id, categoryId: props.categoryId, dayId: props.day.id})
   }
 
-  render(){
-    // console.log(this.props)
-    return(
-      <li className='searchResult' onClick={this.handleAddChoice}>
-        <span className='resultName'>{this.props.food.name}</span>
-        {this.props.food.brand ? <span className='brandName'> - {this.props.food.brand}</span> : null}
-        <ul className='resultMacros'>
-          <li>fat: {this.props.food.fat.toFixed()}</li>
-          <li>carbs: {this.props.food.carbs.toFixed()}</li>
-          <li>protein: {this.props.food.protein.toFixed()}</li>
-        </ul>
-      </li>
-    )
-  }
+  return(
+    <li className='searchResult' onClick={handleAddChoice}>
+      <span className='resultName'>{props.food.name}</span>
+      {props.food.brand ? <span className='brandName'> - {props.food.brand}</span> : null}
+      <ul className='resultMacros'>
+        <li>fat: {props.food.fat.toFixed()}</li>
+        <li>carbs: {props.food.carbs.toFixed()}</li>
+        <li>protein: {props.food.protein.toFixed()}</li>
+      </ul>
+    </li>
+  )
 }
 
 const mapStateToProps = state => {

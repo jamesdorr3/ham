@@ -5,25 +5,25 @@ import {connect} from 'react-redux'
 class MakeFoodCard extends React.Component {
 
   state = {
-    name: null,
-    brand: null,
-    serving_unit_amount: null,
-    serving_unit_name: null,
-    serving_grams: null,
-    calories: null,
-    serving_unit_name: null,
-    fat: null,
-    carbs: null,
-    protein: null,
-    cholesterol: null,
-    dietary_fiber: null,
-    potassium: null,
-    saturated_fat: null,
-    sodium: null,
-    sugars: null,
-    unit_size: null,
-    upc: null,
-    error: null
+    name: '',
+    brand: '',
+    serving_unit_amount: '',
+    serving_unit_name: '',
+    serving_grams: '',
+    calories: '',
+    serving_unit_name: '',
+    fat: '',
+    carbs: '',
+    protein: '',
+    cholesterol: '',
+    dietary_fiber: '',
+    potassium: '',
+    saturated_fat: '',
+    sodium: '',
+    sugars: '',
+    unit_size: '',
+    upc: '',
+    error: ''
   }
 
   handleChange = (e) => {

@@ -19,7 +19,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_CHOICE': {
-      debugger
+      // debugger
       return {...state, choiceFoods: [...state.choiceFoods, {
         choice: {...action.payload.choice, id: action.payload.choice.id || Date.now()},
         food: action.payload.food,
@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
       }]}
     }
     case 'ADD_CHOICES': {
-      debugger
+      // debugger
       return {...state, choiceFoods: [...state.choiceFoods, ...action.payload]}
     }
     case 'DELETE_CHOICE': {

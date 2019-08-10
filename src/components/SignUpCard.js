@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import '../constants.js'
-import {URL, HEADERS} from '../constants.js'
 import {createUser} from '../actions/usersActions'
 
 class SignUpCard extends React.Component {

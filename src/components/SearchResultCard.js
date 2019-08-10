@@ -2,21 +2,20 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {selectSearchResult} from '../actions/searchActions'
 
-class SearchResultCard extends React.Component {
+const SearchResultCard = props => {
 
-  handleAddChoice = () => {
-    this.props.clearForm()
-    this.props.selectSearchResult({fdcId: this.props.food.fdcId, categoryId: this.props.categoryId, dayId: this.props.day.id})
+  const handleAddChoice = () => {
+    props.clearForm()
+    props.selectSearchResult({fdcId: props.food.fdcId, categoryId: props.categoryId, dayId: props.day.id})
   }
 
-  render(){
-    return(
-      <li className='searchResult' onClick={this.handleAddChoice}>
-        <span className='resultName'>{this.props.food.description}</span>
-        {this.props.food.brandOwner ? <span className='brandName'> - {this.props.food.brandOwner}</span> : null}
-      </li>
-    )
-  }
+
+  return(
+    <li className='searchResult' onClick={handleAddChoice}>
+      <span className='resultName'>{props.food.description}</span>
+      {props.food.brandOwner ? <span className='brandName'> - {props.food.brandOwner}</span> : null}
+    </li>
+  )
 }
 
 const mapStateToProps = state => {
