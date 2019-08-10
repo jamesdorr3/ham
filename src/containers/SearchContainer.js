@@ -12,6 +12,7 @@ class SearchContainer extends React.Component {
   state = {
     text: '',
     favorites: [],
+    filteredFavorites: [],
     common: [],
     internal: [],
     error: false,
@@ -20,7 +21,12 @@ class SearchContainer extends React.Component {
   }
 
   componentDidMount = () => {
-    this.foodsIndex('')
+    this.props.foodsIndex('')
+    .then(r => r.json())
+    .then(r => {
+      // debugger
+      this.setState({favorites: r.favorites})
+    })
   }
 
   foodsIndex = (text) => {
@@ -28,7 +34,7 @@ class SearchContainer extends React.Component {
     .then(r => r.json())
     .then(r => {
       // console.log(r)
-      this.setState(r)
+      this.setState({filteredFavorites: r.favorites})
     })
   }
 
@@ -85,7 +91,7 @@ class SearchContainer extends React.Component {
 
   clearResults = () => {
     this.setState({
-      favorites: [],
+      filteredFavorites: [],
       branded: [],
       common: [],
       internal: [],
@@ -93,7 +99,7 @@ class SearchContainer extends React.Component {
       error: false,
       showResults: false
     })
-    this.foodsIndex('')
+    // this.foodsIndex('')
   }
 
   categoryByTime = () => {
@@ -152,7 +158,7 @@ class SearchContainer extends React.Component {
           <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
           : null} */}
           <h5>Favorites</h5>
-          {this.state.favorites.map(food => (
+          {this.state[this.state.filteredFavorites.length > 0 ? 'filteredFavorites' : 'favorites'].map(food => (
             < InternalSearchResultCard 
             categoryId={this.categoryByTime()}
             key={food.id} 
