@@ -12,16 +12,23 @@ class SearchContainer extends React.Component {
   state = {
     text: '',
     favorites: [],
+    filteredFavorites: [],
     common: [],
     internal: [],
     error: false,
     addFood: false,
+    showResults: false
     currentPage: 0,
     totalPages: 0
   }
 
   componentDidMount = () => {
-    this.foodsIndex('')
+    this.props.foodsIndex('')
+    .then(r => r.json())
+    .then(r => {
+      // debugger
+      this.setState({favorites: r.favorites})
+    })
   }
 
   foodsIndex = (text) => {
@@ -29,7 +36,7 @@ class SearchContainer extends React.Component {
     .then(r => r.json())
     .then(r => {
       // console.log(r)
-      this.setState(r)
+      this.setState({filteredFavorites: r.favorites})
     })
   }
 
@@ -91,15 +98,17 @@ class SearchContainer extends React.Component {
 
   clearResults = () => {
     this.setState({
+      filteredFavorites: [],
       branded: [],
       common: [],
       internal: [],
       text: '',
       error: false,
+      showResults: false
       currentPage: 0,
       totalPages: 0
     })
-    this.foodsIndex('')
+    // this.foodsIndex('')
   }
 
   categoryByTime = () => {
@@ -109,13 +118,21 @@ class SearchContainer extends React.Component {
     else{return this.props.categories.find(x => x.name == 'Dinner').id}
   }
 
+  showResults = () => {
+    this.setState({showResults: true})
+  }
+
+  hideResults = () => {
+    this.setState({showResults: false})
+  }
+
   render(){
     return(
       <>
       <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
         <span className='rectangle'>Start Here</span>
       </div>
-      <div className='centered row foodSearchContainer' >
+      <div className='centered row foodSearchContainer' onFocus={this.showResults}>
         <form onSubmit={this.handleSubmit} className='searchForm'>
           <input type='search' 
             list='popularSearches'
@@ -145,12 +162,12 @@ class SearchContainer extends React.Component {
           </button> */}
         </form>
         {/* < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} /> */}
-        <ul className='searchResultContainer'>
+        <ul className={this.state.showResults ? 'searchResultContainer' : 'searchResultContainerHidden'} >
           {/* {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
           <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
           : null} */}
           <h5>Favorites</h5>
-          {this.state.favorites.map(food => (
+          {this.state[this.state.filteredFavorites.length > 0 ? 'filteredFavorites' : 'favorites'].map(food => (
             < InternalSearchResultCard 
             categoryId={this.categoryByTime()}
             key={food.id} 
