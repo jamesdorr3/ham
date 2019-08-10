@@ -38,22 +38,7 @@ class CategoryCard extends React.Component {
         ref={provided.innerRef}
         {...provided.droppableProps}
         >
-        <ul
-          className="grid categoryGrid"
-          >
-            <li className='name categoryName' >{this.props.category.name}</li>
-
-          </ul>
-          {/* <ul className='grid key'>
-            <li className='name'><div>Name</div></li>
-            <li className='amount'><div>Amount</div></li>
-            <li className='measure' ><div>Measure</div></li>
-            <li className='macro calories' ><div>Calories</div></li>
-            <li className='macro fat' ><div>Fat</div></li>
-            <li className='macro carbs' ><div>Carbs</div></li>
-            <li className='macro protein' ><div>Protein</div></li>
-            <li className='deleteColumn'></li>
-          </ul> */}
+          <p className='name categoryName'>{this.props.category.name}</p>
           {this.mySortedChoices().map((choiceFood, index) => < ChoiceCard //.sort((x, y) => x.id - y.id)
           // animationEnd={console.log('END!')}
           choiceFood={choiceFood} 

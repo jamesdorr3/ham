@@ -11,8 +11,13 @@ class GoalsRow extends React.Component {
   }
 
   goalsSelector = () => {
+    const sortedGoals = this.props.goals.sort(function(a,b){
+      if (a.name.toLowerCase() > b.name.toLowerCase()){return 1}
+      if (a.name.toLowerCase() < b.name.toLowerCase()){return -1}
+      return 0
+    })
     return <select value={this.props.goal.id} className='goalsSelect' onChange={this.changeGoal}>
-      {this.props.goals.sort((a,b) => a.name - b.name).map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
+      {sortedGoals.map(goal => <option value={goal.id} key={goal.id}>{goal.name}</option>)}
     </select>
   }
 
@@ -32,12 +37,16 @@ class GoalsRow extends React.Component {
   editGoal = () => {
     this.setState({showEditGoalForm: true})
   }
-  deleteGoal = () => this.props.deleteGoal(this.props.goal.id)
+  deleteGoal = () => {
+    if(this.props.goals.length > 1){
+      this.props.deleteGoal(this.props.goal.id)
+    }
+  }
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({showEditGoalForm: false})
-    this.props.updateGoal({...this.state, id: this.props.goal.id})
+    this.props.updateGoal(this.props.goal)
   }
 
   handleChange = (e) => {

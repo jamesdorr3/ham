@@ -61,12 +61,12 @@ class AutogenerateGoal extends React.Component {
 
   activityLevelSelect = () => {
     const levels = [
-      {name: 'sedentary', multiplier: 1.2}, 
-      {name: 'lightly active', multiplier: 1.375}, 
-      {name: 'moderately active', multiplier: 1.55}, 
-      {name: 'very active', multiplier: 1.725}, 
-      {name: 'extremely active', multiplier: 1.9}]
-    return <select name='activityLevel' onChange={this.handleChange}>
+      {name: 'Sedentary - little or no exercise, desk job', multiplier: 1.2}, 
+      {name: 'lightly active - light exercise, sports 1-3 days a week', multiplier: 1.375}, 
+      {name: 'moderately active - moderate exercise, sports 3-5 days a week', multiplier: 1.55}, 
+      {name: 'very active - hard exercise, sports 6-7 days a week', multiplier: 1.725}, 
+      {name: 'extremely active - hard daily exercise, sports and physical job, or 2x a day exercise', multiplier: 1.9}]
+    return <select className='activityLevel' name='activityLevel' onChange={this.handleChange}>
     {levels.map(opt => {
         return <option name={opt.name} key={opt.name} value={opt.multiplier} >{opt.name}</option>
       })}

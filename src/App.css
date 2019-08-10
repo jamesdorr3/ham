@@ -33,6 +33,8 @@ img.menuButton{position:relative;height:100%}
 .sideMenu ul{width:100%;margin:0 2% 0 0;padding:0 2% 0 0}
 .sideMenu ul li{padding:5% 2%;margin:0 2% 0 0;width:100%}
 .sideMenu .bottom{position:absolute;bottom:0;padding:10% 0}
+.sideMenu .bottom li{cursor:pointer;transition:0.25s}
+.sideMenu .bottom li:hover{transition:0.5s;text-decoration:underline}
 .contact a{text-decoration:none;color:black}
 div.daySelect{grid-column: 2;position:relative}
 .daySelect select{width:80%}
@@ -69,6 +71,7 @@ input.submitGoal{position:relative;height:100%;padding:0px}
 .autogenerateMacros label.gender{width:100%;text-align:center}
 .autogenerateMacros .gender label{width:15%}
 .autogenerateMacros .gender input{width:65%}
+.autogenerateMacros select{max-width:50%}
 .autogenerateMacros label{position:relative;width:30%;display:inline-block;}
 .autogenerateMacros input{position:relative;width:33%}
 .autogenerateMacros button{position:absolute;z-index:1;top:1%;right:1%;border:1px solid black;border-radius:5px;background:rgb(221, 103, 44);color:white}
@@ -110,6 +113,7 @@ input.submitGoal{position:relative;height:100%;padding:0px}
 /* LOADING  */
 /* CATEGORY */
 .category{background:rgb(255, 204, 178);border-radius:5px;margin:1% 0;padding:1% 0}
+.categoryName{position:relative;margin:4px;left:10%}
 .subtotals{grid-column:span 2}
 .choice{background:white;border-top:1px solid rgba(194, 194, 194, 0.589);border-bottom:1px solid rgba(194, 194, 194, 0.589);transition:0.25s;overflow:hidden;height:20px}
 .toExpand{transform: scaleX(1.01);background:gold;border-top:1px solid rgba(194, 194, 194, 0.589);border-bottom:1px solid rgba(194, 194, 194, 0.589);transition:0.25s;overflow:hidden;height:20px;}
@@ -163,12 +167,17 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 /* DROPDOWN */
 .dropdownButton{position:relative;border:1px solid transparent;border-radius:5px;text-align:center}
 .dropdownButton:hover{position:relative;border:1px solid black;border-radius:5px;text-align:center}
-.goals .dropdownButton{width:230%}
-.goals .dropdownButton:hover{width:230%}
+.goals .dropdownButton{min-width:25px}
+.goals .dropdownButton:hover{width:100%}
 .dropdown{display:block;z-index:2;background:white;position:absolute;right:0px;padding:2%;border:1px solid black;visibility:hidden}
-.dropdown li{padding:10%;text-align:left;border-bottom:0.5px solid lightgray}
-.dropdown li button{background:none;border:none}
-.dropdownButton:hover .dropdown{visibility:visible}
+.dropdown li{position:relative;padding:10%;text-align:left;border-bottom:0.5px solid lightgray}
+.dropdown li button{position:relative;background:none;border:none}
+.dropdownButton:hover .dropdown{visibility:visible;}
+@keyframes growAppear {
+  0% { height:0px; width:0px}
+  50% {height: 400%; width: 0px}
+  100% {height:400%;width:400%}
+}
 /* DROPDOWN */
 /* FOOTER SEARCH */
 .footerSearch{position:absolute;bottom:11%;width:100%}
@@ -177,6 +186,7 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 .footerSearch .searchForm{margin:0;padding:0;position:relative}
 .footerSearch .searchText{margin-left:-10%;position:relative;padding:2%;border-radius:25px;border:0px solid transparent}
 .searchForm .searchButton{position:absolute;height:100%;background:white}
+.loadMore{background:lightgray;text-align:center;font-weight:bold}
 /* FOOTER SEARCH */
 /* FOOTER */
 .footer{background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));position:absolute;height:10%;min-height:60px;width:100%;bottom:0;overflow:scroll;}
@@ -190,6 +200,7 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 @media only screen and (min-width: 768px) {
 .table{left:29%;width:70%;height:80%;}
 .autogenerateMacros{width:70%}
+.autogenerateMacros select{max-width:70%}
 select.daySelect{max-width:300px}
 .daySelect input[type='text']{width:50%}
 .daySelect input[type='date']{width:25%}
