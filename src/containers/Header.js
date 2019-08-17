@@ -97,6 +97,7 @@ class Header extends React.Component {
   }
 
   render(){
+    // console.log(this.props.choiceFoods)
     return(
       localStorage.getItem('token')
       ? 

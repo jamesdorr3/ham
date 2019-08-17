@@ -16,7 +16,6 @@ class SearchContainer extends React.Component {
     internal: [],
     error: false,
     addFood: false,
-    showResults: false,
     currentPage: 0,
     totalPages: 0
   }
@@ -117,24 +116,16 @@ class SearchContainer extends React.Component {
     else{return this.props.categories.find(x => x.name === 'Dinner').id}
   }
 
-  showResults = () => {
-    this.setState({showResults: true})
-  }
-
-  hideResults = () => {
-    this.setState({showResults: false})
-  }
-
   render(){
     return(
       <>
       <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
         <span className='rectangle'>Start Here</span>
       </div>
-      <div className='centered row foodSearchContainer' onFocus={this.showResults}>
+      <div className='centered row foodSearchContainer'>
         <form onSubmit={this.handleSubmit} className='searchForm'>
           <input type='search' 
-            list='popularSearches'
+            // list='popularSearches'
             value={this.state.text} 
             onChange={this.handleChange}
             placeholder='Search for any food...'
@@ -161,12 +152,12 @@ class SearchContainer extends React.Component {
           </button> */}
         </form>
         {/* < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} /> */}
-        <ul className={this.state.showResults ? 'searchResultContainer' : 'searchResultContainerHidden'} >
+        <ul className='searchResultContainer' >
           {/* {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
           <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
           : null} */}
           <h5>Favorites</h5>
-          {this.state[this.state.filteredFavorites.length > 0 ? 'filteredFavorites' : 'favorites'].map(food => (
+          {this.state[this.state.filteredFavorites.length > 0 || this.state.text !== '' ? 'filteredFavorites' : 'favorites'].map(food => (
             < InternalSearchResultCard 
             categoryId={this.categoryByTime()}
             key={food.id} 
