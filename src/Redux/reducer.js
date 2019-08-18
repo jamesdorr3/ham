@@ -194,9 +194,11 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'DELETE_GOAL': {
+      const newGoals = state.goals.filter(x => x.id !== parseInt(action.payload))
       return {
         ...state,
-        goals: state.goals.filter(x => x.id !== parseInt(action.payload))
+        goals: newGoals,
+        goal: newGoals[0]
       }
     }
     default: {
