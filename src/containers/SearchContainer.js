@@ -1,6 +1,5 @@
 import React from 'react'
 import SearchResultCard from '../components/SearchResultCard'
-import InternalSearchResultCard from '../components/InternalSearchResultCard'
 
 import {connect} from 'react-redux'
 import {internalSearch, externalSearch} from '../actions/searchActions'
@@ -116,6 +115,16 @@ class SearchContainer extends React.Component {
     else{return this.props.categories.find(x => x.name === 'Dinner').id}
   }
 
+  makeSearchResultCard = (food) => {
+    return < SearchResultCard
+    categoryId={this.categoryByTime()} // i
+    key={food.id} // 
+    food={food}  //  // i
+    clearForm={this.clearResults} // i
+    hideResults={this.hideResults}
+    />
+  }
+
   showResults = () => {
     this.setState({showResults: true})
   }
@@ -140,58 +149,15 @@ class SearchContainer extends React.Component {
             className='searchText'
             >
           </input>
-          {/* <datalist id='popularSearches'>
-            <option>poo</option>
-          </datalist> */}
           <input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton searchIcon'></input>
-          {/* <span className='tooltip'><input type='image' src='search-icon.png' alt='Search' name='submit' className='searchButton'></input><span className='tooltiptext'>Search</span></span>
-          <button onClick={() => this.setState({addFood: !this.state.addFood})} className='iconButton' style={{display: this.props.user.email ? 'inline' : 'none'}}>
-            {this.state.addFood ?
-            <>
-            <img src='close-icon.png' alt='close new food form' className='closeButton' />
-            <span className='tooltiptext'>Close Form</span>
-            </>
-            :
-            <>
-            <img src='add-icon-circle.png' alt='open new food form' className='addButton'/>
-            <span className='tooltiptext'>Add Your Own</span>
-            </>
-          }
-          </button> */}
         </form>
-        {/* < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} /> */}
         <ul className={this.state.showResults ? 'searchResultContainer' : 'searchResultContainerHidden'} >
-          {/* {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
-          <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
-          : null} */}
           <h5>Favorites</h5>
-          {this.state[this.state.filteredFavorites.length > 0 || this.state.text !== '' ? 'filteredFavorites' : 'favorites'].map(food => (
-            < InternalSearchResultCard 
-            categoryId={this.categoryByTime()} // i
-            key={food.id} // 
-            food={food}  //  // i
-            clearForm={this.clearResults} // i
-            hideResults={this.hideResults}
-            />)
-          )}
+          {this.state[this.state.filteredFavorites.length > 0 || this.state.text !== '' ? 'filteredFavorites' : 'favorites'].map(food => this.makeSearchResultCard(food))}
+
           <h5>More Results</h5>
-          {this.state.internal.map(food => (
-            < InternalSearchResultCard 
-            categoryId={this.categoryByTime()}
-            key={food.food_name} 
-            food={food}
-            clearForm={this.clearResults}
-            hideResults={this.hideResults}
-            />)
-          )}
-          {this.state.common.map(food => (
-            < SearchResultCard 
-            categoryId={this.categoryByTime()}
-            key={food.fdcId} 
-            food={food}
-            clearForm={this.clearResults}
-            />)
-          )}
+          {this.state.internal.map(food => this.makeSearchResultCard(food))}
+          {this.state.common.map(food => this.makeSearchResultCard(food))}
 
           {this.state.currentPage < this.state.totalPages
           ?
@@ -209,14 +175,7 @@ class SearchContainer extends React.Component {
             ? 
             <>
             <h5>Recently Deleted</h5>
-            {this.props.removed.map(food => (
-              < InternalSearchResultCard 
-              categoryId={this.categoryByTime()}
-              key={food.food_name} 
-              food={food} 
-              clearForm={this.clearResults}
-              />)
-            )}
+            {this.props.removed.map(food => this.makeSearchResultCard(food))}
             </>
             : null
           }
