@@ -17,7 +17,8 @@ class SearchContainer extends React.Component {
     error: false,
     addFood: false,
     currentPage: 0,
-    totalPages: 0
+    totalPages: 0,
+    showResults: false
   }
 
   componentDidMount = () => {
@@ -102,7 +103,6 @@ class SearchContainer extends React.Component {
       internal: [],
       text: '',
       error: false,
-      showResults: false,
       currentPage: 0,
       totalPages: 0
     })
@@ -116,13 +116,21 @@ class SearchContainer extends React.Component {
     else{return this.props.categories.find(x => x.name === 'Dinner').id}
   }
 
+  showResults = () => {
+    this.setState({showResults: true})
+  }
+
+  hideResults = () => {
+    this.setState({showResults: false})
+  }
+
   render(){
     return(
       <>
       <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>
         <span className='rectangle'>Start Here</span>
       </div>
-      <div className='centered row foodSearchContainer'>
+      <div className='centered row foodSearchContainer' onFocus={this.showResults}>
         <form onSubmit={this.handleSubmit} className='searchForm'>
           <input type='search' 
             // list='popularSearches'
@@ -152,18 +160,18 @@ class SearchContainer extends React.Component {
           </button> */}
         </form>
         {/* < MakeFoodCard addFood={this.state.addFood} categoryId={this.props.categoryId} closeAddFood={() => this.setState({addFood: false})} /> */}
-        <ul className='searchResultContainer' >
+        <ul className={this.state.showResults ? 'searchResultContainer' : 'searchResultContainerHidden'} >
           {/* {this.state.common.length > 0 || this.state.branded.length > 0 || this.state.internal.length > 0 || this.state.error ? 
           <button onClick={this.clearResults} className='closeButton'><span className='tooltiptext'>Close</span><img src='close-icon.png' alt='close search results' className='closeButton' /></button> 
           : null} */}
           <h5>Favorites</h5>
           {this.state[this.state.filteredFavorites.length > 0 || this.state.text !== '' ? 'filteredFavorites' : 'favorites'].map(food => (
             < InternalSearchResultCard 
-            categoryId={this.categoryByTime()}
-            key={food.id} 
-            food={food} 
-            addChoice={this.props.addChoice}
-            clearForm={this.clearResults}
+            categoryId={this.categoryByTime()} // i
+            key={food.id} // 
+            food={food}  //  // i
+            clearForm={this.clearResults} // i
+            hideResults={this.hideResults}
             />)
           )}
           <h5>More Results</h5>
@@ -171,17 +179,16 @@ class SearchContainer extends React.Component {
             < InternalSearchResultCard 
             categoryId={this.categoryByTime()}
             key={food.food_name} 
-            food={food} 
-            addChoice={this.props.addChoice}
+            food={food}
             clearForm={this.clearResults}
+            hideResults={this.hideResults}
             />)
           )}
           {this.state.common.map(food => (
             < SearchResultCard 
             categoryId={this.categoryByTime()}
             key={food.fdcId} 
-            food={food} 
-            addChoice={this.props.addChoice}
+            food={food}
             clearForm={this.clearResults}
             />)
           )}
@@ -207,7 +214,6 @@ class SearchContainer extends React.Component {
               categoryId={this.categoryByTime()}
               key={food.food_name} 
               food={food} 
-              addChoice={this.props.addChoice}
               clearForm={this.clearResults}
               />)
             )}
