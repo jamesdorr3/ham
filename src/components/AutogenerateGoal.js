@@ -12,25 +12,37 @@ class AutogenerateGoal extends React.Component {
     bodyFat: null,
     age: null,
     gender: 50,
-    activityLevel: 1.2
+    activityLevel: 1.2,
+    calorieGoalAdjuster: 1,
+    macroGoal: 'high protein - lift day',
+    fat: 40,
+    carbs: 30,
+    protein: 30,
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    let bmrCals;
+    let tdeeCals;
     if (this.state.bodyFat) {
-      bmrCals = (this.katchMcArdle() + this.mifflin()) / 2
+      tdeeCals = (this.katchMcArdle() + this.mifflin()) / 2
     }
     else{
-      bmrCals = this.mifflin()
+      tdeeCals = this.mifflin()
     }
+
+    tdeeCals = tdeeCals * parseFloat(this.state.calorieGoalAdjuster)
+
+    let calorieGoalDescriptor
+    if(this.state.calorieGoalAdjuster > 1){calorieGoalDescriptor="gain weight"}
+    else if(this.state.calorieGoalAdjuster < 1){calorieGoalDescriptor="lose weight"}
+    else{calorieGoalDescriptor="maintain weight"}
     
     this.props.createGoal({
-      calories: bmrCals.toFixed(), 
-      fat: 1,
-      carbs: 1,
-      protein: 1,
-      name: 'Total Daily Energy Expenditure', 
+      calories: tdeeCals.toFixed(), 
+      fat: ((tdeeCals * parseInt(this.state.fat)) / 900).toFixed(),
+      carbs: ((tdeeCals * parseInt(this.state.carbs)) / 400).toFixed(),
+      protein: ((tdeeCals * parseInt(this.state.protein)) / 400).toFixed(),
+      name: `${this.state.macroGoal} to ${calorieGoalDescriptor}`, 
       user_id: this.props.user.id
     })
     this.props.toggleAutogenerate()
@@ -60,15 +72,46 @@ class AutogenerateGoal extends React.Component {
 
   activityLevelSelect = () => {
     const levels = [
-      {name: 'Sedentary - little or no exercise, desk job', multiplier: 1.2}, 
-      {name: 'lightly active - light exercise, sports 1-3 days a week', multiplier: 1.375}, 
-      {name: 'moderately active - moderate exercise, sports 3-5 days a week', multiplier: 1.55}, 
-      {name: 'very active - hard exercise, sports 6-7 days a week', multiplier: 1.725}, 
-      {name: 'extremely active - hard daily exercise, sports and physical job, or 2x a day exercise', multiplier: 1.9}]
-    return <select className='activityLevel' name='activityLevel' onChange={this.handleChange}>
+      {name: "0 times", oldName: 'Sedentary - little or no exercise, desk job', multiplier: 1.2}, 
+      {name: "lightly 1 to 3 times", oldName: 'lightly active - light exercise, sports 1-3 days a week', multiplier: 1.375}, 
+      {name: "moderately 3 to 5 times", oldName: 'moderately active - moderate exercise, sports 3-5 days a week', multiplier: 1.55}, 
+      {name: "hard 6 to 7 times", oldName: 'very active - hard exercise, sports 6-7 days a week', multiplier: 1.725}, 
+      {name: "extremely hard, at least every day", oldName: 'extremely active - hard daily exercise, sports and physical job, or 2x a day exercise', multiplier: 1.9}]
+    return <select value={this.state.activityLevel} className='activityLevel' name='activityLevel' onChange={this.handleChange}>
     {levels.map(opt => {
         return <option name={opt.name} key={opt.name} value={opt.multiplier} >{opt.name}</option>
       })}
+    </select>
+  }
+
+  calorieGoalAdjusterSelect = () => {
+    const calorieGoals = [
+      {name: "gain weight: +5% calories", multiplyer: 1.05},
+      {name: "maintain weight", multiplyer: 1},
+      {name: "lose weight: -5% calories", multiplyer: 0.95},
+    ]
+    return <select value={this.state.calorieAdjuster} name='calorieGoalAdjuster' onChange={this.handleChange}>
+      {calorieGoals.map(goal => <option name={goal.name} key={goal.name} value={goal.multiplier}>{goal.name}</option>)}
+    </select>
+  }
+
+  macroGoalsSelect = () => {
+    const macroGoals = [
+      {name: 'high protein - rest day', fat: 45, carbs: 20, protein: 35},
+      {name: 'high protein - lift day', fat: 40, carbs: 30, protein: 30},
+      {name: 'keto - low carb', fat: 60, carbs: 5, protein: 35},
+      {name: 'moderate-carb / paleo', fat: 40, carbs: 30, protein: 30},
+      {name: 'shipscale.com weightloss and muscle gain', fat: 35, carbs: 30, protein: 35},
+      {name: 'myFitnessPal', fat: 30, carbs: 50, protein: 20},
+      // {name: 'healthyeater.com', fat: 30, carbs: calc(), protein: 20},
+    ]
+    const selfchange = (e) => {
+      this.handleChange(e)
+      const goalProfile = macroGoals.filter(x=>x.name === e.target.value)[0]
+      this.setState({fat: goalProfile.fat, carbs: goalProfile.carbs, protein: goalProfile.protein})
+    }
+    return <select value={this.state.macroGoal} name='macroGoal' onChange={selfchange}>
+      {macroGoals.map(goal => <option name={goal.name} key={goal.name} value={goal.name}>{goal.name}</option>)}
     </select>
   }
 
@@ -95,8 +138,29 @@ class AutogenerateGoal extends React.Component {
             <input type='range' name='gender' onChange={this.handleChange}></input>
             <label>male</label>
           </span></div>
-          <div><label>Activity Level</label>
+          <div><label>exercise per week</label>
           {this.activityLevelSelect()}</div>
+          <div>
+            <label>Calorie Goal</label>
+            {this.calorieGoalAdjusterSelect()}
+          </div>
+          <div>
+            <label>Macro Profile</label>
+            {this.macroGoalsSelect()}
+          </div>
+          <div>
+            <label>% calories from</label>
+            <label className='macrosForAutogenerate' >Fat</label>
+            <input className='macrosForAutogenerate' name='fat' type='number' value={this.state.fat} onChange={this.handleChange} />
+            <label className='macrosForAutogenerate' >carbs</label>
+            <input className='macrosForAutogenerate' name='carbs' type='number' value={this.state.carbs} onChange={this.handleChange} />
+            <label className='macrosForAutogenerate' >protein</label>
+            <input className='macrosForAutogenerate' name='protein' type='number' value={this.state.protein} onChange={this.handleChange} />
+          </div>
+          <div>
+            <label id='autoMacrosSum'>Total</label>
+            {parseInt(this.state.fat) + parseInt(this.state.carbs) + parseInt(this.state.protein)}%
+          </div>
           <input type='submit' value='Generate Macros' />
         </form>
       </div>

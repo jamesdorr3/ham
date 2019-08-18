@@ -67,15 +67,17 @@ a.showMore{margin-left:30%;border:1px solid black;border-radius:5px;padding:1%;c
 input.submitGoal{position:relative;height:100%;padding:0px}
 .autogenerateMacros{position:fixed;background:white;z-index:1;top:10%;bottom:10%;width:100%}
 .autogenerateMacros form{margin:2%}
-.autogenerateMacros div{position:relative;}
+.autogenerateMacros div{position:relative;margin:5px 0}
 .autogenerateMacros label.gender{width:100%;text-align:center}
 .autogenerateMacros .gender label{width:15%}
 .autogenerateMacros .gender input{width:65%}
-.autogenerateMacros select{max-width:50%}
+.autogenerateMacros select{max-width:40%}
 .autogenerateMacros label{position:relative;width:30%;display:inline-block;}
 .autogenerateMacros input{position:relative;width:33%}
 .autogenerateMacros button{position:absolute;z-index:1;top:1%;right:1%;border:1px solid black;border-radius:5px;background:rgb(221, 103, 44);color:white}
 .autogenerateMacros input[type='submit']{width:100%;margin-top:1%;border:1px solid black;border-radius:5px;background:rgb(221, 103, 44);color:white}
+label.macrosForAutogenerate{width:auto;margin:0% 1% 0% 2%}
+input.macrosForAutogenerate{max-width: 5%}
 /* GOALS */
 /* TABLE */
 .table{position:absolute;top:10%;bottom:16%;width:100%;overflow-y:scroll;overflow-x:hidden;font-size:.9em;padding-top:3%}
@@ -180,8 +182,8 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 .footerSearch{position:absolute;bottom:11%;width:100%}
 .footerSearch input.searchText{display:inline-block;width:85%;font-size:1em}
 .footerSearch .foodSearchContainer{border:1px solid rgb(221, 103, 44);border-radius:25px;background:white;}
-.footerSearch .searchForm{margin:0;padding:0;position:relative;}
-.footerSearch .searchText{margin-left:-10%;position:relative;padding:3px;border-radius:25px;border:0px solid transparent}
+.footerSearch .searchForm{margin:0;padding:0 1%;position:relative;}
+.footerSearch .searchText{margin-left:-10%;position:relative;padding:10px 0;border-radius:25px;border:0px solid transparent}
 .searchForm .searchButton{position:absolute;height:100%;background:white}
 .loadMore{background:lightgray;text-align:center;font-weight:bold}
 /* FOOTER SEARCH */
@@ -197,7 +199,7 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 @media only screen and (min-width: 768px) {
 .table{left:29%;width:70%;height:80%;}
 .autogenerateMacros{width:70%}
-.autogenerateMacros select{max-width:70%}
+.autogenerateMacros select{max-width:50%}
 select.daySelect{max-width:300px}
 .daySelect input[type='text']{width:50%}
 .daySelect input[type='date']{width:25%}
@@ -205,8 +207,9 @@ select.daySelect{max-width:300px}
 
 /* li.deleteColumn{right:150%} */
 
-.footerSearch .foodSearchContainer{position:fixed;top:11%;left:0%;width:28%;padding:1% 0}
-.searchText{font-size:0.8em;}
+.footerSearch .foodSearchContainer{position:fixed;top:11%;left:0%;width:28%;padding:5px 0}
+.searchText{font-size:0.5em}
+.searchForm{left:1%;max-width:87%}
 .searchResultContainer,.searchResultContainerHidden{display:block;position:fixed;top:18%;bottom:11%;width:28%;animation:none}
 .arrow{background:white;position:fixed;top:4%;left:-15%;padding:1%;height:2%;border-radius:5px;border:1px solid black;animation:sway 1s linear infinite;}
 /* .arrow:after{content:'';position:absolute;border-width:10px;border-style:solid;border-color:black transparent transparent transparent;right:-18%;top:75%} */

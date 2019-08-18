@@ -64,14 +64,13 @@ const ChoiceContainer = props => {
     // console.log(props)
     return(
       <div className='table'>
-        {localStorage.getItem('token') ? null : 
+        {localStorage.getItem('token') ? < GoalsRow /> : 
           <div className='welcome'>
           <h1>WELCOME TO HAM</h1>
           <h2>a simple macronutrient tracker</h2>
           <hr/>
           </div>
         }
-        < GoalsRow />
         {totalsRow()}
         {keyRow}
         {props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
