@@ -5,6 +5,7 @@ import {selectInternalSearchResult} from '../actions/searchActions'
 const InternalSearchResultCard = props => {
 
   const handleAddChoice = () => {
+    props.hideResults()
     props.clearForm()
     props.selectInternalSearchResult({foodId: props.food.id, categoryId: props.categoryId, dayId: props.day.id})
   }
