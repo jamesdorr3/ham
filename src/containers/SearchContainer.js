@@ -67,12 +67,13 @@ class SearchContainer extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    if (this.state.text){
+    const searchTerm = this.state.text.replace('%','%25')
+    if (searchTerm){
       // console.log('submit')
       this.setState({common: []})
       this.props.startLoading()
-      this.foodsIndex(this.state.text)
-      this.externalSearch(this.state.text, 1)
+      this.foodsIndex(searchTerm)
+      this.externalSearch(searchTerm, 1)
     }
   }
 
