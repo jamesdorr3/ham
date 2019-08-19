@@ -20,7 +20,7 @@ const SearchResultCard = props => {
       <span className='resultName'>{props.food.name || props.food.description}</span>
       {props.food.brand ? <span className='brandName'> - {props.food.brand}</span> : null}
       {props.food.brandOwner ? <span className='brandName'> - {props.food.brandOwner}</span> : null}
-      {props.food.fat ? 
+      {props.food.fat || props.food.carbs || props.food.protein ? 
       <ul className='resultMacros'>
         <li>fat: {props.food.fat.toFixed()}</li>
         <li>carbs: {props.food.carbs.toFixed()}</li>
