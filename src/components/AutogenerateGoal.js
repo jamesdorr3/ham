@@ -30,7 +30,7 @@ class AutogenerateGoal extends React.Component {
       tdeeCals = this.mifflin()
     }
 
-    tdeeCals = tdeeCals * parseFloat(this.state.calorieGoalAdjuster)
+    tdeeCals = tdeeCals * parseFloat(this.state.calorieGoalAdjuster) //
 
     let calorieGoalDescriptor
     if(this.state.calorieGoalAdjuster > 1){calorieGoalDescriptor="gain weight"}
@@ -86,12 +86,12 @@ class AutogenerateGoal extends React.Component {
 
   calorieGoalAdjusterSelect = () => {
     const calorieGoals = [
-      {name: "gain weight: +5% calories", multiplyer: 1.05},
-      {name: "maintain weight", multiplyer: 1},
-      {name: "lose weight: -5% calories", multiplyer: 0.95},
+      {name: "gain weight: +5% calories", multiplier: 1.05},
+      {name: "maintain weight", multiplier: 1},
+      {name: "lose weight: -5% calories", multiplier: 0.95},
     ]
-    return <select value={this.state.calorieAdjuster} name='calorieGoalAdjuster' onChange={this.handleChange}>
-      {calorieGoals.map(goal => <option name={goal.name} key={goal.name} value={goal.multiplier}>{goal.name}</option>)}
+    return <select value={this.state.calorieGoalAdjuster} name='calorieGoalAdjuster' onChange={this.handleChange}>
+      {calorieGoals.map(goal => <option name={goal.name} key={goal.name} value={goal.multiplier} id={goal.multiplier} >{goal.name}</option>)}
     </select>
   }
 

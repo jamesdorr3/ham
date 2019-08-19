@@ -50,8 +50,13 @@ class GoalsRow extends React.Component {
   }
 
   handleChange = (e) => {
-    // console.log({[e.target.name]: e.target.value})
-    this.props.editGoal({[e.target.name]: e.target.value})
+    // debugger
+    if(e.target.name === "calories"){
+      this.props.editGoal({[e.target.name]: e.target.value})
+    }else{
+      const goal = {...this.props.goal, [e.target.name]: e.target.value}
+      this.props.editGoal({[e.target.name]: e.target.value, calories: parseInt(goal.fat)*9 + parseInt(goal.carbs)*4 + parseInt(goal.protein)*4})
+    }
   }
 
   toggleAutogenerate = () => {this.setState({showAutogenerateForm: !this.state.showAutogenerateForm})}
@@ -63,11 +68,11 @@ class GoalsRow extends React.Component {
       this.state.showEditGoalForm
       ?
       <form className='grid goals' onSubmit={this.handleSubmit}>
-        <li className='goalsTitle'><div>Goals:</div></li>
+        <li className='goalsTitle'><div>Edit Goal:</div></li>
         <li className='goalsSelect'>
           <div><input type='text' name='name' placeholder='name' defaultValue={this.props.goal.name} value={this.state.name} onChange={this.handleChange} /></div>
         </li>
-        <li className='macro calories' ><div><input type='number' name='calories' min='0' placeholder='kcal' value={this.props.goal.calories} onChange={this.handleChange} /></div></li>
+        <li className='macro calories' ><div><input value={this.props.goal.calories} className='readonly' readonly/></div></li>
         <li className='macro fat' ><div><input type='number' name='fat' min='0' placeholder='grams' value={this.props.goal.fat} onChange={this.handleChange} /></div></li>
         <li className='macro carbs' ><div><input type='number' name='carbs' min='0' placeholder='grams' value={this.props.goal.carbs} onChange={this.handleChange} /></div></li>
         <li className='macro protein' ><div><input type='number' name='protein' min='0' placeholder='grams' value={this.props.goal.protein} onChange={this.handleChange} /></div></li>

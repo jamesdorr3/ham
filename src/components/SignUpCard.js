@@ -53,19 +53,19 @@ class SignUpCard extends React.Component {
       <form onSubmit={this.handleSubmit} className='signupForm'>
         <li>
         <label>Username</label><br/>
-        <input value={this.state.username} name='username' onChange={this.handleChange} type='text' placeholder='username' />
+        <input required value={this.state.username} name='username' onChange={this.handleChange} type='text' placeholder='username' />
         </li>
         <li>
           <label>Email</label><br/>
-          <input value={this.state.email} name='email' onChange={this.handleChange} type='email' placeholder='email' />
+          <input required pattern='\w+@\w+\.\w+' value={this.state.email} name='email' onChange={this.handleChange} type='email' placeholder='email' />
         </li>
         <li>
           <label>Password</label><br/>
-          <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='6 characters'/>
+          <input required value={this.state.password} minlength='6' name='password' onChange={this.handleChange} type='password' placeholder='6 characters'/>
         </li>
         <li>
           <label>Password</label><br/>
-          <input value={this.state.password2} name='password2' onChange={this.handleChange} type='password' placeholder='confirm'/>
+          <input required value={this.state.password2} minlength='6' name='password2' onChange={this.handleChange} type='password' placeholder='confirm'/>
         </li>
         <li>
           <input value='Sign Up' type='submit'/>
