@@ -63,10 +63,10 @@ const ChoiceContainer = props => {
   const macrosLeftRow = () => {
     return  <ul className='grid totalsRow'>
       <li className='totals'><span>remaining:</span></li>
-      <li className={`calories macro`} placeholder='grams'>{props.goal.calories - autoSum('calories')}</li>
-      <li className={`fat macro ${compareForStyle('fat')}`}>{props.goal.fat - autoSum('fat')}</li>
-      <li className={`carbs macro ${compareForStyle('carbs')}`}>{props.goal.carbs - autoSum('carbs')}</li>
-      <li className={`protein macro ${compareForStyle('protein')}`}>{props.goal.protein - autoSum('protein')}</li>
+      <li className={`calories macro`} placeholder='grams'>{(props.goal.calories - autoSum('calories')) || 0}</li>
+      <li className={`fat macro ${compareForStyle('fat')}`}>{(props.goal.fat - autoSum('fat')) || 0}</li>
+      <li className={`carbs macro ${compareForStyle('carbs')}`}>{(props.goal.carbs - autoSum('carbs')) || 0}</li>
+      <li className={`protein macro ${compareForStyle('protein')}`}>{(props.goal.protein - autoSum('protein')) || 0}</li>
       <li className='deleteColumn'></li>
     </ul>
   }
