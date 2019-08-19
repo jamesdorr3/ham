@@ -60,6 +60,17 @@ const ChoiceContainer = props => {
     </ul>
   }
 
+  const macrosLeftRow = () => {
+    return  <ul className='grid totalsRow'>
+      <li className='totals'><span>remaining:</span></li>
+      <li className={`calories macro`} placeholder='grams'>{props.goal.calories - autoSum('calories')}</li>
+      <li className={`fat macro ${compareForStyle('fat')}`}>{props.goal.fat - autoSum('fat')}</li>
+      <li className={`carbs macro ${compareForStyle('carbs')}`}>{props.goal.carbs - autoSum('carbs')}</li>
+      <li className={`protein macro ${compareForStyle('protein')}`}>{props.goal.protein - autoSum('protein')}</li>
+      <li className='deleteColumn'></li>
+    </ul>
+  }
+
 
     // console.log(props)
     return(
@@ -72,13 +83,14 @@ const ChoiceContainer = props => {
           </div>
         }
         {totalsRow()}
+        {macrosLeftRow()}
         {keyRow}
         {props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
         return <CategoryCard category={category} key={category.id} />
         })}
-        {keyRow}
-        {totalsRow()}
-        <button className='saveButton' onClick={() => props.saveAll(props)}>Save</button>
+        {/* {keyRow} */}
+        {/* {totalsRow()} */}
+        {/* <button className='saveButton' onClick={() => props.saveAll(props)}>Save</button> */}
         {props.loading? <div className='loading'></div> : null}
         {/* <div className='loading'></div> */}
       </div>
