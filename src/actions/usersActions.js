@@ -11,13 +11,5 @@ export const createUser = (user) => {
       })
     })
     .then(r => r.json())
-    .then(resp => {
-      dispatch({type: 'STOP_LOADING'})
-      if (resp.user && resp.jwt) {
-        localStorage.setItem('token', resp.jwt)
-        dispatch({ type: 'SELECT_USER', payload: resp})
-        return resp
-      }
-    })
   }
 }

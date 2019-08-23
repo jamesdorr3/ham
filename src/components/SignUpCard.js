@@ -29,6 +29,16 @@ class SignUpCard extends React.Component {
     }
     else{
       this.props.createUser(this.state)
+      .then(resp => {
+        this.props.stopLoading()
+        if (resp.user && resp.jwt) {
+          localStorage.setItem('token', resp.jwt)
+          this.props.selectUser(resp)
+        }else if(resp.error){
+          this.setState({error: resp.error})
+          // debugger
+        }
+      })
     }
   }
 
@@ -84,7 +94,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
-    createUser: user => dispatch(createUser(user))
+    createUser: user => dispatch(createUser(user)),
+    stopLoading: () => dispatch({type: 'STOP_LOADING'})
   }
 }
 
