@@ -16,7 +16,7 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 .header input,.header button{border-radius:5px}
 .notSignedInHeader input[type='text'],.notSignedInHeader input[type='password']{width:40%;margin:1%;border-radius:5px;text-transform:none}
 .notSignedInHeader input[type='submit'],.notSignedInHeader button{margin:1%;border-radius:5px;background:white}
-.errorMessage{color:red;font-weight:bold;text-align:center}
+.errorMessage{color:red;font-weight:bold;text-align:center;background:white;border:1px solid black;border-radius:5px;padding:10px;position:absolute;z-index:1;margin:auto}
 .notSignedInMessage{padding-left:5%;color:white}
 .login{position:relative;padding-top:10px}
 .welcome{padding-left:1%}
