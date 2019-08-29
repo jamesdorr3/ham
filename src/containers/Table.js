@@ -85,9 +85,11 @@ const ChoiceContainer = props => {
         {totalsRow()}
         {macrosLeftRow()}
         {keyRow}
-        {props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
-        return <CategoryCard category={category} key={category.id} />
-        })}
+        <div className='tableScollContainer'>
+          {props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
+            return <CategoryCard category={category} key={category.id} />
+          })}
+        </div>
         {/* {keyRow} */}
         {/* {totalsRow()} */}
         {/* <button className='saveButton' onClick={() => props.saveAll(props)}>Save</button> */}

@@ -67,7 +67,7 @@ class SignUpCard extends React.Component {
         </li>
         <li>
           <label>Email</label><br/>
-          <input required pattern='\w+@\w+\.\w+' value={this.state.email} name='email' onChange={this.handleChange} type='email' placeholder='email' />
+          <input required value={this.state.email} name='email' onChange={this.handleChange} type='email' placeholder='email' />
         </li>
         <li>
           <label>Password</label><br/>
@@ -77,11 +77,11 @@ class SignUpCard extends React.Component {
           <label>Password</label><br/>
           <input required value={this.state.password2} minlength='6' name='password2' onChange={this.handleChange} type='password' placeholder='confirm'/>
         </li>
+        {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
         <li>
           <input value='Sign Up' type='submit'/>
         </li>
       </form>
-      {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
       </div>
     )
   }
