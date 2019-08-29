@@ -85,10 +85,12 @@ const ChoiceContainer = props => {
         {totalsRow()}
         {macrosLeftRow()}
         {keyRow}
-        <div className='tableScollContainer'>
+        <div className='categoryContainer'>
+        <div className='categoryScrollContainer'>
           {props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
             return <CategoryCard category={category} key={category.id} />
           })}
+        </div>
         </div>
         {/* {keyRow} */}
         {/* {totalsRow()} */}

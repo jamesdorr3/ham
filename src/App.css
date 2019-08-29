@@ -82,7 +82,9 @@ label.macrosForAutogenerate{width:auto;margin:0% 1% 0% 2%}
 input.macrosForAutogenerate{max-width: 5%}
 /* GOALS */
 /* TABLE */
-.table{position:absolute;top:10%;bottom:16%;width:100%;overflow-y:scroll;overflow-x:hidden;font-size:.9em;padding-top:3%}
+.table{position:absolute;top:10%;bottom:16%;width:100%;overflow-y:hidden;overflow-x:hidden;font-size:.9em;padding-top:3%}
+.categoryContainer{position:relative;overflow:hidden;height:85%}
+.categoryScrollContainer{overflow:scroll;position:absolute;top:0%;bottom:0%;max-height:100%}
 .grid{display:grid;grid-template-columns: 3fr 1fr 2fr  repeat(4, 1fr) 3%}
 .goals .goalsSelect{grid-column:span 2}
 .goals input{position:absolute;width:100%}
