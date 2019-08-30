@@ -8,7 +8,14 @@ import MakeFoodCard from './MakeFoodCard'
 class SignedInHeader extends React.Component {
 
   state = {
-
+    username: '',
+    email: '',
+    usernameOrEmail: '',
+    password: '',
+    signup: false,
+    name: null,
+    date: null,
+    editDay: false
   }
 
   handleSignOut = () => {
@@ -110,7 +117,7 @@ class SignedInHeader extends React.Component {
               </ul>
               <ul className='bottom'>
                 <li onClick={this.toggleNewFoodForm}>Create Your Own Food</li>
-                < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id}/>
+                < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id} />
                 <li className='contact'><a href='mailto:jamesdorr3@gmail.com'>Contact</a></li>
                 <li className='signOut' onClick={this.handleSignOut}>Sign Out</li>
               </ul>

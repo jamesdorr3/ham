@@ -21,7 +21,7 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 .notSignedInMessage{padding-left:5%;color:white}
 .login{position:relative;padding-top:10px}
 .welcome{padding-left:1%}
-.sideMenu{position:fixed;background:white;top:0;bottom:0;z-index:1;margin:0;border-radius:0px;border-right:5px solid rgb(221, 103, 44);visibility:hidden;width:33%;min-width:225px;max-width:300px;animation:menuDisappearLeft 0.5s;padding:5% 1%}
+.sideMenu{position:fixed;background:white;top:0;bottom:0;z-index:1;margin:0;border-radius:0px;border-right:5px solid rgb(221, 103, 44);visibility:hidden;width:33%;min-width:225px;max-width:300px;animation:menuDisappearLeft 0.5s;padding:5% 1%;}
 
 h1.appName{color:white;text-align:right;margin-right:10%}
 span.daySelect{position:absolute;bottom:40%;text-align:center;width:100%}

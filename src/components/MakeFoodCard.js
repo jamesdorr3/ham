@@ -34,7 +34,7 @@ class MakeFoodCard extends React.Component {
     e.preventDefault()
     const s = this.state
     if (s.name && s.serving_unit_amount && s.serving_unit_name && s.serving_grams && s.calories && s.fat && s.carbs && s.protein) {
-      this.props.createFood({...this.state, categoryId: this.props.categoryId})
+      this.props.createFood({...this.state, categoryId: this.props.categoryId, dayId: this.props.day.id})
       this.props.toggleNewFoodForm()
       this.setState({
         name: '',
@@ -160,6 +160,12 @@ class MakeFoodCard extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    day:state.day
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     createFood: (food) => dispatch(createFood(food))
@@ -167,4 +173,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(null, mapDispatchToProps)(MakeFoodCard)
+export default connect(mapStateToProps, mapDispatchToProps)(MakeFoodCard)
