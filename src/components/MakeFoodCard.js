@@ -113,9 +113,9 @@ class MakeFoodCard extends React.Component {
             <input type='submit' />
           </li>
         </ul>
-        <a onClick={() => this.setState({moreInfoForm: !this.state.moreInfoForm})} className='showMore'>
+        <div onClick={() => this.setState({moreInfoForm: !this.state.moreInfoForm})} className='showMore'>
           {this.state.moreInfoForm ? '⬆ Show Less Info (Optional) ⬆' : '⬇ Add More Info (Optional) ⬇'}
-        </a>
+        </div>
         <ul className='newFoodGrid' style={{display: this.state.moreInfoForm ? 'grid' : 'none'}}>
           <li>
             <label>Saturated Fat</label>

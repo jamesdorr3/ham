@@ -7,7 +7,7 @@ export const createDay = () => {
     return fetch(`${URL}/days`, {
       method: 'POST', 
       headers: HEADERS(),
-      body: JSON.stringify({date: (new Date).toLocaleString()})
+      body: JSON.stringify({date: (new Date()).toLocaleString()})
     })
     .then(r => r.json())
     .then(day => {
