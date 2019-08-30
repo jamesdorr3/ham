@@ -1,6 +1,7 @@
 import {URL, HEADERS} from '../constants'
 
 export const createFood = (food) => {
+  // debugger
   return (dispatch) => {
     dispatch({type: 'START_LOADING'})
     return fetch(`${URL}/foods`, {

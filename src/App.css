@@ -16,11 +16,12 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 .header input,.header button{border-radius:5px}
 .notSignedInHeader input[type='text'],.notSignedInHeader input[type='password']{width:40%;margin:1%;border-radius:5px;text-transform:none}
 .notSignedInHeader input[type='submit'],.notSignedInHeader button{margin:1%;border-radius:5px;background:white}
-.errorMessage{color:red;font-weight:bold;text-align:center;background:white;border:1px solid black;border-radius:5px;padding:10px;position:absolute;z-index:1;margin:auto}
+.errorMessage{color:red;font-weight:bold;text-align:center;}
+.login .errorMessage{background:white;border:1px solid black;border-radius:5px;padding:10px;position:absolute;z-index:1;margin:auto}
 .notSignedInMessage{padding-left:5%;color:white}
 .login{position:relative;padding-top:10px}
 .welcome{padding-left:1%}
-.sideMenu{position:fixed;background:white;top:0;bottom:0;z-index:1;margin:0;border-radius:0px;border-right:5px solid rgb(221, 103, 44);visibility:hidden;width:33%;min-width:225px;max-width:300px;animation:menuDisappearLeft 0.5s;padding:5% 1%}
+.sideMenu{position:fixed;background:white;top:0;bottom:0;z-index:1;margin:0;border-radius:0px;border-right:5px solid rgb(221, 103, 44);visibility:hidden;width:33%;min-width:225px;max-width:300px;animation:menuDisappearLeft 0.5s;padding:5% 1%;}
 
 h1.appName{color:white;text-align:right;margin-right:10%}
 span.daySelect{position:absolute;bottom:40%;text-align:center;width:100%}
@@ -55,13 +56,13 @@ div.daySelect{grid-column: 2;position:relative}
 .createFoodContainer button{background:white;position:relative;float:right;border-radius:5px;border:1px solid black;padding:1%;z-index:1;}
 .createFoodContainer{visibility:visible;background:rgb(221, 103, 44);position:fixed;top:0%;width:100%;z-index:1;height:100%;overflow:scroll;right:0}
 .createFoodContainer form{position:relative;width:95%;display:block}
-.createFoodContainer li{padding:0%;margin:0%}
+.createFoodContainer .newFoodGrid li{padding:10px 10px;margin:0px}
 .createFoodContainer label{color:white;padding:0;margin:0}
 .createFoodContainer label:after{content:': '}
 .createFoodContainer input,.createFoodContainer select{width:50%;position:absolute;right:1%;border-radius:5px;padding:0;margin:0x}
 .createFoodContainer select{z-index:2}
-.createFoodContainer input[type='submit']{background:white;position:relative;padding:1%;border:1px solid black;width:100%}
-a.showMore{margin-left:30%;border:1px solid black;border-radius:5px;padding:1%;color:white}
+.createFoodContainer input[type='submit']{background:white;position:relative;padding:1%;border:1px solid black;width:50;display:block;margin:auto}
+div.showMore{border:1px solid black;border-radius:5px;padding:1%;color:white;margin-left:12.5%;display:inline-block;width:75%;text-align:center}
 /* CREATE FOOD */
 /* GOALS */
 .goals input{position:absolute;width:90%;text-align:center;box-shadow: 1px 1px 1px lightgray;border-radius:5px;height:70%;padding:0}
@@ -81,7 +82,9 @@ label.macrosForAutogenerate{width:auto;margin:0% 1% 0% 2%}
 input.macrosForAutogenerate{max-width: 5%}
 /* GOALS */
 /* TABLE */
-.table{position:absolute;top:10%;bottom:16%;width:100%;overflow-y:scroll;overflow-x:hidden;font-size:.9em;padding-top:3%}
+.table{position:absolute;top:10%;bottom:16%;width:100%;overflow-y:hidden;overflow-x:hidden;font-size:.9em;padding-top:3%}
+.categoryContainer{position:relative;overflow:hidden;height:85%;width:100%}
+.categoryScrollContainer{overflow:scroll;position:absolute;top:0%;bottom:0%;max-height:100%;width:100%}
 .grid{display:grid;grid-template-columns: 3fr 1fr 2fr  repeat(4, 1fr) 3%}
 .goals .goalsSelect{grid-column:span 2}
 .goals input{position:absolute;width:100%}

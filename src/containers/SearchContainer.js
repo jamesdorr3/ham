@@ -2,7 +2,7 @@ import React from 'react'
 import SearchResultCard from '../components/SearchResultCard'
 
 import {connect} from 'react-redux'
-import {internalSearch, externalSearch} from '../actions/searchActions'
+import {externalSearch} from '../actions/searchActions'
 import {foodsIndex} from '../actions/foodsActions'
 
 class SearchContainer extends React.Component {
@@ -44,30 +44,37 @@ class SearchContainer extends React.Component {
     if(e.target.value.length === 0) {
       this.foodsIndex('')
       this.clearResults()
+    }else{
+      this.setState({
+        filteredFavorites: this.state.favorites.filter(food=>{
+          const searchTerm = this.state.text.toLowerCase()
+          return food.name.toLowerCase().includes(searchTerm) || (food.brand && food.brand.toLowerCase().includes(searchTerm))
+        })
+      })
     }
   }
 
-  internalSearch = (text) => {
-    this.props.internalSearch(text)
-    .then(r => r.json())
-    .then(r => {
-      if (r.internal.length > 0){
-        // debugger
-        this.setState({
-          internal: r.internal,
-          // common: [{description: 'More results are loading'}]
-        })
-      }else{
-        this.setState({
-          internal: []
-        })
-      }
-    })
-  }
+  // internalSearch = (text) => {
+  //   this.props.internalSearch(encodeURIComponent(text))
+  //   .then(r => r.json())
+  //   .then(r => {
+  //     if (r.internal.length > 0){
+  //       // debugger
+  //       this.setState({
+  //         internal: r.internal,
+  //         // common: [{description: 'More results are loading'}]
+  //       })
+  //     }else{
+  //       this.setState({
+  //         internal: []
+  //       })
+  //     }
+  //   })
+  // }
 
   handleSubmit = e => {
     e.preventDefault()
-    const searchTerm = this.state.text.replace('%','%25')
+    const searchTerm = encodeURIComponent(this.state.text)
     if (searchTerm){
       // console.log('submit')
       this.setState({common: []})
@@ -197,7 +204,7 @@ const mapDispatchToProps = dispatch => {
   return {
     startLoading: () => dispatch({type: 'START_LOADING'}),
     stopLoading: () => dispatch({type: 'STOP_LOADING'}),
-    internalSearch: (searchTerm) => dispatch(internalSearch(searchTerm)),
+    // internalSearch: (searchTerm) => dispatch(internalSearch(searchTerm)),
     // favoriteSearch: (searchTerm) => dispatch(favoriteSearch(searchTerm)),
     externalSearch: (searchTerm, pageNumber = 1) => dispatch(externalSearch(searchTerm, pageNumber)),
     foodsIndex: (searchTerm) => dispatch(foodsIndex(searchTerm))
