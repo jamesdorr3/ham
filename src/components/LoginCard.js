@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import '../constants.js'
 import {auth} from '../actions/authActions'
+import {forgotPassword} from '../actions/passwordActions'
 
 class LoginCard extends React.Component {
 
@@ -38,12 +39,17 @@ class LoginCard extends React.Component {
     this.setState({ [e.target.name]: e.target.value})
   }
 
+  forgotPassword = () => {
+    this.props.forgotPassword(this.state.usernameOrEmail)
+  }
+
   render(){
     return(
       <>
       <form onSubmit={this.handleSubmit}>
         <input value={this.state.usernameOrEmail} name='usernameOrEmail' id='usernameOrEmail' onChange={this.handleChange} type='text' placeholder='Username/Email' />
         <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='Password' />
+        <div onClick={this.forgotPassword}>Forgot Password?</div>
         <input value='Log In' type='submit' className='standardButton' />
         <button onClick={this.props.toggleSignup} className='standardButton'>{this.props.showSignup ? 'Close Sign Up': 'Sign Up'}</button>
       </form>
@@ -58,7 +64,8 @@ const mapDispatchToProps = dispatch => {
     selectUser: (user) => dispatch({ type: 'SELECT_USER', payload: user}),
     startLoading: () => dispatch({type: 'START_LOADING'}),
     stopLoading: () => dispatch({type: 'STOP_LOADING'}),
-    auth: (info) => dispatch(auth(info))
+    auth: (info) => dispatch(auth(info)),
+    forgotPassword: (email) => dispatch(forgotPassword(email))
   }
 }
 

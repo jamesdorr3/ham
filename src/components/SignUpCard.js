@@ -71,11 +71,11 @@ class SignUpCard extends React.Component {
         </li>
         <li>
           <label>Password</label><br/>
-          <input required value={this.state.password} minlength='6' name='password' onChange={this.handleChange} type='password' placeholder='6 characters'/>
+          <input required value={this.state.password} minLength='6' name='password' onChange={this.handleChange} type='password' placeholder='6 characters'/>
         </li>
         <li>
           <label>Password</label><br/>
-          <input required value={this.state.password2} minlength='6' name='password2' onChange={this.handleChange} type='password' placeholder='confirm'/>
+          <input required value={this.state.password2} minLength='6' name='password2' onChange={this.handleChange} type='password' placeholder='confirm'/>
         </li>
         {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
         <li>

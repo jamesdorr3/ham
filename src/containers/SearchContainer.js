@@ -179,6 +179,7 @@ class SearchContainer extends React.Component {
           null
           }
 
+          {this.state.error ? <li>{this.state.error}</li> : null}
           {this.props.removed.length > 0 
             ? 
             <>
@@ -187,8 +188,6 @@ class SearchContainer extends React.Component {
             </>
             : null
           }
-          {this.state.error ? <li>{this.state.error}</li> : null}
-          {/* {this.state.error ? <li>No Results</li> : null} */}
         </ul>
       </div>
       </>

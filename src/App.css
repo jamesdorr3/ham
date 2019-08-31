@@ -53,7 +53,7 @@ div.daySelect{grid-column: 2;position:relative}
 .modal input{width:95%;position:relative;border:0.5px solid lightgray;border-radius:5px;padding:2%}
 /* SIGNUP */
 /* CREATE FOOD */
-.createFoodContainer button{background:white;position:relative;float:right;border-radius:5px;border:1px solid black;padding:1%;z-index:1;}
+.createFoodContainer button{background:white;position:relative;float:right;border-radius:5px;border:1px solid black;padding:1%;z-index:1;margin:5px}
 .createFoodContainer{visibility:visible;background:rgb(221, 103, 44);position:fixed;top:0%;width:100%;z-index:1;height:100%;overflow:scroll;right:0}
 .createFoodContainer form{position:relative;width:95%;display:block}
 .createFoodContainer .newFoodGrid li{padding:10px 10px;margin:0px}
@@ -83,8 +83,7 @@ input.macrosForAutogenerate{max-width: 5%}
 /* GOALS */
 /* TABLE */
 .table{position:absolute;top:10%;bottom:16%;width:100%;overflow-y:hidden;overflow-x:hidden;font-size:.9em;padding-top:3%}
-.categoryContainer{position:relative;overflow:hidden;height:85%;width:100%}
-.categoryScrollContainer{overflow:scroll;position:absolute;top:0%;bottom:0%;max-height:100%;width:100%}
+.categoryScrollContainer{position:relative;height:85%;width:100%;overflow-y:scroll;overflow-x:hidden;}
 .grid{display:grid;grid-template-columns: 3fr 1fr 2fr  repeat(4, 1fr) 3%}
 .goals .goalsSelect{grid-column:span 2}
 .goals input{position:absolute;width:100%}
@@ -120,7 +119,7 @@ input.readonly{background:rgb(226, 226, 226)}
 /* LOADING  */
 /* CATEGORY */
 .category{background:rgb(255, 204, 178);border-radius:5px;margin:1% 0;padding:1% 0}
-.categoryName{position:relative;margin:4px;left:10%}
+.categoryName{position:relative;margin:4px;left:10%;width:80%;}
 .subtotals{grid-column:span 2}
 .choice{background:white;border-top:1px solid rgba(194, 194, 194, 0.589);border-bottom:1px solid rgba(194, 194, 194, 0.589);transition:0.25s;overflow:hidden;height:20px}
 .toExpand{transform: scaleX(1.01);background:gold;border-top:1px solid rgba(194, 194, 194, 0.589);border-bottom:1px solid rgba(194, 194, 194, 0.589);transition:0.25s;overflow:hidden;height:20px;}
@@ -225,7 +224,7 @@ select.daySelect{max-width:300px}
   50% { top: 5.5%; }
   100% { top: 4%; }
 }
-.createFoodContainer{width:50%;border-left:5px solid white}
+.createFoodContainer{left:0px;width:50%;border-right:5px solid white}
 .createFoodContainer ul li{padding:1%}
 .foodSearchContainer:hover .searchResultContainer{animation:none}
 }
