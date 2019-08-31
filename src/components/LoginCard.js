@@ -40,13 +40,22 @@ class LoginCard extends React.Component {
   }
 
   forgotPassword = () => {
-    this.props.forgotPassword(this.state.usernameOrEmail)
+    if(this.state.usernameOrEmail.match(/.+@.+\..+/)){
+      this.props.startLoading()
+      this.props.forgotPassword(this.state.usernameOrEmail)
+      .then(r => r.json())
+      .then(r => this.setState({error: r.error}))
+      this.props.stopLoading()
+      // this.setState({error: `Email sent to ${this.state.usernameOrEmail}`})
+    }else{
+      this.setState({error: 'Please enter a valid email address'})
+    }
   }
 
   render(){
     return(
       <>
-      <form onSubmit={this.handleSubmit}>
+      <form className='login' onSubmit={this.handleSubmit}>
         <input value={this.state.usernameOrEmail} name='usernameOrEmail' id='usernameOrEmail' onChange={this.handleChange} type='text' placeholder='Username/Email' />
         <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='Password' />
         <div onClick={this.forgotPassword}>Forgot Password?</div>
