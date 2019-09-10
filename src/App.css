@@ -176,7 +176,7 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 .dropdownButton:hover{position:relative;border:1px solid black;border-radius:5px;text-align:center}
 .goals .dropdownButton{min-width:25px}
 .goals .dropdownButton:hover{width:100%}
-.dropdown{display:block;z-index:2;background:white;position:absolute;right:0px;padding:2%;border:1px solid black;visibility:hidden}
+.dropdown{width:225px;display:block;z-index:2;background:white;position:absolute;right:0px;padding:2%;border:1px solid black;visibility:hidden;overflow:hidden}
 .dropdown li{position:relative;padding:10%;text-align:left;cursor:pointer}
 .dropdown li:hover{background:rgb(241, 241, 241);border-radius:5px}
 .dropdown li:not(:last-child){border-bottom:0.5px solid lightgray}
