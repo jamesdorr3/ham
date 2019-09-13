@@ -23,7 +23,6 @@ class NotSignedInHeader extends React.Component {
       params = params.split(/(\?token=|&email=)/)
       const token = params[2]
       const email = decodeURIComponent(params[4])
-      console.log(token, email)
       this.setState({showPasswordReset: true, email: email, token: token})
     }
   }
@@ -49,6 +48,8 @@ class NotSignedInHeader extends React.Component {
     return !!this.props.user.email
   }
 
+  closeResetPassword = () => {this.setState({showPasswordReset: false})}
+
   render(){
     return(
       <div className='notSignedInHeader'>
@@ -56,7 +57,7 @@ class NotSignedInHeader extends React.Component {
       <div className='login'>
         < LoginCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} handleChange={this.handleChange} login={this.login} />
         < SignUpCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} />
-        {this.state.showPasswordReset? < ResetPasswordCard closePasswordReset={this.toggleSignup} email={this.state.email} token={this.state.token} /> : null }
+        {this.state.showPasswordReset? < ResetPasswordCard closePasswordReset={this.toggleSignup} email={this.state.email} token={this.state.token} closeResetPassword={this.closeResetPassword} /> : null }
         
       </div>
       </div>
