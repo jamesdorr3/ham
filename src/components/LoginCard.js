@@ -40,6 +40,7 @@ class LoginCard extends React.Component {
   }
 
   forgotPassword = () => {
+    this.setState({error: ''})
     if(this.state.usernameOrEmail.match(/.+@.+\..+/)){
       this.props.startLoading()
       this.props.forgotPassword(this.state.usernameOrEmail)
