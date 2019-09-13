@@ -17,7 +17,7 @@ class LoginCard extends React.Component {
     if (this.props.showSignup){this.props.toggleSignup(e)}
     if (this.state.password) {
       this.props.startLoading()
-      this.props.auth({username_or_email: this.state.usernameOrEmail, password: this.state.password})
+      this.props.auth({username_or_email: this.state.usernameOrEmail.toLowerCase(), password: this.state.password})
       .then(response => {
         return response.json()
       })

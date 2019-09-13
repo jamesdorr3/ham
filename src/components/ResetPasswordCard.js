@@ -31,7 +31,7 @@ class SignUpCard extends React.Component {
       this.props.resetPassword(this.state)
       .then(resp => {
         switch(resp.status){
-          case 202:
+          case 200:
             this.setState({error: "Successful! Please Sign In"})
             break;
           case 422:
