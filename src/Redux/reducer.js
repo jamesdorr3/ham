@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 const initialState = {
   categories: [
     {name: 'Breakfast', created_at: 1, id: 1},
@@ -19,12 +21,14 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_CHOICE': {
-      // debugger
-      return {...state, choiceFoods: [...state.choiceFoods, {
+      const choiceFoodsCopy = _.cloneDeep(state.choiceFoods)
+      choiceFoodsCopy.push({
         choice: {...action.payload.choice, id: action.payload.choice.id || Date.now()},
         food: action.payload.food,
         measures: action.payload.measures
-      }]}
+      })
+      return {...state, 
+        choiceFoods: choiceFoodsCopy}
     }
     case 'ADD_CHOICES': {
       // debugger
@@ -151,18 +155,14 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'EDIT_DAY': {
+      const daysCopy = _.cloneDeep(state.days.filter(x=>x.id !== state.day.id))
+      let dayCopy = (daysCopy.find(x => x.id === state.day.id))
+      dayCopy = {...dayCopy, ...action.payload}
+      daysCopy.push(dayCopy)
       return {
         ...state,
-        day: {
-          ...state.day,
-          ...action.payload
-        },
-        days: [
-          ...state.days.filter(x => x.id !== state.day.id),
-        {...state.day,
-          ...action.payload
-        }
-        ]
+        day: dayCopy,
+        days: daysCopy
       }
     }
     case 'ADD_GOAL': {

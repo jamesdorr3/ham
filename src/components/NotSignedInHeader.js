@@ -2,36 +2,38 @@ import React from 'react'
 import { connect } from 'react-redux'
 import LoginCard from './LoginCard'
 import SignUpCard from './SignUpCard'
+import ResetPasswordCard from './ResetPasswordCard'
 import {reauth} from '../actions/authActions'
-import {createDay, selectDay} from '../actions/daysActions'
 import {saveAll} from '../actions/saveAllAction'
-import {deleteDay} from '../actions/daysActions'
 
 class NotSignedInHeader extends React.Component {
 
   state = {
-    username: '',
     email: '',
-    usernameOrEmail: '',
-    password: '',
     signup: false,
-    editDayName: false,
-    showSignup: false
+    showSignup: false,
+    showPasswordReset: false,
+    token: ''
   }
 
   componentDidMount(){
     if (localStorage.getItem('token')){this.props.reauth()} // thunk
+    let params = window.location.search
+    if (params.includes('token') && params.includes("email")){
+      params = params.split(/(\?token=|&email=)/)
+      const token = params[2]
+      const email = decodeURIComponent(params[4])
+      this.setState({showPasswordReset: true, email: email, token: token})
+    }
   }
 
   handleSignOut = () => {
     this.setState({
-      username: '',
       email: '',
-      usernameOrEmail: '',
-      password: '',
       signup: false,
-      editDayName: false,
-      dayName: ''
+      showSignup: false,
+      showPasswordReset: false,
+      token: ''
     })
     localStorage.removeItem('token');
     this.props.signOut()
@@ -46,49 +48,7 @@ class NotSignedInHeader extends React.Component {
     return !!this.props.user.email
   }
 
-  prettyDayDisplay = (dayObj) => {
-    const day = new Date(dayObj.created_at)
-    return `${day.getMonth() + 1}-${day.getDate()}-${day.getFullYear()}` + (dayObj.name ? ` ${dayObj.name}` : '' )
-  }
-
-  dayOptions = () => {
-    // const days = this.props.days.filter(day => day.id !== this.props.day.id)
-    const days = this.props.days.sort((x, y) => new Date(y.created_at) - new Date(x.created_at))
-    return days.map(day => {
-      return <option value={day.id} key={day.id} >{this.prettyDayDisplay(day)}</option>
-    })
-  }
-  
-  editDayToggle = () => {
-    this.setState({editDayName: !this.state.editDayName})
-  }
-
-  handleDayNameChange = (e) => {
-    this.setState({dayName: e.target.value})
-  }
-
-  dayChangeHandler = e => {
-    this.props.saveAll(this.props) // doesn't work?
-    this.props.selectDay(e.target.value)
-  }
-
-  todaysDate = () => {
-    const date = new Date()
-    const year = date.getFullYear()
-    let month = date.getMonth() + 1
-    let day = date.getDate()
-    if (month < 10) {month = `0${month}`}
-    if (day < 10) {day = `0${day}`}
-    return `${year}-${month}-${day}`
-  }
-
-  deleteDay = () => {
-    if (this.props.days.length > 1 && window.confirm('Are you sure you want to delete this day?')) {
-      const anotherDay = this.props.days.filter(x => x.id !== this.props.day.id)[0]
-      this.props.selectDay(anotherDay.id)
-      this.props.deleteDay(this.props.day.id)
-    }
-  }
+  closeResetPassword = () => {this.setState({showPasswordReset: false})}
 
   render(){
     return(
@@ -97,6 +57,8 @@ class NotSignedInHeader extends React.Component {
       <div className='login'>
         < LoginCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} handleChange={this.handleChange} login={this.login} />
         < SignUpCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} />
+        {this.state.showPasswordReset? < ResetPasswordCard closePasswordReset={this.toggleSignup} email={this.state.email} token={this.state.token} closeResetPassword={this.closeResetPassword} /> : null }
+        
       </div>
       </div>
     )
@@ -111,13 +73,8 @@ const mapDispatchToProps = dispatch => {
   return{
     signOut: () => dispatch({ type: 'SIGN_OUT'}),
     reauth: () => dispatch(reauth()),
-    createDay: () => dispatch(createDay()),
-    selectDay: (id) => dispatch(selectDay(id)),
-    editDayName: (dayName) => dispatch({type: 'EDIT_DAY_NAME', payload: dayName}),
     saveAll: (state) => dispatch(saveAll(state)),
     startLoading: () => dispatch({type: 'START_LOADING'}),
-    stopLoading: () => dispatch({type: 'STOP_LOADING'}),
-    deleteDay: (id) => dispatch(deleteDay(id))
   }
 }
 

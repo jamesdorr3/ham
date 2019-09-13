@@ -12,6 +12,18 @@ export const forgotPassword = (email) => {
   }
 }
 
+export const resetPassword = (user) => {
+  return (dispatch) => {
+    return fetch(`${URL}/password/reset`, {
+      method: 'POST',
+      headers: HEADERS(),
+      body: JSON.stringify({
+        user: user
+      })
+    })
+  }
+}
+
 // export const reauth = () => {
 //   return (dispatch) => {
 //     dispatch({type: 'START_LOADING'})

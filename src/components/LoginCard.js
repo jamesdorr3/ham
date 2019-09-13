@@ -17,7 +17,7 @@ class LoginCard extends React.Component {
     if (this.props.showSignup){this.props.toggleSignup(e)}
     if (this.state.password) {
       this.props.startLoading()
-      this.props.auth({username_or_email: this.state.usernameOrEmail, password: this.state.password})
+      this.props.auth({username_or_email: this.state.usernameOrEmail.toLowerCase(), password: this.state.password})
       .then(response => {
         return response.json()
       })
@@ -40,15 +40,25 @@ class LoginCard extends React.Component {
   }
 
   forgotPassword = () => {
-    this.props.forgotPassword(this.state.usernameOrEmail)
+    this.setState({error: ''})
+    if(this.state.usernameOrEmail.match(/.+@.+\..+/)){
+      this.props.startLoading()
+      this.props.forgotPassword(this.state.usernameOrEmail)
+      .then(r => r.json())
+      .then(r => this.setState({error: r.error}))
+      this.props.stopLoading()
+      // this.setState({error: `Email sent to ${this.state.usernameOrEmail}`})
+    }else{
+      this.setState({error: 'Please enter a valid email address'})
+    }
   }
 
   render(){
     return(
       <>
-      <form onSubmit={this.handleSubmit}>
-        <input value={this.state.usernameOrEmail} name='usernameOrEmail' id='usernameOrEmail' onChange={this.handleChange} type='text' placeholder='Username/Email' />
-        <input value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='Password' />
+      <form className='login' onSubmit={this.handleSubmit}>
+        <input autoComplete="true" value={this.state.usernameOrEmail} name='usernameOrEmail' id='usernameOrEmail' onChange={this.handleChange} type='text' placeholder='Username/Email' />
+        <input autoComplete="true" value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='Password' />
         <div onClick={this.forgotPassword}>Forgot Password?</div>
         <input value='Log In' type='submit' className='standardButton' />
         <button onClick={this.props.toggleSignup} className='standardButton'>{this.props.showSignup ? 'Close Sign Up': 'Sign Up'}</button>
