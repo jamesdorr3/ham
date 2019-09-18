@@ -61,9 +61,9 @@ class LoginCard extends React.Component {
         <input autoComplete="true" value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='Password' />
         <div onClick={this.forgotPassword}>Forgot Password?</div>
         <input value='Log In' type='submit' className='standardButton' />
-        <button onClick={this.props.toggleSignup} className='standardButton'>{this.props.showSignup ? 'Close Sign Up': 'Sign Up'}</button>
+        {/* <button onClick={this.props.toggleSignup} className='standardButton'>{this.props.showSignup ? 'Close Sign Up': 'Sign Up'}</button> */}
+        {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
       </form>
-      {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
       </>
     )
   }

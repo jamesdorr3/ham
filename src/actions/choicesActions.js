@@ -1,6 +1,7 @@
 import {URL, HEADERS} from '../constants'
 
 export const updateChoice = (choiceObj) => {
+  console.log(choiceObj)
   return dispatch => {
     return fetch(`${URL}choices/${choiceObj.id}`, {
       method: 'PATCH',

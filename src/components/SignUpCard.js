@@ -59,7 +59,7 @@ class SignUpCard extends React.Component {
 
   render(){
     return(
-      <div className='modal' style={{display: `${ this.props.showSignup && !this.props.user.email ? 'block' : 'none'}`}}>
+      // <div className='modal' style={{display: `${ this.props.showSignup && !this.props.user.email ? 'block' : 'none'}`}}>
       <form onSubmit={this.handleSubmit} className='signupForm'>
         <li>
         <label>Username</label><br/>
@@ -77,12 +77,12 @@ class SignUpCard extends React.Component {
           <label>Password</label><br/>
           <input required value={this.state.password2} minLength='6' name='password2' onChange={this.handleChange} type='password' placeholder='confirm'/>
         </li>
-        {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
         <li>
           <input value='Sign Up' type='submit'/>
         </li>
+        {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }
       </form>
-      </div>
+      // </div>
     )
   }
 }
