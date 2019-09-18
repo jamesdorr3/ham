@@ -61,16 +61,23 @@ class NotSignedInHeader extends React.Component {
         <div className='login'>
           <button onClick={()=>this.setState({showAuth:true})} className="loginSignupButton">Login<br/>Sign Up</button>
           {this.state.showAuth ? 
-            <div className="loginModal">
-              <button onClick={()=>this.setState({showAuth:false})}>X</button>
-              < LoginCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} handleChange={this.handleChange} login={this.login} />
-              < SignUpCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} />
+            <div className="authModalBackground">
+              <div className="authModal">
+                <div className="closeAndSwitchButtons">
+                  <button onClick={()=>this.setState({showSignup:false})} disabled={!this.state.showSignup} >Log In</button>
+                  <button onClick={()=>this.setState({showSignup:true})} disabled={this.state.showSignup} >Sign Up</button>
+                  <button className="authModalButton" onClick={()=>this.setState({showAuth:false})}>X</button>
+                </div>
+                <div className={`loginOrSignup ${this.state.showSignup ? 'showSignup' : null}`}>
+                  < LoginCard />
+                  < SignUpCard />
+                </div>
+              </div>
             </div>
             :
             null
           }
           {this.state.showPasswordReset? < ResetPasswordCard closePasswordReset={this.toggleSignup} email={this.state.email} token={this.state.token} closeResetPassword={this.closeResetPassword} /> : null }
-          
         </div>
       </div>
     )

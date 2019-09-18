@@ -16,20 +16,28 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 .header input,.header button{border-radius:5px}
 /* .notSignedInHeader input[type='text'],.notSignedInHeader input[type='password']{width:40%;margin:1%;border-radius:5px;text-transform:none}
 .notSignedInHeader input[type='submit'],.notSignedInHeader button{margin:1%;border-radius:5px;background:white} */
-.errorMessage{color:red;font-weight:bold;text-align:center;}
+.errorMessage{color:red;font-weight:bold;text-align:center;background:white;border-radius:5px}
 /* .login .errorMessage{background:white;border:1px solid black;border-radius:5px;padding:10px;position:absolute;z-index:1;margin:auto;top:75px} */
+.signupForm{text-align:left;}
 .signupForm .errorMessage{position:relative;z-index:0;display:block}
-.signupForm input{text-transform:none}
-div.login{padding:0px;background:lime;text-align:right}
-.loginModal{z-index:1;position:fixed;background:rgba(0, 0, 0, 0.5);top:0px;left:0px;width:100%;height:100%}
+.signupForm input{text-transform:none;max-width:250px}
+div.login{padding:0px;text-align:right}
+.authModalBackground{z-index:1;position:fixed;background:rgba(0, 0, 0, 0.5);top:0px;left:0px;width:100%;height:100%}
+/* button.authModalButton{position:relative;background:white;border-radius:25px;height:25px;width:25px} */
 div.login .loginSignupButton{font-size:15px;background:white;border-radius:10px;margin:10px 5px}
-form.login{padding:10px;max-width:500px;position:relative;margin:0px auto;background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));border-radius:5px}
+.authModal{top:5%;max-width:500px;position:relative;margin:0px auto;background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));border-radius:5px;overflow:hidden}
+.closeAndSwitchButtons{display:grid;grid-template-columns:repeat(2,5fr)1fr;}
+.closeAndSwitchButtons button{background:rgba(255, 255, 255, 0.6);border:0.5px solid white;padding:5px}
+form.login{margin-top:10%}
 /* form.login{display:grid;grid-template-rows:repeat(3,1fr);grid-template-columns:1fr 1fr;grid-auto-flow:column;max-width:500px;position:relative;margin:0px auto;background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44))} */
-form.login input,form.login button{font-size:15px;padding:5px 5px;border-radius:5px;background:white;border:0.5px solid lightgray;display:block;margin:3px auto}
-form.login input:not([type='submit']){text-transform:none}
-form.login div{font-size:10px;cursor:pointer;padding:5px;grid-column:span 2;text-align:center;color:white}
+.authModal form input,.authModal form button,.toggleAuthButton{font-size:15px;padding:5px 5px;border-radius:5px;background:white;border:0.5px solid lightgray;display:block;margin:3px auto}
+.authModal form input:not([type='submit']){text-transform:none}
+.authModal form div{font-size:10px;cursor:pointer;padding:5px;grid-column:span 2;text-align:center;color:white}
 .notSignedInMessage{padding-left:5%;color:white}
 .login{padding-top:5px}
+.loginOrSignup{display:grid;grid-template-columns:repeat(2,100%);transition:0.5s}
+.showSignup{transform:translateX(-100%);transition:0.5s}
+
 .welcome{padding-left:1%}
 .sideMenu{position:fixed;background:white;top:0;bottom:0;z-index:1;margin:0;border-radius:0px;border-right:5px solid rgb(221, 103, 44);visibility:hidden;width:33%;min-width:225px;max-width:300px;animation:menuDisappearLeft 0.5s;padding:5% 1%;}
 
