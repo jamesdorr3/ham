@@ -12,7 +12,7 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 /* HEADER */
 .header,.notSignedInHeader{background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));position:absolute;height:10%;min-height:60px;width:100%;top:0;overflow:show;display:grid;}
 .header{grid-template-columns: 1fr 2fr 1fr;}
-.notSignedInHeader{grid-template-columns:1fr 1fr}
+.notSignedInHeader{grid-template-columns:2fr 1fr}
 .header input,.header button{border-radius:5px}
 /* .notSignedInHeader input[type='text'],.notSignedInHeader input[type='password']{width:40%;margin:1%;border-radius:5px;text-transform:none}
 .notSignedInHeader input[type='submit'],.notSignedInHeader button{margin:1%;border-radius:5px;background:white} */
@@ -20,8 +20,12 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 /* .login .errorMessage{background:white;border:1px solid black;border-radius:5px;padding:10px;position:absolute;z-index:1;margin:auto;top:75px} */
 .signupForm .errorMessage{position:relative;z-index:0;display:block}
 .signupForm input{text-transform:none}
-form.login{display:grid;grid-template-rows:repeat(3,1fr);grid-template-columns:1fr 1fr;grid-auto-flow:column;height:60px;padding:0px;max-width:500px;position:relative;margin:auto}
-form.login input,form.login button{font-size:10px;margin:auto;padding:5px 2px;border-radius:5px;background:white;border:0.5px solid lightgray;margin:1px}
+div.login{padding:0px;background:lime;text-align:right}
+.loginModal{z-index:1;position:fixed;background:rgba(0, 0, 0, 0.5);top:0px;left:0px;width:100%;height:100%}
+div.login .loginSignupButton{font-size:15px;background:white;border-radius:10px;margin:10px 5px}
+form.login{padding:10px;max-width:500px;position:relative;margin:0px auto;background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));border-radius:5px}
+/* form.login{display:grid;grid-template-rows:repeat(3,1fr);grid-template-columns:1fr 1fr;grid-auto-flow:column;max-width:500px;position:relative;margin:0px auto;background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44))} */
+form.login input,form.login button{font-size:15px;padding:5px 5px;border-radius:5px;background:white;border:0.5px solid lightgray;display:block;margin:3px auto}
 form.login input:not([type='submit']){text-transform:none}
 form.login div{font-size:10px;cursor:pointer;padding:5px;grid-column:span 2;text-align:center;color:white}
 .notSignedInMessage{padding-left:5%;color:white}
@@ -53,6 +57,14 @@ div.daySelect{grid-column: 2;position:relative}
 .daySelect input[type='submit']{position:relative;padding:1% 10%;margin-left:9%;color:white;background:none;border-radius:5px}
 .daySelect form{margin-top:5%}
 /* HEADER */
+/* PASSWORD RESET */
+.password-reset-background{background:rgba(0, 0, 0, 0.5);position:fixed;z-index:1;height:100%;width:100%;left:0px;top:0px;}
+.password-reset{background:white;position:relative;width:33%;min-width:300px;margin:auto;top:10%;z-index:1;border-radius:5px;border: 1px solid black;}
+.password-reset input{border-radius:3px;border:1px solid lightgray;padding:5px}
+.password-reset input[type="submit"],.password-reset button{border-radius:3px;border:1px solid black;padding:5px;margin:5px;min-width:25px}
+/* .password-reset h2{margin-top:30px} */
+
+/* PASSWORD RESET */
 /* SIGNUP */
 .modal{background:white;position:fixed;z-index:1;margin-left:-20%;width:60%;max-width:500px;border-radius:5px;border: 1px solid black;right:0%}
 .modal form{position:relative;width:100%;padding:2%}
