@@ -22,9 +22,9 @@ class Header extends React.Component {
 
   componentDidMount(){
     if (localStorage.getItem('token')){this.props.reauth()} // thunk
-    window.addEventListener('beforeunload', e => {
-      this.props.saveAll(this.props)
-    })
+    // window.addEventListener('beforeunload', e => {
+    //   this.props.saveAll(this.props)
+    // })
     document.addEventListener('keydown', e => {
       if (e.metaKey && e.code === 'KeyS') {
         e.preventDefault()

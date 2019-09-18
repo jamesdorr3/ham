@@ -6,8 +6,6 @@ import {updateChoice, destroyChoice} from '../actions/choicesActions'
 class ChoiceCard extends React.Component {
 
   state = {
-    amount: this.props.choiceFood.choice.amount,
-    measure: this.props.choiceFood.choice.measure,
     className: 'choice grid'
   }
 
@@ -29,16 +27,16 @@ class ChoiceCard extends React.Component {
     return (this.props.choiceFood.food[macro] * servings).toFixed()
   }
 
-  updateInDB = () => {
-    // const id = this.props.choiceFood.choice.id
-    this.props.updateChoice({...this.props.choiceFood.choice})
+  updateInDB = (payload = null) => {
+    this.props.updateChoice({...this.props.choiceFood.choice, ...payload})
   }
 
   handleAmountChange = (e) => {
     if (e.target.value >= 0) {
       const id = this.props.choiceFood.choice.id
-      this.setState({amount: e.target.value})
-      this.props.editChoice({choice: {amount: e.target.value, id: id}})
+      const amount = e.target.value
+      const payload = {id: id, amount: amount}
+      this.props.editChoice({choice: payload})
     }
   }
 
@@ -52,8 +50,11 @@ class ChoiceCard extends React.Component {
     // else{newAmount = newAmount.toFixed()}
     // // debugger
     // this.props.editChoice({choice: {measure_id: toMeasureId, amount: newAmount, id: this.props.choiceFood.choice.id}})
-    this.props.editChoice({choice: {measure_id: parseInt(e.target.value), id: this.props.choiceFood.choice.id}})
-    this.updateInDB()
+    const measure_id = parseInt(e.target.value)
+    const id = this.props.choiceFood.choice.id
+    const payload = {measure_id: measure_id, id: id}
+    this.props.editChoice({choice: payload})
+    this.updateInDB(payload)
   }
 
   generateMeasures = () => {
@@ -76,8 +77,16 @@ class ChoiceCard extends React.Component {
     }, 500)
   }
 
+  handleFocus = () => {
+    window.addEventListener('beforeunload', this.updateInDB)
+  }
+
+  handleBlur = () => {
+    window.removeEventListener('beforeunload', this.updateInDB)
+    this.updateInDB()
+  }
+
   render(){
-    // console.log(this.props.choiceFood.food)
     return(
       <Draggable 
         draggableId={this.props.choiceFood.choice.id} 
@@ -103,8 +112,11 @@ class ChoiceCard extends React.Component {
               min='0'
               name='amount'
               value={this.props.choiceFood.choice.amount} 
+              id={this.props.choiceFood.choice.id}
+              key={this.props.choiceFood.choice.id}
               onChange={this.handleAmountChange} 
-              onBlur={this.updateInDB}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
               >
               </input>
               </li>
@@ -130,10 +142,6 @@ class ChoiceCard extends React.Component {
     )
   }
 }
-
-// const mapStateToProps = state => {
-//   return state
-// }
 
 const mapDispatchToProps = dispatch => {
   return {

@@ -87,7 +87,7 @@ class GoalsRow extends React.Component {
         <li className='macro carbs' ><div>{this.props.goal.carbs}</div></li>
         <li className='macro protein' ><div>{this.props.goal.protein}</div></li>
         <span className='dropdownButton'>
-          <span>⋯</span>
+          <span className='dots'><span/><span/><span/></span>
           <ul className='dropdown'>
             <li onClick={this.addGoal}><button><img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img></button>Add Goal</li>
             <li onClick={this.editGoal}><button><img src='edit-icon.png' className='editGoal editButton' alt='edit goal' /></button>Edit Goal</li>
