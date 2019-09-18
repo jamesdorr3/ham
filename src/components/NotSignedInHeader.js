@@ -13,7 +13,8 @@ class NotSignedInHeader extends React.Component {
     signup: false,
     showSignup: false,
     showPasswordReset: false,
-    token: ''
+    token: '',
+    showAuth: false
   }
 
   componentDidMount(){
@@ -33,7 +34,8 @@ class NotSignedInHeader extends React.Component {
       signup: false,
       showSignup: false,
       showPasswordReset: false,
-      token: ''
+      token: '',
+      showAuth: false
     })
     localStorage.removeItem('token');
     this.props.signOut()
@@ -50,16 +52,26 @@ class NotSignedInHeader extends React.Component {
 
   closeResetPassword = () => {this.setState({showPasswordReset: false})}
 
+  toggleShowAuth = () => this.setState({showAuth: !this.state.showAuth})
+
   render(){
     return(
       <div className='notSignedInHeader'>
-      <div className='notSignedInMessage'><p>Use HAM free. Log in to record data</p></div>
-      <div className='login'>
-        < LoginCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} handleChange={this.handleChange} login={this.login} />
-        < SignUpCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} />
-        {this.state.showPasswordReset? < ResetPasswordCard closePasswordReset={this.toggleSignup} email={this.state.email} token={this.state.token} closeResetPassword={this.closeResetPassword} /> : null }
-        
-      </div>
+        <div className='notSignedInMessage'><p>Use HAM free. Log in to record data</p></div>
+        <div className='login'>
+          <button onClick={()=>this.setState({showAuth:true})} className="loginSignupButton">Login<br/>Sign Up</button>
+          {this.state.showAuth ? 
+            <div className="loginModal">
+              <button onClick={()=>this.setState({showAuth:false})}>X</button>
+              < LoginCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} handleChange={this.handleChange} login={this.login} />
+              < SignUpCard showSignup={this.state.showSignup} toggleSignup={this.toggleSignup} />
+            </div>
+            :
+            null
+          }
+          {this.state.showPasswordReset? < ResetPasswordCard closePasswordReset={this.toggleSignup} email={this.state.email} token={this.state.token} closeResetPassword={this.closeResetPassword} /> : null }
+          
+        </div>
       </div>
     )
   }

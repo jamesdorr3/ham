@@ -30,6 +30,7 @@ class SignUpCard extends React.Component {
     else{
       this.props.resetPassword(this.state)
       .then(resp => {
+        // debugger
         switch(resp.status){
           case 200:
             this.setState({error: "Successful! Please Sign In"})
@@ -68,8 +69,9 @@ class SignUpCard extends React.Component {
 
   render(){
     return(
-      <div className='modal'>
-      <button onClick={this.props.closeResetPassword} style={{position:"absolute",right:"0px"}}>Close</button>
+      <div className="password-reset-background">
+      <div className='password-reset'>
+      <button onClick={this.props.closeResetPassword} style={{position:"absolute",right:"0px"}}>X</button>
       <h2 style={{textAlign:"center"}}>RESET PASSWORD</h2>
       <form onSubmit={this.handleSubmit} className='signupForm'>
         <li>
@@ -89,6 +91,7 @@ class SignUpCard extends React.Component {
         </li>
         {this.state.error ? <p style={{color:"red",textAlign:"center",fontWeight:"bold"}}>{this.state.error}</p> : null }
       </form>
+      </div>
       </div>
     )
   }
