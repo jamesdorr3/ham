@@ -43,7 +43,13 @@ form.login{margin-top:10%}
 
 h1.appName{color:white;text-align:right;margin-right:10%}
 span.daySelect{position:absolute;bottom:40%;text-align:center;width:100%}
+
 .daySelect .dropdownButton{width:15%}
+.daySelect .dropdownButton{display:inline-block;background:white;height:15px;width:20px;top:3px;}
+.daySelect .dropdownButton .dots{display:inline-block;height:100%;width:100%;transition:transform 0.5s}
+.daySelect .dropdownButton .dots span{display:inline-block;background:black;height:3px;width:3px;border-radius:25px;margin:1px;margin-bottom:5px}
+.daySelect .dropdownButton:hover .dots{transform:rotate(270deg);transition:transform 0.5s}
+
 div.menu{position:relative}
 div.menuButton{position:absolute;height:50%;margin-left:15%;bottom:32.5%}
 img.menuButton{position:relative;height:100%}
@@ -58,7 +64,7 @@ img.menuButton{position:relative;height:100%}
 .contact a{text-decoration:none;color:black}
 div.daySelect{grid-column: 2;position:relative}
 .daySelect select{width:80%}
-.daySelect .dropdownButton button.nonMenu{padding:0;width:15%;color: rgb(245, 245, 245);background:transparent;border:none;font-weight:bold;font-size:1em}
+/* .daySelect .dropdownButton button.nonMenu{padding:0;width:15%;color: rgb(245, 245, 245);background:transparent;border:none;font-weight:bold;font-size:1em} */
 .copy{font-size:18px;position:relative;right:19%}
 .daySelect input[type='text']{text-align:center;width:90%}
 .daySelect input[type='date']{width:50%;background:white;min-width:auto}
@@ -195,7 +201,7 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 /* SEARCH RESULT */
 /* DROPDOWN */
 .dropdownButton{position:relative;border:1px solid transparent;border-radius:5px;text-align:center}
-.dropdownButton:hover{position:relative;border:1px solid black;border-radius:5px;text-align:center}
+.dropdownButton:hover{position:relative;border:1px solid black;transition:0.5s}
 .goals .dropdownButton{min-width:25px}
 .goals .dropdownButton:hover{width:100%}
 .dropdown{width:225px;display:block;z-index:2;background:white;position:absolute;right:0px;padding:2%;border:1px solid black;visibility:hidden;overflow:hidden}
