@@ -118,9 +118,10 @@ class SearchContainer extends React.Component {
 
   categoryByTime = () => {
     const hour = new Date().getHours()
-    if (hour < 9){return this.props.categories.find(x => x.name === 'Breakfast').id}
-    else if (hour < 16){return this.props.categories.find(x => x.name === 'Lunch').id}
-    else{return this.props.categories.find(x => x.name === 'Dinner').id}
+    const categories = this.props.categories
+    if (hour < 9){return categories.find(x => x.name === 'Breakfast').id || categories[0] }
+    else if (hour < 16){return categories.find(x => x.name === 'Lunch').id || categories[1] }
+    else{return categories.find(x => x.name === 'Dinner').id || categories[2] }
   }
 
   makeSearchResultCard = (food) => {
@@ -142,6 +143,7 @@ class SearchContainer extends React.Component {
   }
 
   render(){
+    // debugger
     return(
       <>
       <div className='arrow' style={{display: this.props.choiceFoods.length > 0 ? 'none' : 'block'}}>

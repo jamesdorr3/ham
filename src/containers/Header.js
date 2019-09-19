@@ -25,12 +25,12 @@ class Header extends React.Component {
     // window.addEventListener('beforeunload', e => {
     //   this.props.saveAll(this.props)
     // })
-    document.addEventListener('keydown', e => {
-      if (e.metaKey && e.code === 'KeyS') {
-        e.preventDefault()
-        this.props.saveAll(this.props)
-      }
-    })
+    // document.addEventListener('keydown', e => {
+    //   if (e.metaKey && e.code === 'KeyS') {
+    //     e.preventDefault()
+    //     this.props.saveAll(this.props)
+    //   }
+    // })
   }
 
   handleSignOut = () => {
@@ -74,7 +74,7 @@ class Header extends React.Component {
   }
 
   dayChangeHandler = e => {
-    this.props.saveAll(this.props) // doesn't work?
+    // this.props.saveAll(this.props) // doesn't work?
     this.props.selectDay(e.target.value)
   }
 
