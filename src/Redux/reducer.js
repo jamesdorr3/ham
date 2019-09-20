@@ -45,7 +45,6 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'SELECT_USER': {
-      // debugger
       return {
         ...state,
         categories: action.payload.user.categories,
@@ -125,6 +124,7 @@ const reducer = (state = initialState, action) => {
       // debugger
       return {
         ...state,
+        categories: action.payload.categories,
         choiceFoods: action.payload.choice_foods,
         day: {
           date: action.payload.date,

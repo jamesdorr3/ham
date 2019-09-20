@@ -10,7 +10,7 @@ import {deleteGoal} from '../actions/goalsActions'
 const ChoiceContainer = props => {
 
   const autoSum = (macro) => {
-    let sum = 0
+    let sum = 0.0
     props.choiceFoods.forEach(choiceFood => {
       // console.log(choiceFood)
       // const measurement = ((choiceFood.choice.measure === 'grams') ? choiceFood.food.serving_grams : (choiceFood.food.serving_unit_amount || 1))
@@ -18,13 +18,12 @@ const ChoiceContainer = props => {
       const amount = choiceFood.choice.amount || 0
       const measure = choiceFood.measures.find(x => x.id === choiceFood.choice.measure_id)
       const totalGrams = amount * measure.grams
-      const servingAmount = choiceFood.food.serving_grams
-      const measureAmount = measure.amount? measure.amount : 1
-      const servings = (totalGrams / servingAmount) / measureAmount
-      // console.log(sum)
-      sum += parseInt(choiceFood.food[macro] * servings)
+      const servingGrams = choiceFood.food.serving_grams
+      const measureAmount = measure.amount ? measure.amount : 1
+      const servings = (totalGrams / servingGrams) / measureAmount
+      sum += choiceFood.food[macro] * servings
     })
-    return sum.toFixed()
+    return sum.toFixed() ///////////////////////////////////
   }
 
   const keyRow = 
@@ -73,32 +72,30 @@ const ChoiceContainer = props => {
     }
   }
 
-
-    // console.log(props)
-    return(
-      <div className='table'>
-        {localStorage.getItem('token') ? < GoalsRow /> : 
-          <div className='welcome'>
-          <h1>WELCOME TO HAM</h1>
-          <h2>a simple macronutrient tracker</h2>
-          <hr/>
-          </div>
-        }
-        {totalsRow()}
-        {macrosLeftRow()}
-        {keyRow}
-        <div className='categoryScrollContainer'>
-          {props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
-            return <CategoryCard category={category} key={category.id} />
-          })}
+  return(
+    <div className='table'>
+      {localStorage.getItem('token') ? < GoalsRow /> : 
+        <div className='welcome'>
+        <h1>WELCOME TO HAM</h1>
+        <h2>a simple macronutrient tracker</h2>
+        <hr/>
         </div>
-        {/* {keyRow} */}
-        {/* {totalsRow()} */}
-        {/* <button className='saveButton' onClick={() => props.saveAll(props)}>Save</button> */}
-        {props.loading? <div className='loading'></div> : null}
-        {/* <div className='loading'></div> */}
+      }
+      {totalsRow()}
+      {macrosLeftRow()}
+      {keyRow}
+      <div className='categoryScrollContainer'>
+        {props.categories.sort((x, y) => x.index - y.index).map(category => {
+          return <CategoryCard category={category} key={category.id} />
+        })}
       </div>
-    ) 
+      {/* {keyRow} */}
+      {/* {totalsRow()} */}
+      {/* <button className='saveButton' onClick={() => props.saveAll(props)}>Save</button> */}
+      {props.loading? <div className='loading'></div> : null}
+      {/* <div className='loading'></div> */}
+    </div>
+  ) 
   
 }
 

@@ -17,14 +17,14 @@ class SearchContainer extends React.Component {
     addFood: false,
     currentPage: 0,
     totalPages: 0,
-    showResults: false
+    showResults: false,
+    categories: []
   }
 
   componentDidMount = () => {
     this.props.foodsIndex('')
     .then(r => r.json())
     .then(r => {
-      // debugger
       this.setState({favorites: r.favorites})
     })
   }
@@ -33,14 +33,13 @@ class SearchContainer extends React.Component {
     this.props.foodsIndex(text)
     .then(r => r.json())
     .then(r => {
-      // debugger
       this.setState({filteredFavorites: r.favorites})
+      if(r.categories){this.setState({categories: r.categories})}
     })
   }
 
   handleChange = e => {
     this.setState({text: e.target.value})
-    // this.favoriteSearch(e.target.value)
     if(e.target.value.length === 0) {
       this.foodsIndex('')
       this.clearResults()
@@ -53,24 +52,6 @@ class SearchContainer extends React.Component {
       })
     }
   }
-
-  // internalSearch = (text) => {
-  //   this.props.internalSearch(encodeURIComponent(text))
-  //   .then(r => r.json())
-  //   .then(r => {
-  //     if (r.internal.length > 0){
-  //       // debugger
-  //       this.setState({
-  //         internal: r.internal,
-  //         // common: [{description: 'More results are loading'}]
-  //       })
-  //     }else{
-  //       this.setState({
-  //         internal: []
-  //       })
-  //     }
-  //   })
-  // }
 
   handleSubmit = e => {
     e.preventDefault()
@@ -88,7 +69,6 @@ class SearchContainer extends React.Component {
     this.props.externalSearch(searchPhrase, pageNumber)
     .then(r => r.json())
     .then(r => {
-      // console.log(this.state)
       this.props.stopLoading()
       if (r.common && r.common.length > 0){
         this.setState({common: this.state.common.concat(r.common), currentPage: r.current_page, totalPages: r.total_pages})
@@ -96,9 +76,6 @@ class SearchContainer extends React.Component {
       else{
         this.setState({error: 'No More Results'})
       }
-      // if (r.branded.length > 0){
-      //   this.setState({branded: r.branded})
-      // }
     })
   }
 
@@ -111,16 +88,17 @@ class SearchContainer extends React.Component {
       text: '',
       error: false,
       currentPage: 0,
-      totalPages: 0
+      totalPages: 0,
+      categories: []
     })
-    // this.foodsIndex('')
   }
 
   categoryByTime = () => {
     const hour = new Date().getHours()
-    if (hour < 9){return this.props.categories.find(x => x.name === 'Breakfast').id}
-    else if (hour < 16){return this.props.categories.find(x => x.name === 'Lunch').id}
-    else{return this.props.categories.find(x => x.name === 'Dinner').id}
+    const categories = this.props.categories
+    if (hour < 9){return categories.find(x => x.name === 'Breakfast').id || categories[0] }
+    else if (hour < 16){return categories.find(x => x.name === 'Lunch').id || categories[0] }
+    else{return categories.find(x => x.name === 'Dinner').id || categories[0] }
   }
 
   makeSearchResultCard = (food) => {
@@ -162,6 +140,7 @@ class SearchContainer extends React.Component {
         <ul className={this.state.showResults ? 'searchResultContainer' : 'searchResultContainerHidden'} >
           <h5>Favorites</h5>
           {this.state[this.state.filteredFavorites.length > 0 || this.state.text !== '' ? 'filteredFavorites' : 'favorites'].map(food => this.makeSearchResultCard(food))}
+          {/* {this.state.categories.length===0 ? null : this.state.categories.map(cat => this.makeSearchResultCard(cat))} */}
 
           <h5>More Results</h5>
           {this.state.internal.map(food => this.makeSearchResultCard(food))}
@@ -203,8 +182,6 @@ const mapDispatchToProps = dispatch => {
   return {
     startLoading: () => dispatch({type: 'START_LOADING'}),
     stopLoading: () => dispatch({type: 'STOP_LOADING'}),
-    // internalSearch: (searchTerm) => dispatch(internalSearch(searchTerm)),
-    // favoriteSearch: (searchTerm) => dispatch(favoriteSearch(searchTerm)),
     externalSearch: (searchTerm, pageNumber = 1) => dispatch(externalSearch(searchTerm, pageNumber)),
     foodsIndex: (searchTerm) => dispatch(foodsIndex(searchTerm))
   }

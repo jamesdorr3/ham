@@ -71,7 +71,7 @@ class SignedInHeader extends React.Component {
   }
 
   dayChangeHandler = e => {
-    this.props.saveAll(this.props) // doesn't work?
+    // this.props.saveAll(this.props) // doesn't work?
     this.props.selectDay(e.target.value)
   }
 
