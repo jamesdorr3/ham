@@ -72,32 +72,30 @@ const ChoiceContainer = props => {
     }
   }
 
-
-    // console.log(props)
-    return(
-      <div className='table'>
-        {localStorage.getItem('token') ? < GoalsRow /> : 
-          <div className='welcome'>
-          <h1>WELCOME TO HAM</h1>
-          <h2>a simple macronutrient tracker</h2>
-          <hr/>
-          </div>
-        }
-        {totalsRow()}
-        {macrosLeftRow()}
-        {keyRow}
-        <div className='categoryScrollContainer'>
-          {props.categories.sort((x, y) => x.created_at - y.created_at).map(category => {
-            return <CategoryCard category={category} key={category.id} />
-          })}
+  return(
+    <div className='table'>
+      {localStorage.getItem('token') ? < GoalsRow /> : 
+        <div className='welcome'>
+        <h1>WELCOME TO HAM</h1>
+        <h2>a simple macronutrient tracker</h2>
+        <hr/>
         </div>
-        {/* {keyRow} */}
-        {/* {totalsRow()} */}
-        {/* <button className='saveButton' onClick={() => props.saveAll(props)}>Save</button> */}
-        {props.loading? <div className='loading'></div> : null}
-        {/* <div className='loading'></div> */}
+      }
+      {totalsRow()}
+      {macrosLeftRow()}
+      {keyRow}
+      <div className='categoryScrollContainer'>
+        {props.categories.sort((x, y) => x.index - y.index).map(category => {
+          return <CategoryCard category={category} key={category.id} />
+        })}
       </div>
-    ) 
+      {/* {keyRow} */}
+      {/* {totalsRow()} */}
+      {/* <button className='saveButton' onClick={() => props.saveAll(props)}>Save</button> */}
+      {props.loading? <div className='loading'></div> : null}
+      {/* <div className='loading'></div> */}
+    </div>
+  ) 
   
 }
 

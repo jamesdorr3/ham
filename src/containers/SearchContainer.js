@@ -120,8 +120,8 @@ class SearchContainer extends React.Component {
     const hour = new Date().getHours()
     const categories = this.props.categories
     if (hour < 9){return categories.find(x => x.name === 'Breakfast').id || categories[0] }
-    else if (hour < 16){return categories.find(x => x.name === 'Lunch').id || categories[1] }
-    else{return categories.find(x => x.name === 'Dinner').id || categories[2] }
+    else if (hour < 16){return categories.find(x => x.name === 'Lunch').id || categories[0] }
+    else{return categories.find(x => x.name === 'Dinner').id || categories[0] }
   }
 
   makeSearchResultCard = (food) => {
