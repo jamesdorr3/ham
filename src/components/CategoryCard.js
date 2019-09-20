@@ -23,7 +23,7 @@ const CategoryCard = props => {
       const measureAmount = measure.amount? measure.amount : 1
       const servings = (totalGrams / servingAmount) / measureAmount
       // console.log(sum)
-      sum += parseInt(choiceFood.food[macro] * servings)
+      sum += (choiceFood.food[macro] * servings)
     })
     return sum.toFixed()
   }

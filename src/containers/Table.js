@@ -10,7 +10,7 @@ import {deleteGoal} from '../actions/goalsActions'
 const ChoiceContainer = props => {
 
   const autoSum = (macro) => {
-    let sum = 0
+    let sum = 0.0
     props.choiceFoods.forEach(choiceFood => {
       // console.log(choiceFood)
       // const measurement = ((choiceFood.choice.measure === 'grams') ? choiceFood.food.serving_grams : (choiceFood.food.serving_unit_amount || 1))
@@ -18,13 +18,12 @@ const ChoiceContainer = props => {
       const amount = choiceFood.choice.amount || 0
       const measure = choiceFood.measures.find(x => x.id === choiceFood.choice.measure_id)
       const totalGrams = amount * measure.grams
-      const servingAmount = choiceFood.food.serving_grams
-      const measureAmount = measure.amount? measure.amount : 1
-      const servings = (totalGrams / servingAmount) / measureAmount
-      // console.log(sum)
-      sum += parseInt(choiceFood.food[macro] * servings)
+      const servingGrams = choiceFood.food.serving_grams
+      const measureAmount = measure.amount ? measure.amount : 1
+      const servings = (totalGrams / servingGrams) / measureAmount
+      sum += choiceFood.food[macro] * servings
     })
-    return sum.toFixed()
+    return sum.toFixed() ///////////////////////////////////
   }
 
   const keyRow = 
