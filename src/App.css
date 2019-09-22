@@ -20,7 +20,7 @@ select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-
 /* .login .errorMessage{background:white;border:1px solid black;border-radius:5px;padding:10px;position:absolute;z-index:1;margin:auto;top:75px} */
 .signupForm{text-align:left;}
 .signupForm .errorMessage{position:relative;z-index:0;display:block}
-.signupForm input{text-transform:none;max-width:250px}
+.signupForm input{text-transform:none;width:96%}
 div.login{padding:0px;text-align:right}
 .authModalBackground{z-index:1;position:fixed;background:rgba(0, 0, 0, 0.5);top:0px;left:0px;width:100%;height:100%}
 /* button.authModalButton{position:relative;background:white;border-radius:25px;height:25px;width:25px} */
@@ -57,7 +57,8 @@ img.menuButton{position:relative;height:100%}
 @keyframes menuDisappearLeft {from {visibility:visible; left:0%} to {left: -60%;}}
 .sideMenu ul{width:100%;margin:0 2% 0 0;padding:0 2% 0 0}
 /* .sideMenu h1{background:lime} */
-.sideMenu ul li,.sideMenu h1{padding:5% 2%;margin:0 2% 0 0;width:100%;cursor:pointer;transition:0.25s}
+.sideMenu ul li,.sideMenu h1{padding:5% 2%;margin:0 2% 0 0;width:100%;transition:0.25s}
+.sideMenu ul li{cursor:pointer;}
 .sideMenu ul li:hover{transition:0.5s;text-decoration:underline}
 .contact a{text-decoration:none;color:black}
 div.daySelect{grid-column: 2;position:relative}
