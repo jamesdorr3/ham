@@ -52,14 +52,13 @@ span.daySelect{position:absolute;bottom:40%;text-align:center;width:100%}
 div.menu{position:relative}
 div.menuButton{position:absolute;height:50%;margin-left:15%;bottom:32.5%}
 img.menuButton{position:relative;height:100%}
-.menuButton:hover .sideMenu{visibility:visible; animation:menuAppearRight 0.5s;left:0%}
+.menuButton:hover .sideMenu{visibility:visible; animation:menuAppearRight 0.5s;left:0%;overflow:hidden}
 @keyframes menuAppearRight {from {left:-50%;} to {left: 0%;}}
 @keyframes menuDisappearLeft {from {visibility:visible; left:0%} to {left: -60%;}}
 .sideMenu ul{width:100%;margin:0 2% 0 0;padding:0 2% 0 0}
-.sideMenu ul li{padding:5% 2%;margin:0 2% 0 0;width:100%}
-.sideMenu .bottom{position:absolute;bottom:0;padding:10% 0}
-.sideMenu .bottom li{cursor:pointer;transition:0.25s}
-.sideMenu .bottom li:hover{transition:0.5s;text-decoration:underline}
+/* .sideMenu h1{background:lime} */
+.sideMenu ul li,.sideMenu h1{padding:5% 2%;margin:0 2% 0 0;width:100%;cursor:pointer;transition:0.25s}
+.sideMenu ul li:hover{transition:0.5s;text-decoration:underline}
 .contact a{text-decoration:none;color:black}
 div.daySelect{grid-column: 2;position:relative}
 .daySelect select{width:80%}

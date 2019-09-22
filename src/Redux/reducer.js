@@ -4,7 +4,8 @@ const initialState = {
   categories: [
     {name: 'Breakfast', created_at: 1, id: 1},
     {name: 'Lunch', created_at: 2, id: 2},
-    {name: 'Dinner', created_at: 3, id: 3}
+    {name: 'Snack', created_at: 3, id: 3},
+    {name: 'Dinner', created_at: 4, id: 4}
   ],
   day: {},
   days: [],
@@ -31,7 +32,6 @@ const reducer = (state = initialState, action) => {
         choiceFoods: choiceFoodsCopy}
     }
     case 'ADD_CHOICES': {
-      // debugger
       return {...state, choiceFoods: [...state.choiceFoods, ...action.payload]}
     }
     case 'DELETE_CHOICE': {
@@ -100,12 +100,11 @@ const reducer = (state = initialState, action) => {
       for (let i = 0; i < choicesIds.length; i ++) {
         const choiceFood = state.choiceFoods.find(x => x.choice.id === parseInt(choicesIds[i]))
 
-        // debugger
+
         newChoices.push({...choiceFood, choice: {...choiceFood.choice, index: i}})
       }
       const choiceFood = newChoices.find(x => x.choice.id === action.payload.choiceId)
       choiceFood.choice.category_id = action.payload.categoryId
-      // debugger
       return {
         ...state,
         choiceFoods: newChoices
@@ -114,6 +113,7 @@ const reducer = (state = initialState, action) => {
     case 'ADD_DAY': {
       return {
         ...state,
+        categories: action.payload.categories,
         choiceFoods: [],
         day: action.payload,
         days: [...state.days, {...action.payload, goal_id: action.payload.goal.id}],
@@ -121,7 +121,6 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'SELECT_DAY': {
-      // debugger
       return {
         ...state,
         categories: action.payload.categories,
@@ -135,7 +134,6 @@ const reducer = (state = initialState, action) => {
       }
     }
     case 'ADD_FOOD': {
-      // debugger
       return {
         ...state,
         choiceFoods: [...state.choiceFoods, action.payload]
