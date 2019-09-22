@@ -104,7 +104,7 @@ class SearchContainer extends React.Component {
   makeSearchResultCard = (food) => {
     return < SearchResultCard
     categoryId={this.categoryByTime()} // i
-    key={food.id} // 
+    key={food.id || food.fdcId} // 
     food={food}  //  // i
     clearForm={this.clearResults} // i
     hideResults={this.hideResults}

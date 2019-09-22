@@ -108,18 +108,12 @@ class SignedInHeader extends React.Component {
         <div className='menu'>
           <div className='menuButton'><img src='menu-icon-white.png' className='menuButton' alt='menu button'></img>
             <div className='sideMenu'>
-              <ul className='top'>
-                <li>{this.props.user.username}</li>
-                <li>{this.props.user.email}</li>
-                {/* <li>Height</li>
-                <li>Weight</li>
-                <li>Body Fat %</li> */}
-              </ul>
-              <ul className='bottom'>
-                <li onClick={this.toggleNewFoodForm}>Create Your Own Food</li>
+              <ul className='menuItems'>
+                <h1>{this.props.user.username}</h1>
+                <li onClick={this.toggleNewFoodForm} classNames="clickable">Create Your Own Food</li>
                 < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id} />
-                <li className='contact'><a href='mailto:jamesdorr3@gmail.com'>Contact</a></li>
-                <li className='signOut' onClick={this.handleSignOut}>Sign Out</li>
+                <li className='contact clickable'><a href='mailto:jamesdorr3@gmail.com'>Contact</a></li>
+                <li className='signOut clickable' onClick={this.handleSignOut}>Sign Out</li>
               </ul>
             </div>
           </div>

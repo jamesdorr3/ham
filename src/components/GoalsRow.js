@@ -29,14 +29,17 @@ class GoalsRow extends React.Component {
   addGoal = () => {
     this.props.createGoal({
       user_id: this.props.user.id,
+      day_id: this.props.day.id,
       name: 'new goal',
       calories: 1, fat: 1, carbs: 1, protein: 1
     })
     .then(this.editGoal)
   }
+  
   editGoal = () => {
     this.setState({showEditGoalForm: true})
   }
+
   deleteGoal = () => {
     if(this.props.goals.length > 1){
       this.props.deleteGoal(this.props.goal.id)
