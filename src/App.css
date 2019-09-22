@@ -55,12 +55,12 @@ img.menuButton{position:relative;height:100%}
 .sideMenu ul li{cursor:pointer;}
 .sideMenu ul li:hover{transition:0.5s;text-decoration:underline}
 .contact a{text-decoration:none;color:black}
-div.daySelect{grid-column: 2;}
-span.daySelect{position:absolute;bottom:40%;width:33%;left:33%}
-.daySelect select{display:inline;background:black}
+div.daySelect{grid-column: 2;position:relative;}
+span.daySelect{position:absolute;bottom:40%;width:300px;max-width:90%;display:block;margin:auto}
+.daySelect select{background:white;width:100%}
 /* .daySelect .dropdown button.nonMenu{padding:0;width:15%;color: rgb(245, 245, 245);background:transparent;border:none;font-weight:bold;font-size:1em} */
 .copy{font-size:18px;position:relative;right:19%}
-.daySelect input[type='text']{text-align:center;width:90%}
+.daySelect input[type='text']{text-align:center;width:calc(100%-25px)}
 .daySelect input[type='date']{width:50%;background:white;min-width:auto}
 .daySelect input[type='submit']{position:relative;padding:1% 10%;margin-left:9%;color:white;background:none;border-radius:5px}
 .daySelect form{margin-top:5%}
@@ -193,36 +193,21 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 /* SEARCH RESULT */
 /* DROPDOWN */
 
-.dropdown{padding:0;background:white;position:absolute;right:0px;display:inline-block;border:1px solid lightgray;border-radius:5px;white-space:nowrap;min-width:20px;text-align:right;overflow:auto;z-index:1}
-.dropdown .dots{width:15px;height:15px;display:inline-block;transition:transform 0.25s;margin-right:2.5px}
+.daySelect .dropdown{right:-20px}
+.goals .dropdown{right:0px}
+/* .dropdown{padding:0;background:white;position:absolute;display:inline-block;border:1px solid lightgray;border-radius:5px;white-space:nowrap;min-width:20px;text-align:right;overflow:auto;z-index:1} */
+.dropdown{display:inline-block;position:absolute;text-align:right;z-index:1}
+.dropdown .dots{padding:1px;background:white;width:15px;height:15px;display:inline-block;transition:transform 0.25s;margin-right:2.5px;margin-top:1px;border-radius:5px;border:1px solid lightgray}
 .dropdown .dots span{display:inline-block;background:black;height:3px;width:3px;border-radius:25px;margin:1px;margin-bottom:5px}
 .dropdown:hover .dots{transform:rotate(90deg);transition:transform 0.25s}
 
+.dropdown:hover{background:transparent}
 .dropdown-content{display:none}
-.dropdown:hover .dropdown-content{padding:0px;margin:0px;text-align:left;display:block}
-.dropdown-content li{padding:10px;width:100%;margin:0;border-top:1px solid lightgray;cursor:pointer}
+.dropdown:hover .dropdown-content{padding:0px;margin:0px;text-align:left;display:block;border:1px solid black;border-radius:5px;overflow:hidden}
+.dropdown-content li{background:white;padding:15px 10px;margin:0;border-top:1px solid lightgray;cursor:pointer;font-size:18px}
 .dropdown-content li:hover{background:rgb(240, 240, 240)}
-/* .dropdown{display:inline-block;height:15px;width:20px;top:3px;border:1px solid lightgray}
-.dropdown .dots{display:inline-block;height:100%;width:100%;transition:transform 0.25s}
-.dropdown .dots span{display:inline-block;background:black;height:3px;width:3px;border-radius:25px;margin:1px;margin-bottom:5px}
-.dropdown:hover .dots{transform:rotate(90deg);transition:transform 0.25s}
+.dropdown-content li button{background:none;border:none;cursor:pointer}
 
-.dropdown{position:relative;border:1px solid transparent;border-radius:5px;text-align:center}
-.dropdown:hover{position:relative;border:1px solid rgb(122, 85, 85);transition:0.5s}
-.goals .dropdown{min-width:20px;border:1px solid lightgray}
-.goals .dropdown .dots span{margin-top:7px}
-.goals .dropdown:hover{border:1px solid black} */
-/* .dropdown{width:225px;display:block;z-index:1;background:white;position:absolute;right:0px;padding:2%;border:1px solid black;visibility:hidden;overflow:hidden}
-.dropdown li{background:lime;width:100%;position:relative;padding:10%;text-align:left;cursor:pointer;display:block}
-.dropdown li:hover{background:rgb(241, 241, 241);border-radius:5px}
-.dropdown li:not(:last-child){border-bottom:0.5px solid lightgray}
-.dropdown li button{position:relative;background:none;border:none}
-.dropdown:hover .dropdown{visibility:visible;} */
-@keyframes growAppear {
-  0% { height:0px; width:0px}
-  50% {height: 400%; width: 0px}
-  100% {height:400%;width:400%}
-}
 /* DROPDOWN */
 /* FOOTER SEARCH */
 .footerSearch{position:absolute;bottom:11%;width:100%}
