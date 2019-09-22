@@ -86,13 +86,7 @@ const reducer = (state = initialState, action) => {
     }
     case 'SIGN_OUT': {
       // console.log('sign out')
-      return {
-        ...state,
-        choiceFoods: [],
-        goal: {},
-        goals: [],
-        user: {}
-      }
+      return initialState
     }
     case 'HANDLE_DROP': {
       const newChoices = []
