@@ -101,21 +101,25 @@ class SignedInHeader extends React.Component {
     this.props.copyDay(this.props.day.id)
   }
 
+  hideMenu = () => {
+    this.checkbox.checked = false
+  }
+
   render(){
     // console.log(this.props.days)
     return(
       <div className='header'>
-        <div className='menu'>
-          <div className='menuButton'><img src='menu-icon-white.png' className='menuButton' alt='menu button'></img>
-            <div className='sideMenu'>
-              <ul className='menuItems'>
-                <h1>{this.props.user.username}</h1>
-                <li onClick={this.toggleNewFoodForm} className="clickable">Create Your Own Food</li>
-                < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id} />
-                <li className='contact clickable'><a href='mailto:ham.macros@gmail.com'>Contact</a></li>
-                <li className='signOut clickable' onClick={this.handleSignOut}>Sign Out</li>
-              </ul>
-            </div>
+        <div className='menu' onBlur={this.hideMenu}>
+          <input type="checkbox" className="menuCheckbox" ref={input => this.checkbox = input} />
+          <div className='menuButton'><span/><span/><span/></div>
+          <div className='sideMenu'>
+            <ul className='menuItems'>
+              <h1>{this.props.user.username}</h1>
+              <li onClick={this.toggleNewFoodForm} className="clickable">Create Your Own Food</li>
+              < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id} />
+              <li className='contact clickable'><a href='mailto:ham.macros@gmail.com'>Contact</a></li>
+              <li className='signOut clickable' onClick={this.handleSignOut}>Sign Out</li>
+            </ul>
           </div>
         </div>
         <div className='daySelect'>
