@@ -86,7 +86,7 @@ span.daySelect{position:absolute;bottom:40%;width:300px;max-width:90%;display:bl
 /* CREATE FOOD */
 .createFoodContainer button{background:white;position:relative;float:right;border-radius:5px;border:1px solid black;padding:1%;z-index:1;margin:5px}
 .createFoodContainer{visibility:visible;background:rgb(221, 103, 44);position:fixed;top:0%;width:100%;z-index:1;height:100%;overflow:scroll;right:0}
-.createFoodContainer form{position:relative;width:95%;display:block}
+.createFoodContainer form{position:relative;width:95%;display:block;margin-top:50px}
 .createFoodContainer .newFoodGrid li{padding:10px 10px;margin:0px}
 .createFoodContainer label{color:white;padding:0;margin:0}
 .createFoodContainer label:after{content:': '}
@@ -156,13 +156,16 @@ input.readonly{background:rgb(226, 226, 226)}
 .toExpand{transform: scaleX(1.01);background:gold;border-top:1px solid rgba(194, 194, 194, 0.589);border-bottom:1px solid rgba(194, 194, 194, 0.589);transition:0.25s;overflow:hidden;height:20px;}
 .shrunk{background:red;border-top:0px solid rgba(194, 194, 194, 0.589);border-bottom:0px solid rgba(194, 194, 194, 0.589);overflow:hidden;height:0px; transition:0.5s}
 .choice:hover {transform: scaleX(1.01);transition:0.25s;box-shadow: 0px 1px 5px rgb(90, 90, 90)}
-button.deleteButton{border:none;background:none}
-/* li.deleteColumn{position:relative;right:200%} */
 
-.choice button.deleteButton{padding:1px 0;border:none;}
+.deleteColumn{text-align:center;overflow:visible}
+button.deleteButton{border:none;height:100%}
+.choice button.deleteButton{padding:1px 0;border:none;border-radius:25px;transition:0.25s}
+.choice button.deleteButton span{display:block;margin:1px}
+.choice:hover button.deleteButton{background:rgb(255, 90, 90);transition:0.25s;margin:1px}
+.choice:hover button.deleteButton span{margin:-8px 0px;}
 /* .choice:hover button.deleteButton{visibility:visible;} */
 /* img.deleteChoice{position:relative;background:none;border-radius:0px;padding:10%;transition:0.25s;right:0} */
-.choice:hover img.deleteChoice{background:rgb(255, 90, 90);border-radius:25px;border:0.25px solid black;transition:0.25s;padding:5%}
+/* .choice:hover img.deleteChoice{background:rgb(255, 90, 90);border-radius:25px;border:0.25px solid black;transition:0.25s;padding:5%} */
 
 .choice li.name:hover span.nameScroll{position:fixed;z-index:1;background:white;}
 
@@ -214,6 +217,11 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 .dropdown-content li:hover{background:rgb(240, 240, 240)}
 .dropdown-content li button{background:none;border:none;cursor:pointer}
 
+span.icon{height:15px;width:15px;display:block;background-size:100%;padding:0px;margin:0 4px 0 -3px;background-repeat:no-repeat;background-position:center}
+span.addIcon{background-image:url("./icons/add-icon-circle.png");}
+span.editIcon{background-image:url("./icons/edit-icon.png");}
+span.deleteIcon{background-image:url("./icons/trash-icon.png");background-size:80%}
+
 /* DROPDOWN */
 /* FOOTER SEARCH */
 .footerSearch{position:absolute;bottom:11%;width:100%}
@@ -242,8 +250,6 @@ select.daySelect{max-width:300px}
 .daySelect input[type='date']{width:25%}
 .daySelect input[type='submit']{position:relative;padding:1% 9%;margin-left:0%;color:white;background:none;border-radius:5px}
 
-/* li.deleteColumn{right:150%} */
-
 .footerSearch .foodSearchContainer{position:fixed;top:11%;left:0%;width:28%;padding:5px 0}
 .searchText{font-size:0.5em}
 .searchForm{left:1%;max-width:87%}
@@ -262,9 +268,8 @@ select.daySelect{max-width:300px}
 
 /* ONLY DESKTOP */
 @media only screen and (min-width: 992px) {
-  /* li.deleteColumn{right:100%} */
-img.deleteChoice{visibility:hidden;opacity:0}
-.choice:hover img.deleteChoice{visibility:visible;opacity:1;}
+.choice .deleteButton{visibility:hidden;opacity:0}
+.choice:hover .deleteButton{visibility:visible;opacity:1;}
 } 
 
 @media only screen and (max-height: 550px){
