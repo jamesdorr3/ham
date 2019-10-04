@@ -101,21 +101,25 @@ class SignedInHeader extends React.Component {
     this.props.copyDay(this.props.day.id)
   }
 
+  hideMenu = () => {
+    this.checkbox.checked = false
+  }
+
   render(){
     // console.log(this.props.days)
     return(
       <div className='header'>
-        <div className='menu'>
-          <div className='menuButton'><img src='menu-icon-white.png' className='menuButton' alt='menu button'></img>
-            <div className='sideMenu'>
-              <ul className='menuItems'>
-                <h1>{this.props.user.username}</h1>
-                <li onClick={this.toggleNewFoodForm} className="clickable">Create Your Own Food</li>
-                < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id} />
-                <li className='contact clickable'><a href='mailto:ham.macros@gmail.com'>Contact</a></li>
-                <li className='signOut clickable' onClick={this.handleSignOut}>Sign Out</li>
-              </ul>
-            </div>
+        <div className='menu' onBlur={this.hideMenu}>
+          <input type="checkbox" className="menuCheckbox" ref={input => this.checkbox = input} />
+          <div className='menuButton'><span/><span/><span/></div>
+          <div className='sideMenu'>
+            <ul className='menuItems'>
+              <h1>{this.props.user.username}</h1>
+              <li onClick={this.toggleNewFoodForm} className="clickable">Create Your Own Food</li>
+              < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id} />
+              <li className='contact clickable'><a href='mailto:ham.macros@gmail.com'>Contact</a></li>
+              <li className='signOut clickable' onClick={this.handleSignOut}>Sign Out</li>
+            </ul>
           </div>
         </div>
         <div className='daySelect'>
@@ -134,11 +138,11 @@ class SignedInHeader extends React.Component {
             <span className="dropdown">
               <span className='dots'><span/><span/><span/></span>
               <ul className='dropdown-content'>
-                <li onClick={this.props.createDay}><button><img src='add-icon-circle.png' className='newDay addButton' alt='add new Day'></img></button>Add Day</li>
-                <li onClick={this.editDay}><button><img src='edit-icon.png' className='editDay editButton' alt='edit Day' /></button>Edit Day</li>
+                <li onClick={this.props.createDay}><button><span className="icon addIcon"/></button>Add Day</li>
+                <li onClick={this.editDay}><button><span className="icon editIcon"/></button>Edit Day</li>
                 <li onClick={this.copyDay}><button className='copyButton'><span className='copy'>𝍌</span></button>Copy Day</li>
                 {this.props.days.length > 1 ?
-                <li onClick={this.deleteDay}><button><img src='trash-icon.png' className='deleteDay deleteButton' alt='delete Day' /></button>Delete Day</li>
+                <li onClick={this.deleteDay}><button><span className="icon deleteIcon"/></button>Delete Day</li>
                 : null}
               </ul>
             </span>

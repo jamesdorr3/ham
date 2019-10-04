@@ -92,10 +92,10 @@ class GoalsRow extends React.Component {
         <span className='dropdown'>
           <span className='dots'><span/><span/><span/></span>
           <ul className='dropdown-content'>
-            <li onClick={this.addGoal}><button><img src='add-icon-circle.png' className='newGoal addButton' alt='add new goal'></img></button>Add Goal</li>
-            <li onClick={this.editGoal}><button><img src='edit-icon.png' className='editGoal editButton' alt='edit goal' /></button>Edit Goal</li>
+            <li onClick={this.addGoal}><button><span className="icon addIcon"/></button>Add Goal</li>
+            <li onClick={this.editGoal}><button><span className="icon editIcon"/></button>Edit Goal</li>
             {this.props.goals.length > 1 ?
-            <li onClick={this.deleteGoal}><button><img src='trash-icon.png' className='deleteChoice deleteButton' alt='delete choice' /></button>Delete Goal</li>
+            <li onClick={this.deleteGoal}><button><span className="icon deleteIcon"/></button>Delete Goal</li>
             : null}
             <li onClick={this.toggleAutogenerate}><button>♾</button>Autogenerate Goal</li>
           </ul>

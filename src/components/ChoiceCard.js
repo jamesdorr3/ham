@@ -134,7 +134,7 @@ class ChoiceCard extends React.Component {
           <li className='macro fat'>{this.autoUpdateMacro('fat')}</li>
           <li className='macro carbs'>{this.autoUpdateMacro('carbs')}</li>
           <li className='macro protein'>{this.autoUpdateMacro('protein')}</li>
-          <li className='deleteColumn' ><button onClick={this.deleteChoice} className='deleteChoice deleteButton' alt='delete choice'><img src='trash-icon.png' className='deleteChoice' alt='delete choice'></img></button></li>
+          <li className='deleteColumn' ><button onClick={this.deleteChoice} className='deleteChoice deleteButton' alt='delete choice'><span className="icon deleteIcon"/></button></li>
         </ul>
         
         )}
