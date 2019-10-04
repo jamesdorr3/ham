@@ -43,7 +43,8 @@ class AutogenerateGoal extends React.Component {
       carbs: ((tdeeCals * parseInt(this.state.carbs)) / 400).toFixed(),
       protein: ((tdeeCals * parseInt(this.state.protein)) / 400).toFixed(),
       name: `${this.state.macroGoal} to ${calorieGoalDescriptor}`, 
-      user_id: this.props.user.id
+      user_id: this.props.user.id,
+      day_id: this.props.day.id
     })
     this.props.toggleAutogenerate()
   }
@@ -170,7 +171,8 @@ class AutogenerateGoal extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    day: state.day
   }
 }
 
