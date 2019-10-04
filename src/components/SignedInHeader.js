@@ -110,9 +110,9 @@ class SignedInHeader extends React.Component {
             <div className='sideMenu'>
               <ul className='menuItems'>
                 <h1>{this.props.user.username}</h1>
-                <li onClick={this.toggleNewFoodForm} classNames="clickable">Create Your Own Food</li>
+                <li onClick={this.toggleNewFoodForm} className="clickable">Create Your Own Food</li>
                 < MakeFoodCard showNewFoodForm={this.state.showNewFoodForm} toggleNewFoodForm={this.toggleNewFoodForm} categoryId={this.props.categories[0].id} />
-                <li className='contact clickable'><a href='mailto:jamesdorr3@gmail.com'>Contact</a></li>
+                <li className='contact clickable'><a href='mailto:ham.macros@gmail.com'>Contact</a></li>
                 <li className='signOut clickable' onClick={this.handleSignOut}>Sign Out</li>
               </ul>
             </div>
@@ -131,13 +131,15 @@ class SignedInHeader extends React.Component {
             <select onChange={this.dayChangeHandler} value={this.props.day.id} className='daySelect'>
               {this.dayOptions()}
             </select>
-            <span className="dropdownButton">
+            <span className="dropdown">
               <span className='dots'><span/><span/><span/></span>
-              <ul className='dropdown'>
+              <ul className='dropdown-content'>
                 <li onClick={this.props.createDay}><button><img src='add-icon-circle.png' className='newDay addButton' alt='add new Day'></img></button>Add Day</li>
                 <li onClick={this.editDay}><button><img src='edit-icon.png' className='editDay editButton' alt='edit Day' /></button>Edit Day</li>
                 <li onClick={this.copyDay}><button className='copyButton'><span className='copy'>𝍌</span></button>Copy Day</li>
+                {this.props.days.length > 1 ?
                 <li onClick={this.deleteDay}><button><img src='trash-icon.png' className='deleteDay deleteButton' alt='delete Day' /></button>Delete Day</li>
+                : null}
               </ul>
             </span>
           </span>
