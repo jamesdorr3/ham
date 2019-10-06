@@ -65,7 +65,6 @@ class GoalsRow extends React.Component {
   toggleAutogenerate = () => {this.setState({showAutogenerateForm: !this.state.showAutogenerateForm})}
 
   render(){
-    console.log(this.props.goals)
     return(
       <>
       {

@@ -18,7 +18,8 @@ class SearchContainer extends React.Component {
     currentPage: 0,
     totalPages: 0,
     showResults: false,
-    categories: []
+    categories: [],
+    loading: false
   }
 
   componentDidMount = () => {
@@ -57,19 +58,18 @@ class SearchContainer extends React.Component {
     e.preventDefault()
     const searchTerm = encodeURIComponent(this.state.text)
     if (searchTerm){
-      // console.log('submit')
       this.setState({common: []})
-      this.props.startLoading()
       this.foodsIndex(searchTerm)
       this.externalSearch(searchTerm, 1)
     }
   }
 
   externalSearch(searchPhrase, pageNumber = 1){
+    this.setState({loading:true})
     this.props.externalSearch(searchPhrase, pageNumber)
     .then(r => r.json())
     .then(r => {
-      this.props.stopLoading()
+      this.setState({loading:false})
       if (r.common && r.common.length > 0){
         this.setState({common: this.state.common.concat(r.common), currentPage: r.current_page, totalPages: r.total_pages})
       }
@@ -89,7 +89,8 @@ class SearchContainer extends React.Component {
       error: false,
       currentPage: 0,
       totalPages: 0,
-      categories: []
+      categories: [],
+      loading: false
     })
   }
 
@@ -141,7 +142,6 @@ class SearchContainer extends React.Component {
           <h5>Favorites</h5>
           {this.state[this.state.filteredFavorites.length > 0 || this.state.text !== '' ? 'filteredFavorites' : 'favorites'].map(food => this.makeSearchResultCard(food))}
           {/* {this.state.categories.length===0 ? null : this.state.categories.map(cat => this.makeSearchResultCard(cat))} */}
-
           <h5>More Results</h5>
           {this.state.internal.map(food => this.makeSearchResultCard(food))}
           {this.state.common.map(food => this.makeSearchResultCard(food))}
@@ -157,6 +157,7 @@ class SearchContainer extends React.Component {
           :
           null
           }
+          {this.state.loading ? <div className='searchLoading'><span/></div> : null}
 
           {this.state.error ? <li>{this.state.error}</li> : null}
           {this.props.removed.length > 0 
@@ -180,8 +181,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    startLoading: () => dispatch({type: 'START_LOADING'}),
-    stopLoading: () => dispatch({type: 'STOP_LOADING'}),
     externalSearch: (searchTerm, pageNumber = 1) => dispatch(externalSearch(searchTerm, pageNumber)),
     foodsIndex: (searchTerm) => dispatch(foodsIndex(searchTerm))
   }

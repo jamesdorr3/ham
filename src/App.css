@@ -129,7 +129,7 @@ input.readonly{background:rgb(226, 226, 226)}
 .saveButton{visibility:hidden}
 /* TABLE */
 /* LOADING  */
-.loading {
+.loading,.searchLoading span {
   background:rgba(255, 255, 255, 0.904);
   position: fixed;
   margin-left:5%;
@@ -198,6 +198,8 @@ ul.resultMacros{font-size:0.5em;display:grid;grid-template-columns:repeat(3,1fr)
 .resultName{font-size:0.7em;}
 .brandName{font-size:0.5em}
 .resultMacros{display:block;text-align:right;font-size:0.7em}
+div.searchLoading{height:30px;width:100%;background:lightgray;position:relative;box-shadow:inset 3px 0px 3px darkgray}
+div.searchLoading span{background:none;position:absolute;border: 10px solid #f3f3f3;border-top: 10px solid rgb(221, 103, 44);border-bottom: 10px solid rgb(221, 103, 44);border-radius: 50%;width: 5px;height: 5px;animation: spin 1.5s linear infinite;left:40%;top:2px}
 /* SEARCH RESULT */
 /* DROPDOWN */
 
