@@ -46,7 +46,7 @@ class SearchContainer extends React.Component {
     }else{
       this.setState({
         filteredFavorites: this.state.favorites.filter(food=>{
-          const searchTerm = this.state.text.toLowerCase()
+          const searchTerm = e.target.value.toLowerCase()
           return food.name.toLowerCase().includes(searchTerm) || (food.brand && food.brand.toLowerCase().includes(searchTerm))
         })
       })
