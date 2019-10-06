@@ -44,17 +44,17 @@ form.login{margin-top:10%}
 h1.appName{color:white;text-align:right;margin-right:10%}
 
 div.menu{position:relative}
-div.menuButton,.menuCheckbox{position:absolute;height:50px;width:50px;bottom:25%;left:15px;z-index:3}
-.menuCheckbox{bottom:20%;left:13px;z-index:4;opacity:0}
+div.menuButton,.menuCheckbox{position:absolute;height:50px;width:50px;bottom:25%;left:15px}
+.menuCheckbox{bottom:20%;left:13px;opacity:0;z-index:1}
 div.menuButton span{background:white;height:15%;margin:15% 0;width:100%;position:relative;display:block;border-radius:25px;transition:0.5s}
-.menuCheckbox:checked~.menuButton span{transition:0.5s;background:black}
+.menuCheckbox:checked~.menuButton span{transition:0.5s}
 .menuCheckbox:checked~.menuButton span:first-child{transform:rotate(-33deg)translateY(1px)translateX(-10px)scaleX(0.75)}
 .menuCheckbox:checked~.menuButton span:nth-child(2){transform:translateX(10px)}
 .menuCheckbox:checked~.menuButton span:last-child{transform:rotate(33deg)translateY(-1px)translateX(-10px)scaleX(0.75)}
-.sideMenu{position:fixed;background:white;top:0;bottom:0;left:-350px;z-index:2;margin:0;border-radius:0px;border-right:5px solid rgb(221, 103, 44);width:33%;min-width:225px;max-width:300px;transition:0.375s;padding:5% 1%;}
+.sideMenu{position:fixed;background:white;top:10%;bottom:10%;left:-350px;z-index:2;margin:0;border-radius:0px;border-right:5px solid rgb(221, 103, 44);width:33%;min-width:225px;max-width:300px;transition:0.375s;padding:5% 1%;}
 .menuCheckbox:checked~.sideMenu{left:0px;transition:0.375s}
 
-.sideMenu ul{width:100%;margin:30px 2% 0 0;padding:0 2% 0 0}
+.sideMenu ul{width:100%;margin:0px 2% 0 0;padding:0 2% 0 0}
 /* .sideMenu h1{background:lime} */
 .sideMenu ul li,.sideMenu h1{padding:5% 2%;margin:0 2% 0 0;width:100%;transition:0.25s}
 .sideMenu ul li{cursor:pointer;}
