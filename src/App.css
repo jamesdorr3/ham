@@ -10,9 +10,8 @@ ul{margin:0 1%;padding:0 0.5%;border-radius:5px}
 select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-1}
 /* UNIVERSAL */
 /* HEADER */
-.header,.notSignedInHeader{background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));position:absolute;height:10%;min-height:60px;width:100%;top:0;overflow:show;display:grid;}
-.header{grid-template-columns: 1fr 2fr 1fr;}
-.notSignedInHeader{grid-template-columns:2fr 1fr}
+.header,.notSignedInHeader{background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));height:50px;min-height:50px;width:100%;top:0;overflow:show;display:flex;flex-direction:row}
+/* .notSignedInHeader{grid-template-columns:2fr 1fr} */
 .header input,.header button{border-radius:5px}
 /* .notSignedInHeader input[type='text'],.notSignedInHeader input[type='password']{width:40%;margin:1%;border-radius:5px;text-transform:none}
 .notSignedInHeader input[type='submit'],.notSignedInHeader button{margin:1%;border-radius:5px;background:white} */
@@ -41,16 +40,17 @@ form.login{margin-top:10%}
 
 .welcome{padding-left:1%}
 
-h1.appName{color:white;text-align:right;margin-right:10%}
+div.appName{order:1;flex:1 1;display:flex;justify-content:flex-end;align-items:center}
+h1.appName{color:white;text-align:right;margin-right:15px}
 
-div.menu{position:relative}
-div.menuButton,.menuCheckbox{position:absolute;height:50px;width:50px;bottom:25%;left:15px}
-.menuCheckbox{bottom:20%;left:13px;opacity:0;z-index:1}
+div.menu{order:0;flex: 1 1;display:flex;justify-content:flex-start;align-items:center}
+div.menuButton,.menuCheckbox{position:absolute;height:45px;width:45px;align-self:center;margin-left:15px}
+.menuCheckbox{opacity:0;z-index:1}
 div.menuButton span{background:white;height:15%;margin:15% 0;width:100%;position:relative;display:block;border-radius:25px;transition:0.5s}
 .menuCheckbox:checked~.menuButton span{transition:0.5s}
-.menuCheckbox:checked~.menuButton span:first-child{transform:rotate(-33deg)translateY(1px)translateX(-10px)scaleX(0.75)}
-.menuCheckbox:checked~.menuButton span:nth-child(2){transform:translateX(10px)}
-.menuCheckbox:checked~.menuButton span:last-child{transform:rotate(33deg)translateY(-1px)translateX(-10px)scaleX(0.75)}
+.menuCheckbox:checked~.menuButton span:first-child{transform:rotate(-33deg)translateX(-10px)scaleX(0.75)}
+.menuCheckbox:checked~.menuButton span:nth-child(2){transform:translateX(5px)}
+.menuCheckbox:checked~.menuButton span:last-child{transform:rotate(33deg)translateX(-10px)scaleX(0.75)}
 .sideMenu{position:fixed;background:white;top:10%;bottom:10%;left:-350px;z-index:2;margin:0;border-radius:0px;border-right:5px solid rgb(221, 103, 44);width:33%;min-width:225px;max-width:300px;transition:0.375s;padding:5% 1%;}
 .menuCheckbox:checked~.sideMenu{left:0px;transition:0.375s}
 
@@ -60,8 +60,8 @@ div.menuButton span{background:white;height:15%;margin:15% 0;width:100%;position
 .sideMenu ul li{cursor:pointer;}
 .sideMenu ul li:hover{transition:0.5s;text-decoration:underline}
 .contact a{text-decoration:none;color:black}
-div.daySelect{grid-column: 2;position:relative;}
-span.daySelect{position:absolute;bottom:40%;width:300px;max-width:90%;display:block;margin:auto}
+div.daySelect{order:1;flex: 2 2;display:flex;justify-content:center;align-items:center}
+span.daySelect{position:absolute;width:300px;max-width:38%;display:block;margin:auto}
 .daySelect select{background:white;width:100%}
 /* .daySelect .dropdown button.nonMenu{padding:0;width:15%;color: rgb(245, 245, 245);background:transparent;border:none;font-weight:bold;font-size:1em} */
 .copy{font-size:18px;position:relative;right:19%}
@@ -226,11 +226,11 @@ span.deleteIcon{background-image:url("./icons/trash-icon.png");background-size:8
 
 /* DROPDOWN */
 /* FOOTER SEARCH */
-.footerSearch{position:absolute;bottom:11%;width:100%}
-.footerSearch input.searchText{display:inline-block;width:85%;font-size:1em}
-.footerSearch .foodSearchContainer{border:1px solid rgb(221, 103, 44);border-radius:25px;background:white;}
-.footerSearch .searchForm{margin:0;padding:0 1%;position:relative;}
-.footerSearch .searchText{margin-left:-10%;position:relative;padding:10px 0;border-radius:25px;border:0px solid transparent}
+.search{position:absolute;bottom:11%;width:100%}
+.search input.searchText{display:inline-block;width:85%;font-size:1em}
+.search .foodSearchContainer{border:1px solid rgb(221, 103, 44);border-radius:25px;background:white;}
+.search .searchForm{margin:0;padding:0 1%;position:relative;}
+.search .searchText{margin-left:-10%;position:relative;padding:10px 0;border-radius:25px;border:0px solid transparent}
 .searchForm .searchButton{position:absolute;height:100%;background:white}
 .loadMore{background:lightgray;text-align:center;font-weight:bold}
 /* FOOTER SEARCH */
@@ -252,7 +252,7 @@ select.daySelect{max-width:300px}
 .daySelect input[type='date']{width:25%}
 .daySelect input[type='submit']{position:relative;padding:1% 9%;margin-left:0%;color:white;background:none;border-radius:5px}
 
-.footerSearch .foodSearchContainer{position:fixed;top:11%;left:0%;width:28%;padding:5px 0}
+.search .foodSearchContainer{position:fixed;top:11%;left:0%;width:28%;padding:5px 0}
 .searchText{font-size:0.5em}
 .searchForm{left:1%;max-width:87%}
 .searchResultContainer,.searchResultContainerHidden{display:block;position:fixed;top:18%;bottom:11%;width:28%;animation:none}
@@ -277,5 +277,5 @@ select.daySelect{max-width:300px}
 @media only screen and (max-height: 550px){
 .table{top:60px;height:80%}
 div.footer{display:none}
-.footerSearch{bottom:0px}
+.search{bottom:0px}
 }

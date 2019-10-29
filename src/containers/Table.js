@@ -89,11 +89,7 @@ const ChoiceContainer = props => {
           return <CategoryCard category={category} key={category.id} />
         })}
       </div>
-      {/* {keyRow} */}
-      {/* {totalsRow()} */}
-      {/* <button className='saveButton' onClick={() => props.saveAll(props)}>Save</button> */}
       {props.loading? <div className='loading'></div> : null}
-      {/* <div className='loading'></div> */}
     </div>
   ) 
   

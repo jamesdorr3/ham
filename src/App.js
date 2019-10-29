@@ -43,7 +43,7 @@ class App extends React.Component {
         <div className='loading'
           style={{display: this.props.loading ? 'block' : 'none'}}
         ></div>
-        <div  className='footerSearch'>
+        <div  className='search'>
           < SearchContainer />
         </div>
         < Footer />
