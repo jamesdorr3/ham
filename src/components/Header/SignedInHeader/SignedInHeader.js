@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {reauth} from '../actions/authActions'
-import {createDay, selectDay, updateDay, deleteDay, copyDay} from '../actions/daysActions'
-import {saveAll} from '../actions/saveAllAction'
-import MakeFoodCard from './MakeFoodCard'
+import {reauth} from '../../../actions/authActions'
+import {createDay, selectDay, updateDay, deleteDay, copyDay} from '../../../actions/daysActions'
+import {saveAll} from '../../../actions/saveAllAction'
+import MakeFoodCard from './MakeFoodCard/MakeFoodCard'
 
 class SignedInHeader extends React.Component {
 

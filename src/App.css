@@ -10,7 +10,7 @@ ul{margin:0 1%;padding:0 0.5%;border-radius:5px}
 select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-1}
 /* UNIVERSAL */
 /* HEADER */
-.header,.notSignedInHeader{background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));height:50px;min-height:50px;width:100%;top:0;overflow:show;display:flex;flex-direction:row}
+.header,.notSignedInHeader{background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));height:50px;min-height:50px;width:100%;top:0;overflow:show;display:flex;flex-direction:row;justify-content:space-between}
 /* .notSignedInHeader{grid-template-columns:2fr 1fr} */
 .header input,.header button{border-radius:5px}
 /* .notSignedInHeader input[type='text'],.notSignedInHeader input[type='password']{width:40%;margin:1%;border-radius:5px;text-transform:none}
@@ -32,7 +32,7 @@ form.login{margin-top:10%}
 .authModal form input,.authModal form button,.toggleAuthButton{font-size:15px;padding:5px 5px;border-radius:5px;background:white;border:0.5px solid lightgray;display:block;margin:3px auto}
 .authModal form input:not([type='submit']){text-transform:none}
 .authModal form div{font-size:12px;cursor:pointer;padding:5px;grid-column:span 2;text-align:center;color:white}
-.notSignedInMessage{padding-left:5%;color:white}
+.notSignedInMessage{padding-left:5%;color:white;}
 .login{padding-top:5px}
 .loginOrSignup{display:grid;grid-template-columns:repeat(2,100%);transition:0.5s}
 .loginOrSignup h1{text-align:center;color:white;text-shadow:1 px 1 px 0px black,-1 px -1 px 0px black, 1 px -1 px 0 black, -1 px 1 px 0 black}

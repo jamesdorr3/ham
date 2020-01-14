@@ -2,8 +2,8 @@ import React from 'react'
 import SearchResultCard from '../components/SearchResultCard'
 
 import {connect} from 'react-redux'
-import {externalSearch} from '../actions/searchActions'
-import {foodsIndex} from '../actions/foodsActions'
+import {externalSearch} from '../../actions/searchActions'
+import {foodsIndex} from '../../actions/foodsActions'
 
 class SearchContainer extends React.Component {
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import '../constants.js'
-import {auth} from '../actions/authActions'
-import {forgotPassword} from '../actions/passwordActions'
+import '../../../../constants.js'
+import {auth} from '../../../../actions/authActions'
+import {forgotPassword} from '../../../../actions/passwordActions'
 
 class LoginCard extends React.Component {
 
@@ -60,7 +60,7 @@ class LoginCard extends React.Component {
         <h1>Login</h1>
         <input autoComplete="true" value={this.state.usernameOrEmail} name='usernameOrEmail' id='usernameOrEmail' onChange={this.handleChange} type='text' placeholder='Username/Email' />
         <input autoComplete="true" value={this.state.password} name='password' onChange={this.handleChange} type='password' placeholder='Password' />
-        {/* <div onClick={this.forgotPassword}>Forgot Password?</div> */}
+        <div onClick={this.forgotPassword}>Forgot Password?</div>
         <input value='Log In' type='submit' className='standardButton' />
         {/* <button onClick={this.props.toggleSignup} className='standardButton'>{this.props.showSignup ? 'Close Sign Up': 'Sign Up'}</button> */}
         {this.state.error ? <p className='errorMessage'>{this.state.error}</p> : null }

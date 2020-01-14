@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import LoginCard from './LoginCard'
-import SignUpCard from './SignUpCard'
-import ResetPasswordCard from './ResetPasswordCard'
-import {reauth} from '../actions/authActions'
-import {saveAll} from '../actions/saveAllAction'
+import LoginCard from './LoginCard/LoginCard'
+import SignUpCard from './SignUpCard/SignUpCard'
+import ResetPasswordCard from './ResetPasswordCard/ResetPasswordCard'
+import {reauth} from '../../../actions/authActions'
+import {saveAll} from '../../../actions/saveAllAction'
 
 class NotSignedInHeader extends React.Component {
 

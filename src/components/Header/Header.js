@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import {reauth} from '../actions/authActions'
-import {createDay, selectDay} from '../actions/daysActions'
-import {saveAll} from '../actions/saveAllAction'
-import {deleteDay, updateDay} from '../actions/daysActions'
-import SignedInHeader from '../components/SignedInHeader'
-import NotSignedInHeader from '../components/NotSignedInHeader'
+import {reauth} from '../../actions/authActions'
+import {createDay, selectDay} from '../../actions/daysActions'
+import {saveAll} from '../../actions/saveAllAction'
+import {deleteDay, updateDay} from '../../actions/daysActions'
+import SignedInHeader from './SignedInHeader/SignedInHeader'
+import NotSignedInHeader from './NotSignedInHeader/NotSignedInHeader'
 
 class Header extends React.Component {
 

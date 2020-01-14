@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import SearchContainer from './containers/SearchContainer'
+import SearchContainer from './components/SearchContainer/SearchContainer'
 import Table from './containers/Table'
-import Header from './containers/Header'
+import Header from './components/Header/Header'
 import {DragDropContext} from 'react-beautiful-dnd';
 import {connect} from 'react-redux'
 import Footer from './components/Footer'

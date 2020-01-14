@@ -1,5 +1,5 @@
 import React from 'react'
-import {createFood} from '../actions/foodsActions'
+import {createFood} from '../../../../actions/foodsActions'
 import {connect} from 'react-redux'
 
 class MakeFoodCard extends React.Component {

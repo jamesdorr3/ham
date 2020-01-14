@@ -7,13 +7,14 @@
     "eslint-utils": "^1.4.2",
     "lodash": "^4.17.15",
     "lodash.template": "^4.5.0",
+    "node-sass": "^4.13.0",
     "querystringify": "^2.1.1",
     "react": "^16.8.6",
     "react-addons-transition-group": "^15.6.2",
     "react-beautiful-dnd": "^11.0.3",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.3.0",
     "react-test-renderer": "^16.8.6",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
@@ -43,7 +44,6 @@
     ]
   },
   "devDependencies": {
-    "babel-jest": "^24.8.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "gh-pages": "^2.0.1",
