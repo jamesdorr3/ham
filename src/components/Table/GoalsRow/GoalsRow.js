@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {createGoal, updateGoal, deleteGoal} from '../actions/goalsActions'
-import AutogenerateGoal from './AutogenerateGoal'
-import {updateDay} from '../actions/daysActions'
+import {createGoal, updateGoal, deleteGoal} from '../../../actions/goalsActions'
+import AutogenerateGoal from './AutogenerateGoal/AutogenerateGoal'
+import {updateDay} from '../../../actions/daysActions'
 
 class GoalsRow extends React.Component {
 

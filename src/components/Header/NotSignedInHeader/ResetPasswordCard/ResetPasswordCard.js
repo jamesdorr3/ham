@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import '../../../../../constants.js'
-import {resetPassword} from '../../../../../actions/passwordActions'
+import '../../../../constants.js'
+import {resetPassword} from '../../../../actions/passwordActions'
 
 class SignUpCard extends React.Component {
 

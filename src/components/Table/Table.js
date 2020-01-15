@@ -1,11 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import CategoryCard from '../components/CategoryCard'
-import GoalsRow from '../components/GoalsRow'
-import {updateGoal} from '../actions/goalsActions'
-import {createGoal} from '../actions/goalsActions'
-import {saveAll} from '../actions/saveAllAction'
-import {deleteGoal} from '../actions/goalsActions'
+import CategoryCard from './CategoryCard/CategoryCard'
+import GoalsRow from './GoalsRow/GoalsRow'
+import {updateGoal} from '../../actions/goalsActions'
+import {createGoal} from '../../actions/goalsActions'
+import {saveAll} from '../../actions/saveAllAction'
+import {deleteGoal} from '../../actions/goalsActions'
 
 const ChoiceContainer = props => {
 

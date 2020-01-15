@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Droppable} from 'react-beautiful-dnd'
-import ChoiceCard from '../components/ChoiceCard'
+import ChoiceCard from './ChoiceCard/ChoiceCard'
 
 const CategoryCard = props => {
 

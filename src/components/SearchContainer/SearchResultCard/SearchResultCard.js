@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {selectInternalSearchResult, selectSearchResult} from '../../actions/searchActions'
+import {selectInternalSearchResult, selectSearchResult} from '../../../actions/searchActions'
 
 const SearchResultCard = props => {
 

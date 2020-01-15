@@ -1,0 +1,31 @@
+.footer {
+  background: linear-gradient(rgb(226, 123, 72), rgb(221, 103, 44));
+  position: absolute;
+  height: 50px;
+  min-height: 50px;
+  width: 100%;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  .attribution{
+    display: flex;
+    position: absolute;
+    right: 5%;
+    text-decoration: none;
+    color: rgb(245, 245, 245);
+    div, h2{
+      line-height: 30px;
+    }
+    h2{
+      margin: 0;
+      margin-left: 10px;
+    }
+  }
+}
+
+@media only screen and (max-height: 550px) {
+  div.footer {
+    display: none;
+  }
+}

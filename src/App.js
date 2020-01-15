@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
 import SearchContainer from './components/SearchContainer/SearchContainer'
-import Table from './containers/Table'
+import Table from './components/Table/Table'
 import Header from './components/Header/Header'
 import {DragDropContext} from 'react-beautiful-dnd';
 import {connect} from 'react-redux'
-import Footer from './components/Footer'
+import Footer from './components/Footer/Footer'
 import {saveAll} from './actions/saveAllAction'
 
 class App extends React.Component {

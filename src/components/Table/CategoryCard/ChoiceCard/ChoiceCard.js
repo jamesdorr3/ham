@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Draggable} from 'react-beautiful-dnd'
-import {updateChoice, destroyChoice} from '../actions/choicesActions'
+import {updateChoice, destroyChoice} from '../../../../actions/choicesActions'
 
 class ChoiceCard extends React.Component {
 

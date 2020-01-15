@@ -8,7 +8,6 @@ li input,li select{width:100%}
 ul{margin:0 1%;padding:0 0.5%;border-radius:5px}
 .macro input{position:absolute;left:0;text-align:center;width:100%}
 select{border-radius:5px;border:0.5px solid lightgray;background:white;z-index:-1}
-/* UNIVERSAL */
 /* HEADER */
 .header,.notSignedInHeader{background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));height:50px;min-height:50px;width:100%;top:0;overflow:show;display:flex;flex-direction:row;justify-content:space-between}
 /* .notSignedInHeader{grid-template-columns:2fr 1fr} */
@@ -51,7 +50,7 @@ div.menuButton span{background:white;height:15%;margin:15% 0;width:100%;position
 .menuCheckbox:checked~.menuButton span:first-child{transform:rotate(-33deg)translateX(-10px)scaleX(0.75)}
 .menuCheckbox:checked~.menuButton span:nth-child(2){transform:translateX(5px)}
 .menuCheckbox:checked~.menuButton span:last-child{transform:rotate(33deg)translateX(-10px)scaleX(0.75)}
-.sideMenu{position:fixed;background:white;top:10%;bottom:10%;left:-350px;z-index:2;margin:0;border-radius:0px;border-right:5px solid rgb(221, 103, 44);width:33%;min-width:225px;max-width:300px;transition:0.375s;padding:5% 1%;}
+.sideMenu{position:fixed;background:white;top:50px;bottom:10%;left:-350px;z-index:2;margin:0;border-radius:0px;border-right:5px solid rgb(221, 103, 44);width:33%;min-width:225px;max-width:300px;transition:0.375s;padding:5% 1%;}
 .menuCheckbox:checked~.sideMenu{left:0px;transition:0.375s}
 
 .sideMenu ul{width:100%;margin:0px 2% 0 0;padding:0 2% 0 0}
@@ -113,7 +112,7 @@ label.macrosForAutogenerate{width:auto;margin:0% 1% 0% 2%}
 input.macrosForAutogenerate{max-width: 5%}
 /* GOALS */
 /* TABLE */
-.table{position:absolute;top:10%;bottom:16%;width:100%;overflow-y:hidden;overflow-x:hidden;font-size:.9em;padding-top:3%}
+.table{position:absolute;top:50px;bottom:90px;width:100%;overflow-y:hidden;overflow-x:hidden;font-size:.9em;padding-top:3%}
 .categoryScrollContainer{position:relative;height:85%;width:100%;overflow-y:scroll;overflow-x:hidden;}
 .grid{display:grid;grid-template-columns: 3fr 1fr 2fr  repeat(4, 1fr) 3%}
 .goals .goalsSelect{grid-column:span 2}
@@ -180,6 +179,46 @@ div.arrow{position:fixed;bottom:20%;border:1px solid black;border-radius:5px;pad
   100% { bottom: 18%; }
 }
 /* CATEGORY */
+/* DROPDOWN */
+/* FOOTER SEARCH */
+.search {
+  position: absolute;
+  bottom: 55px;
+  width: 100%;
+}
+.search input.searchText {
+  display: inline-block;
+  width: 85%;
+  font-size: 1em;
+}
+.search .foodSearchContainer {
+  border: 1px solid rgb(221, 103, 44);
+  border-radius: 25px;
+  background: white;
+}
+.search .searchForm {
+  margin: 0;
+  padding: 0 1%;
+  position: relative;
+}
+.search .searchText {
+  margin-left: -10%;
+  position: relative;
+  padding: 10px 0;
+  border-radius: 25px;
+  border: 0px solid transparent;
+}
+.searchForm .searchButton {
+  position: absolute;
+  height: 100%;
+  background: white;
+}
+.loadMore {
+  background: lightgray;
+  text-align: center;
+  font-weight: bold;
+}
+
 /* SEARCH */
 .searchForm{text-align:center;margin-left:2%}
 .searchForm input[type='text']{display:none}
@@ -224,23 +263,6 @@ span.addIcon{background-image:url("./icons/add-icon-circle.png");}
 span.editIcon{background-image:url("./icons/edit-icon.png");}
 span.deleteIcon{background-image:url("./icons/trash-icon.png");background-size:80%}
 
-/* DROPDOWN */
-/* FOOTER SEARCH */
-.search{position:absolute;bottom:11%;width:100%}
-.search input.searchText{display:inline-block;width:85%;font-size:1em}
-.search .foodSearchContainer{border:1px solid rgb(221, 103, 44);border-radius:25px;background:white;}
-.search .searchForm{margin:0;padding:0 1%;position:relative;}
-.search .searchText{margin-left:-10%;position:relative;padding:10px 0;border-radius:25px;border:0px solid transparent}
-.searchForm .searchButton{position:absolute;height:100%;background:white}
-.loadMore{background:lightgray;text-align:center;font-weight:bold}
-/* FOOTER SEARCH */
-/* FOOTER */
-.footer{background:linear-gradient(rgb(226, 123, 72),rgb(221, 103, 44));position:absolute;height:10%;min-height:60px;width:100%;bottom:0;overflow:scroll;}
-.attribution{position:absolute;text-align:center;text-decoration:none;color:rgb(245, 245, 245);white-space:nowrap;right:5%;bottom:20%}
-.attribution h2{margin:0;}
-.hidden{display:none}
-/* FOOTER */
-
 
 /* NOT CELL PHONES */
 @media only screen and (min-width: 768px) {
@@ -275,7 +297,6 @@ select.daySelect{max-width:300px}
 } 
 
 @media only screen and (max-height: 550px){
-.table{top:60px;height:80%}
-div.footer{display:none}
-.search{bottom:0px}
+  .table{top:60px;bottom:40px;padding-bottom:20px;}
+  .search{bottom:0px}
 }
